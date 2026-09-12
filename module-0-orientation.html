@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 0 — Orientation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 0</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - the exam, in one breath -->
+  <section class="panel active" data-name="The exam, in one breath">
+    <p class="kicker">Orientation — start here, before any chemistry</p>
+    <h1>Know the target before you study for it</h1>
+    <p class="lead">This class preps you for the <b>ABYC Marine Composites (Composite Boat Builder) certification</b>. Before a single resin fact, get the shape of the test itself. Toggle between the two things that matter most.</p>
+
+    <div class="card">
+      <div class="segmented" id="examSeg" role="group" aria-label="Choose a view of the exam">
+        <button class="seg" data-state="format" aria-pressed="true">Format</button>
+        <button class="seg" data-state="scope" aria-pressed="false">Scope</button>
+      </div>
+
+      <svg class="demo-svg" id="examSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+
+      <div class="statrow" id="examChips"></div>
+      <div class="verdict" id="examVerdict"></div>
+    </div>
+
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> ABYC exams are traditionally open-notes, but that's not confirmed here for this specific <b>online-proctored</b> delivery. Study as if closed-book regardless — see Section 5 for why.
+    </div>
+    <!-- TODO: VERIFY content with Tyler / ABYC study guide: whether ABYC's traditional open-notes/open-book exam policy applies to this exam's online-proctored delivery format -->
+
+    <div class="callout"><b>Safety, in one breath (full coverage in Module 5):</b> composites work means resins, solvents, and fine dust. The one habit to start now, before you touch anything: check a product's safety data sheet and put on the PPE it calls for — every time, not just for "the big jobs." That mindset is worth more than any single fact in this course.</div>
+
+    <details class="deep">
+      <summary>Field notes: where all this started</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>FRP</b> stands for <b>Fiberglass Reinforced Plastic</b>. What launched modern composites in the first place was <b>phenolic resin</b>. Fiberglass boatbuilding itself began <b>after WWII</b>, when the US Navy contracted a <b>28-foot personnel craft</b> built from it, chasing reduced maintenance versus wood — and it <b>proliferated around 1960</b> as lower hull costs and near-zero maintenance drove a boom in ownership.</p>
+        <p style="margin-bottom:8px">Early FRP builders had no structural calculator to lean on. They used the <b>empirical method</b> — build it, test if it survives — which is exactly why so many early fiberglass boats are over-built: without a calculated design basis, builders defaulted to conservative (excess) material. The driving factor behind FRP's development in the first place was the ability to produce <b>complex hull configurations</b> and the advantages of a <b>seamless, moldable</b> hull versus planked wood.</p>
+        <p style="margin-bottom:0">Three advantages composites hold over traditional materials: <b>higher specific strength</b> (strength per pound), the ability to be <b>formed into complex shapes</b> (design flexibility), and <b>greater durability</b>.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: CREDENTIAL STACK -->
+  <section class="panel" data-name="The credential stack">
+    <p class="kicker">Where this cert sits in the wider stack</p>
+    <h2>One credential among several</h2>
+    <p>The ABYC Marine Composites cert isn't the only composites-adjacent credential out there. Tap each to see, in general terms, what it is and where it's said to sit — the exact comparison (cost, hands-on vs. written) needs a source check, flagged below.</p>
+
+    <div class="roles" id="credRoles">
+      <button class="role" aria-expanded="false" data-job="A Certified Composites Technician credential from the American Composites Manufacturers Association — a separate industry body from ABYC. General composites-manufacturing skill credential; exact scope/overlap with this exam not confirmed here.">
+        <div class="swatch" style="background:#2f6f92"></div>
+        <h3>ACMA CCT</h3><div style="font-size:13px;color:#42586b">industry credential</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="A separate composites-industry credentialing body, distinct from both ABYC and ACMA. Where its cost and format sit relative to this exam is not confirmed here.">
+        <div class="swatch" style="background:#1d4f6c"></div>
+        <h3>CertTEC</h3><div style="font-size:13px;color:#42586b">credentialing body</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="The cosmetic / color-matching track mentioned in Section 1 — explicitly separate from this builder/manufacturer exam. How the programs otherwise compare is not confirmed here.">
+        <div class="swatch" style="background:#c9a227"></div>
+        <h3>MiniCraft</h3><div style="font-size:13px;color:#42586b">cosmetic track</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Another finish/cosmetic-side credential named alongside MiniCraft in the curriculum. Its exact relationship to the ABYC builder exam is not confirmed here.">
+        <div class="swatch" style="background:#b9c79a"></div>
+        <h3>Spectrum</h3><div style="font-size:13px;color:#42586b">cosmetic track</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="A general workplace-safety credential (the OSHA 10-hour outreach card), common across shop environments generally. Whether it's expected alongside this specific cert is not confirmed here.">
+        <div class="swatch" style="background:#42586b"></div>
+        <h3>OSHA 10</h3><div style="font-size:13px;color:#42586b">safety credential</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+    </div>
+
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact positioning, cost, and hands-on-vs-written classification of ACMA CCT, CertTEC, MiniCraft, Spectrum, and OSHA 10 relative to the ABYC Marine Composites cert. Nothing above should be treated as a confirmed comparison until sourced.
+    </div>
+    <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact positioning/cost of ACMA CCT, CertTEC, MiniCraft, Spectrum, OSHA 10 relative to the ABYC Marine Composites cert -->
+  </section>
+
+  <!-- 3: EXAM BLUEPRINT MAP -->
+  <section class="panel" data-name="The exam blueprint">
+    <p class="kicker">The real coverage map</p>
+    <h2>Every ABYC exam area → the module that covers it</h2>
+    <p>This is the actual blueprint, straight from the curriculum. Tap an area below; it lights up the module(s) that teach it. Tap a few — this is also your at-a-glance map of the whole course.</p>
+
+    <div class="card">
+      <div class="toggles" id="blueToggles" role="group" aria-label="Tap an ABYC exam area"></div>
+      <svg class="demo-svg" id="blueSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="blueRead">Tap an ABYC area above to see which module(s) cover it.</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: why this map is worth memorizing</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Two areas repeat on purpose: resin material properties come back in Module 6 once you know how cure chemistry works, and manufacturing processes come back in Module 8 once you know molds and tooling. If a question feels like it's testing something from "way earlier," that repetition is usually why — the exam reuses the same building blocks across contexts.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: HOW TO USE THIS CLASS -->
+  <section class="panel" data-name="How to use this class">
+    <p class="kicker">The method behind every module</p>
+    <h2>See → Do → Check — put it in order</h2>
+    <p>Every module in this course runs the same loop: <b>See</b> the idea, <b>Do</b> something with it, <b>Check</b> that it stuck. Drag (or use the arrows) to put the five habits that make this course actually work into the right order, then hit Check.</p>
+
+    <div class="card">
+      <div id="cycleGame"></div>
+    </div>
+
+    <p class="note">There's no single required study cadence — daily, one module a week, whatever fits. The one thing that isn't optional: don't skip the Check step, and don't move on with a flagged gap unresolved.</p>
+
+    <div class="callout"><b>Quick pre-flight, before you start any module:</b>
+      <ul style="margin:8px 0 0 18px;padding:0">
+        <li>Know which ABYC area you're about to cover (Section 3 above).</li>
+        <li>Give it one uninterrupted stretch of time — this isn't skimmable.</li>
+        <li>Have a way to jot down anything you get wrong or any <span class="chip warn" style="padding:2px 8px;font-size:11.5px">TODO: VERIFY</span> callout you hit.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5: PACING -->
+  <section class="panel" data-name="Pacing yourself">
+    <p class="kicker">The number that should worry you a little</p>
+    <h2>200 questions, 3.5 hours — do the math</h2>
+    <p>3.5 hours for 200 questions works out to about <b>63 seconds per question</b>. That's the real reason "open-book" (however it ends up applying to this format) doesn't save you — you won't have time to go look things up. Drag the slider to see what happens at a slower pace.</p>
+
+    <div class="card">
+      <div class="control">
+        <label for="paceRange"><span>Average time per question</span><span class="val" id="paceVal">90 sec</span></label>
+        <input type="range" id="paceRange" min="20" max="120" value="90" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Time used of the 3.5-hour (210-minute) budget</span><span id="paceVal2">150%</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="paceFill" style="width:100%"></div></div>
+      </div>
+      <div class="readout" id="paceRead"></div>
+    </div>
+    <p class="note">The budgeted pace, doing the arithmetic from the numbers above (210 minutes ÷ 200 questions), is about 63 seconds/question — that's a real number from this exam's own format, not an estimate.</p>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions on the numbers and scope you just learned. Read carefully — the wrong answers are built to look plausible.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 0 locked in.</h2>
+      <p>You know the exam's shape (200 questions, 80% to pass, 3.5 hours, 32 CEUs, valid 5 years), what it does and doesn't cover, where it sits among other composites credentials, and how this course expects you to study. Now the chemistry starts.</p>
+      <p class="next-label">Up next → Module 1: What a composite actually is.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 1. exam format / scope toggle ---- */
+  function passBarSvg(){
+    var s='';
+    var total=20, hiCount=16; // 16/20 = 80% -> visualizes 160/200 questions needed to pass
+    var startX=40, w=15, gap=1.5, y=40, h=60;
+    for(var i=0;i<total;i++){
+      var x=startX+i*(w+gap);
+      var on=i<hiCount;
+      s+='<rect x="'+x.toFixed(1)+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="'+(on?'#1f8a68':'#e3e9ec')+'" stroke="'+(on?'#155c46':'#c2ced6')+'"/>';
+    }
+    s+='<line x1="'+(startX+hiCount*(w+gap)-gap/2).toFixed(1)+'" y1="30" x2="'+(startX+hiCount*(w+gap)-gap/2).toFixed(1)+'" y2="108" stroke="#b98416" stroke-width="2" stroke-dasharray="4 3"/>';
+    s+='<text x="'+(startX+hiCount*(w+gap)).toFixed(1)+'" y="24" font-family="Space Grotesk" font-size="12" fill="#8a6109">80% to pass</text>';
+    s+='<text x="200" y="128" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#42586b">200 multiple-choice questions total</text>';
+    s+='<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#1d4f6c">3.5 hours · 32 CEUs · valid 5 years</text>';
+    s+='<text x="200" y="168" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#6c7f8f">self-study, proctored online</text>';
+    return s;
+  }
+  function scopeSvg(){
+    var onItems=['Construction','Structural detail','Manufacturing processes','QA & inspection','Safety','Environmental compliance'];
+    var s='';
+    s+='<text x="105" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#155c46">ON the exam</text>';
+    s+='<text x="300" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#7d2118">NOT on the exam</text>';
+    onItems.forEach(function(t,i){
+      var y=32+i*22;
+      s+='<rect x="20" y="'+y+'" width="170" height="18" rx="4" fill="rgba(31,138,104,.12)" stroke="#1f8a68"/>';
+      s+='<path d="M28 '+(y+9)+' l4 5 l8 -10" fill="none" stroke="#155c46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      s+='<text x="46" y="'+(y+13)+'" font-family="Inter" font-size="11.5" fill="#155c46">'+t+'</text>';
+    });
+    s+='<rect x="210" y="32" width="170" height="18" rx="4" fill="rgba(195,58,44,.1)" stroke="#c33a2c"/>';
+    s+='<line x1="218" y1="'+(32+5)+'" x2="226" y2="'+(32+13)+'" stroke="#7d2118" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="226" y1="'+(32+5)+'" x2="218" y2="'+(32+13)+'" stroke="#7d2118" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="236" y="45" font-family="Inter" font-size="11.5" fill="#7d2118">Color / gelcoat matching</text>';
+    s+='<text x="210" y="70" font-family="Inter" font-size="11" fill="#6c7f8f">That\'s the separate MiniCraft /</text>';
+    s+='<text x="210" y="84" font-family="Inter" font-size="11" fill="#6c7f8f">Spectrum cosmetic track — see Section 2.</text>';
+    return s;
+  }
+  var examVerdicts={
+    format:'This is a self-study, proctored-online exam: <b>200 multiple-choice questions</b>, <b>80%</b> required to pass, <b>3.5 hours</b>, <b>32 CEUs</b>, valid for <b>5 years</b>.',
+    scope:'A <b>builder / manufacturer</b> exam — construction, structural detail, processes, QA, safety, environmental. <b>Color matching is explicitly not on it</b> — that lives in the separate cosmetic MiniCraft/Spectrum track.'
+  };
+  var examChipsHtml={
+    format:'<span class="chip info">200 questions</span><span class="chip info">80% to pass</span><span class="chip info">3.5 hours</span><span class="chip info">32 CEUs</span><span class="chip info">valid 5 years</span>',
+    scope:'<span class="chip ok">✓ Construction &amp; QA</span><span class="chip ok">✓ Safety &amp; environmental</span><span class="chip no">✕ Color matching</span>'
+  };
+  var examSeg=document.querySelectorAll('#examSeg .seg');
+  function setExam(state){
+    examSeg.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.state===state);});
+    document.getElementById('examSvg').innerHTML = state==='format' ? passBarSvg() : scopeSvg();
+    document.getElementById('examVerdict').innerHTML = examVerdicts[state];
+    document.getElementById('examChips').innerHTML = examChipsHtml[state];
+  }
+  examSeg.forEach(function(b){b.addEventListener('click',function(){setExam(b.dataset.state);});});
+  setExam('format');
+
+  /* ---- 2. credential roles ---- */
+  document.querySelectorAll('#credRoles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML=r.dataset.job;
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 3. exam blueprint map ---- */
+  var areas=[
+    {id:'orient',label:'Program / exam orientation',mods:[0]},
+    {id:'history',label:'History & evolution of composites',mods:[0,1,7]},
+    {id:'fund',label:'Fundamentals: single-skin vs sandwich',mods:[1,4]},
+    {id:'reinf',label:'Reinforcement materials',mods:[2]},
+    {id:'resin',label:'Resin materials',mods:[3,6]},
+    {id:'core',label:'Core materials',mods:[4]},
+    {id:'cure',label:'Catalyzation & cure',mods:[3,6]},
+    {id:'mfg',label:'Manufacturing processes',mods:[7,8]},
+    {id:'mold',label:'Molds / tooling / gelcoat',mods:[8]},
+    {id:'struct',label:'Structural details',mods:[9]},
+    {id:'hw',label:'Hardware installation',mods:[10]},
+    {id:'qa',label:'QA & inspection',mods:[11]},
+    {id:'repair',label:'Repair',mods:[12]},
+    {id:'safety',label:'Safety & shop environment',mods:[5]},
+    {id:'env',label:'Environmental compliance',mods:[13]},
+    {id:'review',label:'Comprehensive review',mods:[14]}
+  ];
+  var blueWrap=document.getElementById('blueToggles');
+  areas.forEach(function(a){
+    var b=document.createElement('button');
+    b.className='tg'; b.type='button'; b.dataset.id=a.id; b.setAttribute('aria-pressed','false');
+    b.textContent=a.label;
+    blueWrap.appendChild(b);
+  });
+  function fmtMods(arr){
+    if(arr.length===1) return 'Module '+arr[0];
+    if(arr.length===2) return 'Modules '+arr[0]+' &amp; '+arr[1];
+    return 'Modules '+arr.slice(0,-1).join(', ')+' &amp; '+arr[arr.length-1];
+  }
+  function buildGrid(hiSet){
+    var s='';
+    for(var i=0;i<=14;i++){
+      var col=i%5, row=Math.floor(i/5);
+      var x=15+col*78, y=15+row*52;
+      var hi=hiSet.indexOf(i)>-1;
+      s+='<rect x="'+x+'" y="'+y+'" width="70" height="42" rx="6" fill="'+(hi?'#ef5f2b':'#eef3f6')+'" stroke="'+(hi?'#b94a1f':'#c2ced6')+'" stroke-width="1.5"/>';
+      s+='<text x="'+(x+35)+'" y="'+(y+27)+'" text-anchor="middle" font-family="Space Grotesk" font-size="15" font-weight="600" fill="'+(hi?'#fff':'#42586b')+'">M'+i+'</text>';
+    }
+    return s;
+  }
+  var blueBtns=document.querySelectorAll('#blueToggles .tg');
+  function setBlue(){
+    var pressed=[];
+    blueBtns.forEach(function(b){ if(b.getAttribute('aria-pressed')==='true') pressed.push(b.dataset.id); });
+    var hiSet=[];
+    var lines=[];
+    pressed.forEach(function(id){
+      var a=areas.filter(function(x){return x.id===id;})[0];
+      a.mods.forEach(function(m){ if(hiSet.indexOf(m)===-1) hiSet.push(m); });
+      lines.push('<b>'+a.label+'</b> → '+fmtMods(a.mods));
+    });
+    document.getElementById('blueSvg').innerHTML=buildGrid(hiSet);
+    var read=document.getElementById('blueRead');
+    if(!lines.length){ read.className='readout'; read.textContent='Tap an ABYC area above to see which module(s) cover it.'; }
+    else { read.className='readout ok'; read.innerHTML=lines.join('<br>'); }
+  }
+  blueBtns.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')!=='true'); setBlue();});});
+  setBlue();
+
+  /* ---- 4. see-do-check ordering game ---- */
+  CFS.initOrderGame('cycleGame', [
+    {id:'see', label:'See it — read the short teaching text and look at the diagram first.'},
+    {id:'flag', label:"Flag it — note anything you missed or any TODO: VERIFY callout, and cross-check it against the official ABYC study guide."},
+    {id:'do', label:'Do it — work every tap / toggle / slider / game in the section until the readout makes sense.'},
+    {id:'cold', label:"Repeat cold — before exam day, redo every module's quiz from memory, no notes."},
+    {id:'check', label:"Check it — answer the module's 5-question recall quiz."}
+  ], ['see','do','check','flag','cold'], {
+    correctMsg:"That's the See→Do→Check cycle this course runs on — plus the two habits (flag gaps, then drill cold) that actually get you exam-ready.",
+    wrongMsg:'Not quite — green rows are already in the right spot. Think about what has to happen before you can even attempt the next step.'
+  });
+
+  /* ---- 5. pacing slider ---- */
+  var paceRange=document.getElementById('paceRange');
+  var BUDGET_MIN=210, QUESTIONS=200;
+  function setPace(){
+    var sec=+paceRange.value;
+    document.getElementById('paceVal').textContent=sec+' sec';
+    var totalMin=Math.round(QUESTIONS*sec/60);
+    var pct=Math.round((totalMin/BUDGET_MIN)*100);
+    document.getElementById('paceVal2').textContent=pct+'%';
+    var fill=document.getElementById('paceFill');
+    fill.style.width=Math.min(100,pct)+'%';
+    var read=document.getElementById('paceRead');
+    if(totalMin<=BUDGET_MIN){
+      fill.className='mfill sw';
+      read.className='readout ok';
+      read.innerHTML='At '+sec+' sec/question × 200 questions ≈ <b>'+totalMin+' minutes</b> — inside the 210-minute (3.5-hour) budget, with <b>'+(BUDGET_MIN-totalMin)+' minutes</b> to spare.';
+    } else {
+      fill.className='mfill weight';
+      read.className='readout warn';
+      read.innerHTML='At '+sec+' sec/question × 200 questions ≈ <b>'+totalMin+' minutes</b> — that\'s <b>'+(totalMin-BUDGET_MIN)+' minutes over</b> the 210-minute budget. The real budgeted pace is about <b>63 seconds/question</b>.';
+    }
+  }
+  paceRange.addEventListener('input', setPace); setPace();
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'How many multiple-choice questions are on the ABYC Marine Composites exam, and what score do you need to pass?',
+     opts:['150 questions / 70%','200 questions / 80%','100 questions / 75%','250 questions / 90%'],correct:1,
+     why:'200 multiple-choice questions, 80% required to pass — the exam format facts from Section 1.'},
+    {stem:'How much time do you get for the exam, and how many CEUs does passing earn you?',
+     opts:['2 hours / 16 CEUs','4 hours / 40 CEUs','3.5 hours / 32 CEUs','5 hours / 32 CEUs'],correct:2,
+     why:'3.5 hours and 32 CEUs, per the exam format facts in Section 1.'},
+    {stem:'How long is the ABYC Marine Composites credential valid before you need to renew it?',
+     opts:['2 years','5 years','10 years','It never expires'],correct:1,
+     why:'The credential is valid for 5 years, as stated in Section 1.'},
+    {stem:'Which of the following is explicitly NOT covered by this exam?',
+     opts:['Structural detail and QA/inspection','Safety and environmental compliance','Color / cosmetic gelcoat matching','Manufacturing processes'],correct:2,
+     why:'This is a builder/manufacturer exam. Color matching is explicitly excluded — that lives in the separate MiniCraft/Spectrum cosmetic track (Section 1).'},
+    {stem:'At 200 questions in 3.5 hours (210 minutes), roughly how long do you have per question — and what does that mean for exam strategy?',
+     opts:['~63 seconds; know the material cold regardless of any open-book policy','~10 minutes; plenty of time to look everything up','~5 seconds; effectively impossible to finish','~30 minutes; take your time'],correct:0,
+     why:'210 minutes ÷ 200 questions ≈ 63 seconds/question (Section 5). At that pace you must already know the material — you will not have time to search for answers.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-0'); }});
+})();
+</script>
+</body>
+</html>

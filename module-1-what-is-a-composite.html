@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — What a Composite Actually Is</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 1</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="Why combine them?">
+    <p class="kicker">The one idea everything hangs on</p>
+    <h1>What a composite actually is</h1>
+    <p class="lead">A composite is two materials that, together, beat either one alone: a <span class="tag fiber">reinforcement</span> (the fibers) locked inside a <span class="tag resin">matrix</span> (the cured resin). Tap each below and watch what you'd actually get.</p>
+
+    <div class="card">
+      <div class="segmented" id="matSeg" role="group" aria-label="Choose a material">
+        <button class="seg" data-state="fiber" aria-pressed="false">Fiber only</button>
+        <button class="seg" data-state="resin" aria-pressed="false">Resin only</button>
+        <button class="seg" data-state="composite" aria-pressed="true">The composite</button>
+      </div>
+
+      <svg class="demo-svg" id="matSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g id="g-fiber" style="display:none">
+          <path d="M40 120 Q120 60 200 120 T360 120" fill="none" stroke="#2f6f92" stroke-width="3"/>
+          <path d="M40 132 Q120 78 200 132 T360 132" fill="none" stroke="#2f6f92" stroke-width="3"/>
+          <path d="M40 108 Q120 150 200 108 T360 108" fill="none" stroke="#3f7ea0" stroke-width="3"/>
+          <text x="200" y="40" text-anchor="middle" font-family="Space Grotesk" font-size="14" fill="#42586b">strong, but no shape</text>
+        </g>
+        <g id="g-resin" style="display:none">
+          <rect x="90" y="55" width="220" height="70" rx="6" fill="#e0a021" opacity="0.85"/>
+          <path d="M170 55 L185 90 L165 100 L182 125" fill="none" stroke="#7a5a0a" stroke-width="3"/>
+          <path d="M245 55 L232 92 L250 105 L236 125" fill="none" stroke="#7a5a0a" stroke-width="3"/>
+          <text x="200" y="40" text-anchor="middle" font-family="Space Grotesk" font-size="14" fill="#42586b">rigid, but brittle</text>
+        </g>
+        <g id="g-composite">
+          <rect x="70" y="60" width="260" height="60" rx="8" fill="#e0a021" opacity="0.55"/>
+          <line x1="80" y1="75" x2="320" y2="75" stroke="#2f6f92" stroke-width="3"/>
+          <line x1="80" y1="90" x2="320" y2="90" stroke="#2f6f92" stroke-width="3"/>
+          <line x1="80" y1="105" x2="320" y2="105" stroke="#2f6f92" stroke-width="3"/>
+          <rect x="70" y="60" width="260" height="60" rx="8" fill="none" stroke="#b98416" stroke-width="1.5"/>
+          <text x="200" y="45" text-anchor="middle" font-family="Space Grotesk" font-size="14" fill="#42586b">fibers + resin working together</text>
+        </g>
+      </svg>
+
+      <div class="verdict" id="matVerdict"></div>
+    </div>
+    <p class="note">This division of labor is the thing 80% of the exam quietly tests. Hold onto it.</p>
+
+    <details class="deep">
+      <summary>Field notes: where this actually started</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>What launched modern composites:</b> phenolic resin. <b>Fiberglass boatbuilding began</b> after WWII, when the US Navy contracted a 28-foot personnel craft built from it, chasing reduced maintenance versus wood. It <b>proliferated around 1960</b> as lower hull costs and near-zero maintenance drove a boom in ownership.</p>
+        <p style="margin-bottom:0">Early FRP builders had no structural calculator — they used the <b>empirical method</b> (build it, test if it survives), which is exactly why early fiberglass boats are often over-built. The three advantages that made composites win: <b>higher specific strength</b> (strength per pound), the ability to be <b>molded into complex, seamless shapes</b>, and <b>greater durability</b> than planked wood.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: ROLES -->
+  <section class="panel" data-name="The division of labor">
+    <p class="kicker">Who does what</p>
+    <h2>Three jobs, three materials</h2>
+    <p>Every structural decision in a boat is really a decision about these three roles. Tap each card to see its job.</p>
+    <div class="roles roles-3" id="roles">
+      <button class="role" aria-expanded="false" data-job="Carries the <b>tensile</b> (pulling) load. Strength runs <b>along</b> the fiber — which is why fiber direction matters so much later.">
+        <div class="swatch" style="background:var(--fiber)"></div>
+        <h3>Reinforcement</h3>
+        <div style="font-size:13px;color:#42586b">the fibers</div>
+        <div class="job"></div>
+        <div class="hint">Tap to reveal its job</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Binds the fibers, <b>transfers load</b> between them, and carries the <b>compression &amp; shear</b> the fibers can't. Also protects them from water. It's usually the weak link.">
+        <div class="swatch" style="background:var(--resin)"></div>
+        <h3>Matrix</h3>
+        <div style="font-size:13px;color:#42586b">the resin</div>
+        <div class="job"></div>
+        <div class="hint">Tap to reveal its job</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Holds the two skins <b>apart</b> and carries shear between them. Adds huge <b>stiffness</b> for almost no weight — the whole point of a sandwich (Module 4).">
+        <div class="swatch" style="background:#b9c79a"></div>
+        <h3>Core</h3>
+        <div style="font-size:13px;color:#42586b">foam or balsa</div>
+        <div class="job"></div>
+        <div class="hint">Tap to reveal its job</div>
+      </button>
+    </div>
+    <p class="note" style="margin-top:16px">Exam trap: when a laminate cracks but the glass strands are intact, it's the <b>matrix or the bond</b> that failed — not the fiber.</p>
+  </section>
+
+  <!-- 3: ANISOTROPY -->
+  <section class="panel" data-name="Direction matters">
+    <p class="kicker">Anisotropy</p>
+    <h2>Strong only where the fibers point</h2>
+    <p>Steel is equally strong in every direction. A laminate is not — it's <b>anisotropic</b>. Drag the load and watch its strength collapse as it points across the fibers instead of along them.</p>
+    <div class="card">
+      <svg class="demo-svg" id="anisoSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g>
+          <line x1="60" y1="55" x2="340" y2="55" stroke="#2f6f92" stroke-width="3"/>
+          <line x1="60" y1="75" x2="340" y2="75" stroke="#2f6f92" stroke-width="3"/>
+          <line x1="60" y1="95" x2="340" y2="95" stroke="#2f6f92" stroke-width="3"/>
+          <line x1="60" y1="115" x2="340" y2="115" stroke="#2f6f92" stroke-width="3"/>
+        </g>
+        <g id="loadArrow" transform="rotate(0 200 85)">
+          <line x1="200" y1="30" x2="200" y2="140" stroke="#ef5f2b" stroke-width="4"/>
+          <polygon points="200,22 192,40 208,40" fill="#ef5f2b"/>
+          <polygon points="200,148 192,130 208,130" fill="#ef5f2b"/>
+        </g>
+      </svg>
+      <div class="control">
+        <label for="anisoRange"><span>Load direction</span><span class="val" id="anisoAngle">0° — along fibers</span></label>
+        <input type="range" id="anisoRange" min="0" max="90" value="0" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Load-bearing strength</span><span id="anisoPct">100%</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="anisoFill" style="width:100%"></div></div>
+      </div>
+      <div class="readout" id="anisoRead">Pulling along the fibers: this is what glass is built for.</div>
+    </div>
+    <p class="note">This is <em>why</em> boatbuilders reach for biaxial and triaxial fabrics — to put fibers in more than one direction. (Module 2.)</p>
+
+    <details class="deep">
+      <summary>Field notes: how you actually pick fiber direction on a real part</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px">Trace the <b>load path</b>. If you can point to one line on the part and say "this only ever gets pulled that way" — a stringer cap, a keel, a mast compression post — that's a <b>single, known load path</b>, and unidirectional fiber laid straight along it is the efficient answer.</p>
+        <p style="margin-bottom:8px">If the part is loaded from several directions or you can't be sure (a hull skin taking hoop, longitudinal, and slamming loads) — <b>multiple/uncertain load paths</b> — you cover every direction with a quasi-isotropic layup (0°, 90°, and both ±45°), so no direction is left for the resin to carry alone.</p>
+        <p style="margin-bottom:0">The math behind the slider above: each ply's usable strength in a given direction falls off roughly with <b>cos²θ</b> of the angle between the fiber and the load (classical laminate theory resolves this with a transform matrix per ply). A ply 45° off the load keeps roughly half its strength; at 90° it contributes almost none — which is exactly the curve the slider is tracing. This single relationship is the whole reason ply orientation is chosen on purpose rather than by habit.</p>
+      </div>
+    </details>
+
+    <div id="anisoVideos"></div>
+  </section>
+
+  <!-- 4: SANDWICH -->
+  <section class="panel" data-name="Sandwich = stiffness">
+    <p class="kicker">Single-skin vs. sandwich</p>
+    <h2>How a little foam multiplies stiffness</h2>
+    <p>Same two skins, same glass. Add a lightweight core between them and stiffness rockets while weight barely moves — the exact reason an I-beam is stiff. Slide the core thicker and watch.</p>
+    <div class="card">
+      <svg class="demo-svg" id="sandSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <text x="200" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" fill="#42586b">cross-section</text>
+        <rect id="skinTop" x="120" y="70" width="160" height="10" fill="#2f6f92"/>
+        <rect id="coreRect" x="120" y="80" width="160" height="10" fill="#c9d6ad" stroke="#a9ba82"/>
+        <rect id="skinBot" x="120" y="90" width="160" height="10" fill="#2f6f92"/>
+        <text x="300" y="86" id="coreLabel" font-family="Space Grotesk" font-size="11" fill="#54622f"></text>
+      </svg>
+      <div class="control">
+        <label for="coreRange"><span>Core thickness</span><span class="val" id="coreVal">0 mm (solid laminate)</span></label>
+        <input type="range" id="coreRange" min="0" max="40" value="0" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Stiffness (relative)</span><span id="stiffVal">8</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="stiffFill" style="width:8%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Weight (relative)</span><span id="wtVal">30</span></div>
+        <div class="mtrack"><div class="mfill weight" id="wtFill" style="width:30%"></div></div>
+      </div>
+      <div class="readout" id="sandRead">A solid laminate: to make it stiffer you'd have to make it heavier.</div>
+      <p class="note">Numbers are relative and illustrative, to show the trend — not engineering values.</p>
+    </div>
+  </section>
+
+  <!-- 5: GLASS:RESIN -->
+  <section class="panel" data-name="The wet-out sweet spot">
+    <p class="kicker">Fiber-to-resin ratio</p>
+    <h2>More glass, less resin — up to a point</h2>
+    <p>Resin is the heavy, brittle part. More glass and just enough resin to fully wet it = strong and light. Too much resin is dead weight; too little and you can't wet the fibers, so voids form. Find the sweet spot.</p>
+    <div class="card">
+      <svg class="demo-svg" id="grSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <rect x="60" y="55" width="280" height="60" rx="6" fill="#e0a021" opacity="0.5"/>
+        <g id="grFibers"></g>
+        <g id="grVoids"></g>
+        <rect x="60" y="55" width="280" height="60" rx="6" fill="none" stroke="#b98416" stroke-width="1.5"/>
+      </svg>
+      <div class="control">
+        <label for="grRange"><span>Glass content (by weight)</span><span class="val" id="grVal">45%</span></label>
+        <input type="range" id="grRange" min="20" max="72" value="45" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Strength-to-weight</span><span id="swVal">86</span></div>
+        <div class="mtrack"><div class="mfill sw" id="swFill" style="width:86%"></div></div>
+      </div>
+      <div class="readout ok" id="grRead">Good wet-out: strong and light.</div>
+      <p class="note">Real ratios depend on process (hand lay-up runs leaner than vacuum infusion). Trend shown, not a target number.</p>
+    </div>
+    <div class="callout"><b>Calculating it for real:</b> percent fiber content = (weight of fiber ÷ total weight of the cured laminate) × 100%. That single calculation is how a shop actually checks whether a laminate hit its target ratio, rather than eyeballing it.</div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five questions, exam-style — the distractors are meant to look right. Answer each; you'll get instant feedback and the reason.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 1 locked in.</h2>
+      <p>You can explain the fiber / matrix / core roles, why sandwich construction is stiff, anisotropy, and the wet-out sweet spot. That's the foundation everything else builds on.</p>
+      <p class="next-label">Up next → Module 2: Reinforcements (glass types, fabric forms, orientation).</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('anisoVideos', CFS_VIDEOS.fiberOrientation);
+  CFS.initChatbot();
+
+  /* ---- 1. material toggle ---- */
+  var verdicts = {
+    fiber:'<strong>Strong, but shapeless.</strong> Fibers have huge pull-strength and zero stiffness. It\'s a rope, not a hull.',
+    resin:'<strong>Rigid, but brittle.</strong> Cured resin holds a shape, then cracks under load. No toughness on its own.',
+    composite:'<strong>Now it\'s a boat.</strong> Fibers take the pull, resin binds them and takes the compression, shear, and water. Each covers the other\'s weakness.'
+  };
+  var segBtns = document.querySelectorAll('#matSeg .seg');
+  var gFiber=document.getElementById('g-fiber'), gResin=document.getElementById('g-resin'), gComp=document.getElementById('g-composite');
+  function setMat(state){
+    segBtns.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.state===state);});
+    gFiber.style.display = state==='fiber'?'':'none';
+    gResin.style.display = state==='resin'?'':'none';
+    gComp.style.display  = state==='composite'?'':'none';
+    document.getElementById('matVerdict').innerHTML = verdicts[state];
+  }
+  segBtns.forEach(function(b){b.addEventListener('click',function(){setMat(b.dataset.state);});});
+  setMat('composite');
+
+  /* ---- 2. roles ---- */
+  document.querySelectorAll('#roles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML = r.dataset.job;
+    r.addEventListener('click', function(){
+      var open = r.getAttribute('aria-expanded')==='true';
+      r.setAttribute('aria-expanded', !open);
+    });
+  });
+
+  /* ---- 3. anisotropy ---- */
+  var aRange=document.getElementById('anisoRange');
+  var loadArrow=document.getElementById('loadArrow');
+  var aAngle=document.getElementById('anisoAngle');
+  var aPct=document.getElementById('anisoPct');
+  var aFill=document.getElementById('anisoFill');
+  var aRead=document.getElementById('anisoRead');
+  function setAniso(){
+    var deg=+aRange.value;
+    loadArrow.setAttribute('transform','rotate('+deg+' 200 85)');
+    var rad=deg*Math.PI/180;
+    var pct=Math.max(4, Math.round(100*Math.pow(Math.cos(rad),2)));
+    aPct.textContent=pct+'%';
+    aFill.style.width=pct+'%';
+    var word = deg<=15?'along fibers':deg>=75?'across fibers':'off-axis';
+    aAngle.textContent=deg+'° — '+word;
+    if(deg<=15){aRead.className='readout ok';aRead.textContent='Pulling along the fibers: this is what glass is built for.';}
+    else if(deg>=75){aRead.className='readout warn';aRead.textContent='Pulling across the fibers: the resin is holding it now, and resin is weak. This is where unidirectional laminates fail.';}
+    else{aRead.className='readout';aRead.textContent='Off-axis: only part of the fiber strength is working for you.';}
+  }
+  aRange.addEventListener('input', setAniso); setAniso();
+
+  /* ---- 4. sandwich ---- */
+  var cRange=document.getElementById('coreRange');
+  var coreRect=document.getElementById('coreRect');
+  var skinTop=document.getElementById('skinTop');
+  var skinBot=document.getElementById('skinBot');
+  var coreLabel=document.getElementById('coreLabel');
+  var coreVal=document.getElementById('coreVal');
+  var stiffVal=document.getElementById('stiffVal');
+  var stiffFill=document.getElementById('stiffFill');
+  var wtVal=document.getElementById('wtVal');
+  var wtFill=document.getElementById('wtFill');
+  var sandRead=document.getElementById('sandRead');
+  function setSand(){
+    var c=+cRange.value;
+    var coreH=c*2.2;
+    var topY=80-coreH;
+    skinTop.setAttribute('y', topY-10);
+    coreRect.setAttribute('y', topY);
+    coreRect.setAttribute('height', Math.max(0.1,coreH));
+    skinBot.setAttribute('y', topY+coreH);
+    coreLabel.setAttribute('y', topY+coreH/2+4);
+    coreLabel.textContent = c>0 ? c+' mm core' : '';
+    var stiff=Math.round(8 + (Math.pow(c,1.55)/Math.pow(40,1.55))*92);
+    var wt=Math.round(30 + c*0.6);
+    stiffVal.textContent=stiff; stiffFill.style.width=stiff+'%';
+    wtVal.textContent=wt; wtFill.style.width=wt+'%';
+    if(c===0){coreVal.textContent='0 mm (solid laminate)';sandRead.className='readout';sandRead.textContent='A solid laminate: to make it stiffer you\'d have to make it heavier.';}
+    else{
+      coreVal.textContent=c+' mm core';
+      var mult=(stiff/8).toFixed(1);
+      sandRead.className='readout ok';
+      sandRead.textContent='Stiffness is now ~'+mult+'× the solid skins, for only ~'+(wt/30).toFixed(1)+'× the weight. That\'s the sandwich payoff.';
+    }
+  }
+  cRange.addEventListener('input', setSand); setSand();
+
+  /* ---- 5. glass:resin ---- */
+  var grRange=document.getElementById('grRange');
+  var grVal=document.getElementById('grVal');
+  var swVal=document.getElementById('swVal');
+  var swFill=document.getElementById('swFill');
+  var grRead=document.getElementById('grRead');
+  var grFibers=document.getElementById('grFibers');
+  var grVoids=document.getElementById('grVoids');
+  function setGR(){
+    var g=+grRange.value;
+    grVal.textContent=g+'%';
+    var sw;
+    if(g<=60){ sw = 40 + (g-20)*1.5; }
+    else { sw = 100 - (g-60)*3.2; }
+    sw=Math.max(10,Math.min(100,Math.round(sw)));
+    swVal.textContent=sw; swFill.style.width=sw+'%';
+    var n=Math.round((g-20)/52*9)+2;
+    var lines='';
+    for(var k=0;k<n;k++){var y=62+ (56/(n+1))*(k+1); lines+='<line x1="70" y1="'+y+'" x2="330" y2="'+y+'" stroke="#2f6f92" stroke-width="2.5"/>';}
+    grFibers.innerHTML=lines;
+    var voids='';
+    if(g>62){var vn=Math.round((g-62)/10*8);for(var v=0;v<vn;v++){var vx=90+Math.random()*220;var vy=68+Math.random()*40;voids+='<circle cx="'+vx.toFixed(0)+'" cy="'+vy.toFixed(0)+'" r="3.5" fill="#fff" stroke="#c33a2c" stroke-width="1.5"/>';}}
+    grVoids.innerHTML=voids;
+    if(g<32){grRead.className='readout warn';grRead.textContent='Resin-rich: too much of the heavy, brittle part. Heavier and weaker than it should be.';}
+    else if(g>62){grRead.className='readout warn';grRead.textContent='Too dry to wet out — voids (red) are forming and strength is dropping fast.';}
+    else{grRead.className='readout ok';grRead.textContent='Good wet-out: fibers fully wetted, minimal excess resin. Strong and light.';}
+  }
+  grRange.addEventListener('input', setGR); setGR();
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'A fiberglass panel cracks in a line under load, but the glass strands themselves are intact. What most likely failed?',
+     opts:['The reinforcement fibers','The resin matrix / fiber-resin bond','The gelcoat pigment','The core density'],correct:1,
+     why:'The matrix binds the fibers and carries the loads they can\'t. Most composite failures are the resin cracking or the bond letting go — not the glass snapping.'},
+    {stem:'Why is a cored (sandwich) panel far stiffer than a solid laminate of the same weight?',
+     opts:['The core material is stronger than fiberglass','The core adds tensile strength to the skins','Separating the skins increases stiffness, like an I-beam','The resin cures harder inside a sandwich'],correct:2,
+     why:'Stiffness comes from moving material away from the center. The core\'s job is to hold the skins apart and carry shear between them — not to be strong itself.'},
+    {stem:'Calling a laminate "anisotropic" means it:',
+     opts:['Is equally strong in every direction','Is strongest in the direction its fibers run','Has no usable strength','Can only be used cosmetically'],correct:1,
+     why:'Fiber-reinforced composites carry load along the fibers, so strength is directional. That\'s the whole reason fabric orientation is chosen deliberately.'},
+    {stem:'Compared to a properly wet-out laminate of the same fibers, a "resin-rich" laminate is generally:',
+     opts:['Lighter and stronger','Heavier and more brittle','Identical in every way','Impossible to cure'],correct:1,
+     why:'Excess resin adds weight and more of the brittle component without adding any fiber, so strength-to-weight goes down.'},
+    {stem:'In the fiber/matrix division of labor, which is correct?',
+     opts:['Fibers carry compression; resin carries tension','Fibers carry tension; resin binds them and carries compression & shear','Both carry tension only','The core carries all the tensile load'],correct:1,
+     why:'Tensile strength runs along the fibers; the matrix binds them, transfers load between them, and handles compression and shear.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-1'); }});
+})();
+</script>
+</body>
+</html>

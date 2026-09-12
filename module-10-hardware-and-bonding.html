@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 10 — Hardware Installation &amp; Bonding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 10</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="Where leaks and rot start">
+    <p class="kicker">Hardware installation &amp; bonding — start here</p>
+    <h1>The hole is the easy part. Sealing it isn't.</h1>
+    <p class="lead">Every winch, cleat, stanchion, and thru-hull means putting a hole in the laminate. Do it right and the boat is stronger where you drilled. Do it wrong and you've built a permanent leak, a crack waiting to happen, or a rot pocket in the core. ABYC exam area: <b>Hardware installation.</b></p>
+    <div class="card">
+      <div class="segmented" id="hullSeg" role="group" aria-label="Choose hull construction">
+        <button class="seg" data-h="single" aria-pressed="true">Single-skin hull</button>
+        <button class="seg" data-h="cored" aria-pressed="false">Cored (sandwich) hull</button>
+      </div>
+      <svg class="demo-svg" id="hullSvg" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="hullRead"></div>
+    </div>
+    <p class="note">Same hole, two very different problems. The rest of this module is: choose the right fastener, seal the core, bed the fitting, and — if carbon's involved — keep it away from bare metal.</p>
+
+    <div class="callout"><b>Four skills, four sections ahead:</b> fastener method &amp; backing plates · isolating core from fasteners · bedding/sealing at any penetration · carbon-fiber galvanic risk.</div>
+  </section>
+
+  <!-- 2: FASTENER-METHOD CHOOSER -->
+  <section class="panel" data-name="Choosing the fastener">
+    <p class="kicker">Interactive: pick the fastener</p>
+    <h2>Self-tapping screw, or through-bolt with a backing plate?</h2>
+    <p>The general rule: a <b>self-tapping screw</b> only grips a thin layer of laminate — fine for a light, non-structural, low-load fitting. Anything carrying real structural or shock load needs a <b>through-bolt with a backing plate</b> (also called a bracing plate), which spreads the bolt's load over a much wider area of laminate and resists pull-out.</p>
+    <div class="card">
+      <svg class="demo-svg" id="fastSvg" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="statrow">
+        <span class="chip warn">Self-tapping: light duty only</span>
+        <span class="chip ok">Through-bolt + backing plate: spreads the load</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <p class="kicker">Five fittings — you choose</p>
+      <h3 style="margin-top:0">Right method, or pull-out waiting to happen?</h3>
+      <div id="fastScenarios"></div>
+    </div>
+
+    <div class="callout"><b>Countersinking matters too:</b> counterbore or countersink the fastener hole so the screw head or nut doesn't ride directly on the gelcoat. The sealant should fill the gap around the fastener — the fastener shouldn't be crushing or cracking the brittle gelcoat surface to seat itself.</div>
+
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: specific fastener torque values, fastener sizing for given loads, and backing-plate material/thickness specs are not in our vetted knowledge base. Do not teach numbers here until checked. -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> we don't have vetted specifics on exact fastener torque values, fastener sizing for a given load, or backing-plate material/thickness — only the general through-bolt-vs-self-tapping principle above is confirmed. Flagged rather than guessed.</div>
+
+    <div id="hwVideos"></div>
+  </section>
+
+  <!-- 3: CORE-SEALING ORDER GAME -->
+  <section class="panel" data-name="Isolating the core">
+    <p class="kicker">Interactive: put the steps in order</p>
+    <h2>Isolate the core before a fastener ever touches it</h2>
+    <p>On a cored (sandwich) hull, the core must <b>never</b> directly contact a fastener or a thru-hull fitting. Exposed core next to a hole is a wick — water travels straight into it. The fix is a specific sequence, not a shortcut. Drag the steps (or use the arrows) into the correct order, then check.</p>
+    <div class="card">
+      <div id="coreOrderGame"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <svg class="demo-svg" id="coreSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <p class="note">The cured epoxy plug is what the fastener actually threads into — not the core. The surrounding core stays sealed off from water on both sides of the laminate.</p>
+    </div>
+    <div class="callout warn"><b>Skip this and:</b> improper thru-hull installation lets water intrude into the laminate — and on a cored hull, that water wicks through the exposed core, spreading rot far from the original hole. (On single-skin hulls, the equivalent failure is skipping the doubler that restores the strength cut away by the hole.)</div>
+  </section>
+
+  <!-- 4: BEDDING/SEALING TOGGLE -->
+  <section class="panel" data-name="Bedding &amp; sealing">
+    <p class="kicker">Interactive: toggle the bedding compound</p>
+    <h2>Why bedding compound matters at any hull penetration</h2>
+    <p>Every fitting sits on top of a hole. Without something sealing that interface, water tracks under the fitting's base and down along the fastener shanks and threads — a slow, hidden leak path called crevice intrusion. Toggle bedding compound on and off and watch the path close.</p>
+    <div class="card">
+      <div class="segmented" id="bedSeg" role="group" aria-label="Toggle bedding compound">
+        <button class="seg" data-b="no" aria-pressed="true">No bedding compound</button>
+        <button class="seg" data-b="yes" aria-pressed="false">Bedding compound applied</button>
+      </div>
+      <svg class="demo-svg" id="bedSvg" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="bedRead"></div>
+    </div>
+    <p class="note">Bedding compound isn't just glue for the fitting — it's the seal that keeps crevice water out and lets the fitting and hull flex slightly against each other without opening a gap.</p>
+
+    <div class="callout"><b>Bedding compound vs. putty — don't mix them up:</b> putties are for filleting bulkheads and stringers (the radius-fillet tabbing joint, as Module 9 covered) — a structural bonding job. Bedding compound seals a hardware penetration against water. Different jobs, different products.</div>
+
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: no vetted specific bedding-compound product/type recommendation (e.g. polyurethane vs. polysulfide vs. silicone) for a given application. -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> we don't have a vetted specific bedding-compound product or type recommendation for a given application — flagged rather than guessed.</div>
+
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: "When is it necessary to use an adhesive in place of a putty?" is an explicit open question with no vetted answer in our source material. -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> When is it necessary to use an adhesive in place of a putty? This is an open question with no vetted answer in our source material — don't guess at one.</div>
+  </section>
+
+  <!-- 5: CARBON GALVANIC WARNING -->
+  <section class="panel" data-name="Carbon + metal hardware">
+    <p class="kicker">Interactive: tap each hardware situation</p>
+    <h2>Carbon fiber and bare metal hardware don't mix</h2>
+    <p>As Module 2 covered: carbon fiber is electrically conductive and sits far from common boat metals — especially aluminum — on the galvanic series. Bolt a carbon layup directly to an aluminum fitting, add moisture or seawater as the electrolyte, and you get rapid corrosion of the metal — the carbon behaves as a noble cathode. It's a hardware-installation problem as much as a materials one: the fix has to happen at the fastener. Tap each situation below.</p>
+    <div class="roles" id="carbonRoles">
+      <button class="role" aria-expanded="false" data-job="<b>Danger.</b> Carbon is conductive and sits far from aluminum on the galvanic series. With seawater or even damp air as the electrolyte, direct contact drives rapid corrosion of the aluminum — not the carbon.">
+        <div class="swatch" style="background:#1c1f26"></div>
+        <h3>Carbon direct to aluminum</h3><div style="font-size:13px;color:#42586b">no isolation</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="<b>Safe.</b> A ply of E-glass between the carbon and the metal breaks the electrical contact — the carbon can no longer act as a cathode against the fitting.">
+        <div class="swatch" style="background:var(--fiber)"></div>
+        <h3>Glass barrier ply</h3><div style="font-size:13px;color:#42586b">isolation method</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="<b>Safe.</b> A full epoxy coating over the metal fitting keeps the conductive carbon from ever touching bare metal, even where they overlap.">
+        <div class="swatch" style="background:#2f6f92"></div>
+        <h3>Epoxy isolation</h3><div style="font-size:13px;color:#42586b">isolation method</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="<b>Safe.</b> A non-conductive fastener or bushing breaks the electrical path right at the point of contact — useful when the carbon and metal parts have to physically touch or bolt together.">
+        <div class="swatch" style="background:#c9a227"></div>
+        <h3>Non-conductive fastener/bushing</h3><div style="font-size:13px;color:#42586b">isolation method</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+    </div>
+    <div class="callout warn"><b>Rule of thumb:</b> never bed a carbon layup directly against aluminum hardware. Isolate with a glass barrier ply, epoxy isolation, or non-conductive fasteners/bushings — pick one, don't assume it's fine because the joint looks dry today.</div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 10 locked in.</h2>
+      <p>You can choose between self-tapping and through-bolt-plus-backing-plate, explain why a cored hull's fasteners need an over-drill-fill-recure-redrill sequence, explain why bedding compound matters at any penetration, and flag a carbon-to-metal galvanic risk before it becomes a corroded bracket.</p>
+      <p class="next-label">Up next → Module 11: Quality assurance &amp; defects.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 1. single-skin vs cored thru-hull cross-section ---- */
+  function pipeAndFlange(){
+    return '<rect x="194" y="30" width="12" height="120" fill="#8a96a3"/>'+
+      '<rect x="176" y="30" width="48" height="9" rx="2" fill="#5c6b7a"/>'+
+      '<rect x="184" y="148" width="32" height="9" rx="2" fill="#5c6b7a"/>';
+  }
+  function singleSkinSvg(){
+    var s='';
+    s+='<rect x="40" y="70" width="150" height="20" fill="#2f6f92"/>';
+    s+='<rect x="210" y="70" width="150" height="20" fill="#2f6f92"/>';
+    s+='<rect x="150" y="60" width="100" height="10" fill="#ef5f2b"/>';
+    s+=pipeAndFlange();
+    s+='<text x="200" y="22" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#42586b">Single-skin laminate</text>';
+    s+='<text x="200" y="52" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#b94a1f">doubler — restores strength cut away by the hole</text>';
+    s+='<text x="60" y="102" font-family="Space Grotesk" font-size="11" fill="#42586b">inside hull ↑</text>';
+    s+='<text x="60" y="180" font-family="Space Grotesk" font-size="11" fill="#42586b">outside / underwater ↓</text>';
+    return s;
+  }
+  function coredSvg(){
+    var s='';
+    ['left','right'].forEach(function(side){
+      var x = side==='left' ? 40 : 210;
+      s+='<rect x="'+x+'" y="66" width="150" height="6" fill="#2f6f92"/>';
+      s+='<rect x="'+x+'" y="72" width="150" height="18" fill="#d8c88a"/>';
+      s+='<rect x="'+x+'" y="90" width="150" height="6" fill="#2f6f92"/>';
+    });
+    s+=pipeAndFlange();
+    s+='<path d="M194 84 q-22 8 -30 26" fill="none" stroke="#c33a2c" stroke-width="2.5" stroke-dasharray="4 4" marker-end="url(#coreArrow)"/>';
+    s+='<defs><marker id="coreArrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c33a2c"/></marker></defs>';
+    s+='<text x="200" y="22" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#42586b">Cored (sandwich) laminate</text>';
+    s+='<text x="200" y="140" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#8f2117">exposed core wicks water — Section 3 fixes this</text>';
+    s+='<text x="60" y="182" font-family="Space Grotesk" font-size="11" fill="#42586b">outer skin / core / inner skin</text>';
+    return s;
+  }
+  var hullSeg=document.querySelectorAll('#hullSeg .seg');
+  function setHull(h){
+    hullSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.h===h);});
+    var svg=document.getElementById('hullSvg'), read=document.getElementById('hullRead');
+    if(h==='single'){
+      svg.innerHTML=singleSkinSvg();
+      read.className='readout';
+      read.innerHTML='On single-skin hulls, the fix for a cut-away hole is a <b>doubler</b> — extra laminate that restores the strength the hole removed.';
+    } else {
+      svg.innerHTML=coredSvg();
+      read.className='readout warn';
+      read.innerHTML='On cored hulls, the core must <b>never</b> directly touch the fitting. Left exposed, it wicks water into the laminate far from the hole.';
+    }
+  }
+  hullSeg.forEach(function(b){b.addEventListener('click',function(){setHull(b.dataset.h);});});
+  setHull('single');
+
+  /* ---- 2. fastener diagram (static) + scenario chooser ---- */
+  document.getElementById('fastSvg').innerHTML =
+    '<line x1="200" y1="15" x2="200" y2="175" stroke="#c2ced6" stroke-width="1" stroke-dasharray="3 5"/>'+
+    '<text x="100" y="24" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#8f2117">Self-tapping</text>'+
+    '<rect x="30" y="80" width="140" height="26" fill="#2f6f92"/>'+
+    '<rect x="92" y="55" width="16" height="10" fill="#5c6b7a"/>'+
+    '<line x1="100" y1="65" x2="100" y2="100" stroke="#5c6b7a" stroke-width="6"/>'+
+    '<path d="M100 50 q10 -14 -2 -26" fill="none" stroke="#c33a2c" stroke-width="2.5" marker-end="url(#pullArrow)"/>'+
+    '<defs><marker id="pullArrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c33a2c"/></marker></defs>'+
+    '<text x="100" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#8f2117">grips a thin layer — can strip under load</text>'+
+    '<text x="300" y="24" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#155c46">Through-bolt + backing plate</text>'+
+    '<rect x="230" y="80" width="140" height="26" fill="#2f6f92"/>'+
+    '<line x1="300" y1="55" x2="300" y2="140" stroke="#5c6b7a" stroke-width="6"/>'+
+    '<rect x="292" y="52" width="16" height="8" fill="#5c6b7a"/>'+
+    '<rect x="260" y="106" width="80" height="10" fill="#ef5f2b"/>'+
+    '<rect x="290" y="136" width="20" height="8" fill="#5c6b7a"/>'+
+    '<path d="M300 116 l-45 18 M300 116 l45 18" stroke="#155c46" stroke-width="2" stroke-dasharray="3 4"/>'+
+    '<text x="300" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#155c46">plate spreads the load over a wide area</text>';
+
+  var scenarios=[
+    {text:'A small plastic map-light fixture on the inside of a cabin liner — it only has to support its own weight.', correct:'self',
+      rightMsg:'Right — a light, non-structural fitting like this carries essentially no load, so a self-tapping screw is the appropriate, simpler choice.',
+      wrongMsg:'Not quite — through-bolting with a backing plate is overkill here. Self-tapping screws are made for exactly this kind of light, non-structural fitting.'},
+    {text:'A bow cleat that will take the full shock load of the anchor rode snubbing in a blow.', correct:'bolt',
+      rightMsg:'Right — a cleat under heavy shock loading needs a through-bolt and backing plate to spread that load over a wide area of laminate and resist pull-out.',
+      wrongMsg:'Not quite — self-tapping screws only grip a thin layer of laminate. Under a hard anchor-rode shock load they pull out. This calls for a through-bolt and backing plate.'},
+    {text:'A stanchion base holding lifelines a crew member could fall against.', correct:'bolt',
+      rightMsg:'Right — this is a structural, safety-critical fitting. It needs a through-bolt and backing plate to distribute that load and resist pull-out.',
+      wrongMsg:'Not quite — a stanchion base has to hold a person\'s full weight in a fall. Self-tapping screws are only appropriate for light, non-structural fittings; this needs a through-bolt and backing plate.'},
+    {text:'A small cabin courtesy light mounted to a bulkhead, with only its own weight to support.', correct:'self',
+      rightMsg:'Right — no meaningful load here, so a self-tapping screw is fine.',
+      wrongMsg:'Not quite — this fitting carries essentially no load. Self-tapping is the appropriate, simpler choice for light, non-structural fittings like this.'},
+    {text:'A mid-boat cleat sized for docklines and towing loads.', correct:'bolt',
+      rightMsg:'Right — docklines and towing put real structural load through this fitting, so it needs a through-bolt and backing plate.',
+      wrongMsg:'Not quite — this fitting sees real structural load. Self-tapping screws are only appropriate for light, non-structural fittings; use a through-bolt and backing plate here.'}
+  ];
+  var scWrap=document.getElementById('fastScenarios');
+  scenarios.forEach(function(sc,i){
+    var q=document.createElement('div'); q.className='q';
+    var stem=document.createElement('div'); stem.className='stem'; stem.textContent=(i+1)+'. '+sc.text; q.appendChild(stem);
+    var row=document.createElement('div'); row.style.display='flex'; row.style.gap='10px'; row.style.flexWrap='wrap';
+    var why=document.createElement('div'); why.className='why'; why.textContent='';
+    ['self','bolt'].forEach(function(choice){
+      var b=document.createElement('button'); b.className='opt'; b.style.flex='1'; b.style.minWidth='220px';
+      b.setAttribute('aria-pressed','false');
+      b.textContent = choice==='self' ? 'Self-tapping screw' : 'Through-bolt + backing plate';
+      b.addEventListener('click',function(){
+        if(q.dataset.done) return; q.dataset.done='1';
+        var btns=row.querySelectorAll('.opt');
+        btns.forEach(function(x){x.setAttribute('disabled','');});
+        b.setAttribute('aria-pressed','true');
+        if(choice===sc.correct){ b.classList.add('correct'); why.textContent=sc.rightMsg; }
+        else {
+          b.classList.add('wrong');
+          Array.prototype.forEach.call(btns,function(x){
+            if((x.textContent==='Self-tapping screw'&&sc.correct==='self')||(x.textContent==='Through-bolt + backing plate'&&sc.correct==='bolt')) x.classList.add('correct');
+          });
+          why.textContent=sc.wrongMsg;
+        }
+        why.classList.add('show');
+      });
+      row.appendChild(b);
+    });
+    q.appendChild(row); q.appendChild(why);
+    scWrap.appendChild(q);
+  });
+
+  CFS.renderVideos('hwVideos', CFS_VIDEOS.hardware);
+
+  /* ---- 3. core-sealing order game + isolated cross-section ---- */
+  CFS.initOrderGame('coreOrderGame', [
+    {id:'over', label:'Over-drill the fastener hole oversize (larger than the fastener itself)'},
+    {id:'fill', label:'Fill the oversized hole solid with thickened epoxy'},
+    {id:'cure', label:'Let the epoxy cure fully'},
+    {id:'redrill', label:'Re-drill back down to the fastener\'s final size, through the cured epoxy plug'}
+  ], ['over','fill','cure','redrill'], {
+    correctMsg:'Correct — that cured epoxy plug is now what the fastener actually threads into, not the core. The core stays isolated from water on both faces of the laminate.',
+    wrongMsg:'Not quite — green rows are already in the right spot. Remember: the epoxy has to cure solid before you can trust drilling back into it.'
+  });
+
+  document.getElementById('coreSvg').innerHTML =
+    (function(){
+      var s='';
+      ['left','right'].forEach(function(side){
+        var x = side==='left' ? 40 : 210;
+        s+='<rect x="'+x+'" y="56" width="150" height="6" fill="#2f6f92"/>';
+        s+='<rect x="'+x+'" y="62" width="150" height="18" fill="#d8c88a"/>';
+        s+='<rect x="'+x+'" y="80" width="150" height="6" fill="#2f6f92"/>';
+      });
+      s+='<rect x="182" y="56" width="36" height="30" fill="#c9a227"/>';
+      s+=pipeAndFlangeShort();
+      s+='<text x="200" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#42586b">After: core isolated by cured epoxy plug</text>';
+      s+='<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#155c46">fastener threads into epoxy, never into bare core</text>';
+      return s;
+    })();
+  function pipeAndFlangeShort(){
+    return '<rect x="194" y="24" width="12" height="100" fill="#8a96a3"/>'+
+      '<rect x="176" y="24" width="48" height="9" rx="2" fill="#5c6b7a"/>'+
+      '<rect x="184" y="116" width="32" height="9" rx="2" fill="#5c6b7a"/>';
+  }
+
+  /* ---- 4. bedding toggle ---- */
+  function bedNoSvg(){
+    return '<rect x="30" y="70" width="340" height="18" fill="#2f6f92"/>'+
+      '<rect x="150" y="52" width="100" height="12" fill="#8a96a3"/>'+
+      '<rect x="185" y="88" width="30" height="14" fill="#5c6b7a"/>'+
+      '<path d="M200 64 q0 8 -14 10 M200 64 q0 8 14 10" fill="none" stroke="#c33a2c" stroke-width="2.5" stroke-dasharray="3 4"/>'+
+      '<text x="200" y="22" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#8f2117">No bedding compound</text>'+
+      '<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#8f2117">water tracks under the flange and down the fastener</text>';
+  }
+  function bedYesSvg(){
+    return '<rect x="30" y="70" width="340" height="18" fill="#2f6f92"/>'+
+      '<rect x="150" y="52" width="100" height="12" fill="#8a96a3"/>'+
+      '<rect x="145" y="62" width="110" height="8" fill="#ef5f2b"/>'+
+      '<rect x="185" y="88" width="30" height="14" fill="#5c6b7a"/>'+
+      '<text x="200" y="22" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#155c46">Bedding compound applied</text>'+
+      '<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="11.5" fill="#155c46">seals the interface and cushions slight movement</text>';
+  }
+  var bedSeg=document.querySelectorAll('#bedSeg .seg');
+  function setBed(b){
+    bedSeg.forEach(function(x){x.setAttribute('aria-pressed',x.dataset.b===b);});
+    var svg=document.getElementById('bedSvg'), read=document.getElementById('bedRead');
+    if(b==='no'){
+      svg.innerHTML=bedNoSvg(); read.className='readout warn';
+      read.innerHTML='No seal at the interface — water finds the gap around the base and works down the fastener holes into the laminate.';
+    } else {
+      svg.innerHTML=bedYesSvg(); read.className='readout ok';
+      read.innerHTML='Bedding compound fills the interface, blocking the water path and letting the fitting move very slightly against the hull without opening a gap.';
+    }
+  }
+  bedSeg.forEach(function(x){x.addEventListener('click',function(){setBed(x.dataset.b);});});
+  setBed('no');
+
+  /* ---- 5. carbon galvanic roles ---- */
+  document.querySelectorAll('#carbonRoles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML=r.dataset.job;
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'What is the purpose of a backing plate (bracing plate) under a through-bolted fitting?',
+     opts:['To make the fitting look more finished on the inside','To distribute the stress from the mounting-bolt loads over a wider area of the laminate','To replace the need for any sealant at the hole','To speed up drilling the hole'],correct:1,
+     why:'A backing plate (bracing plate) spreads the load from the bolt over a wider area of laminate instead of concentrating it at one small point — that\'s what lets a through-bolted fitting resist pull-out.'},
+    {stem:'When is a self-tapping screw an appropriate fastener for hardware on a boat?',
+     opts:['For any fitting, as long as the screw is long enough','Only for light, non-structural, low-load fittings','Only below the waterline','Only on cored laminates'],correct:1,
+     why:'Self-tapping screws grip only a thin layer of laminate, so they\'re appropriate for light, non-structural, low-load fittings. Real structural or shock loads need a through-bolt and backing plate.'},
+    {stem:'On a cored (sandwich) hull, why do you over-drill the fastener hole, fill it with thickened epoxy, let it cure, and then re-drill to final size?',
+     opts:['To make the hole look neater','To isolate the exposed core from the fastener so water can\'t wick into it','To save resin compared to filling the whole panel','To avoid needing a backing plate'],correct:1,
+     why:'The core must never directly contact a fastener or thru-hull fitting. The cured epoxy plug takes the core\'s place right at the hole, so the fastener seats in solid epoxy and the surrounding core stays sealed off from water.'},
+    {stem:'What happens if a thru-hull fitting is installed on a cored hull without isolating the core first?',
+     opts:['Nothing, as long as the fitting is through-bolted','Water can intrude into the laminate and wick through the exposed core','The gelcoat will yellow faster','The fitting will corrode the gelcoat'],correct:1,
+     why:'Improper thru-hull installation lets water intrude into the laminate — and on a cored hull, that water wicks through the exposed core since it wasn\'t isolated from the hole.'},
+    {stem:'A carbon-fiber bracket is through-bolted directly to an aluminum fitting with no isolation between them. What is the main concern?',
+     opts:['The carbon will absorb water and swell','Galvanic corrosion of the aluminum, since carbon is conductive and sits far from it on the galvanic series','The bolt will overheat during tightening','The epoxy will not cure properly near aluminum'],correct:1,
+     why:'As Module 2 covered, carbon fiber is electrically conductive and sits far from common boat metals — especially aluminum — on the galvanic series. Moisture as an electrolyte drives rapid corrosion of the aluminum unless isolated with a glass barrier ply, epoxy isolation, or non-conductive fasteners/bushings.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-10'); }});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 — Curing Chemistry &amp; Catalyzation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 6</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - free-radical cure + cobalt promoter -->
+  <section class="panel active" data-name="Controlling the cure">
+    <p class="kicker">Curing chemistry — start here</p>
+    <h1>You don't just "add hardener." You control a reaction.</h1>
+    <p class="lead">Module 3 showed you that <b>more MEKP ≠ more strength</b>. This module is the deeper mechanics behind that rule: what's actually happening chemically, how mass and temperature change the outcome, and exactly when a fresh layer can still chemically weld itself to the last one.</p>
+    <div class="card">
+      <svg class="demo-svg" id="polySvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <p style="font-size:14.5px;margin:10px 0 0"><b>Polymerization (esterification):</b> individual resin molecules cross-link into one continuous network — liquid becomes solid. It's a one-way, <b>exothermic</b> (heat-releasing) reaction, same as Module 3's thermoset definition, just now happening in real time in front of you.</p>
+    </div>
+
+    <div class="callout">
+      <b>The redox pair:</b> <b>MEKP</b> (methyl ethyl ketone peroxide) is the catalyst — it initiates the free-radical chain reaction that cross-links polyester/vinylester resin. A <b>cobalt promoter (accelerator)</b>, already mixed into most promoted laminating resins, works alongside MEKP to get that free-radical reaction going at working temperatures — that's the "redox pair." Module 5's warning stands: never mix MEKP and cobalt together neat, outside the resin — concentrated contact between the two is a fire/explosion hazard.
+    </div>
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact cobalt promoter dosing/ppm figures. The course material confirms cobalt's role as an accelerator paired with MEKP but does not give a specific percentage or ppm dosing number — don't test or teach a specific figure until one is sourced.
+      <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact cobalt promoter dosing/ppm figures -->
+    </div>
+
+    <div class="callout">
+      <b>Recap from Module 3 — air inhibition:</b> atmospheric oxygen stops surface styrene from fully curing, so a structural (non-final) polyester/vinylester layer stays tacky after its gel time passes. That's expected — it's exactly what lets the next wet layer bond to it. Only the <em>final</em> coat needs a wax/surfacing additive to seal out air and cure hard. Keep that in mind: it's the same window of chemical opportunity behind this module's <b>green bonding window</b> in Section 5.
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: inhibitor vs. catalyst vs. promoter — who does what</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Inhibitor</b> — already in the resin from the manufacturer. Slows polymerization so the resin has shelf life and you get working/open time before cure takes over. You don't add this; it's baked in.</p>
+        <p style="margin-bottom:8px"><b>Catalyst (MEKP)</b> — what you add at the bench. It initiates the free-radical reaction. It doesn't get "used up" to build strength; it just starts and paces the reaction.</p>
+        <p style="margin-bottom:0"><b>Promoter (cobalt)</b> — usually pre-mixed into the resin by the manufacturer. It's what lets MEKP initiate cure at normal shop temperatures instead of needing heat. Three different jobs, three different chemicals — mixing up which does what is a common exam trap.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: ADVANCED CATALYZATION CALCULATOR -->
+  <section class="panel" data-name="Catalyzation calculator">
+    <p class="kicker">The genuinely useful tool</p>
+    <h2>Catalyzation calculator — with a temperature nudge</h2>
+    <p>Module 3's calculator gave you volume × percentage → milliliters. This one adds the piece real shops actually adjust for: <b>shop temperature</b>. Set your batch, your percentage, and your shop conditions.</p>
+    <div class="card">
+      <div class="segmented" id="presetSeg" role="group" aria-label="Load a worked checkpoint">
+        <button class="seg" data-preset="quart2" aria-pressed="false" type="button">Checkpoint: quart @ 2%</button>
+        <button class="seg" data-preset="cup1" aria-pressed="false" type="button">Checkpoint: cup @ 1%</button>
+      </div>
+      <div class="control">
+        <label for="volRange2"><span>Batch size</span><span class="val" id="volVal2">1 quart (32 oz)</span></label>
+        <input type="range" id="volRange2" min="4" max="128" value="32" step="4">
+      </div>
+      <div class="control">
+        <label for="pctRange2"><span>Catalyst percentage</span><span class="val" id="pctVal2">2.0%</span></label>
+        <input type="range" id="pctRange2" min="1" max="4" value="2" step="0.25">
+      </div>
+      <p class="kicker" style="margin-top:16px">Shop temperature</p>
+      <div class="segmented" id="tempSeg" role="group" aria-label="Shop temperature band">
+        <button class="seg" data-temp="cold" aria-pressed="false" type="button">Cold shop</button>
+        <button class="seg" data-temp="normal" aria-pressed="true" type="button">Normal (~75°F)</button>
+        <button class="seg" data-temp="hot" aria-pressed="false" type="button">Hot shop</button>
+      </div>
+      <div class="readout" id="mekpRead2"></div>
+      <div class="readout info" id="tempRead"></div>
+      <p class="note">Math shown: ml = batch (oz) × 30 ml/oz (Module 3's shop rule of thumb) × percentage ÷ 100. That's why a quart (32 oz) at 2% lands at ~19–20 ml, and a cup (8 oz) at 1% lands at ~2.4–2.5 ml — the two checkpoints above, within normal rounding.</p>
+      <div class="callout todo">
+        <b>TODO: VERIFY with Tyler / ABYC study guide:</b> a precise drops-per-ml conversion for MEKP dispensers. Dropper/bottle-cap calibration varies by manufacturer, so this tool reports the ABYC-vetted unit — milliliters — rather than guessing a drops figure.
+        <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact drops-per-ml conversion for MEKP dispensers -->
+      </div>
+    </div>
+    <div class="callout warn"><b>Still true from Module 3:</b> the usual everyday working range is <b>1%–2.5%</b> MEKP by weight; the full allowed band is wider — <b>about 1%–4%</b> — and where you sit in that band is a temperature call, not a strength call. More MEKP shortens working time and raises exotherm; it doesn't make the part stronger.</div>
+    <div class="callout"><b>"Triggering":</b> if a batch suddenly starts gelling far faster than expected while you're still applying it, that's called triggering — and it's a sign of an improper resin-to-catalyst ratio, not bad luck. Weigh or measure your catalyst; don't eyeball it.</div>
+    <div id="mekpVideos"></div>
+  </section>
+
+  <!-- 3: EXOTHERM DEMO -->
+  <section class="panel" data-name="Exotherm and mass">
+    <p class="kicker">Heat does the rest of the work</p>
+    <h2>Thin film vs. thick mass: the exotherm trade-off</h2>
+    <p>Cure is exothermic — it releases its own heat, and that heat speeds up the reaction further. A thick mass traps that heat; a thin film loses it to the air. Slide from a thin film to a thick pour and watch what happens.</p>
+    <div class="card">
+      <svg class="demo-svg" id="exoSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:120px"></svg>
+      <div class="control">
+        <label for="exoRange"><span>Resin mass</span><span class="val" id="exoVal">Thin film</span></label>
+        <input type="range" id="exoRange" min="0" max="100" value="15" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Relative peak exotherm (illustrative)</span><span id="exoTempVal">low</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="exoTempFill" style="width:15%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Relative cure speed (illustrative)</span><span id="exoSpeedVal">slow</span></div>
+        <div class="mtrack"><div class="mfill sw" id="exoSpeedFill" style="width:15%"></div></div>
+      </div>
+      <div class="readout" id="exoRead"></div>
+      <p class="note">Curve shape only — relative/illustrative, not measured temperatures. The point is the trend: mass drives heat, heat drives speed, and both extremes fail differently.</p>
+    </div>
+    <div class="callout"><b>Demold rule of thumb:</b> whatever the mass, don't pull a part from the mold until it has cooled back to room temperature — pulling it while still hot from exotherm is a common cause of warping.</div>
+
+    <details class="deep">
+      <summary>Field notes: why "just add a few more plies at once" backfires</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Laying up too many plies in one session stacks resin mass fast, and that mass traps exothermic heat faster than it can escape. The results show up in different ways depending on the part: cracking or crazing in the laminate itself, pre-release from the mold surface, mold damage from the heat, or a warped/distorted part as it cools unevenly. None of that is a catalyst problem — it's a mass-and-heat problem, which is why the fix is usually "build it in stages," not "use less MEKP."</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: GEL / WORK / CURE TIMELINE -->
+  <section class="panel" data-name="The cure timeline">
+    <p class="kicker">Put the phases in order</p>
+    <h2>Gel-time, post-cure, full-cure — in the right order</h2>
+    <p>Three phases, three very different timescales. Drag (or use the arrows) to put them in the order they actually happen, then check your work.</p>
+    <div class="card">
+      <div id="cureOrderGame"></div>
+    </div>
+    <p class="note">Notice the timescales aren't close to each other — minutes, then weeks, then closer to a year. Treating "cured" as a single moment is the mistake this timeline is meant to fix.</p>
+  </section>
+
+  <!-- 5: GREEN WINDOW / SECONDARY BOND TOGGLE -->
+  <section class="panel" data-name="The green window">
+    <p class="kicker">Bond now, or bond later — it's not equal</p>
+    <h2>Primary bond (green) vs. secondary bond (fully cured)</h2>
+    <p>Toggle between laminating a new ply while the layer under it is still uncured ("green") versus laminating onto that same layer after it has fully cured.</p>
+    <div class="card">
+      <div class="segmented" id="bondSeg2" role="group" aria-label="When you laminate the next ply">
+        <button class="seg" data-when="green" aria-pressed="true" type="button">While still green (uncured)</button>
+        <button class="seg" data-when="cured" aria-pressed="false" type="button">After full cure</button>
+      </div>
+      <svg class="demo-svg" id="bondSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:120px"></svg>
+      <div class="meter">
+        <div class="mlab"><span>Relative bond strength (illustrative)</span><span id="bondVal2">high</span></div>
+        <div class="mtrack"><div class="mfill sw" id="bondFill2" style="width:95%"></div></div>
+      </div>
+      <div class="readout" id="bondRead2"></div>
+    </div>
+    <div class="callout"><b>Recap from Module 3:</b> of the three resin families, <b>epoxy has the best secondary-bonding characteristics</b> — which is exactly why it's the standard choice whenever you're forced into a secondary bond (a repair, or any layer added after full cure) rather than a primary/green one.</div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. Everything here was taught on this page.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 6 locked in.</h2>
+      <p>You can explain the MEKP/cobalt redox pair, calculate and temperature-adjust a catalyst dose, describe exotherm and the mass trade-off, sequence gel-time → post-cure → full-cure, and identify the green-window bonding rule.</p>
+      <p class="next-label">Up next → Module 7: Manufacturing processes — hand lay-up, spray-up, vacuum bag, infusion, RTM, prepreg.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 1. polymerization SVG ---- */
+  (function(){
+    var s='<text x="200" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">liquid resin → cross-linked solid</text>';
+    // left: loose molecules (liquid)
+    var mols=[[40,60],[70,90],[45,110],[85,55],[100,105],[55,80]];
+    mols.forEach(function(m){s+='<circle cx="'+m[0]+'" cy="'+m[1]+'" r="7" fill="#e0a021"/>';});
+    s+='<text x="70" y="140" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#8a6109">liquid</text>';
+    // arrow
+    s+='<line x1="130" y1="90" x2="200" y2="90" stroke="#42586b" stroke-width="2" marker-end="url(#arrow6)"/>';
+    s+='<defs><marker id="arrow6" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#42586b"/></marker></defs>';
+    s+='<text x="165" y="78" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#42586b">cure</text>';
+    // right: cross-linked network (solid)
+    var pts=[[250,55],[290,55],[330,55],[250,90],[290,90],[330,90],[250,125],[290,125],[330,125]];
+    var lines='';
+    for(var r=0;r<3;r++){for(var c=0;c<2;c++){var i=r*3+c;lines+='<line x1="'+pts[i][0]+'" y1="'+pts[i][1]+'" x2="'+pts[i+1][0]+'" y2="'+pts[i+1][1]+'" stroke="#2f6f92" stroke-width="2"/>';}}
+    for(var c2=0;c2<3;c2++){for(var r2=0;r2<2;r2++){var j=r2*3+c2;lines+='<line x1="'+pts[j][0]+'" y1="'+pts[j][1]+'" x2="'+pts[j+3][0]+'" y2="'+pts[j+3][1]+'" stroke="#2f6f92" stroke-width="2"/>';}}
+    s+=lines;
+    pts.forEach(function(p){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="7" fill="#155c46"/>';});
+    s+='<text x="290" y="140" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#155c46">solid (cross-linked)</text>';
+    document.getElementById('polySvg').innerHTML=s;
+  })();
+
+  /* ---- 2. advanced catalyzation calculator ---- */
+  var volRange2=document.getElementById('volRange2'), pctRange2=document.getElementById('pctRange2');
+  var tempSeg=document.querySelectorAll('#tempSeg .seg');
+  var curTemp='normal';
+  var tempGuidance={
+    cold:{label:'Cold shop', text:'Cold slows the reaction, so shops typically lean toward the <b>upper</b> part of the range (roughly 2%–2.5%, up to the wider 4% ceiling in very cold conditions if the manufacturer allows it) to still get a workable cure. This is guidance, not a fixed multiplier — always check the resin\'s own data sheet.'},
+    normal:{label:'Normal shop (~75°F)', text:'This is the reference condition Module 3\'s numbers assume: the everyday <b>1%–2.5%</b> working range applies as-is.'},
+    hot:{label:'Hot shop', text:'Heat speeds the reaction on its own, so shops typically lean toward the <b>lower</b> part of the range (closer to 1%) to avoid a too-fast, too-hot kick. This is guidance, not a fixed multiplier — always check the resin\'s own data sheet.'}
+  };
+  function setMekp2(){
+    var oz=+volRange2.value, pct=+pctRange2.value;
+    var ml = oz*30*pct/100;
+    document.getElementById('volVal2').textContent = oz+' oz'+(oz===8?' (1 cup)':oz===32?' (1 quart)':oz===128?' (1 gallon)':'');
+    document.getElementById('pctVal2').textContent = pct.toFixed(2).replace(/0$/,'').replace(/\.$/,'')+'%';
+    var read=document.getElementById('mekpRead2');
+    var cls = pct>2.5? 'readout warn':'readout ok';
+    read.className=cls;
+    read.innerHTML = 'Add <b>'+ml.toFixed(1)+' ml</b> of MEKP to '+oz+' oz of resin at '+pct+'%.'+
+      (pct>2.5?' That\'s above the typical 1–2.5% everyday range — inside the wider 1–4% band only if temperature and the manufacturer\'s data sheet justify it.':' Within the everyday working range.');
+    var tg=tempGuidance[curTemp];
+    var tread=document.getElementById('tempRead');
+    tread.innerHTML='<b>'+tg.label+':</b> '+tg.text;
+  }
+  volRange2.addEventListener('input',setMekp2); pctRange2.addEventListener('input',setMekp2);
+  tempSeg.forEach(function(b){b.addEventListener('click',function(){
+    tempSeg.forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+    curTemp=b.dataset.temp; setMekp2();
+  });});
+  document.querySelectorAll('#presetSeg .seg').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#presetSeg .seg').forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+      if(b.dataset.preset==='quart2'){volRange2.value=32;pctRange2.value=2;}
+      else{volRange2.value=8;pctRange2.value=1;}
+      setMekp2();
+    });
+  });
+  setMekp2();
+  CFS.renderVideos('mekpVideos', CFS_VIDEOS.mekpCatalyst);
+
+  /* ---- 3. exotherm demo ---- */
+  var exoRange=document.getElementById('exoRange');
+  function lerpColor(a,b,t){
+    var ar=parseInt(a.substr(1,2),16),ag=parseInt(a.substr(3,2),16),ab=parseInt(a.substr(5,2),16);
+    var br=parseInt(b.substr(1,2),16),bg=parseInt(b.substr(3,2),16),bb=parseInt(b.substr(5,2),16);
+    var r=Math.round(ar+(br-ar)*t),g=Math.round(ag+(bg-ag)*t),bl=Math.round(ab+(bb-ab)*t);
+    return 'rgb('+r+','+g+','+bl+')';
+  }
+  function setExo(){
+    var v=+exoRange.value;
+    var color=lerpColor('#2f6f92','#c33a2c', v/100);
+    var h=(6+v*0.9).toFixed(1);
+    var svg='<text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">resin cross-section (relative heat by color)</text>'+
+      '<rect x="90" y="'+(120-h)+'" width="220" height="'+h+'" fill="'+color+'" rx="4"/>'+
+      '<line x1="80" y1="120" x2="320" y2="120" stroke="#42586b" stroke-width="2"/>';
+    document.getElementById('exoSvg').innerHTML=svg;
+    document.getElementById('exoVal').textContent = v<20?'Thin film':v>80?'Thick pour':'Moderate laminate';
+    var tempPct=Math.max(6,v);
+    var speedPct=Math.max(6,v);
+    document.getElementById('exoTempFill').style.width=tempPct+'%';
+    document.getElementById('exoSpeedFill').style.width=speedPct+'%';
+    document.getElementById('exoTempVal').textContent = tempPct<30?'low':tempPct<70?'moderate':'high';
+    document.getElementById('exoSpeedVal').textContent = speedPct<30?'slow':speedPct<70?'moderate':'fast';
+    var read=document.getElementById('exoRead');
+    if(v<20){
+      read.className='readout warn';
+      read.textContent='Thin film risk: not enough resin mass to trap reaction heat. Cure can stall out short of full hardness — undercure, not overcure.';
+    } else if(v>80){
+      read.className='readout warn';
+      read.textContent='Thick mass risk: trapped heat compounds on itself. Watch for overheating, cracking, pre-release from the mold, mold damage, or a warped part — classic symptoms of laying up too many plies at once.';
+    } else {
+      read.className='readout ok';
+      read.textContent='Workable range: enough mass to retain heat and cure fully, not so much that heat runs away. This is why a thicker laminate generally cures faster than a thin one — right up until it\'s too thick.';
+    }
+  }
+  exoRange.addEventListener('input',setExo); setExo();
+
+  /* ---- 4. cure timeline order game ---- */
+  CFS.initOrderGame('cureOrderGame', [
+    {id:'full', label:'Full-cure — laminate reaches its final full mechanical properties (up to about a year)'},
+    {id:'gel', label:'Gel-time / pot-time — resin thickens and sets up (minutes)'},
+    {id:'post', label:'Post-cure — laminate hardens enough for structural work, fairing, and normal handling (a few weeks)'}
+  ], ['gel','post','full'], {
+    correctMsg:'Correct: gel-time (minutes) → post-cure (weeks) → full-cure (up to about a year). Each phase unlocks a different thing you\'re allowed to do to the part.',
+    wrongMsg:'Not yet — green rows are already in the right spot. Think about which phase is measured in minutes, which in weeks, and which in closer to a year.'
+  });
+
+  /* ---- 5. green window toggle ---- */
+  function primaryBondSvg(){
+    var s='<text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">molecular cross-linking across the boundary</text>'+
+      '<rect x="70" y="45" width="260" height="30" fill="#2f6f92" opacity="0.55" rx="4"/>'+
+      '<rect x="70" y="80" width="260" height="30" fill="#2f6f92" opacity="0.75" rx="4"/>';
+    for(var x=90;x<=310;x+=20){s+='<line x1="'+x+'" y1="70" x2="'+(x+10)+'" y2="90" stroke="#155c46" stroke-width="2"/>';}
+    s+='<text x="200" y="118" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#155c46">fibers cross the boundary = one continuous network</text>';
+    return s;
+  }
+  function secondaryBondSvg(){
+    var s='<text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">mechanical bond at a hard interface</text>'+
+      '<rect x="70" y="45" width="260" height="30" fill="#2f6f92" opacity="0.85" rx="4"/>'+
+      '<line x1="70" y1="76" x2="330" y2="76" stroke="#8a6109" stroke-width="3" stroke-dasharray="2 3"/>'+
+      '<rect x="70" y="80" width="260" height="30" fill="#2f6f92" opacity="0.5" rx="4"/>';
+    for(var x=85;x<=315;x+=14){s+='<circle cx="'+x+'" cy="76" r="1.6" fill="#8a6109"/>';}
+    s+='<text x="200" y="118" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#8a6109">sanded, inert surface = mechanical grip only</text>';
+    return s;
+  }
+  var bondSeg2=document.querySelectorAll('#bondSeg2 .seg');
+  function setBond2(when){
+    bondSeg2.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.when===when);});
+    var svgEl=document.getElementById('bondSvg'), fill=document.getElementById('bondFill2'), val=document.getElementById('bondVal2'), read=document.getElementById('bondRead2');
+    if(when==='green'){
+      svgEl.innerHTML=primaryBondSvg();
+      fill.style.width='95%'; val.textContent='high';
+      read.className='readout ok';
+      read.innerHTML='<b>Primary bond.</b> The new ply laminates onto a layer that hasn\'t cured yet, so both cross-link together into one continuous molecular network — the strongest bond composites can make.';
+    } else {
+      svgEl.innerHTML=secondaryBondSvg();
+      fill.style.width='55%'; val.textContent='reduced';
+      read.className='readout warn';
+      read.innerHTML='<b>Secondary bond.</b> The base layer already finished cross-linking on its own, so the new ply can only get a weaker secondary/mechanical bond — and only after sanding the surface and a solvent wipe to prep it.';
+    }
+  }
+  bondSeg2.forEach(function(b){b.addEventListener('click',function(){setBond2(b.dataset.when);});});
+  setBond2('green');
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'What is the everyday working range for MEKP catalyst by weight, and how wide is the full allowed band once temperature is factored in?',
+     opts:['1%–2.5% everyday; up to about 1%–4% depending on temperature','5%–10% everyday; up to 20% in cold shops','0.1%–0.5% everyday; never more than 1%','There is no upper limit — more catalyst just cures faster with no downside'],correct:0,
+     why:'The everyday working range is 1%–2.5% MEKP by weight; the wider allowed band, adjusted for shop temperature, is about 1%–4%.'},
+    {stem:'Why does a THICK laminate mass generally cure faster than a thin film of the same resin?',
+     opts:['Thick laminates automatically get more catalyst mixed in','The cure reaction is exothermic, and a thick mass traps more of that self-generated heat, accelerating the reaction','Thick laminates use a different resin chemistry','Thickness has no effect on cure speed'],correct:1,
+     why:'Cure releases heat (exothermic). A thick mass retains that heat, which speeds the reaction further — while a thin film loses heat to the air and may even undercure.'},
+    {stem:'A structural (non-final) layer of polyester still feels tacky after its gel time has passed. What\'s happening, and is it a problem?',
+     opts:['Air inhibition — atmospheric oxygen stops surface cure; this is expected and is exactly what the next wet layer bonds to','The batch was never catalyzed and must be scraped off','The mold released too early','Too much MEKP was used'],correct:0,
+     why:'Air inhibition leaves a structural layer tacky on purpose — that tackiness is what a following wet layer chemically bonds to. Only the final coat needs a wax/surfacing additive to cure hard.'},
+    {stem:'You laminate a new ply onto a layer of the SAME resin that fully cured days ago. Compared to laminating onto that layer while it was still green, this bond will be:',
+     opts:['Identical — cure timing never affects bond strength','Weaker — a secondary/mechanical bond, requiring sanding and a solvent wipe to bond well','Stronger, because the base layer is now fully hardened','Impossible — cured resin cannot be bonded to at all'],correct:1,
+     why:'Once a layer fully cures, later layers only achieve a weaker secondary/mechanical bond and need sanding plus a solvent wipe. Laminating onto a still-green layer achieves full molecular cross-linking instead — the strongest bond.'},
+    {stem:'While applying a polyester batch, it suddenly starts gelling much faster than expected ("triggering"). What does this indicate?',
+     opts:['Normal exotherm for a thick laminate — no action needed','An improper resin-to-catalyst ratio','The resin has reached its full-cure phase','The shop is too cold'],correct:1,
+     why:'Triggering — an unexpectedly fast gel/kick during application — indicates the resin-to-catalyst ratio is off, not a normal or harmless event.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-6'); }});
+})();
+</script>
+</body>
+</html>

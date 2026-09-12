@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 12 — Repair Fundamentals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 12</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="Where the trade lives">
+    <p class="kicker">Repair fundamentals — start here</p>
+    <h1>This is where the trade lives</h1>
+    <p class="lead">Everything so far — reinforcements, resins, cure chemistry, quality checks — reconnects right here. Repair is triage (cosmetic or structural?), geometry (how do you taper a patch so it carries load?), and matching what's already there. Nothing new to invent, just your existing skills aimed at a hole.</p>
+
+    <div class="card">
+      <p class="kicker" style="margin-top:0">Recap you already own</p>
+      <h3 style="margin-top:0">Secondary bonding is the whole game in repair</h3>
+      <p>Module 3's one-way bond street applies directly to repair work — run the interactive version there if you want it again. The short version: <b>epoxy has the best secondary-bonding characteristics of the three resin families</b>, and bonds well to nearly everything, including cured polyester or vinylester. Polyester and vinylester, on the other hand, bond poorly to fully-cured epoxy without heavy prep. That's why epoxy is the default resin for repair and secondary bonding.</p>
+      <p>And the <b>green window</b> matters just as much in repair as it did in the shop: while a laminate is still curing ("green"), a fresh layer can chemically bond to it. Once it's <b>fully cured</b>, a new layer only gets a weaker secondary/mechanical bond — which means the surface needs <b>sanding and a solvent wipe</b> before you laminate over it. Every repair you do is bonding to fully-cured, pre-existing laminate, so this prep step is never optional.</p>
+      <div class="callout"><b>Recap from Module 11:</b> if a laminate has been affected by drainage or moisture, the move is the same every time: inspect the extent of the damage, remove any trapped moisture, then repair the affected area. You'll see that exact sequence again in the blister-repair panel below.</div>
+    </div>
+
+    <p class="note">Objectives for this module: triage cosmetic vs. structural damage, apply the scarf/taper ratio, think through matching a repair laminate to what's already there, and outline gelcoat and blister repair.</p>
+  </section>
+
+  <!-- 2: DAMAGE TRIAGE -->
+  <section class="panel" data-name="Cosmetic vs structural triage">
+    <p class="kicker">Before you touch a grinder</p>
+    <h2>Cosmetic or structural — the field tests</h2>
+    <p>The curriculum names two go-to field checks for triage: the <b>wet-rag test</b> and the <b>tap test</b>. Tap through both, then work the symptom cards below.</p>
+
+    <div class="card">
+      <div class="segmented" id="triageSeg" role="group" aria-label="Choose a triage test">
+        <button class="seg" data-t="wetrag" aria-pressed="true">Wet-rag test</button>
+        <button class="seg" data-t="tap" aria-pressed="false">Tap test</button>
+      </div>
+      <div class="readout" id="triageRead"></div>
+    </div>
+
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> the exact wet-rag test procedure and interpretation are not locked in this content pack. This page names the test per the curriculum but does not detail its exact execution/interpretation steps — confirm against the ABYC study guide before treating any specific procedure as an exam fact.</div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide — exact wet-rag test procedure and interpretation are not locked in this content pack. -->
+
+    <div class="card" style="margin-top:14px">
+      <p class="kicker" style="margin-top:0">Decision helper</p>
+      <h3 style="margin-top:0">Tap a symptom, see the call</h3>
+      <svg class="demo-svg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <rect x="10" y="55" width="130" height="40" rx="8" fill="#eef3f6" stroke="#c2ced6"/>
+        <text x="75" y="80" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#25313d">Damage found</text>
+        <line x1="140" y1="65" x2="240" y2="30" stroke="#42586b" stroke-width="2"/>
+        <line x1="140" y1="85" x2="240" y2="120" stroke="#42586b" stroke-width="2"/>
+        <rect x="240" y="10" width="150" height="40" rx="8" fill="#e4f2ea" stroke="#2f8a5c"/>
+        <text x="315" y="35" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46">Cosmetic: surface only</text>
+        <rect x="240" y="100" width="150" height="40" rx="8" fill="#fbeceb" stroke="#c94b3c"/>
+        <text x="315" y="120" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#8f2117">Structural: hollow tap,</text>
+        <text x="315" y="134" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#8f2117">through-crack, or moisture</text>
+      </svg>
+      <div class="roles" id="triageCards">
+        <button class="role" aria-expanded="false" data-verdict="cosmetic" data-reason="Tap test sounds solid and consistent with the surrounding laminate, and there's no crack through to the inside — a surface-only cosmetic repair.">
+          <div class="swatch" style="background:#2f6f92"></div>
+          <h3 style="font-size:15px">Surface gelcoat scratch or small chip</h3>
+          <div style="font-size:13px;color:#42586b">laminate underneath sounds solid all around</div>
+          <div class="job"></div><div class="hint">Tap to reveal the call</div>
+        </button>
+        <button class="role" aria-expanded="false" data-verdict="structural" data-reason="A duller, hollower sound than the solid laminate right next to it is exactly what the tap test is checking for — treat it as a possible void or delamination beneath the surface.">
+          <div class="swatch" style="background:#c94b3c"></div>
+          <h3 style="font-size:15px">Dull, hollow sound when tapped</h3>
+          <div style="font-size:13px;color:#42586b">compared to the solid sound just outside it</div>
+          <div class="job"></div><div class="hint">Tap to reveal the call</div>
+        </button>
+        <button class="role" aria-expanded="false" data-verdict="structural" data-reason="Damage that goes all the way through to the inside of the hull is laminate damage, not cosmetic — it needs a structural repair, not a gelcoat touch-up.">
+          <div class="swatch" style="background:#c94b3c"></div>
+          <h3 style="font-size:15px">Crack or star-break through to the inside</h3>
+          <div style="font-size:13px;color:#42586b">visible from both faces of the laminate</div>
+          <div class="job"></div><div class="hint">Tap to reveal the call</div>
+        </button>
+        <button class="role" aria-expanded="false" data-verdict="structural" data-reason="Recap from Module 11: a laminate affected by drainage/moisture needs the damage inspected, the trapped moisture removed, and the area repaired — not painted over."
+                >
+          <div class="swatch" style="background:#c94b3c"></div>
+          <h3 style="font-size:15px">Soft, spongy, or damp area</h3>
+          <div style="font-size:13px;color:#42586b">possible trapped moisture</div>
+          <div class="job"></div><div class="hint">Tap to reveal the call</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: SCARF RATIO -->
+  <section class="panel" data-name="Scarf ratio & patch geometry">
+    <p class="kicker">The geometry of a strong patch</p>
+    <h2>12:1 — and never smaller than 6 inches</h2>
+    <p>Repairing a single-skin hole means tapering ("scarfing") back the surrounding laminate so new plies overlap old ones gradually instead of butting into a hard step. Slide the laminate thickness and watch the taper.</p>
+
+    <div class="card">
+      <div class="control">
+        <label for="scarfRange"><span>Laminate thickness at the damage</span><span class="val" id="scarfVal">0.25 in</span></label>
+        <input type="range" id="scarfRange" min="0.125" max="0.75" value="0.25" step="0.125">
+      </div>
+      <svg class="demo-svg" id="scarfSvg" viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="scarfRead"></div>
+    </div>
+
+    <div class="callout"><b>The two numbers to know cold:</b> a single-skin hole repair uses a <b>12:1 scarf ratio</b> — that's both the typical and the minimum. And no matter how small the damage, the <b>finished scarf diameter shouldn't be less than about 6 inches</b>. On thin laminate the 12:1 math alone can call for less than that — the 6-inch floor overrides it.</div>
+
+    <div class="callout"><b>Formica as a splash mold:</b> when repairing a hole straight through a single skin, Formica is commonly used as a splash mold — a smooth, non-stick backing surface you can rebuild the outer contour and gelcoat surface against from behind the hole.</div>
+
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> "matching a repair laminate schedule" to the original construction is a real objective, but this content pack has no vetted method for reverse-engineering an unknown original schedule. Treat it qualitatively for now — match ply count, fabric type, and orientation to the surrounding intact laminate as closely as you can — rather than a precise numeric procedure.</div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide — no vetted method exists here for reverse-engineering an unknown original laminate schedule; treat "matching the schedule" qualitatively only. -->
+  </section>
+
+  <!-- 4: GELCOAT REPAIR FLOW -->
+  <section class="panel" data-name="Gelcoat repair flow">
+    <p class="kicker">Putting the sequence in order</p>
+    <h2>Order the gelcoat repair</h2>
+    <p>A cosmetic gelcoat repair follows the same basic sequence every time. Drag (or use the arrow buttons) to put these six steps in the right order, then check your work.</p>
+    <div class="card">
+      <div id="gelOrderGame"></div>
+    </div>
+  </section>
+
+  <!-- 5: BLISTER / OSMOSIS REPAIR -->
+  <section class="panel" data-name="Blister & osmosis repair">
+    <p class="kicker">Matching the recap from Module 11</p>
+    <h2>Diagnose → dry out → barrier-coat</h2>
+    <p>Blister and osmosis repair follows the same inspect-then-dry-then-repair logic you already know from moisture damage generally. Match each stage to what actually happens during it.</p>
+    <div id="blisterMatchGame"></div>
+    <div class="readout" id="blisterMatchDone" style="display:none">Matched. Diagnose the extent, dry it out fully, then seal it back up — the order matters as much as the steps.</div>
+
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact blister dry-out duration and barrier-coat specification are not locked in this content pack.</div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: exact blister dry-out duration and barrier-coat specification are not locked in this content pack. -->
+
+    <div id="repairVideos"></div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. Read the distractors carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 12 locked in.</h2>
+      <p>You can triage cosmetic vs. structural damage with the wet-rag/tap tests, apply the 12:1 scarf ratio and the 6-inch minimum diameter, prep a fully-cured surface for a secondary bond, order a gelcoat repair correctly, and walk through diagnose → dry out → barrier-coat for blisters.</p>
+      <p class="next-label">Up next → Module 13: Environmental &amp; regulatory compliance.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 2. triage: wet-rag / tap test toggle ---- */
+  var triageSeg=document.querySelectorAll('#triageSeg .seg');
+  function setTriage(t){
+    triageSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===t);});
+    var read=document.getElementById('triageRead');
+    if(t==='wetrag'){
+      read.className='readout';
+      read.innerHTML='<b>Wet-rag test:</b> named in the curriculum as one of the field checks used to triage damage before you commit to a repair. See the TODO below — this page doesn\'t have a vetted step-by-step for it yet.';
+    } else {
+      read.className='readout warn';
+      read.innerHTML='<b>Tap test:</b> tap the suspect area and compare the sound to a known-good area of laminate nearby. A duller or hollower sound than the surrounding laminate can indicate a void or delamination beneath the surface — damage a visual check alone would miss.';
+    }
+  }
+  triageSeg.forEach(function(b){b.addEventListener('click',function(){setTriage(b.dataset.t);});});
+  setTriage('wetrag');
+
+  /* ---- 2. triage: symptom cards ---- */
+  document.querySelectorAll('#triageCards .role').forEach(function(r){
+    var verdict=r.dataset.verdict;
+    var chipHtml = verdict==='cosmetic'
+      ? '<span class="chip yes">Cosmetic</span>'
+      : '<span class="chip no">Structural</span>';
+    r.querySelector('.job').innerHTML = chipHtml + '<div style="margin-top:6px">' + r.dataset.reason + '</div>';
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 3. scarf ratio slider + cross-section SVG ---- */
+  var scarfRange=document.getElementById('scarfRange');
+  function scarfSvgMarkup(t, taper, diaFromTaper, finished){
+    // side view: taper wedge scaled for display (not to true scale)
+    var dispTaper = 40 + (taper/9)*90; // px, just for visual scaling across the slider range
+    var dispT = 6 + t*40;
+    var cx = 200;
+    var leftTipX = cx - dispTaper, rightTipX = cx + dispTaper;
+    var topY = 70 - dispT/2, botY = 70 + dispT/2;
+    var s = '';
+    s += '<text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">side view — scarf taper (not to scale)</text>';
+    s += '<line x1="20" y1="'+topY+'" x2="'+leftTipX+'" y2="70" stroke="#2f6f92" stroke-width="3"/>';
+    s += '<line x1="20" y1="'+botY+'" x2="'+leftTipX+'" y2="70" stroke="#2f6f92" stroke-width="3"/>';
+    s += '<line x1="'+rightTipX+'" y1="70" x2="380" y2="'+topY+'" stroke="#2f6f92" stroke-width="3"/>';
+    s += '<line x1="'+rightTipX+'" y1="70" x2="380" y2="'+botY+'" stroke="#2f6f92" stroke-width="3"/>';
+    s += '<line x1="20" y1="'+topY+'" x2="20" y2="'+botY+'" stroke="#42586b" stroke-width="2"/>';
+    s += '<line x1="380" y1="'+topY+'" x2="380" y2="'+botY+'" stroke="#42586b" stroke-width="2"/>';
+    s += '<line x1="'+leftTipX+'" y1="70" x2="'+rightTipX+'" y2="70" stroke="#b98416" stroke-width="1.5" stroke-dasharray="4 4"/>';
+    s += '<text x="'+cx+'" y="95" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#8a6109">taper ≈ 12 × thickness, each side</text>';
+    s += '<text x="20" y="'+(topY-8)+'" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#42586b">t</text>';
+    s += '<text x="'+cx+'" y="135" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#25313d">12 : 1</text>';
+    // footprint circle
+    var maxDia = 12; // display scale cap
+    var r = 14 + (Math.min(finished,maxDia)/maxDia)*40;
+    var minR = 14 + (6/maxDia)*40;
+    s += '<circle cx="315" cy="165" r="'+minR+'" fill="none" stroke="#c94b3c" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    s += '<circle cx="315" cy="165" r="'+r+'" fill="#eef3f6" stroke="#2f6f92" stroke-width="2"/>';
+    s += '<text x="315" y="168" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#25313d">footprint</text>';
+    s += '<text x="80" y="165" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#8f2117">dashed = 6in floor</text>';
+    return s;
+  }
+  function setScarf(){
+    var t=+scarfRange.value;
+    document.getElementById('scarfVal').textContent=t.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+' in';
+    var taper = t*12;
+    var diaFromTaper = 2*taper; // small/point damage, worst case per the "even for small damage" rule
+    var finished = Math.max(diaFromTaper, 6);
+    document.getElementById('scarfSvg').innerHTML = scarfSvgMarkup(t, taper, diaFromTaper, finished);
+    var read=document.getElementById('scarfRead');
+    if(diaFromTaper < 6){
+      read.className='readout warn';
+      read.textContent='At '+t.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+' in thick, a 12:1 taper alone works out to about '+diaFromTaper.toFixed(1)+' in across for small damage — but the 6 in minimum finished scarf diameter overrides that. Use 6 in.';
+    } else {
+      read.className='readout ok';
+      read.textContent='At '+t.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')+' in thick, the 12:1 taper alone already needs about '+diaFromTaper.toFixed(1)+' in across — above the 6 in minimum, so the ratio is what governs here.';
+    }
+  }
+  scarfRange.addEventListener('input',setScarf); setScarf();
+
+  /* ---- 4. gelcoat repair order game ---- */
+  CFS.initOrderGame('gelOrderGame', [
+    {id:'clean', label:'Clean and grind out the damaged area'},
+    {id:'fill', label:'Fill/laminate the area back to thickness'},
+    {id:'fair', label:'Fair the surface (sand and fill to shape)'},
+    {id:'gel', label:'Apply gelcoat'},
+    {id:'sand', label:'Sand the cured gelcoat'},
+    {id:'polish', label:'Buff/polish to finish'}
+  ], ['clean','fill','fair','gel','sand','polish'], {
+    correctMsg:'That\'s the sequence: clean/grind out → fill/laminate → fair → gelcoat → sand → polish.'
+  });
+
+  /* ---- 5. blister/osmosis match game ---- */
+  CFS.renderVideos('repairVideos', CFS_VIDEOS.repair);
+  CFS.initMatchGame('blisterMatchGame', [
+    {left:'Diagnose', right:'Identify the blisters/osmosis and how far the moisture damage extends before doing any repair work'},
+    {left:'Dry out', right:'Open the blisters and let the laminate dry out thoroughly before repairing'},
+    {left:'Barrier-coat', right:'Apply a moisture barrier coat before refinishing, to help keep new water out'}
+  ], {onComplete:function(){document.getElementById('blisterMatchDone').style.display='block';}});
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'You tap a suspect area and get a noticeably duller, hollower sound than the solid laminate right next to it. What does this suggest?',
+     opts:['The area is just cosmetically scuffed and needs polishing','Possible delamination or a void beneath the surface — treat it as a structural concern until proven otherwise','The gelcoat is simply thicker there','Tap sound has no diagnostic value'],correct:1,
+     why:'A tap test compares the sound over a suspect area against a known-good area of laminate; a dull or hollow sound can indicate voids or delamination beneath the surface that you can\'t see.'},
+    {stem:'What is the typical AND minimum scarf ratio for repairing a single-skin hole?',
+     opts:['6:1','12:1','20:1','3:1'],correct:1,
+     why:'12:1 is both the typical and the minimum scarf ratio for a single-skin hole repair.'},
+    {stem:'Even for a very small area of damage, what is the minimum finished scarf diameter you should plan for?',
+     opts:['2 inches','4 inches','About 6 inches','12 inches'],correct:2,
+     why:'The minimum finished scarf diameter is about 6 inches, even for small damage — on thin laminate the 12:1 taper math alone can call for less, but the 6-inch floor overrides it.'},
+    {stem:'You\'re laminating a new repair layer over laminate that fully cured days ago (it\'s well past the "green" window). What should you do to the surface first for a solid secondary bond?',
+     opts:['Nothing — resin bonds equally well to any surface, cured or not','Sand the surface and wipe it with solvent before laminating','Add extra catalyst to reactivate the old resin','Coat it with wax to seal it first'],correct:1,
+     why:'Once a laminate is fully cured, the green window for a strong chemical bond has closed — a new layer only gets a weaker secondary/mechanical bond, so the surface needs sanding plus a solvent wipe first.'},
+    {stem:'When repairing a hole through a single-skin laminate, what is Formica typically used for?',
+     opts:['As a catalyst measuring cup','As a splash mold — a smooth, non-stick backing to rebuild the outer contour from behind the hole','As a UV-resistant topcoat','As a fabric reinforcement layer'],correct:1,
+     why:'Formica gives a smooth, non-stick backing surface (a splash mold) so you can rebuild the outer contour and gelcoat surface from behind the hole.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-12'); }});
+})();
+</script>
+</body>
+</html>

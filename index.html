@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composites Field School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .hero{padding:36px 0 8px}
+  .exam-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+  .exam-stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13px}
+  .exam-stat b{font-family:var(--display);display:block;font-size:16px;color:var(--accent)}
+  .overall{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+  .overall .otrack{height:12px;background:#eaeff2;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin:10px 0}
+  .overall .ofill{height:100%;background:var(--accent);border-radius:20px;transition:width .3s ease}
+  .grid{display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0 40px}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:980px){.grid{grid-template-columns:1fr 1fr 1fr}}
+  .mcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);transition:all .15s;position:relative}
+  .mcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .mcard.locked{opacity:.6;cursor:default}
+  .mcard.locked:hover{transform:none;border-color:var(--line)}
+  .mnum{font-family:var(--display);font-weight:700;font-size:22px;color:var(--fiber)}
+  .mtitle{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.25}
+  .mpurpose{font-size:13.5px;color:var(--ink-soft);flex:1}
+  .mfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+  .marea{font-size:11.5px;color:var(--ink-soft);background:#eef3f6;border-radius:6px;padding:3px 7px}
+  .pill{font-family:var(--display);font-weight:600;font-size:11.5px;padding:4px 9px;border-radius:20px;white-space:nowrap}
+  .pill.not-started{background:#eaeff2;color:var(--ink-soft)}
+  .pill.in-progress{background:rgba(224,160,33,.18);color:#8a6109}
+  .pill.complete{background:rgba(31,138,104,.14);color:#155c46}
+  .pill.soon{background:repeating-linear-gradient(135deg,#eaeff2,#eaeff2 6px,#dfe6ea 6px,#dfe6ea 12px);color:var(--ink-soft)}
+  .startbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .resetlink{background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0}
+  footer.pagefoot{position:static;background:none;border:none;backdrop-filter:none;margin:30px 0 60px;text-align:center;color:var(--ink-soft);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School</div>
+    <div class="counter">ABYC Marine Composites prep</div>
+  </div>
+</header>
+
+<div class="wrap" style="padding-bottom:40px">
+  <div class="hero">
+    <p class="kicker">Builder, not color</p>
+    <h1>Composites Field School</h1>
+    <p class="lead">A ground-up course for the ABYC Marine Composites (Composite Boat Builder) certification — construction, materials, processes, QA, safety, and environmental compliance. Zero prior experience assumed.</p>
+    <div class="exam-row">
+      <div class="exam-stat"><b>200</b>questions</div>
+      <div class="exam-stat"><b>80%</b>to pass</div>
+      <div class="exam-stat"><b>3.5 hrs</b>proctored</div>
+      <div class="exam-stat"><b>32</b>CEUs</div>
+      <div class="exam-stat"><b>5 yrs</b>valid</div>
+    </div>
+    <div class="callout">This course is built from the published ABYC topic list and standard composites body of knowledge. <b>The official ABYC study guide is the authoritative source</b> — reconcile against it, especially anywhere you see a <span style="white-space:nowrap">TODO: VERIFY</span> flag.</div>
+  </div>
+
+  <div class="overall">
+    <div class="startbar">
+      <div>
+        <div style="font-family:var(--display);font-weight:600;font-size:15px" id="overallLabel">0 / 15 modules complete</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="resetlink" id="resetBtn">Reset progress</button>
+        <a class="btn primary" id="startBtn" href="module-1-what-is-a-composite.html">Start course</a>
+      </div>
+    </div>
+    <div class="otrack"><div class="ofill" id="overallFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="grid" id="moduleGrid"></div>
+
+  <footer class="pagefoot">Composites Field School · a self-study companion, not a substitute for the official ABYC Marine Composites study guide.</footer>
+</div>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  var modules = [
+    {n:0, id:'module-0', title:'Orientation: what this is and how to pass', purpose:'De-mystify the cert and set up how to study, before any chemistry.', area:'Orientation', file:'module-0-orientation.html', built:true},
+    {n:1, id:'module-1', title:'What a composite actually is', purpose:'Fiber / matrix / core roles, anisotropy, sandwich stiffness, wet-out.', area:'Fundamentals', file:'module-1-what-is-a-composite.html', built:true},
+    {n:2, id:'module-2', title:'Reinforcements', purpose:'Fabric forms, fiber types, crimp, orientation, areal weight.', area:'Reinforcement materials', file:'module-2-reinforcements.html', built:true},
+    {n:3, id:'module-3', title:'The matrix: resins', purpose:'Polyester, vinylester, epoxy — bonding, catalyzation, cure quirks.', area:'Resin materials', file:'module-3-resins.html', built:true},
+    {n:4, id:'module-4', title:'Cores & sandwich construction', purpose:'Core materials, the shear role, sandwich failure modes.', area:'Core materials / structural', file:'module-4-cores-and-sandwich.html', built:true},
+    {n:5, id:'module-5', title:'Safety, health & the shop environment', purpose:'Styrene, MEKP, dust, PPE, ventilation, first aid.', area:'Safety practices', file:'module-5-safety.html', built:true},
+    {n:6, id:'module-6', title:'Curing chemistry & catalyzation', purpose:'Catalyst math, exotherm, gel/work/cure, the green bond window.', area:'Catalyzation / QA', file:'module-6-curing-chemistry.html', built:true},
+    {n:7, id:'module-7', title:'Manufacturing processes', purpose:'Hand lay-up, spray-up, vacuum bag, infusion, RTM, prepreg.', area:'Processes / environmental', file:'module-7-manufacturing-processes.html', built:true},
+    {n:8, id:'module-8', title:'Molds, tooling & gelcoat application', purpose:'Build sequence, release agents, gelcoat thickness & defects.', area:'Processes / QA', file:'module-8-molds-and-gelcoat.html', built:true},
+    {n:9, id:'module-9', title:'Structural details & design', purpose:'Stringers, bulkheads, transoms, hull-to-deck joints, load paths.', area:'Structural details', file:'module-9-structural-details.html', built:true},
+    {n:10, id:'module-10', title:'Hardware installation & bonding', purpose:'Fastening, core sealing, bedding, carbon-galvanic risk.', area:'Hardware installation', file:'module-10-hardware-and-bonding.html', built:true},
+    {n:11, id:'module-11', title:'Quality assurance & defects', purpose:'Wet-out, void content, Barcol hardness, defect diagnosis.', area:'Quality assurance', file:'module-11-quality-assurance.html', built:true},
+    {n:12, id:'module-12', title:'Repair fundamentals', purpose:'Damage triage, scarf ratios, laminate schedules, blister repair.', area:'Repair', file:'module-12-repair-fundamentals.html', built:true},
+    {n:13, id:'module-13', title:'Environmental & regulatory compliance', purpose:'VOC/HAP, waste disposal, closed molding, shop best practices.', area:'Environmental compliance', file:'module-13-environmental-compliance.html', built:true},
+    {n:14, id:'module-14', title:'Capstone: full practice exam', purpose:'Mixed, timed, exam-style test across every module.', area:'All', file:'module-14-capstone.html', built:true}
+  ];
+
+  var grid = document.getElementById('moduleGrid');
+  function label(status){ return status==='complete'?'Complete':status==='in-progress'?'In progress':'Not started'; }
+
+  function draw(){
+    var progress = CFS.getProgress();
+    var completeCount = 0;
+    grid.innerHTML='';
+    modules.forEach(function(m){
+      var status = progress[m.id] || 'not-started';
+      if(status==='complete') completeCount++;
+      var el = document.createElement(m.built?'a':'div');
+      el.className = 'mcard'+(!m.built?' locked':'');
+      if(m.built) el.href = m.file;
+      var pillClass = !m.built ? 'soon' : status;
+      var pillLabel = !m.built ? 'Coming soon' : label(status);
+      el.innerHTML =
+        '<div class="mnum">'+String(m.n).padStart(2,'0')+'</div>'+
+        '<div class="mtitle">'+m.title+'</div>'+
+        '<div class="mpurpose">'+m.purpose+'</div>'+
+        '<div class="mfoot"><span class="marea">'+m.area+'</span><span class="pill '+pillClass+'">'+pillLabel+'</span></div>';
+      grid.appendChild(el);
+    });
+    document.getElementById('overallLabel').textContent = completeCount+' / '+modules.length+' modules complete';
+    document.getElementById('overallFill').style.width = Math.round((completeCount/modules.length)*100)+'%';
+    var next = modules.find(function(m){ return m.built && (progress[m.id]||'not-started')!=='complete'; }) || modules.find(function(m){return m.built;});
+    var startBtn = document.getElementById('startBtn');
+    if(next){
+      startBtn.href = next.file;
+      startBtn.textContent = completeCount===0 ? 'Start course' : 'Continue — Module '+next.n;
+    }
+  }
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(confirm('Reset all module progress on this device?')){
+      localStorage.removeItem('cfs.progress');
+      draw();
+    }
+  });
+  draw();
+  CFS.initChatbot();
+})();
+</script>
+</body>
+</html>

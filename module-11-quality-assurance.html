@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 11 — Quality Assurance &amp; Defects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 11</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="Judging the laminate">
+    <p class="kicker">Quality assurance — start here</p>
+    <h1>Good laminate, or a problem waiting to surface?</h1>
+    <p class="lead">Everything in Modules 1–10 was about building the laminate right. This module is about <b>proving</b> it was built right — and diagnosing it when it wasn't. Same three questions every time: is the fiber:resin ratio in range, has it cured enough to keep working, and does it look/sound/read clean?</p>
+    <div class="card">
+      <div class="segmented" id="hookSeg" role="group" aria-label="Choose a laminate condition">
+        <button class="seg" data-c="good" aria-pressed="true">Well-consolidated</button>
+        <button class="seg" data-c="porous" aria-pressed="false">Porosity</button>
+        <button class="seg" data-c="delam" aria-pressed="false">Delamination</button>
+      </div>
+      <svg class="demo-svg" id="hookSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="hookRead"></div>
+    </div>
+    <p class="note">All three panels are the same fiber and resin. The only difference is how well the laminate was consolidated — <b>even resin distribution, trapped air rolled out, layers fully compacted and wetted</b> — while it was being built.</p>
+
+    <details class="deep">
+      <summary>Field notes: why QA is a separate skill from lay-up</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">A laminator's job is to build the part. A QA check's job is to <b>prove</b> the part matches spec — with a number or a test, not a feeling. That's the whole shift in this module: instead of "that looks about right," you calculate percent fiber content, you check Barcol hardness before adding layers, and you inspect with a defined method (visual, tap-sounding, moisture meter) instead of eyeballing it. Every defect covered here — porosity, alligatoring, pre-release, crazing, dry spots, delamination — has a known, specific cause. Diagnosing correctly means you fix the process, not just the part.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: DEFECT IDENTIFIER (match game) -->
+  <section class="panel" data-name="Defect identifier">
+    <p class="kicker">Match the defect to its cause</p>
+    <h2>Six defects, six specific causes</h2>
+    <p>None of these are random bad luck — each one traces back to a specific process mistake. Match each defect to what actually causes it.</p>
+    <div class="card">
+      <div id="defectMatchGame"></div>
+      <div class="readout" id="defectMatchDone" style="display:none">All matched. On the exam, a defect question is really a process-cause question in disguise.</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: the defects in plain language</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Porosity</b> — small trapped air bubbles/pinholes in the gelcoat or laminate. Caused by high-speed or turbulent mixing, spraying with too much pressure, spraying too close to the surface (blowing air in), or water contamination from the air or mold surface.</p>
+        <p style="margin-bottom:8px"><b>Alligatoring</b> — a cracked, reptile-skin surface pattern in gelcoat. Caused by gelcoat applied too thin, or structural laminate applied too early over it before the gelcoat reached adequate cure.</p>
+        <p style="margin-bottom:8px"><b>Pre-release</b> — the part separates from the mold too early. Caused by too much catalyst, too much promoter/accelerator, excessive film thickness, an elevated shop or mold temperature, or an improper release agent.</p>
+        <p style="margin-bottom:8px"><b>Crazing / cracking</b> — fine stress cracks in gelcoat. Caused by gelcoat that's too thick or over-catalyzed, which cures too fast and shrinks more than it can handle without cracking.</p>
+        <p style="margin-bottom:8px"><b>Dry spots / resin-starved</b> — patches of fabric that never got fully wetted out. Caused by not applying enough resin, or not properly consolidating the laminate (rolling out air and working resin through the fabric) during lay-up.</p>
+        <p style="margin-bottom:0"><b>Delamination</b> — layers separating from each other instead of acting as one laminate. Caused by a poor interlaminar bond: laminating over a fully-cured surface without sanding and a solvent wipe (missing the "green window"), trapped air/voids blocking full ply-to-ply contact, or a lamination schedule that was changed from the design intent.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 3: QUALITY METER (glass:resin ratio + void content) -->
+  <section class="panel" data-name="Fiber content & void quality meter">
+    <p class="kicker">The QA math</p>
+    <h2>The fiber:resin ratio, as a pass/fail check</h2>
+    <p>Module 1 showed the wet-out sweet spot. Here it's a QA number: shops calculate <b>percent fiber content</b> to confirm a laminate actually hit its target ratio, and watch for the same thing visually — voids forming when there isn't enough resin to fully wet the glass.</p>
+    <div class="card">
+      <div class="callout"><b>The formula:</b> percent fiber content = (weight of fiber ÷ total weight of the cured laminate) × 100%. This is the actual lab/shop check — not a visual guess.</div>
+      <svg class="demo-svg" id="qmSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <rect x="60" y="55" width="280" height="60" rx="6" fill="#e0a021" opacity="0.5"/>
+        <g id="qmFibers"></g>
+        <g id="qmVoids"></g>
+        <rect x="60" y="55" width="280" height="60" rx="6" fill="none" stroke="#b98416" stroke-width="1.5"/>
+      </svg>
+      <div class="control">
+        <label for="qmRange"><span>Glass content by weight (relative/illustrative)</span><span class="val" id="qmVal">45%</span></label>
+        <input type="range" id="qmRange" min="20" max="72" value="45" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Estimated fiber content this represents (illustrative)</span><span id="qmFcVal">45%</span></div>
+        <div class="mtrack"><div class="mfill sw" id="qmFcFill" style="width:45%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Void content risk (relative/illustrative)</span><span id="qmVoidVal">low</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="qmVoidFill" style="width:10%"></div></div>
+      </div>
+      <div class="readout" id="qmRead"></div>
+      <p class="note">The slider position and the "void content risk" bar are relative/illustrative — they show the trend (too little resin → voids start forming), not a certified measurement.</p>
+    </div>
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack.
+    </div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack. -->
+  </section>
+
+  <!-- 4: BARCOL HARDNESS DEMO -->
+  <section class="panel" data-name="Barcol hardness cure check">
+    <p class="kicker">Checking cure before you commit to more layers</p>
+    <h2>Barcol hardness: how hard has it actually cured?</h2>
+    <p>A Barcol hardness tester presses a spring-loaded indentor into the laminate and reads how deep it penetrates. <b>Less penetration (a harder surface) means more cure has developed.</b> Slide through the cure timeline and watch what the indentor does.</p>
+    <div class="card">
+      <div class="control">
+        <label for="barRange"><span>Cure progress (illustrative timeline)</span><span class="val" id="barVal">Just gelled</span></label>
+        <input type="range" id="barRange" min="0" max="100" value="10" step="1">
+      </div>
+      <svg class="demo-svg" id="barSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <rect x="70" y="90" width="260" height="50" rx="4" fill="#c9d6ad"/>
+        <line x1="70" y1="90" x2="330" y2="90" stroke="#8a9a63" stroke-width="2"/>
+        <g id="barIndentor"></g>
+        <text x="200" y="160" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">indentor tip, viewed from the side</text>
+      </svg>
+      <div class="meter">
+        <div class="mlab"><span>Indentation depth (illustrative — less depth = harder / more cured)</span><span id="barDepthVal">deep</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="barDepthFill" style="width:85%"></div></div>
+      </div>
+      <div class="readout" id="barRead"></div>
+    </div>
+    <p class="note">Why check it at all: the skin coat should be checked for Barcol hardness development <b>before more layers are applied on top</b> — building bulk laminate on top of an undercured skin coat can trap uncured resin and risks a weaker, unpredictable bond.</p>
+    <div id="barcolVideos"></div>
+
+    <details class="deep">
+      <summary>Field notes: why hardness, not just "does it feel tacky"</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Tack-free isn't the same as cured. Curing runs through phases — gel/pot-time (minutes), post-cure (a few weeks), full-cure (up to about a year for full properties) — and a laminate can feel dry to the touch well before it has developed real hardness. A Barcol reading gives an actual, repeatable number instead of a finger test, which is why it's the standard cure-verification check before committing more material on top.</p>
+      </div>
+    </details>
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack.
+    </div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack. -->
+  </section>
+
+  <!-- 5: INSPECTION METHOD MATCHER -->
+  <section class="panel" data-name="Inspection method matcher">
+    <p class="kicker">Three tools, three different questions</p>
+    <h2>Match the inspection method to what it detects</h2>
+    <p>Visual inspection, the tap/sounding test, and a moisture meter each answer a different question. Match each to what it actually tells you.</p>
+    <div class="card">
+      <div id="inspectMatchGame"></div>
+      <div class="readout" id="inspectMatchDone" style="display:none">All matched. Notice none of these require cutting the part open — that's the point of a non-destructive inspection method.</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: what each method actually is</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Visual inspection</b> — the first and simplest check: look for cracks, blisters, discoloration, surface contamination, and other visible surface defects. It's the same logic used for mold inspection (heat damage, nicks, scratches, cracks, contamination) applied to the finished part.</p>
+        <p style="margin-bottom:8px"><b>Tap / sounding test</b> — tap the surface (e.g., with a coin or a small hammer) and listen. A sharp, solid sound means the laminate is fully bonded underneath; a dull or hollow sound at a given spot suggests a possible void or delamination beneath the surface at that spot.</p>
+        <p style="margin-bottom:0"><b>Moisture meter</b> — reads moisture content non-destructively. An elevated reading suggests water intrusion — for example into a cored laminate, or as an early precursor to osmotic blistering — before it's visible from the outside.</p>
+      </div>
+    </details>
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack.
+    </div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: specific numeric acceptance criteria (void %, moisture-meter thresholds, Barcol hardness target values) are not locked in this content pack. -->
+    <p class="note">If a laminate does show signs of drainage/moisture damage: inspect the extent of the damage, remove the trapped moisture, and repair the affected area — in that order.</p>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors borrow causes from other defects on this page — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 11 locked in.</h2>
+      <p>You can calculate percent fiber content, explain what a Barcol reading actually measures and why it's checked before adding layers, read a tap-test result, match six common defects to their real causes, and match an inspection method to what it detects.</p>
+      <p class="next-label">Up next → Module 12: Repair fundamentals — damage triage, scarf ratios, laminate schedules, blister repair.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 1. hook: good vs porosity vs delamination ---- */
+  var hookSeg=document.querySelectorAll('#hookSeg .seg');
+  function goodLaminate(){
+    var s='';
+    for(var y=64;y<=132;y+=9){s+='<line x1="70" y1="'+y+'" x2="330" y2="'+y+'" stroke="#2f6f92" stroke-width="3"/>';}
+    return s;
+  }
+  function porousLaminate(){
+    var s='';
+    for(var y=64;y<=132;y+=9){s+='<line x1="70" y1="'+y+'" x2="330" y2="'+y+'" stroke="#2f6f92" stroke-width="3"/>';}
+    var seed=[[100,75],[140,100],[180,80],[220,115],[260,90],[300,105],[120,120],[250,70],[190,125],[310,80]];
+    seed.forEach(function(p){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#fff" stroke="#c33a2c" stroke-width="1.5"/>';});
+    return s;
+  }
+  function delamLaminate(){
+    var s='';
+    for(var y=64;y<=132;y+=9){
+      if(y===100||y===109){continue;}
+      s+='<line x1="70" y1="'+y+'" x2="330" y2="'+y+'" stroke="#2f6f92" stroke-width="3"/>';
+    }
+    s+='<line x1="70" y1="100" x2="230" y2="100" stroke="#2f6f92" stroke-width="3"/>';
+    s+='<line x1="260" y1="100" x2="330" y2="100" stroke="#2f6f92" stroke-width="3"/>';
+    s+='<line x1="70" y1="109" x2="330" y2="109" stroke="#2f6f92" stroke-width="3"/>';
+    s+='<rect x="230" y="99" width="30" height="12" fill="#fff" stroke="#c33a2c" stroke-width="1.5" stroke-dasharray="2 2"/>';
+    s+='<text x="245" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#8f2117">gap between plies</text>';
+    return s;
+  }
+  var hookData={
+    good:{svg:goodLaminate(),cls:'readout ok',msg:'Fully consolidated: fibers evenly wetted, no trapped air, plies bonded to each other. This is the target for every laminate.'},
+    porous:{svg:porousLaminate(),cls:'readout warn',msg:'Porosity: small trapped air pockets (red circles) throughout the resin — from turbulent mixing, too-high spray pressure, spraying too close, or water contamination.'},
+    delam:{svg:delamLaminate(),cls:'readout warn',msg:'Delamination: a gap has opened between two plies instead of them acting as one laminate — usually a poor interlaminar bond or trapped air/voids at that interface.'}
+  };
+  function setHook(c){
+    hookSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===c);});
+    var d=hookData[c];
+    document.getElementById('hookSvg').innerHTML=d.svg;
+    var read=document.getElementById('hookRead');
+    read.className=d.cls; read.innerHTML=d.msg;
+  }
+  hookSeg.forEach(function(b){b.addEventListener('click',function(){setHook(b.dataset.c);});});
+  setHook('good');
+
+  /* ---- 2. defect identifier match game ---- */
+  CFS.initMatchGame('defectMatchGame', [
+    {left:'Porosity', right:'High-speed/turbulent mixing, too-high spray pressure, spraying too close, or water contamination'},
+    {left:'Alligatoring', right:'Gelcoat too thin, or laminate applied too early over it'},
+    {left:'Pre-release', right:'Too much catalyst/promoter, excess film thickness, elevated shop/mold temperature, or wrong release agent'},
+    {left:'Crazing / cracking', right:'Gelcoat too thick or over-catalyzed, curing too fast and shrinking'},
+    {left:'Dry spots / resin-starved', right:'Not enough resin applied, or the laminate wasn\'t properly consolidated'},
+    {left:'Delamination', right:'Poor interlaminar bond: missed green window, trapped voids, or a changed lamination schedule'}
+  ], {onComplete:function(){document.getElementById('defectMatchDone').style.display='block';}});
+
+  /* ---- 3. quality meter (fiber content + void content) ---- */
+  var qmRange=document.getElementById('qmRange');
+  var qmFibers=document.getElementById('qmFibers');
+  var qmVoids=document.getElementById('qmVoids');
+  function setQM(){
+    var g=+qmRange.value;
+    document.getElementById('qmVal').textContent=g+'%';
+    document.getElementById('qmFcVal').textContent=g+'%';
+    document.getElementById('qmFcFill').style.width=g+'%';
+    var n=Math.round((g-20)/52*9)+2;
+    var lines='';
+    for(var k=0;k<n;k++){var y=62+(56/(n+1))*(k+1); lines+='<line x1="70" y1="'+y+'" x2="330" y2="'+y+'" stroke="#2f6f92" stroke-width="2.5"/>';}
+    qmFibers.innerHTML=lines;
+    var voidPct=0, voids='';
+    if(g>62){
+      voidPct=Math.min(100,Math.round((g-62)/10*100));
+      var vn=Math.round((g-62)/10*8);
+      for(var v=0;v<vn;v++){var vx=90+Math.random()*220;var vy=68+Math.random()*40;voids+='<circle cx="'+vx.toFixed(0)+'" cy="'+vy.toFixed(0)+'" r="3.5" fill="#fff" stroke="#c33a2c" stroke-width="1.5"/>';}
+    }
+    qmVoids.innerHTML=voids;
+    document.getElementById('qmVoidFill').style.width=Math.max(4,voidPct)+'%';
+    document.getElementById('qmVoidVal').textContent = voidPct>66?'high':voidPct>20?'rising':'low';
+    var read=document.getElementById('qmRead');
+    if(g<32){read.className='readout warn';read.textContent='Resin-rich: fiber content is low for the amount of resin present — heavier and weaker than target, but not a void problem.';}
+    else if(g>62){read.className='readout warn';read.textContent='Too little resin to fully wet this much glass — voids (red) start forming and strength drops. This is what a QA check is designed to catch.';}
+    else{read.className='readout ok';read.textContent='In range: fibers fully wetted, minimal excess resin, no voids forming. This is the fiber content a shop is aiming for.';}
+  }
+  qmRange.addEventListener('input', setQM); setQM();
+
+  /* ---- 4. barcol hardness demo ---- */
+  var barRange=document.getElementById('barRange');
+  function setBar(){
+    var c=+barRange.value;
+    var label = c<20?'Just gelled':c<50?'Early cure':c<80?'Post-cure':'Well cured';
+    document.getElementById('barVal').textContent=label;
+    var depth = Math.max(4, 34 - c*0.3);
+    var depthPct = Math.max(4,Math.round(100-c*0.9));
+    document.getElementById('barIndentor').innerHTML =
+      '<line x1="200" y1="40" x2="200" y2="'+(90+depth)+'" stroke="#42586b" stroke-width="6"/>' +
+      '<polygon points="200,'+(90+depth)+' 190,'+(90+depth-14)+' 210,'+(90+depth-14)+'" fill="#ef5f2b"/>' +
+      '<ellipse cx="200" cy="'+(90+depth)+'" rx="10" ry="3" fill="#5c6e40" opacity="0.6"/>';
+    document.getElementById('barDepthFill').style.width=depthPct+'%';
+    document.getElementById('barDepthVal').textContent = depthPct>66?'deep (soft)':depthPct>33?'moderate':'shallow (hard)';
+    var read=document.getElementById('barRead');
+    if(c<40){read.className='readout warn';read.textContent='Indentor sinks deep — the surface is still soft. Barcol hardness has not developed enough to add more layers on top yet.';}
+    else if(c<75){read.className='readout';read.textContent='Hardness is developing. Depending on the process, this may or may not be far enough along — that\'s exactly why you take an actual reading instead of guessing.';}
+    else{read.className='readout ok';read.textContent='Shallow penetration — the surface has developed real hardness. This is the kind of reading that clears a skin coat to take more layers.';}
+  }
+  barRange.addEventListener('input', setBar); setBar();
+  CFS.renderVideos('barcolVideos', CFS_VIDEOS.qa);
+
+  /* ---- 5. inspection method matcher ---- */
+  CFS.initMatchGame('inspectMatchGame', [
+    {left:'Visual inspection', right:'Visible surface defects — cracks, blisters, discoloration, contamination'},
+    {left:'Tap / sounding test', right:'A dull/hollow sound vs. a sharp/solid sound — possible void or delamination beneath the surface'},
+    {left:'Moisture meter', right:'Elevated moisture — possible water intrusion, e.g. into a cored laminate or an osmotic-blister precursor'}
+  ], {onComplete:function(){document.getElementById('inspectMatchDone').style.display='block';}});
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'How do you calculate the percent fiber content of a cured laminate?',
+     opts:['(Weight of resin ÷ weight of fiber) × 100%','(Weight of fiber ÷ total weight of the cured laminate) × 100%','(Volume of fiber ÷ volume of the mold) × 100%','(Weight of the cured laminate ÷ weight of fiber) × 100%'],correct:1,
+     why:'Percent fiber content = weight of fiber divided by total weight of the cured laminate, times 100%. That single calculation is the actual QA check, not a visual guess.'},
+    {stem:'What does a Barcol hardness reading actually measure, and why check it on a skin coat before adding more layers?',
+     opts:['Gelcoat gloss level — purely cosmetic','The depth of penetration of a spring-loaded indentor under load, used to verify the layer has cured enough before more material goes on top','The exact resin-to-catalyst ratio used','The wet-film thickness that was sprayed'],correct:1,
+     why:'Barcol hardness characterizes indentation hardness — depth of penetration under load. Checking it before adding layers confirms the skin coat has actually developed enough cure to build on.'},
+    {stem:'During a tap/sounding test, one spot on the panel gives a dull, hollow sound while the surrounding area sounds sharp and solid. What does that most likely indicate?',
+     opts:['Normal, healthy core material','A possible void or delamination beneath the surface at that spot','The resin is over-catalyzed','Excess fiber content at that spot'],correct:1,
+     why:'A dull/hollow tap-test sound compared to a sharp/solid one is the classic sign of a void or delamination hiding under the surface at that location.'},
+    {stem:'On the fiber-content quality meter, what happens if glass content is pushed too high for the resin to fully wet it out?',
+     opts:['The laminate gets heavier and weaker (resin-rich)','Voids start forming and strength drops','Nothing changes — more glass is always better','The laminate cures faster with no downside'],correct:1,
+     why:'Too little resin for the amount of glass means the fibers can\'t be fully wetted, so voids form and strength drops — the dry, resin-starved end of the ratio.'},
+    {stem:'Which of these is an actual known cause of porosity in a laminate or gelcoat?',
+     opts:['Too much catalyst','Gelcoat applied too thick','High-speed/turbulent mixing, too-high spray pressure, spraying too close, or water contamination','Laminating too early over the gelcoat'],correct:2,
+     why:'Porosity comes from turbulent/high-speed mixing, too-high spray pressure, spraying too close to the surface, or water contamination. The other options are causes of pre-release, crazing, and alligatoring, respectively — not porosity.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-11'); }});
+})();
+</script>
+</body>
+</html>

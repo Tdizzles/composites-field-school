@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Safety, Health &amp; the Shop Environment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 5</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="Why this module is different">
+    <p class="kicker">Safety, health &amp; the shop environment — start here</p>
+    <h1>Everything else in this course is optional if you get hurt</h1>
+    <p class="lead">Every other module is about making a good part. This one is about walking out of the shop the same way you walked in. It's also one of the most heavily tested sections on the ABYC exam — the questions are specific, and "close enough" answers are wrong answers.</p>
+
+    <div class="card">
+      <p class="kicker">The chemicals you're actually dealing with</p>
+      <h3 style="margin-top:0">Read the diamond before you read the label</h3>
+      <p style="font-size:14.5px">Most resin, gelcoat, and solvent containers carry an NFPA HazCom diamond. Four quadrants, four colors, always the same meaning — learn this once and you can read any container in the shop.</p>
+      <svg class="demo-svg" id="nfpaSvg" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="max-width:260px;margin:0 auto;display:block"></svg>
+      <div class="statrow" style="justify-content:center;flex-wrap:wrap;gap:8px">
+        <span class="chip info">Blue = Health</span>
+        <span class="chip bad">Red = Flammability</span>
+        <span class="chip warn">Yellow = Instability (reactivity)</span>
+        <span class="chip">White = Specific hazard</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Shop environment basics, fast:</b> the <b>SDS</b> (Safety Data Sheet — formerly MSDS) is the reference document for any chemical's hazards, handling, and first aid; keep them accessible. A <b>large spill</b> means immediate containment, alert management, and keep it out of floor drains. Solvent-soaked rags go in a <b>sealed, fire-rated container</b> — they can spontaneously combust. Moving heavy objects with a <b>hoist requires two employees</b>, no exceptions.
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: why does this module get so much exam weight?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Because the failure modes here aren't "the part looks bad" — they're "someone goes blind" or "the shop catches fire." MEKP-in-the-eyes and MEKP-plus-accelerator are the two classic ABYC trap questions: they sound like chemistry trivia until you realize the wrong answer is a hospital trip. Treat this section the way the exam does — as the non-negotiable one.</p>
+      </div>
+    </details>
+
+    <div id="safetyVideos"></div>
+  </section>
+
+  <!-- 2: HAZARD SELECTOR -->
+  <section class="panel" data-name="Hazard selector">
+    <p class="kicker">Know your enemy</p>
+    <h2>Four hazards, four responses</h2>
+    <p>Tap a material to see what it actually does to you, what stops it, and which quadrant of the diamond lights up.</p>
+    <div class="card">
+      <div class="segmented" id="hazSeg" role="group" aria-label="Choose a hazard">
+        <button class="seg" data-h="mekp" aria-pressed="true">MEKP (catalyst)</button>
+        <button class="seg" data-h="styrene" aria-pressed="false">Styrene (resin vapor)</button>
+        <button class="seg" data-h="acetone" aria-pressed="false">Acetone (solvent)</button>
+        <button class="seg" data-h="dust" aria-pressed="false">Sanding dust</button>
+      </div>
+      <svg class="demo-svg" id="hazSvg" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="max-width:220px;margin:0 auto;display:block"></svg>
+      <div class="verdict" id="hazHazard"></div>
+      <div class="readout" id="hazPPE"></div>
+      <div class="readout" id="hazControl"></div>
+    </div>
+    <p class="note">Sanding dust isn't a HazCom-labeled chemical — it's a physical hazard. It still needs the right PPE, just not the diamond.</p>
+
+    <div class="callout">
+      <b>Gloves, quickly:</b> nitrile resists solvents and resin far better than cotton or leather, which offer essentially no chemical barrier at all. For anything involving MEKP, resin, or acetone, nitrile (or better) is the default — not cotton, not leather.
+      <!-- TODO: VERIFY content with Tyler / ABYC study guide: specific chemical-resistance breakthrough-time figures for nitrile vs. other glove materials -->
+    </div>
+    <div class="callout todo">
+      Exact PPE storage/replacement schedules and specific chemical-storage distances/quantities aren't confirmed for this page.
+      <!-- TODO: VERIFY content with Tyler / ABYC study guide: specific storage distances/quantities for MEKP vs. accelerator/heat sources, and cartridge replacement intervals -->
+    </div>
+  </section>
+
+  <!-- 3: RESPIRATOR MATCH GAME -->
+  <section class="panel" data-name="Respirator matching">
+    <p class="kicker">The distinction that gets tested every time</p>
+    <h2>Match the task to the protection</h2>
+    <p>An organic-vapor (OV) cartridge respirator and a particulate respirator are <b>not interchangeable</b>. One stops vapor, the other stops dust — wearing the wrong one is the same as wearing nothing.</p>
+    <div class="card">
+      <div id="respMatchGame"></div>
+      <div class="readout" id="respMatchDone" style="display:none">All matched. If you can place these five without thinking, the OV-vs-particulate question on the exam is free points.</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: what actually breaks a respirator's protection</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Three things determine whether a respirator is actually protecting you: <b>how it's stored</b> when not in use (a cartridge left open in a dirty shop degrades and gets contaminated), <b>the cartridge type</b> — matched to the real hazard, OV for vapor, particulate for dust, and <b>facial hair</b>, which breaks the seal against your skin no matter how good the respirator is. Any one of those three failing means the respirator isn't doing its job even though you're wearing it.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: NEVER MIX MEKP + ACCELERATOR -->
+  <section class="panel" data-name="Never mix MEKP + accelerator">
+    <p class="kicker">The one rule that can put you in the hospital</p>
+    <h2>MEKP and cobalt accelerator never touch each other directly</h2>
+    <p>MEKP is an organic peroxide. Cobalt accelerator is an oxidizer. Combine them <b>neat</b> — straight together, not through the resin — and they can react violently. The fix is procedural, not exotic: catalyst and accelerator each go into the resin <b>separately</b>.</p>
+    <div class="card">
+      <div class="segmented" id="mixSeg" role="group" aria-label="Choose a mixing method">
+        <button class="seg" data-m="wrong" aria-pressed="true">Mix MEKP + accelerator together first</button>
+        <button class="seg" data-m="right" aria-pressed="false">Add each to the resin separately</button>
+      </div>
+      <svg class="demo-svg" id="mixSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="mixRead"></div>
+    </div>
+    <p class="note">Ventilation is the primary control for the styrene vapor both resin and MEKP work releases — good airflow doesn't replace this rule, but it's your baseline protection while you follow it.</p>
+
+    <div id="mekpVideos"></div>
+  </section>
+
+  <!-- 5: FIRST-AID ORDER GAME -->
+  <section class="panel" data-name="MEKP-in-eyes first aid">
+    <p class="kicker">If it happens, you won't have time to look this up</p>
+    <h2>MEKP in the eyes: put the response in order</h2>
+    <p>MEKP can cause blindness on eye contact. There's no clever technique here — just speed and follow-through. Put these steps in the right order.</p>
+    <div class="card">
+      <div id="firstAidOrder"></div>
+    </div>
+    <div class="callout todo">
+      This page confirms immediate copious flushing followed by prompt medical attention. It does not confirm a specific flush duration.
+      <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact minimum eyewash flushing duration (e.g., ANSI Z358.1 guidance) -->
+    </div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. Read carefully — the wrong answers are the ones that sound almost right.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 5 locked in.</h2>
+      <p>You can read an NFPA diamond, pick the right respirator for the task, state why MEKP and accelerator never mix directly, and give the correct first aid for MEKP in the eyes.</p>
+      <p class="next-label">Up next → Module 6: Curing chemistry &amp; catalyzation.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('safetyVideos', CFS_VIDEOS.safety);
+  CFS.initChatbot();
+
+  /* ---- shared: NFPA diamond builder ---- */
+  function diamond(active){
+    active = active || {};
+    var cx=150, cy=110, s=78;
+    // quadrant polygons around center, diamond rotated square split into 4 triangles
+    var top    = 'M'+cx+','+(cy-s)+' L'+(cx-s)+','+cy+' L'+cx+','+cy+' Z';
+    var left   = 'M'+(cx-s)+','+cy+' L'+cx+','+(cy+s)+' L'+cx+','+cy+' Z';
+    var bottom = 'M'+cx+','+(cy+s)+' L'+(cx+s)+','+cy+' L'+cx+','+cy+' Z';
+    var right  = 'M'+(cx+s)+','+cy+' L'+cx+','+(cy-s)+' L'+cx+','+cy+' Z';
+    function fill(name,on,onColor){ return active.hasOwnProperty(name) ? (active[name] ? onColor : '#e4e9ec') : onColor; }
+    var healthOn = active.health!==undefined ? active.health : true;
+    var flameOn  = active.flame!==undefined ? active.flame : true;
+    var instOn   = active.inst!==undefined ? active.inst : true;
+    var specOn   = active.spec!==undefined ? active.spec : true;
+    var cHealth = healthOn ? '#2f6f92' : '#dfe6ea';
+    var cFlame  = flameOn  ? '#c33a2c' : '#dfe6ea';
+    var cInst   = instOn   ? '#e0a021' : '#dfe6ea';
+    var cSpec   = specOn   ? '#ffffff' : '#dfe6ea';
+    var s2 =
+      '<polygon points="'+cx+','+(cy-s)+' '+(cx-s)+','+cy+' '+cx+','+cy+'" fill="'+cFlame+'" stroke="#1c1f26" stroke-width="1.5"/>' +
+      '<polygon points="'+(cx-s)+','+cy+' '+cx+','+(cy+s)+' '+cx+','+cy+'" fill="'+cHealth+'" stroke="#1c1f26" stroke-width="1.5"/>' +
+      '<polygon points="'+cx+','+(cy+s)+' '+(cx+s)+','+cy+' '+cx+','+cy+'" fill="'+cSpec+'" stroke="#1c1f26" stroke-width="1.5"/>' +
+      '<polygon points="'+(cx+s)+','+cy+' '+cx+','+(cy-s)+' '+cx+','+cy+'" fill="'+cInst+'" stroke="#1c1f26" stroke-width="1.5"/>' +
+      '<text x="'+cx+'" y="'+(cy-s*0.42)+'" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#fff" font-weight="600">FLAME</text>' +
+      '<text x="'+(cx-s*0.5)+'" y="'+(cy+4)+'" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#fff" font-weight="600">HEALTH</text>' +
+      '<text x="'+cx+'" y="'+(cy+s*0.5)+'" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#42586b" font-weight="600">SPECIFIC</text>' +
+      '<text x="'+(cx+s*0.48)+'" y="'+(cy+4)+'" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#4a3a04" font-weight="600">REACT</text>';
+    return s2;
+  }
+  document.getElementById('nfpaSvg').innerHTML = diamond({});
+
+  /* ---- 2. hazard selector ---- */
+  var hazards = {
+    mekp:{
+      label:'MEKP (catalyst)',
+      hazard:'An organic peroxide and an oxidizer. On eye contact it can cause <b>blindness</b>. Mixed directly (neat) with accelerator rather than each going into the resin separately, it can react violently.',
+      ppe:'PPE: eye protection, nitrile gloves, and an OV cartridge respirator whenever vapor is present.',
+      control:'Control: keep it away from accelerator and heat/ignition sources; add catalyst and accelerator to the resin separately, never together.',
+      diamond:{health:false, flame:false, inst:true, spec:true}
+    },
+    styrene:{
+      label:'Styrene (resin/gelcoat vapor)',
+      hazard:'A VOC and hazardous air pollutant with <b>central-nervous-system effects</b> at elevated exposure. On California\'s Prop 65 list. Strong, persistent odor.',
+      ppe:'PPE: an organic-vapor (OV) cartridge respirator during mixing/spraying. A particulate/dust mask does <b>nothing</b> against this vapor.',
+      control:'Control: ventilation is the primary control for styrene/resin vapor exposure.',
+      diamond:{health:true, flame:true, inst:false, spec:false}
+    },
+    acetone:{
+      label:'Acetone (solvent/wash)',
+      hazard:'<b>Flammable.</b>',
+      ppe:'PPE: OV cartridge respirator in enclosed or poorly ventilated spaces.',
+      control:'Control: store away from ignition sources; ventilate.',
+      diamond:{health:false, flame:true, inst:false, spec:false}
+    },
+    dust:{
+      label:'Sanding / grinding dust (glass &amp; resin)',
+      hazard:'Fine glass and resin dust — a physical inhalation and skin/eye irritation hazard, not a HazCom-labeled chemical.',
+      ppe:'PPE: a particulate respirator (a different cartridge than the OV one used for vapor) plus eye/skin protection.',
+      control:'Control: dust collection / local exhaust where possible; the OV cartridge does not substitute here.',
+      diamond:{health:false, flame:false, inst:false, spec:false}
+    }
+  };
+  var hazSeg = document.querySelectorAll('#hazSeg .seg');
+  function setHaz(h){
+    var d = hazards[h];
+    hazSeg.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.h===h); });
+    document.getElementById('hazSvg').innerHTML = diamond(d.diamond);
+    document.getElementById('hazHazard').innerHTML = '<b>'+d.label+':</b> '+d.hazard;
+    document.getElementById('hazPPE').innerHTML = d.ppe;
+    document.getElementById('hazPPE').className = 'readout';
+    document.getElementById('hazControl').innerHTML = d.control;
+    document.getElementById('hazControl').className = 'readout ok';
+  }
+  hazSeg.forEach(function(b){ b.addEventListener('click', function(){ setHaz(b.dataset.h); }); });
+  setHaz('mekp');
+
+  /* ---- 3. respirator match game ---- */
+  CFS.initMatchGame('respMatchGame', [
+    {left:'Mixing resin or gelcoat (styrene vapor)', right:'Organic-vapor (OV) cartridge respirator'},
+    {left:'Sanding or grinding cured laminate', right:'Particulate respirator (dust cartridge)'},
+    {left:'Spraying gelcoat', right:'Safety glasses + OV cartridge respirator + gloves'},
+    {left:'Trimming a demolded part', right:'Particulate respirator + eye and skin protection'},
+    {left:'Handling MEKP or resin with your hands', right:'Nitrile gloves — not cotton or leather'}
+  ], {onComplete:function(){ document.getElementById('respMatchDone').style.display='block'; }});
+
+  /* ---- 4. never mix ---- */
+  var mixSeg = document.querySelectorAll('#mixSeg .seg');
+  function mixWrongSvg(){
+    return '<circle cx="120" cy="90" r="34" fill="#e0a021" opacity="0.85"/><text x="120" y="95" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#4a3a04" font-weight="700">MEKP</text>' +
+      '<circle cx="280" cy="90" r="34" fill="#2f6f92" opacity="0.85"/><text x="280" y="95" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#fff" font-weight="700">ACCEL.</text>' +
+      '<line x1="154" y1="90" x2="246" y2="90" stroke="#c33a2c" stroke-width="5"/>' +
+      '<line x1="185" y1="65" x2="215" y2="115" stroke="#c33a2c" stroke-width="7" stroke-linecap="round"/>' +
+      '<line x1="215" y1="65" x2="185" y2="115" stroke="#c33a2c" stroke-width="7" stroke-linecap="round"/>' +
+      '<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117" font-weight="600">Direct contact — can react violently</text>';
+  }
+  function mixRightSvg(){
+    return '<circle cx="90" cy="55" r="26" fill="#e0a021" opacity="0.85"/><text x="90" y="60" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#4a3a04" font-weight="700">MEKP</text>' +
+      '<circle cx="90" cy="130" r="26" fill="#2f6f92" opacity="0.85"/><text x="90" y="135" text-anchor="middle" font-family="Space Grotesk" font-size="10" fill="#fff" font-weight="700">ACCEL.</text>' +
+      '<rect x="230" y="55" width="110" height="75" rx="10" fill="#c9d6ad"/><text x="285" y="97" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46" font-weight="700">RESIN</text>' +
+      '<path d="M118 55 Q180 40 228 78" fill="none" stroke="#1f8a68" stroke-width="4" marker-end="url(#arrM5)"/>' +
+      '<path d="M118 130 Q180 145 228 105" fill="none" stroke="#1f8a68" stroke-width="4" marker-end="url(#arrM5)"/>' +
+      '<defs><marker id="arrM5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1f8a68"/></marker></defs>' +
+      '<text x="200" y="165" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46" font-weight="600">Each added to the resin separately — safe</text>';
+  }
+  function setMix(m){
+    mixSeg.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.m===m); });
+    var svg = document.getElementById('mixSvg'), read = document.getElementById('mixRead');
+    if(m==='wrong'){
+      svg.innerHTML = mixWrongSvg();
+      read.className = 'readout warn';
+      read.innerHTML = 'MEKP is an organic peroxide; cobalt accelerator is an oxidizer. Combined <b>neat</b> like this, the mixture can react violently. This is never done on purpose in a shop — but it is exactly the mistake the exam is checking that you\'d never make.';
+    } else {
+      svg.innerHTML = mixRightSvg();
+      read.className = 'readout ok';
+      read.innerHTML = 'Catalyst and accelerator each go into the resin <b>separately</b> — they only ever meet already diluted inside the resin, never on their own.';
+    }
+  }
+  mixSeg.forEach(function(b){ b.addEventListener('click', function(){ setMix(b.dataset.m); }); });
+  setMix('wrong');
+  CFS.renderVideos('mekpVideos', CFS_VIDEOS.mekpCatalyst);
+
+  /* ---- 5. first-aid order game ---- */
+  CFS.initOrderGame('firstAidOrder', [
+    {id:'stop', label:'Treat it as an emergency — stop what you\'re doing'},
+    {id:'flush', label:'Immediately flush the eyes with copious water'},
+    {id:'continue', label:'Keep flushing continuously — don\'t cut it short'},
+    {id:'medical', label:'Get prompt medical attention'}
+  ], ['stop','flush','continue','medical'], {
+    correctMsg:'Correct. Immediate, copious flushing followed by prompt medical attention — that order, every time.',
+    wrongMsg:'Not quite — green rows are already in the right spot. The core rule: flush immediately and keep flushing, then get medical help.'
+  });
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'You\'re mixing resin and gelcoat, releasing styrene vapor. Which respirator protects you?',
+     opts:['Any dust mask','An organic-vapor (OV) cartridge respirator','No respirator needed if the room is well-lit','A particulate (dust) respirator'],correct:1,
+     why:'A dust mask does nothing against styrene vapor. Mixing/spraying resin or gelcoat calls for an OV cartridge respirator.'},
+    {stem:'You\'re sanding cured fiberglass laminate. Which respirator protection is required?',
+     opts:['An organic-vapor (OV) cartridge respirator','A particulate respirator','Either works interchangeably','No protection needed — it\'s just dust'],correct:1,
+     why:'Sanding/grinding produces glass and resin dust, which needs particulate protection — a different cartridge than the OV one used for vapors. They are not interchangeable.'},
+    {stem:'MEKP splashes into a worker\'s eyes. What is the correct first aid?',
+     opts:['Apply an ointment and keep working','Immediately flush with copious water, then get prompt medical attention','Wait to see if irritation goes away on its own','Rub the eyes to clear the chemical'],correct:1,
+     why:'MEKP can cause blindness on eye contact. The correct response is immediate, copious water flushing followed by prompt medical attention.'},
+    {stem:'Why should MEKP catalyst never be combined directly with cobalt accelerator?',
+     opts:['It just wastes the accelerator','Mixed neat, the peroxide and oxidizer can react violently — each must be added to the resin separately','It slightly slows the cure','It only changes the resin\'s color'],correct:1,
+     why:'MEKP (organic peroxide) and accelerator (oxidizer) combined directly, rather than each added to the resin separately, can react violently.'},
+    {stem:'What is the PRIMARY control for reducing styrene/resin vapor exposure in a shop?',
+     opts:['Wearing two pairs of gloves','Ventilation','Working faster to finish before vapor builds up','Drinking more water during the shift'],correct:1,
+     why:'Ventilation is the primary control for styrene/resin vapor exposure — respirators are additional protection, not a substitute for it.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-5'); }});
+})();
+</script>
+</body>
+</html>

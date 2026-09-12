@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 7 — Manufacturing Processes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 7</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - open vs closed molding -->
+  <section class="panel active" data-name="How it's made changes everything">
+    <p class="kicker">Manufacturing processes — start here</p>
+    <h1>Same laminate, wildly different part</h1>
+    <p class="lead">Everything in Modules 1–6 — the fiber, the fabric, the resin — still has to actually get turned into a boat. <b>How</b> you do that changes cost, consistency, glass:resin control, emissions, and how much skill it demands. Start with the biggest split: <span class="tag fiber">open</span> vs <span class="tag fiber">closed</span> molding.</p>
+    <div class="card">
+      <div class="segmented" id="moldSeg" role="group" aria-label="Open vs closed molding">
+        <button class="seg" data-m="open" aria-pressed="true">Open molding</button>
+        <button class="seg" data-m="closed" aria-pressed="false">Closed molding</button>
+      </div>
+      <svg class="demo-svg" id="moldSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="statrow">
+        <span class="chip" id="moldChip"></span>
+      </div>
+      <div class="verdict" id="moldVerdict"></div>
+    </div>
+
+    <div class="callout"><b>For the exam:</b> the two kinds of <b>open molding</b> are <b>hand lay-up</b> and <b>spray-up</b> (chopper gun). Open molding — not any closed method — is still the <b>most commonly used</b> lamination process in the boatbuilding industry.</div>
+
+    <details class="deep">
+      <summary>Field notes: what happens before any glass even touches the mold</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Regardless of which process you pick, production follows the same general sequence: <b>mold preparation → release agent → gelcoat → skin coat → structural laminate → cure → demold</b>. The process you choose (hand lay-up, spray-up, vacuum bagging, infusion, RTM, prepreg) changes how the "skin coat" and "structural laminate" steps get done — everything before and after stays the same.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: PROCESS SELECTOR -->
+  <section class="panel" data-name="Six processes, one selector">
+    <p class="kicker">The core comparison</p>
+    <h2>Pick a process, read the trade-offs</h2>
+    <p>Tap through all six. For each one: how it works, when a shop reaches for it, and where it lands on cost, consistency, glass:resin control, emissions, and skill needed.</p>
+    <div class="card">
+      <div class="segmented" id="procSeg" role="group" aria-label="Choose a manufacturing process">
+        <button class="seg" data-p="handlayup" aria-pressed="true">Hand lay-up</button>
+        <button class="seg" data-p="sprayup" aria-pressed="false">Spray-up (chopper gun)</button>
+        <button class="seg" data-p="vacbag" aria-pressed="false">Vacuum bagging</button>
+        <button class="seg" data-p="infusion" aria-pressed="false">Resin infusion</button>
+        <button class="seg" data-p="rtm" aria-pressed="false">RTM</button>
+        <button class="seg" data-p="prepreg" aria-pressed="false">Prepreg</button>
+      </div>
+      <div class="statrow">
+        <span class="chip" id="procChip"></span>
+      </div>
+
+      <div class="meter">
+        <div class="mlab"><span>Cost</span><span id="pCostVal">0</span></div>
+        <div class="mtrack"><div class="mfill weight" id="pCostFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Strength / consistency</span><span id="pConsistVal">0</span></div>
+        <div class="mtrack"><div class="mfill sw" id="pConsistFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Glass:resin ratio control</span><span id="pControlVal">0</span></div>
+        <div class="mtrack"><div class="mfill sw" id="pControlFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Emissions</span><span id="pEmissVal">0</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="pEmissFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Skill needed</span><span id="pSkillVal">0</span></div>
+        <div class="mtrack"><div class="mfill weight" id="pSkillFill" style="width:0%"></div></div>
+      </div>
+
+      <div class="verdict" id="procHow"></div>
+      <p class="note" id="procWhen"></p>
+    </div>
+    <p class="note">Bars are relative/illustrative — the point is the ranking (open molding lowest cost/consistency/skill and highest emissions; closed processes the reverse), not the exact number.</p>
+
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact comparative cost/skill/emissions numbers for hand lay-up vs spray-up vs vacuum bag vs infusion vs RTM vs prepreg are not locked in this content pack.
+      <!-- TODO: VERIFY with Tyler / ABYC study guide: exact comparative cost/skill/emissions numbers for hand lay-up vs spray-up vs vacuum bag vs infusion vs RTM vs prepreg are not locked in this content pack. -->
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: how resin actually gets onto (or into) the fiber</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Resin application tools:</b> a brush, a resin-fed roller, a spray gun, or a flow coater. Spray guns themselves come in several types — siphon cup, cup gun, pressure pot, high-pressure airless, air-assist airless, HVLP, impingement applicator, and flow coater. "Impingement" means two or more streams (resin and catalyst) are shot so they collide and mix on the way to the surface. A flow coater works like a showerhead: several resin streams merge into one fan, and the orientation of the nozzle holes sets that fan's shape.</p>
+        <p style="margin-bottom:0"><b>Consolidating</b> a laminate — by hand, roller, or vacuum — means evening out the resin, working out trapped air, and rolling the fibers down so the layers are fully compacted and wetted. Every process on this page is, underneath the different equipment, still solving that same problem.</p>
+      </div>
+    </details>
+
+    <div id="procVideos"></div>
+  </section>
+
+  <!-- 3: OPEN VS CLOSED EMISSIONS -->
+  <section class="panel" data-name="Emissions: surface area, not thickness">
+    <p class="kicker">The environmental piece</p>
+    <h2>What actually drives emissions</h2>
+    <p>Open-mold styrene emissions come from resin and gelcoat sitting exposed to open air. The exam-tested detail: it's the <b>exposed surface area</b> that sets the emissions level — not how thick the laminate is. Try both sliders and watch the meter.</p>
+    <div class="card">
+      <div class="segmented" id="emSeg" role="group" aria-label="Open vs closed molding">
+        <button class="seg" data-e="open" aria-pressed="true">Open molding</button>
+        <button class="seg" data-e="closed" aria-pressed="false">Closed molding</button>
+      </div>
+      <svg class="demo-svg" id="emSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+
+      <div class="control">
+        <label for="areaRange"><span>Exposed resin surface area</span><span class="val" id="areaVal">50%</span></label>
+        <input type="range" id="areaRange" min="10" max="100" value="50" step="5">
+      </div>
+      <div class="control">
+        <label for="thickRange"><span>Laminate thickness (try moving this one)</span><span class="val" id="thickVal">medium</span></label>
+        <input type="range" id="thickRange" min="1" max="10" value="5" step="1">
+      </div>
+
+      <div class="meter">
+        <div class="mlab"><span>Styrene emissions level</span><span id="emVal">0</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="emFill" style="width:0%"></div></div>
+      </div>
+      <div class="readout" id="emRead"></div>
+    </div>
+    <p class="note">Illustrative meter — built to show the ranking rule (area moves it, thickness doesn't), not a certified emissions figure.</p>
+
+    <div class="callout"><b>Why closed molding wins here:</b> enclosing the resin/catalyst reaction inside a sealed mold or vacuum bag dramatically cuts styrene VOC/HAP emissions versus open molding. Closed molding's other advantages: improved surface finish, reduced material waste, and better control over the fiber-to-resin ratio.</div>
+
+    <details class="deep">
+      <summary>Field notes: infusion vs. RTM — both "closed," not the same thing</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Infusion (VARTM — vacuum-assisted resin infusion)</b> is the closed-molding procedure defined by <b>vacuum pressure only</b> — no injection pressure. Dry reinforcement goes into the mold, gets sealed under a bag, and resin is pulled through it by vacuum alone.</p>
+        <p style="margin-bottom:0"><b>VARTM</b> as a broader term (Vacuum-Assisted Resin Transfer Molding) covers processes using <b>vacuum and/or pressure</b> — so RTM, which injects resin into a closed rigid mold, can add injection pressure on top of vacuum. An RTM mold is a two-part tool that has to seal, which is why RTM mold maintenance specifically includes checking that <b>gaskets are clean and intact</b>, on top of basic mold care.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: CHOPPER-GUN CALIBRATION ORDER GAME -->
+  <section class="panel" data-name="Chopper-gun calibration">
+    <p class="kicker">Set it up right before you pull the trigger</p>
+    <h2>Chopper-gun calibration, in order</h2>
+    <p>Spray-up is fast — and it's the most <b>operator-dependent</b> and <b>resin-rich</b> process on this page. A big part of controlling that starts before you spray a single pass: calibrating the gun in the right order. Drag or use the arrows to put these three steps in sequence.</p>
+    <div class="card">
+      <div id="chopOrder"></div>
+    </div>
+
+    <div class="callout"><b>When it goes wrong — three chopper-gun defects, and the fix:</b>
+      <ul style="margin:8px 0 0 18px;padding:0">
+        <li><b>Excessive wet chop</b> → increase air pressure to the chop motor.</li>
+        <li><b>Spring-back</b> (chop doesn't cut cleanly) → caused by dull chopper blades.</li>
+        <li><b>Improper chop pattern</b> → caused by incorrect gun orientation relative to the surface.</li>
+      </ul>
+    </div>
+    <p class="note">"Triggering" during resin application — the mix starting to kick early or not kicking at all — points to an improper resin-to-catalyst ratio, not the chopper gun itself.</p>
+  </section>
+
+  <!-- 5: FIBER CONTENT CALCULATOR -->
+  <section class="panel" data-name="Fiber content calculator">
+    <p class="kicker">Prove the ratio, don't eyeball it</p>
+    <h2>Calculate percent fiber content</h2>
+    <p>The formula the exam wants: <b>percent fiber content = (weight of fiber ÷ total weight of laminate) × 100%</b>. Slide the fiber and resin weights and watch it compute.</p>
+    <div class="card">
+      <svg class="demo-svg" id="fcSvg" viewBox="0 0 400 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:80px"></svg>
+
+      <div class="control">
+        <label for="fiberRange"><span>Fiber (glass) weight</span><span class="val" id="fiberVal">30 lb</span></label>
+        <input type="range" id="fiberRange" min="0" max="60" value="30" step="1">
+      </div>
+      <div class="control">
+        <label for="resinRange"><span>Resin weight</span><span class="val" id="resinVal">70 lb</span></label>
+        <input type="range" id="resinRange" min="0" max="120" value="70" step="1">
+      </div>
+
+      <div class="meter">
+        <div class="mlab"><span>Percent fiber content</span><span id="fcVal">0%</span></div>
+        <div class="mtrack"><div class="mfill sw" id="fcFill" style="width:0%"></div></div>
+      </div>
+      <div class="readout" id="fcRead"></div>
+    </div>
+
+    <div class="callout"><b>Why this number matters:</b> closed-molding processes (vacuum bagging, infusion, RTM, prepreg) give better control over this exact ratio than open molding does — one of the main reasons production shops move toward them. Two other ways shops protect the ratio: <b>pre-cutting</b> reinforcement fabric (speeds up lamination time, ensures consistency between parts, and allows structural optimization) and <b>overlapping</b> fabric at seams, which transfers stress between adjacent pieces instead of leaving a gap in the load path.</div>
+
+    <details class="deep">
+      <summary>Field notes: the skin coat — why it gets checked before you build on top of it</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">The <b>skin coat</b> — applied by chopper gun or hand lay-up — is a critical layer: it acts as a corrosion barrier (blister resistance) and supports the gelcoat film. Before any bulk structural laminate goes on top of it, the skin coat should be checked for <b>Barcol hardness</b> development, to confirm it's cured enough to build on.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 7 locked in.</h2>
+      <p>You can compare hand lay-up, spray-up, vacuum bagging, infusion, RTM, and prepreg on cost, consistency, glass:resin control, emissions, and skill; explain why open-mold emissions track surface area (not thickness); calibrate a chopper gun in order; and calculate percent fiber content.</p>
+      <p class="next-label">Up next → Module 8: Molds, Tooling &amp; Gelcoat Application.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 1. open vs closed molding hook ---- */
+  function vaporLines(n, x0, x1, y){
+    var s='',step=(x1-x0)/(n+1);
+    for(var i=1;i<=n;i++){
+      var x=x0+step*i;
+      s+='<path d="M'+x+' '+y+' Q '+(x+8)+' '+(y-18)+' '+x+' '+(y-34)+'" fill="none" stroke="#ef5f2b" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>';
+      s+='<path d="M'+(x-4)+' '+(y-30)+' L '+x+' '+(y-38)+' L '+(x+4)+' '+(y-30)+'" fill="none" stroke="#ef5f2b" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>';
+    }
+    return s;
+  }
+  function moldBase(){
+    return '<path d="M60 118 L92 60 L308 60 L340 118 L340 128 L60 128 Z" fill="#eef3f6" stroke="#42586b" stroke-width="3"/>'+
+           '<rect x="98" y="96" width="204" height="20" fill="#2f6f92"/>';
+  }
+  function openMoldSvg(){
+    return moldBase()+vaporLines(6,110,290,92)+
+      '<text x="200" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">full resin surface exposed to open air</text>';
+  }
+  function closedMoldSvg(){
+    return moldBase()+
+      '<rect x="90" y="86" width="220" height="12" fill="#1d4f6c" opacity="0.92"/>'+
+      '<line x1="90" y1="86" x2="90" y2="98" stroke="#155c46" stroke-width="4"/>'+
+      '<line x1="310" y1="86" x2="310" y2="98" stroke="#155c46" stroke-width="4"/>'+
+      '<circle cx="345" cy="70" r="12" fill="none" stroke="#155c46" stroke-width="3"/>'+
+      '<line x1="335" y1="76" x2="312" y2="90" stroke="#155c46" stroke-width="3"/>'+
+      vaporLines(1,195,205,84)+
+      '<text x="200" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46">sealed under a mold or vacuum bag — minimal exposure</text>';
+  }
+  var moldSeg=document.querySelectorAll('#moldSeg .seg');
+  function setMold(m){
+    moldSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===m);});
+    var chip=document.getElementById('moldChip'), v=document.getElementById('moldVerdict');
+    if(m==='open'){
+      document.getElementById('moldSvg').innerHTML=openMoldSvg();
+      chip.className='chip warn'; chip.textContent='Higher styrene emissions';
+      v.innerHTML='<b>Open molding</b> — hand lay-up or spray-up — leaves the wet resin and gelcoat exposed to the shop air the whole time it\'s being worked. It\'s the cheapest, most flexible way to build a part, and it\'s still the most commonly used lamination process in boatbuilding.';
+    } else {
+      document.getElementById('moldSvg').innerHTML=closedMoldSvg();
+      chip.className='chip ok'; chip.textContent='Far fewer styrene emissions';
+      v.innerHTML='<b>Closed molding</b> — vacuum bagging, infusion, RTM, prepreg — encloses the resin/catalyst reaction inside a sealed mold or vacuum bag. That gets you a better surface finish, less waste, and much better control of the glass:resin ratio, for more cost and process skill.';
+    }
+  }
+  moldSeg.forEach(function(b){b.addEventListener('click',function(){setMold(b.dataset.m);});});
+  setMold('open');
+
+  /* ---- 2. process selector ---- */
+  var procs={
+    handlayup:{chip:'Open molding',cost:15,consist:35,control:40,emiss:85,skill:35,
+      how:'<b>How it works:</b> dry reinforcement (mat, roving, or cloth) is placed into the mold by hand, then resin is applied with a brush or resin-fed roller and worked into the fabric ply by ply, consolidating out air and excess resin as you go.',
+      when:'When to use: one-off and low-volume parts, complex shapes, and repairs — needs only basic tools, no capital equipment. Glass:resin control depends almost entirely on the operator\'s technique.'},
+    sprayup:{chip:'Open molding',cost:25,consist:25,control:20,emiss:85,skill:30,
+      how:'<b>How it works:</b> a chopper gun cuts continuous roving into short fibers and sprays them, mixed with catalyzed resin, straight onto the mold as the operator sweeps the gun across the surface.',
+      when:'When to use: fast build-up of small, complex parts. The catch: it\'s the most operator-dependent process here, and prone to running resin-rich if the gun isn\'t calibrated and swept evenly.'},
+    vacbag:{chip:'Closed molding',cost:45,consist:55,control:60,emiss:30,skill:55,
+      how:'<b>How it works:</b> a wet hand lay-up (or spray-up) is sealed under a plastic film and vacuum is drawn, using atmospheric pressure to compact the laminate and draw out excess resin and trapped air.',
+      when:'When to use: you want hand lay-up\'s flexibility but need better compaction, fewer voids, and a better glass:resin ratio than open lay-up alone gives.'},
+    infusion:{chip:'Closed molding',cost:65,consist:75,control:80,emiss:15,skill:75,
+      how:'<b>How it works:</b> dry reinforcement is placed in the mold and sealed under a vacuum bag, then resin is drawn through the dry fiber stack by vacuum alone — no injection pressure. This is exactly what defines vacuum-assisted resin infusion (VARTM).',
+      when:'When to use: larger structural parts where you want closed-molding\'s low emissions and consistent fiber-to-resin ratio without a matched-metal mold\'s tooling cost.'},
+    rtm:{chip:'Closed molding',cost:80,consist:85,control:85,emiss:10,skill:80,
+      how:'<b>How it works:</b> dry reinforcement is loaded into a closed, rigid two-part mold, which is then clamped shut and resin is injected (with vacuum and/or pressure) into the closed cavity.',
+      when:'When to use: repeatable, higher-volume production of parts that need a finished surface on both sides. Because the mold is a two-part tool that must seal, RTM mold maintenance specifically includes checking that gaskets are clean and intact.'},
+    prepreg:{chip:'Closed molding',cost:95,consist:95,control:95,emiss:5,skill:90,
+      how:'<b>How it works:</b> the reinforcement fabric arrives from the supplier already impregnated with a pre-measured amount of resin — hence "pre-preg" — then it\'s laid into the mold and cured to complete cross-linking.',
+      when:'When to use: the highest, most consistent performance parts, where precision and repeatability matter more than cost or process simplicity.'}
+  };
+  var procSeg=document.querySelectorAll('#procSeg .seg');
+  function setProc(p){
+    var d=procs[p];
+    procSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p===p);});
+    var chip=document.getElementById('procChip');
+    chip.className='chip '+(d.chip==='Open molding'?'warn':'ok'); chip.textContent=d.chip;
+    document.getElementById('pCostVal').textContent=d.cost; document.getElementById('pCostFill').style.width=d.cost+'%';
+    document.getElementById('pConsistVal').textContent=d.consist; document.getElementById('pConsistFill').style.width=d.consist+'%';
+    document.getElementById('pControlVal').textContent=d.control; document.getElementById('pControlFill').style.width=d.control+'%';
+    document.getElementById('pEmissVal').textContent=d.emiss; document.getElementById('pEmissFill').style.width=d.emiss+'%';
+    document.getElementById('pSkillVal').textContent=d.skill; document.getElementById('pSkillFill').style.width=d.skill+'%';
+    document.getElementById('procHow').innerHTML=d.how;
+    document.getElementById('procWhen').innerHTML=d.when;
+  }
+  procSeg.forEach(function(b){b.addEventListener('click',function(){setProc(b.dataset.p);});});
+  setProc('handlayup');
+  CFS.renderVideos('procVideos', CFS_VIDEOS.processes);
+
+  /* ---- 3. emissions: area vs thickness ---- */
+  var emSeg=document.querySelectorAll('#emSeg .seg');
+  var areaRange=document.getElementById('areaRange'), thickRange=document.getElementById('thickRange');
+  var emMode='open';
+  function emSvgFor(mode,areaPct){
+    var full=220, w=Math.max(30, full*(areaPct/100)), x=200-w/2;
+    var s='<path d="M60 118 L92 60 L308 60 L340 118 L340 128 L60 128 Z" fill="#eef3f6" stroke="#42586b" stroke-width="3"/>';
+    s+='<rect x="'+x+'" y="96" width="'+w+'" height="20" fill="#2f6f92"/>';
+    if(mode==='open'){
+      s+=vaporLines(Math.max(1,Math.round(areaPct/16)), x+6, x+w-6, 92);
+    } else {
+      s+='<rect x="'+(x-6)+'" y="86" width="'+(w+12)+'" height="12" fill="#1d4f6c" opacity="0.92"/>';
+      s+=vaporLines(1, 195, 205, 84);
+    }
+    return s;
+  }
+  function setEmissions(){
+    var mode=emMode, area=+areaRange.value, thick=+thickRange.value;
+    document.getElementById('areaVal').textContent=area+'%';
+    document.getElementById('thickVal').textContent = thick<=3?'thin':thick<=7?'medium':'thick';
+    document.getElementById('emSvg').innerHTML=emSvgFor(mode,area);
+    var level = mode==='open' ? Math.round(area*0.9) : Math.round(area*0.12);
+    var fill=document.getElementById('emFill'), val=document.getElementById('emVal'), read=document.getElementById('emRead');
+    fill.style.width=level+'%'; val.textContent=level;
+    if(mode==='open'){
+      read.className='readout warn';
+      read.innerHTML='Open mold: emissions track the <b>exposed surface area</b> slider directly. Drag the thickness slider all you want — the meter doesn\'t move, because thickness isn\'t what drives styrene emissions.';
+    } else {
+      read.className='readout ok';
+      read.innerHTML='Closed molding: the resin is sealed inside a mold or vacuum bag, so even a large part gives off far fewer emissions than an open mold of the same size.';
+    }
+  }
+  emSeg.forEach(function(b){b.addEventListener('click',function(){
+    emSeg.forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+    emMode=b.dataset.e; setEmissions();
+  });});
+  areaRange.addEventListener('input',setEmissions);
+  thickRange.addEventListener('input',setEmissions);
+  setEmissions();
+
+  /* ---- 4. chopper-gun calibration order game ---- */
+  CFS.initOrderGame('chopOrder', [
+    {id:'ratio', label:'Adjust the chop-to-resin ratio'},
+    {id:'mekp', label:'Set the catalyzation (MEKP) level'},
+    {id:'chute', label:'Position the chop chute'}
+  ], ['mekp','chute','ratio'], {
+    correctMsg:'Correct — MEKP level, then chop chute position, then chop-to-resin ratio. That order matters because each later setting depends on the one before it being right.',
+    wrongMsg:'Not quite — green rows are already in the right spot. Start with the catalyzation (MEKP) level before touching the chute or the ratio.'
+  });
+
+  /* ---- 5. fiber content calculator ---- */
+  var fiberRange=document.getElementById('fiberRange'), resinRange=document.getElementById('resinRange');
+  function fcBarSvg(fiberPct){
+    var w=280, fw=(w*fiberPct/100);
+    return '<rect x="60" y="30" width="'+w+'" height="30" fill="#c9a227"/>'+
+      '<rect x="'+(60+fw)+'" y="30" width="'+(w-fw)+'" height="30" fill="#2f6f92"/>'+
+      '<text x="'+(60+fw/2)+'" y="50" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#1c1f26">fiber</text>'+
+      '<text x="'+(60+fw+(w-fw)/2)+'" y="50" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#fff">resin</text>';
+  }
+  function setFC(){
+    var f=+fiberRange.value, r=+resinRange.value, total=f+r;
+    document.getElementById('fiberVal').textContent=f+' lb';
+    document.getElementById('resinVal').textContent=r+' lb';
+    var pct = total>0 ? Math.round((f/total)*1000)/10 : 0;
+    document.getElementById('fcSvg').innerHTML = total>0 ? fcBarSvg(pct) : '';
+    document.getElementById('fcVal').textContent=pct+'%';
+    document.getElementById('fcFill').style.width=pct+'%';
+    var read=document.getElementById('fcRead');
+    if(total===0){ read.className='readout'; read.textContent='Set a fiber and resin weight to calculate.'; }
+    else{ read.className='readout'; read.innerHTML=f+' lb fiber ÷ '+total+' lb total laminate × 100% = <b>'+pct+'%</b> fiber content.'; }
+  }
+  fiberRange.addEventListener('input',setFC);
+  resinRange.addEventListener('input',setFC);
+  setFC();
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'Between hand lay-up and resin infusion, which process gives more consistent control over the glass:resin ratio, and why?',
+     opts:['Hand lay-up — hand rolling always removes more excess resin','Infusion — it\'s a closed process where vacuum draws resin through the fiber stack, rather than an operator working it in by hand','They\'re identical since both typically use E-glass','Neither — ratio control depends only on gelcoat thickness'],correct:1,
+     why:'Closed-molding processes like infusion give better control over the fiber-to-resin ratio than open molding, because the resin path is controlled by the process (vacuum), not by an operator\'s hand-rolling technique.'},
+    {stem:'What determines the level of styrene emissions from an open mold?',
+     opts:['The thickness of the laminate','Ambient humidity in the shop','The surface area of resin/gelcoat exposed to the air','How long the resin took to cure'],correct:2,
+     why:'Open-mold emissions depend on the surface area of resin or gelcoat exposed to air — not on thickness.'},
+    {stem:'Which closed-molding procedure is characterized by vacuum pressure only, with no injection pressure?',
+     opts:['RTM','Infusion molding (vacuum-assisted resin infusion)','Spray-up','Prepreg'],correct:1,
+     why:'Infusion molding (VARTM — vacuum-assisted resin infusion) is defined by vacuum pressure alone; RTM, by contrast, injects resin and can add pressure on top of vacuum.'},
+    {stem:'What is the correct order to calibrate a chopper gun?',
+     opts:['Chop-to-resin ratio → chop chute position → catalyzation (MEKP) level','Catalyzation (MEKP) level → chop chute position → chop-to-resin ratio','Chop chute position → catalyzation (MEKP) level → chop-to-resin ratio','Chop-to-resin ratio → catalyzation (MEKP) level → chop chute position'],correct:1,
+     why:'Set the catalyzation (MEKP) level first, then position the chop chute, then adjust the chop-to-resin ratio.'},
+    {stem:'You notice excessive wet chop while running a chopper gun. What\'s the fix?',
+     opts:['Increase air pressure to the chop motor','Decrease the MEKP percentage','Switch to a smaller chop chute','Add more accelerator to the resin'],correct:0,
+     why:'Excessive wet chop during chopper-gun application is corrected by increasing air pressure to the chop motor.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-7'); }});
+})();
+</script>
+</body>
+</html>

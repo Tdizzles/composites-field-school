@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 14 — Capstone: Full Practice Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 14</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: INSTRUCTIONS + TIMER -->
+  <section class="panel active" data-name="Before you start">
+    <p class="kicker">Capstone — read this first</p>
+    <h1>Full practice exam: everything, mixed, timed</h1>
+    <p class="lead">This is not a lesson — it's a <b>mixed, timed practice exam</b> pulling questions from every module you've covered so far (Modules 0–13). Answer each question; you get instant feedback and the reason, same as every recall check up to now.</p>
+
+    <div class="card">
+      <h3 style="margin-top:0">How this works</h3>
+      <p style="margin-bottom:8px">48 questions total, split into four blocks of 12 (Sections 2–5 of this module). Each question is exam-style multiple choice with one best answer.</p>
+      <p style="margin-bottom:8px">The real ABYC Marine Composites exam is <b>200 questions, 80% required to pass, over 3.5 hours</b>. This practice set uses that same <b>80% bar</b> to score you at the end — but at a fraction of the length.</p>
+      <p style="margin-bottom:0">There's no official published ABYC item bank or question blueprint. This set is built entirely from this course's own vetted content (Modules 1–13's material and quizzes), assembled to spread across every topic area — it's practice, not a guaranteed preview of the real exam.</p>
+    </div>
+
+    <div class="callout todo"><b>Before the real exam:</b> this practice set is built from this course's own vetted content, not an official ABYC item bank — treat a passing score here as encouraging, not a guarantee, and reconcile against the official ABYC study guide.</div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin-top:0">Start when ready</h3>
+      <p style="margin-bottom:12px">Starting the exam begins a visible <b>practice-pace timer</b> — a pacing guide only, set well under the real exam's 3.5 hours, just to give this shorter set some exam pressure. It does <b>not</b> lock you out or affect your score when it runs out.</p>
+      <button class="btn primary" id="startExamBtn" type="button">Start exam</button>
+      <div class="readout" id="examTimer" style="display:none;margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- 2: BLOCK A -->
+  <section class="panel" data-name="Block A">
+    <p class="kicker">Practice exam — Block A</p>
+    <h2>Questions 1–12</h2>
+    <p>Mixed topics: orientation/history, composite basics, reinforcements, resins, safety, processes, gelcoat/molds, and structure. Read every option — the distractors are built to look right.</p>
+    <div class="card">
+      <div id="blockA"></div>
+      <div class="score" id="scoreA"></div>
+    </div>
+  </section>
+
+  <!-- 3: BLOCK B -->
+  <section class="panel" data-name="Block B">
+    <p class="kicker">Practice exam — Block B</p>
+    <h2>Questions 13–24</h2>
+    <p>A different mix, same rules — one best answer per question, instant feedback.</p>
+    <div class="card">
+      <div id="blockB"></div>
+      <div class="score" id="scoreB"></div>
+    </div>
+  </section>
+
+  <!-- 4: BLOCK C -->
+  <section class="panel" data-name="Block C">
+    <p class="kicker">Practice exam — Block C</p>
+    <h2>Questions 25–36</h2>
+    <p>Keep going — this block leans into structure, QA, repair, and environmental topics alongside the fundamentals.</p>
+    <div class="card">
+      <div id="blockC"></div>
+      <div class="score" id="scoreC"></div>
+    </div>
+  </section>
+
+  <!-- 5: BLOCK D + SCOREBOARD -->
+  <section class="panel" data-name="Block D + scoreboard">
+    <p class="kicker">Practice exam — Block D (final)</p>
+    <h2>Questions 37–48</h2>
+    <p>Last block. Once you finish it, your full topic breakdown appears below, and your final results are ready on the next section.</p>
+    <div class="card">
+      <div id="blockD"></div>
+      <div class="score" id="scoreD"></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin-top:0">Topic breakdown (live)</h3>
+      <p class="note" style="margin-top:0">Fills in as you answer questions across all four blocks — these are your real per-topic scores, not sample data.</p>
+      <svg class="demo-svg" id="scoreboardSvg" viewBox="0 0 400 130" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:150px"></svg>
+      <div id="scoreboardList" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <!-- 6: RESULTS -->
+  <section class="panel" data-name="Final results">
+    <p class="kicker">Capstone complete</p>
+    <h2>Your results</h2>
+    <div class="card">
+      <div id="resultsBody"><p>Finish Block D (Section 5) to see your final score and pass/fail here.</p></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Composites Field School — complete.</h2>
+      <p>You've completed the Composites Field School core curriculum — now go earn the certification.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ==========================================================================
+     This module deviates from CFS.renderQuiz on purpose. The other modules'
+     renderQuiz gives one score line per call and has no idea what "topic" a
+     question belongs to. This capstone needs a running, cross-block tally
+     PER TOPIC TAG (safety, resins, reinforcements, etc.) so Section 5's
+     scoreboard and Section 6's weak-spot list can be built from the user's
+     real answers. So: a small custom renderer below reuses the exact same
+     .q / .stem / .opt / .why CSS classes and interaction pattern as
+     CFS.renderQuiz (so it looks and behaves identically), but also writes
+     into a shared topicTally object as each question is answered, and each
+     block's completion callback feeds the scoreboard + (on the last block)
+     the final results panel and CFS.markComplete.
+     ========================================================================== */
+
+  var TOPIC_ORDER = ['m0','m1','m2','m36','m5','m7','m8','m910','m11','m12','m13'];
+  var TOPIC_INFO = {
+    m0:  {label:'Orientation & History', mod:'Module 0'},
+    m1:  {label:'Composite Basics',      mod:'Module 1'},
+    m2:  {label:'Reinforcements',        mod:'Module 2'},
+    m36: {label:'Resins & Curing',       mod:'Modules 3 & 6'},
+    m5:  {label:'Safety',                mod:'Module 5'},
+    m7:  {label:'Processes',             mod:'Module 7'},
+    m8:  {label:'Gelcoat & Molds',       mod:'Module 8'},
+    m910:{label:'Structural',            mod:'Modules 9 & 10'},
+    m11: {label:'Quality Assurance',     mod:'Module 11'},
+    m12: {label:'Repair',                mod:'Module 12'},
+    m13: {label:'Environmental',         mod:'Module 13'}
+  };
+  var topicTally = {};
+  TOPIC_ORDER.forEach(function(k){ topicTally[k] = {correct:0, total:0}; });
+  var overallCorrect = 0, overallTotal = 0;
+
+  function renderBlock(containerId, scoreId, questions, onBlockComplete){
+    var qc = document.getElementById(containerId);
+    var scoreLine = document.getElementById(scoreId);
+    var answered = 0, correctCount = 0;
+    questions.forEach(function(q, qi){
+      var wrap = document.createElement('div'); wrap.className = 'q';
+      var stem = document.createElement('div'); stem.className = 'stem';
+      stem.textContent = (qi + 1) + '. ' + q.stem; wrap.appendChild(stem);
+      var why = document.createElement('div'); why.className = 'why'; why.textContent = q.why;
+      q.opts.forEach(function(text, oi){
+        var b = document.createElement('button'); b.className = 'opt'; b.textContent = text;
+        b.addEventListener('click', function(){
+          if (wrap.dataset.done) return;
+          wrap.dataset.done = '1'; answered++;
+          var btns = wrap.querySelectorAll('.opt');
+          btns.forEach(function(x){ x.setAttribute('disabled',''); });
+          var isCorrect = (oi === q.correct);
+          if (isCorrect) { b.classList.add('correct'); correctCount++; }
+          else { b.classList.add('wrong'); btns[q.correct].classList.add('correct'); }
+          why.classList.add('show');
+
+          var t = topicTally[q.topic];
+          t.total++; if (isCorrect) t.correct++;
+          overallTotal++; if (isCorrect) overallCorrect++;
+          updateScoreboard();
+
+          if (scoreLine) {
+            scoreLine.textContent = 'Score: ' + correctCount + ' / ' + answered +
+              (answered === questions.length ? '  — block complete' : '');
+          }
+          if (answered === questions.length && typeof onBlockComplete === 'function') {
+            onBlockComplete(correctCount, questions.length);
+          }
+        });
+        wrap.appendChild(b);
+      });
+      wrap.appendChild(why);
+      qc.appendChild(wrap);
+    });
+  }
+
+  function updateScoreboard(){
+    var listEl = document.getElementById('scoreboardList');
+    var svg = document.getElementById('scoreboardSvg');
+    if (!listEl || !svg) return;
+    var n = TOPIC_ORDER.length;
+    var barW = (360 / n) - 6;
+    var html = '', bars = '';
+    TOPIC_ORDER.forEach(function(key, i){
+      var t = topicTally[key], info = TOPIC_INFO[key];
+      var pct = t.total ? Math.round(100 * t.correct / t.total) : 0;
+      html += '<div style="display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:5px 0;border-bottom:1px solid var(--line)">' +
+        '<span>' + info.label + ' <span style="color:var(--ink-soft)">(' + info.mod + ')</span></span>' +
+        '<span style="font-family:var(--display);font-weight:600;white-space:nowrap">' +
+        (t.total ? t.correct + '/' + t.total + ' — ' + pct + '%' : '—') + '</span></div>';
+      var h = t.total ? Math.max(2, (pct / 100) * 90) : 2;
+      var x = 20 + i * (barW + 6);
+      var y = 110 - h;
+      var color = !t.total ? '#c2ced6' : (pct >= 80 ? '#1f8a68' : (pct >= 50 ? '#e0a021' : '#c33a2c'));
+      bars += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + color + '"/>';
+    });
+    listEl.innerHTML = html;
+    svg.innerHTML = bars + '<line x1="15" y1="110" x2="385" y2="110" stroke="#8fa3b1" stroke-width="1"/>';
+  }
+  updateScoreboard();
+
+  function renderResults(){
+    var pct = overallTotal ? Math.round(100 * overallCorrect / overallTotal) : 0;
+    var pass = pct >= 80;
+    var weakHtml = '';
+    TOPIC_ORDER.forEach(function(key){
+      var t = topicTally[key];
+      if (!t.total) return;
+      var p = Math.round(100 * t.correct / t.total);
+      if (p < 80) {
+        var info = TOPIC_INFO[key];
+        weakHtml += '<li>' + info.label + ' — ' + p + '% (' + t.correct + '/' + t.total + '). Review ' + info.mod + '.</li>';
+      }
+    });
+    var el = document.getElementById('resultsBody');
+    el.innerHTML =
+      '<div class="readout ' + (pass ? 'ok' : 'warn') + '" style="font-size:19px">Final score: ' +
+      overallCorrect + ' / ' + overallTotal + ' (' + pct + '%) — ' +
+      (pass ? 'PASS (≥ 80% bar)' : 'Below the 80% pass bar') + '</div>' +
+      (weakHtml
+        ? '<h3 style="margin-top:18px">Weak spots to review</h3><ul style="margin:0;padding-left:20px">' + weakHtml + '</ul>'
+        : '<p style="margin-top:14px">No topic fell below 80% — solid, even coverage across the board.</p>') +
+      '<p class="note" style="margin-top:14px">This is a self-built practice set, not the official ABYC item bank — use this as a study-priority map, then confirm against the ABYC study guide.</p>';
+  }
+
+  /* ---- timer (practice pace only — NOT the real 3.5-hour exam length) ---- */
+  var startBtn = document.getElementById('startExamBtn');
+  var timerEl = document.getElementById('examTimer');
+  var timerInterval = null;
+  startBtn.addEventListener('click', function(){
+    if (timerInterval) return;
+    startBtn.disabled = true;
+    startBtn.textContent = 'Exam started — good luck';
+    timerEl.style.display = 'block';
+    var seconds = 18 * 60; // 18-minute practice pace, not the real exam duration
+    function tick(){
+      var m = Math.floor(seconds / 60), s = seconds % 60;
+      if (seconds <= 0) {
+        clearInterval(timerInterval);
+        timerEl.className = 'readout warn';
+        timerEl.textContent = 'Practice-pace time is up. This has no effect on your score — finish the remaining questions at your own pace.';
+        return;
+      }
+      timerEl.className = 'readout';
+      timerEl.textContent = 'Practice-pace timer: ' + m + ':' + (s < 10 ? '0' : '') + s +
+        ' — a pacing guide only, NOT the real 3.5-hour ABYC exam time.';
+      seconds--;
+    }
+    tick();
+    timerInterval = setInterval(tick, 1000);
+  });
+
+  /* ==================== QUESTION BANK ====================
+     Every question below is either (a) reused/lightly reworded from
+     module-1, module-2, or module-3's own vetted quiz arrays, or
+     (b) newly written with its stem, correct answer, and "why" drawn
+     directly from an assets/knowledge-base.js entry. No new facts,
+     numbers, or answers are introduced beyond those two sources. */
+
+  var blockA = [
+    {topic:'m0', stem:'What resin chemistry is credited with launching the use of modern composite materials?',
+     opts:['Polyurethane','Phenolic resin','Epoxy','Vinylester'], correct:1,
+     why:'Phenolic resin is what launched the use of modern composite materials.'},
+    {topic:'m0', stem:'Fiberglass boatbuilding in the US traces back to which origin?',
+     opts:['A post-WWII US Navy-contracted 28-foot personnel craft, seeking reduced maintenance versus wood','A 1920s attempt to replace riveted steel hulls','A NASA materials spinoff program','A change to sailboat racing rules'], correct:0,
+     why:'Fiberglass boatbuilding began after WWII, when the US Navy contracted a 28-foot personnel craft built from it, chasing reduced maintenance versus wood.'},
+    {topic:'m1', stem:'A fiberglass panel cracks along a line under load, yet the glass strands themselves remain intact. What most likely failed?',
+     opts:['The reinforcement fibers','The resin matrix or the fiber-resin bond','The gelcoat pigment','The core density'], correct:1,
+     why:'The matrix binds the fibers and carries the loads they can\'t. Most composite failures are the resin cracking or the bond letting go — not the glass snapping.'},
+    {topic:'m1', stem:'Why is a cored (sandwich) panel far stiffer than a solid laminate of the same weight?',
+     opts:['The core material itself is stronger than fiberglass','The core adds tensile strength to the skins','Separating the skins increases stiffness — the same principle as an I-beam','The resin cures harder inside a sandwich'], correct:2,
+     why:'Stiffness comes from moving material away from the center. The core\'s job is to hold the skins apart and carry shear between them, not to be strong itself.'},
+    {topic:'m2', stem:'Which reinforcement is generally the WEAKEST per unit weight — used mainly for bulk, blocking print-through, and bonding layers?',
+     opts:['Unidirectional','Woven roving','Chopped strand mat','Stitched biaxial'], correct:2,
+     why:'CSM is random short fibers, so it has the lowest structural strength per weight. It\'s a bulk/bond layer, not a strength layer.'},
+    {topic:'m2', stem:'Why is a stitched biaxial typically stronger than a woven roving of the same fibers and weight?',
+     opts:['The stitching adds extra resin','Woven fibers are crimped (pre-buckled) and lose strength; stitched fibers stay straight','Woven roving is made from weaker glass','Biaxial contains more binder'], correct:1,
+     why:'Crimp: in a weave the fibers go over/under, so they must straighten under load before carrying it. Stitched fabrics keep fibers straight, so they work immediately.'},
+    {topic:'m36', stem:'What is the key difference between a thermoset and a thermoplastic resin?',
+     opts:['Thermosets are always more expensive','Thermosets cross-link permanently during cure and cannot be re-melted; thermoplastics do not cross-link and can be reformed','Thermoplastics cannot be used in boatbuilding','There is no real difference'], correct:1,
+     why:'Thermoset molecules cross-link during an irreversible, exothermic cure. Thermoplastics have no cross-linking, so they can be melted and reshaped.'},
+    {topic:'m36', stem:'Compared to standard (orthophthalic) polyester, isophthalic polyester offers:',
+     opts:['Lower cost only','Better mechanical properties, chemical resistance, and water-permeation resistance, at higher cost','Faster cure with no catalyst needed','Compatibility with epoxy binders'], correct:1,
+     why:'Isophthalic acid in place of orthophthalic gives better mechanical properties and water/chemical resistance — at a higher price. Gelcoat is typically isophthalic.'},
+    {topic:'m5', stem:'On an NFPA hazard label, what does each diamond color represent?',
+     opts:['Health = blue, Flammability = red, Instability = yellow, Specific hazard = white','Health = red, Flammability = blue, Instability = white, Specific hazard = yellow','All four quadrants use the same color code','Health = green, Flammability = orange, Instability = purple, Specific hazard = black'], correct:0,
+     why:'NFPA hazard colors are Health = blue, Flammability = red, Instability (reactivity) = yellow, and Specific hazard = white.'},
+    {topic:'m7', stem:'What are the two kinds of open molding?',
+     opts:['Hand lay-up and spray-up','Infusion and RTM','Vacuum bagging and autoclave','Pultrusion and filament winding'], correct:0,
+     why:'The two kinds of open molding are hand lay-up and spray-up.'},
+    {topic:'m8', stem:'Aside from chemicals or wax, what guarantees a mold will release from its part?',
+     opts:['A positive draft margin of at least 2°, or building it as a split mold','Cooling the mold to freezing before demold','Spraying extra gelcoat onto the mold surface','Using only epoxy resin in the layup'], correct:0,
+     why:'A mold releases reliably with a positive draft margin of at least 2°, or by being built as a split mold.'},
+    {topic:'m910', stem:'What is the primary purpose of hull stiffeners (stringers)?',
+     opts:['Purely cosmetic paneling','To effectively distribute local loads throughout the larger hull structure','To replace the need for a keel','To reduce resin consumption during layup'], correct:1,
+     why:'Hull stiffeners (stringers) exist to effectively distribute local loads throughout the larger hull structure.'}
+  ];
+
+  var blockB = [
+    {topic:'m0', stem:'Early FRP boatbuilders had no structural calculator. What design method did they rely on, and what did it typically cause?',
+     opts:['Finite-element analysis — optimized, minimal-weight hulls','The empirical (build-it-and-test) method — often over-built, conservative hulls','Computer-aided lofting — exact scantlings every time','ABYC pre-certification of every hull design'], correct:1,
+     why:'Early builders used the empirical method (build it, test if it survives), which is exactly why early fiberglass boats are often over-built.'},
+    {topic:'m1', stem:'Calling a laminate "anisotropic" means it:',
+     opts:['Is equally strong in every direction','Is strongest in the direction its fibers run','Has no usable strength','Can only be used cosmetically'], correct:1,
+     why:'Fiber-reinforced composites carry load along the fibers, so strength is directional. That\'s the whole reason fabric orientation is chosen deliberately.'},
+    {topic:'m2', stem:'You are laminating a repair with EPOXY. Which reinforcement is a poor choice because its binder won\'t dissolve?',
+     opts:['Stitched biaxial','Cloth','Standard chopped strand mat','Unidirectional carbon'], correct:2,
+     why:'Standard CSM\'s binder is dissolved by the styrene in polyester/vinylester — not by epoxy. With epoxy the mat stays stiff and wets out poorly.'},
+    {topic:'m2', stem:'A fabric labeled "1708" is:',
+     opts:['17 oz woven roving only','A 17 oz/yd² ±45° biaxial stitched to a ~0.75 oz mat','1708 gsm cloth','A glass with 17.08% resin content'], correct:1,
+     why:'The number encodes weight plus construction: 17 oz/yd² biaxial plus an "08" (¾ oz) chopped-mat backing.'},
+    {topic:'m36', stem:'You need to laminate new material onto a boat hull that is fully-cured EPOXY. Which resin choice is most likely to give a strong bond?',
+     opts:['Standard orthophthalic polyester','Any resin — epoxy bonds equally well to everything applied to it','Epoxy','Vinylester, because it contains styrene'], correct:2,
+     why:'The one-way bond rule: epoxy bonds well to nearly everything, but polyester and vinylester bond poorly to fully-cured epoxy. To build on cured epoxy, use epoxy.'},
+    {topic:'m36', stem:'Doubling the percentage of MEKP catalyst in a polyester resin batch will mainly:',
+     opts:['Double the cured strength of the laminate','Speed up and intensify the cure (more exotherm), not increase ultimate strength','Have no effect at all','Turn the resin into an epoxy'], correct:1,
+     why:'MEKP initiates a free-radical cure; more of it cures faster and hotter, risking cracking or pre-release — it does not make the part stronger.'},
+    {topic:'m5', stem:'Which respirator cartridge is required for resin/gelcoat vapor exposure during mixing and spraying, versus sanding dust?',
+     opts:['A particulate (dust) mask works fine for both','An organic-vapor (OV) cartridge for vapors; a particulate cartridge for sanding/grinding dust — they are not interchangeable','No respirator is needed for either task','A surgical mask is sufficient for both'], correct:1,
+     why:'An organic-vapor cartridge respirator is required for resin/gelcoat vapors during mixing and spraying; a particulate mask is needed for sanding/grinding dust — one does not substitute for the other.'},
+    {topic:'m5', stem:'What is the correct first aid if MEKP contacts the eyes?',
+     opts:['Wipe with a dry cloth and continue working','Immediate, copious flushing with water, followed by prompt medical attention','Apply petroleum jelly to soothe it','Wait 24 hours to see if irritation subsides'], correct:1,
+     why:'MEKP can cause blindness on eye contact — the correct first aid is immediate, copious flushing with water, followed by prompt medical attention.'},
+    {topic:'m7', stem:'What determines the emissions level from an open mold?',
+     opts:['The thickness of the laminate being built','The surface area of resin/gelcoat exposed to the air','The color of the gelcoat','The ambient humidity alone'], correct:1,
+     why:'Emissions from an open mold are determined by the surface area of resin or gelcoat exposed to air — not the thickness of the material.'},
+    {topic:'m7', stem:'A closed-molding process characterized by vacuum pressure only — no injection pressure — is called:',
+     opts:['Hand lay-up','Spray-up','Infusion molding (vacuum-assisted resin infusion)','Chopper-gun molding'], correct:2,
+     why:'Infusion molding (vacuum-assisted resin infusion) is characterized by the use of vacuum pressure only, with no injection pressure.'},
+    {topic:'m8', stem:'What are three common types of mold release agent?',
+     opts:['Mold release wax, PVA, and chemical release agents','Acetone, MEKP, and cobalt promoter','Gelcoat, resin, and catalyst','Styrene, silica, and talc'], correct:0,
+     why:'Three common mold release agents are mold release wax, PVA (polyvinyl alcohol), and chemical release agents.'},
+    {topic:'m11', stem:'How do you calculate the percent fiber content of a laminate?',
+     opts:['Weight of resin ÷ weight of fiber × 100%','Weight of fiber ÷ total weight of the laminate × 100%','Volume of fiber ÷ volume of the mold × 100%','Number of plies ÷ laminate thickness'], correct:1,
+     why:'Percent fiber content = weight of fiber ÷ total weight of the cured laminate, multiplied by 100%.'}
+  ];
+
+  var blockC = [
+    {topic:'m0', stem:'How is the ABYC Marine Composites certification exam itself structured?',
+     opts:['200 multiple-choice questions, 80% required to pass, 3.5 hours, valid 5 years','50 essay questions, 60% to pass, 1 hour, valid 10 years','An in-person practical build test only, no written component','100 true/false questions, 90% to pass, 2 hours'], correct:0,
+     why:'The ABYC Marine Composites exam is 200 multiple-choice questions, 80% required to pass, 3.5 hours, 32 CEUs, and valid for 5 years.'},
+    {topic:'m1', stem:'Compared to a properly wet-out laminate of the same fibers, a "resin-rich" laminate is generally:',
+     opts:['Lighter and stronger','Heavier and more brittle','Identical in every way','Impossible to cure'], correct:1,
+     why:'Excess resin adds weight and more of the brittle component without adding any fiber, so strength-to-weight goes down.'},
+    {topic:'m2', stem:'A UNIDIRECTIONAL fabric makes the most sense where:',
+     opts:['Loads come equally from every direction','You need maximum strength along one known load path','You want a cosmetic finish layer','You need to block print-through'], correct:1,
+     why:'UD puts nearly all fibers in one direction — maximum strength/stiffness along that axis, very little across it.'},
+    {topic:'m36', stem:'A partially-cured epoxy surface feels slightly waxy and slippery before the next layer is applied. What should happen before laminating over it?',
+     opts:['Nothing — laminate directly over it','Wash off the amine blush with water and abrade the surface','Apply extra hardener to melt the wax','Heat the surface with a torch'], correct:1,
+     why:'That waxy film is amine blush, a byproduct of epoxy curing in humid/cool conditions. It must be washed off and sanded before recoating or the new layer won\'t bond.'},
+    {topic:'m5', stem:'Why should MEKP never be mixed directly with cobalt accelerator/promoter?',
+     opts:['It has no effect either way','MEKP is an organic peroxide/oxidizer; combined directly with an accelerator instead of each going into the resin separately, the mixture can react violently','It will simply fail to cure','It will turn the resin into an epoxy'], correct:1,
+     why:'MEKP is an organic peroxide and an oxidizer. Combined directly (neat) with an accelerator rather than each mixed separately into the resin, the mixture can react violently.'},
+    {topic:'m7', stem:'What is the main advantage of closed molding over open molding?',
+     opts:['It requires no skilled labor at all','Improved surface finish, less waste, better fiber-to-resin ratio control, and far fewer styrene emissions','It eliminates the need for gelcoat entirely','It always cures faster regardless of resin used'], correct:1,
+     why:'Closed molding gives improved surface finish, reduced material waste, better control over fiber-to-resin ratio, and far fewer styrene emissions than open molding.'},
+    {topic:'m8', stem:'What is the recommended wet-gauge thickness when spraying gelcoat?',
+     opts:['2–4 mils','8–10 mils','18–22 mils','40–50 mils'], correct:2,
+     why:'Recommended gelcoat spray thickness is roughly 18–22 mils wet gauge, curing down to about 18 mils final thickness.'},
+    {topic:'m910', stem:'On a cored (sandwich) hull, what must be done at a thru-hull fitting?',
+     opts:['Nothing special — treat it the same as a single-skin hull','The core must be isolated/sealed from the fitting so water cannot travel through the exposed core','The core should be left exposed for inspection','Only gelcoat needs to be applied around the hole'], correct:1,
+     why:'On sandwich construction, the core must not directly contact the thru-hull fitting — it must be isolated/sealed so water can\'t travel through the exposed core.'},
+    {topic:'m910', stem:'What are the four common sandwich-panel failure modes?',
+     opts:['Skin-to-core debond, core shear failure, core crush, and print-through','Gelcoat crazing, alligatoring, pre-release, and porosity','Fiber pull-out, resin starvation, delamination, and blistering only','Warping, yellowing, chalking, and osmosis'], correct:0,
+     why:'The four common sandwich-panel failure modes are skin-to-core debond, core shear failure, core crush, and print-through.'},
+    {topic:'m11', stem:'What does "consolidating" a laminate mean?',
+     opts:['Cutting it down to its final trimmed size','Achieving even resin distribution, removing trapped air, and rolling down fibers so layers are fully compacted and wetted','Adding a second coat of gelcoat','Increasing the catalyst percentage'], correct:1,
+     why:'Consolidating a laminate means achieving even distribution of resin, removing trapped air pockets, and manually rolling down the fibers so the layers are fully compacted and wetted.'},
+    {topic:'m12', stem:'What is the typical scarf ratio, and minimum finished diameter, when repairing a hole in a single-skin laminate?',
+     opts:['3:1 ratio, no minimum diameter','12:1 ratio, minimum finished diameter of about 6 inches','1:1 ratio, minimum diameter of 1 inch','20:1 ratio, minimum diameter of 24 inches'], correct:1,
+     why:'A 12:1 scarf ratio is typical for a single-skin hole repair, with a minimum finished scarf diameter of about 6 inches even for small damage.'},
+    {topic:'m13', stem:'Which agency controls environmental regulations for boat builders in the US?',
+     opts:['OSHA','The Environmental Protection Agency (EPA)','The US Coast Guard','ABYC'], correct:1,
+     why:'The Environmental Protection Agency (EPA) controls environmental regulations for boat builders.'}
+  ];
+
+  var blockD = [
+    {topic:'m1', stem:'In the fiber/matrix division of labor, which statement is correct?',
+     opts:['Fibers carry compression; resin carries tension','Fibers carry tension; resin binds them and carries compression & shear','Both carry tension only','The core carries all the tensile load'], correct:1,
+     why:'Tensile strength runs along the fibers; the matrix binds them, transfers load between them, and handles compression and shear.'},
+    {topic:'m2', stem:'A carbon-fiber part is through-bolted directly to an aluminum bracket with no isolation. What is the main concern?',
+     opts:['The carbon will absorb water','Galvanic corrosion of the aluminum, since carbon is conductive and noble relative to it','The bolt will overheat during cure','The resin will not wet out the carbon'], correct:1,
+     why:'Carbon fiber is electrically conductive and sits far from aluminum on the galvanic series; direct contact in the presence of moisture drives rapid corrosion of the metal unless isolated.'},
+    {topic:'m36', stem:'A resin-rich outer laminating layer of polyester stays tacky to the touch even after normal cure time has passed — but this is expected at that stage. Why?',
+     opts:['The resin was never catalyzed','Air inhibition — atmospheric oxygen stops surface styrene from fully curing until a wax-additive finish coat seals it','The mold released too early','The glass-to-resin ratio was too high'], correct:1,
+     why:'Air-inhibited (tacky) surfaces are normal between structural layers — that tackiness is what the next layer bonds to. Only the final coat needs a surfacing/wax additive to cure hard.'},
+    {topic:'m5', stem:'What is the primary control for styrene/resin vapor exposure in a composites shop?',
+     opts:['Ventilation','Wearing sunglasses','Drinking more water','Turning off the shop lights'], correct:0,
+     why:'The primary control for styrene/resin vapor exposure in a shop is ventilation.'},
+    {topic:'m7', stem:'Why is the skin coat considered a critical layer in lamination?',
+     opts:['It has no real function beyond cosmetics','It acts as a corrosion barrier that increases blister resistance and backs up the gelcoat film','It replaces the need for structural laminate entirely','It is always applied after the structural laminate'], correct:1,
+     why:'The skin coat acts as a corrosion barrier that increases resistance to blisters and supports/backs up the gelcoat film.'},
+    {topic:'m8', stem:'What commonly causes gelcoat "alligatoring"?',
+     opts:['Too much mold release wax','Gelcoat applied too thinly, or structural laminate applied before the gelcoat reached adequate cure','Spraying gelcoat too far from the mold','Using isophthalic instead of orthophthalic resin'], correct:1,
+     why:'Alligatoring is caused by gelcoat applied too thinly, or by structural laminate being applied too early — before the gelcoat reached adequate cure.'},
+    {topic:'m8', stem:'What is the proper spray distance when applying gelcoat?',
+     opts:['2–4 inches','12–18 inches','36–48 inches','Contact spraying, touching the mold'], correct:1,
+     why:'The proper distance from the mold when spraying gelcoat is 12 to 18 inches.'},
+    {topic:'m910', stem:'What is an advantage of solid laminate over sandwich (cored) construction?',
+     opts:['It is always lighter for the same stiffness','It offers more primary-axis reinforcement for hull-girder bending, is easier to inspect for damage, and is stronger for a given thickness','It cannot be damaged by impact','It requires no core kerfing'], correct:1,
+     why:'Solid laminates offer the greatest amount of primary-axis reinforcement to resist hull-girder bending, are easier to inspect for structural damage, and are stronger (rather than just stiffer) for a given thickness.'},
+    {topic:'m11', stem:'What happens if a part\'s specified lamination schedule is changed without engineering review?',
+     opts:['Nothing — schedules are just suggestions','Reduced strength, increased risk of delamination, or a change in dimensional stability versus design intent','The part will always end up stronger','It only affects cosmetic appearance'], correct:1,
+     why:'A change in lamination schedule can cause reduced strength, increased risk of delamination, or changes in dimensional stability versus the design intent.'},
+    {topic:'m12', stem:'What is Formica commonly used for when repairing a hole in a single-skin laminate?',
+     opts:['As a mixing surface for catalyst only','As a splash mold — a smooth, non-stick backing to rebuild the outer contour/gelcoat surface from behind the hole','As a sanding block','As permanent reinforcement inside the repair'], correct:1,
+     why:'Formica is used as a splash mold — a smooth, non-stick backing surface to rebuild the outer contour/gelcoat surface from behind the hole.'},
+    {topic:'m13', stem:'How does closed molding reduce environmental impact compared to open molding?',
+     opts:['It uses no resin at all','By enclosing the resin/catalyst reaction inside a sealed mold or vacuum bag, dramatically cutting styrene VOC/HAP emissions versus open molding','It eliminates the need for a respirator entirely','It requires more resin, which dilutes emissions per part'], correct:1,
+     why:'Closed molding encloses the reaction inside a sealed mold or vacuum bag, dramatically cutting styrene VOC/HAP emissions compared with open molding, where emissions scale with exposed resin/gelcoat surface area.'},
+    {topic:'m13', stem:'What must be done with solvent-soaked rags to avoid a fire hazard?',
+     opts:['Leave them in an open pile to air dry','Dispose of them properly — e.g. in a sealed, fire-rated container — since they can spontaneously combust','Store them inside a resin drum','Wash them in the same sink used for gelcoat cleanup'], correct:1,
+     why:'Solvent-soaked rags must be disposed of properly (e.g., in a sealed, fire-rated container) because oily/solvent-soaked rags can spontaneously combust.'}
+  ];
+
+  renderBlock('blockA', 'scoreA', blockA);
+  renderBlock('blockB', 'scoreB', blockB);
+  renderBlock('blockC', 'scoreC', blockC);
+  renderBlock('blockD', 'scoreD', blockD, function(){
+    updateScoreboard();
+    renderResults();
+    CFS.markComplete('module-14');
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — Reinforcements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 2</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - fabric forms -->
+  <section class="panel active" data-name="The forms of glass">
+    <p class="kicker">Reinforcements — start here</p>
+    <h1>Same glass, wildly different strength</h1>
+    <p class="lead">The <span class="tag fiber">fiber</span> matters less than how it's arranged. Tap through the five common forms and watch strength-per-weight and epoxy compatibility change — for the same glass.</p>
+    <div class="card">
+      <div class="segmented" id="fabSeg" role="group" aria-label="Choose a fabric form">
+        <button class="seg" data-form="csm" aria-pressed="true">Chopped strand mat</button>
+        <button class="seg" data-form="woven" aria-pressed="false">Woven roving</button>
+        <button class="seg" data-form="cloth" aria-pressed="false">Cloth</button>
+        <button class="seg" data-form="biax" aria-pressed="false">Stitched biaxial</button>
+        <button class="seg" data-form="ud" aria-pressed="false">Unidirectional</button>
+      </div>
+      <svg class="demo-svg" id="fabSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="statrow">
+        <span class="chip" id="fabChip"></span>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Strength-to-weight (relative)</span><span id="fabStrVal">28</span></div>
+        <div class="mtrack"><div class="mfill sw" id="fabStrFill" style="width:28%"></div></div>
+      </div>
+      <div class="verdict" id="fabVerdict"></div>
+      <p class="note" id="fabBest"></p>
+    </div>
+    <p class="note">Values are relative and illustrative — the point is the ranking, not the exact number.</p>
+
+    <details class="deep">
+      <summary>Field notes: is CSM even used much, and why not just use biax everywhere?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Chopped strand mat — yes, constantly, but never for strength.</b> It's a bulk/bond layer: builds thickness cheaply, blocks print-through of a coarser weave underneath gelcoat, and — because its random short fibers and extra resin fill the gaps — bonds adjacent plies of woven roving together. The classic hand-lay marine schedule is literally roving/mat/roving/mat for this reason.</p>
+        <p style="margin-bottom:0"><b>Why not biaxial everywhere?</b> Cost and process. Stitched fabric costs more per pound than roving or mat, and it can't be sprayed — chopper-gun/spray-up (a large share of production boatbuilding) physically lays down chopped roving, not a stitched sheet. For bulk, non-critical, or sprayed work, the cheaper forms still win on cost and labor time even though they're weaker per pound.</p>
+      </div>
+    </details>
+
+    <div class="card" style="margin-top:14px">
+      <p class="kicker">Quick game</p>
+      <h3 style="margin-top:0">Match the fabric to its best job</h3>
+      <p style="font-size:14.5px">Click one card on the left, then its matching job on the right.</p>
+      <div id="fabMatchGame"></div>
+      <div class="readout" id="fabMatchDone" style="display:none">All matched. That pairing — form → job — is exactly what the exam tests.</div>
+    </div>
+
+    <div id="fabVideos"></div>
+  </section>
+
+  <!-- 2: FIBER TYPES -->
+  <section class="panel" data-name="The raw fibers">
+    <p class="kicker">The materials themselves</p>
+    <h2>Four fibers, four jobs</h2>
+    <p>This is the part people over-weight. For most boat work it's E-glass; the exotics are situational. Tap each to see the trade-off.</p>
+    <div class="roles" id="fiberRoles">
+      <button class="role" aria-expanded="false" data-job="The marine workhorse: good strength, low cost, easy to wet out. Roughly <b>90% of production boat glass</b> is E-glass.">
+        <div class="swatch" style="background:var(--fiber)"></div>
+        <h3>E-glass</h3><div style="font-size:13px;color:#42586b">standard</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="About <b>30% stronger and stiffer</b> than E-glass with better heat resistance — at a higher price. For extra performance without jumping to carbon.">
+        <div class="swatch" style="background:#1d4f6c"></div>
+        <h3>S-glass</h3><div style="font-size:13px;color:#42586b">high-strength</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Very stiff and light, but expensive and <b>brittle</b> — little warning before it fails. It also conducts electricity, so it can drive <b>galvanic corrosion</b> against nearby metal.">
+        <div class="swatch" style="background:#1c1f26"></div>
+        <h3>Carbon</h3><div style="font-size:13px;color:#42586b">stiff &amp; light</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Outstanding <b>impact and abrasion</b> toughness — but it <b>absorbs water</b>, is very hard to cut and sand/fair, and is <b>weak in compression</b>. Used in impact zones, rarely as a whole hull.">
+        <div class="swatch" style="background:#c9a227"></div>
+        <h3>Aramid (Kevlar)</h3><div style="font-size:13px;color:#42586b">tough</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+    </div>
+    <div class="callout"><b>One more for the exam:</b> <b>E-CR glass</b> is a corrosion-resistant (boron-free) E-glass made for better water and acid resistance — worth knowing for below-the-waterline laminates.</div>
+
+    <details class="deep">
+      <summary>Field notes: why bother with multiple glass types at all?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px">Each fiber is a different point on the cost/strength/stiffness/toughness/weight trade-off curve — there's no single "best" glass, only the best one for a given zone of the boat. E-glass covers the vast majority of structure because it's cheap and easy to wet out; the exotics earn their keep only where their one specific property (S-glass's stiffness, carbon's stiffness-to-weight, aramid's impact toughness) is worth the added cost and handling difficulty.</p>
+        <p style="margin-bottom:0"><b>Galvanic corrosion with carbon:</b> carbon fiber conducts electricity and sits far from common boat metals — especially aluminum — on the galvanic series. Direct contact between a carbon layup and aluminum hardware, in the presence of moisture/seawater as an electrolyte, can drive rapid corrosion of the metal (carbon effectively behaves as a noble cathode). Fix: isolate carbon layups from metal fittings with a glass barrier ply, epoxy isolation, or non-conductive fasteners/bushings — never bed carbon directly against aluminum.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 3: CRIMP -->
+  <section class="panel" data-name="Crimp: woven vs stitched">
+    <p class="kicker">The concept that separates pros</p>
+    <h2>Why stitched beats woven</h2>
+    <p>Take the same fibers at the same weight. Weave them and they bend over-and-under — <b>crimp</b>. Stitch them flat and they stay straight. Toggle and watch what crimp costs you.</p>
+    <div class="card">
+      <div class="segmented" id="crimpSeg" role="group" aria-label="Weave vs stitched">
+        <button class="seg" data-c="woven" aria-pressed="true">Woven roving</button>
+        <button class="seg" data-c="stitched" aria-pressed="false">Stitched biaxial</button>
+      </div>
+      <svg class="demo-svg" id="crimpSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="meter">
+        <div class="mlab"><span>Usable strength (relative)</span><span id="crimpVal">72</span></div>
+        <div class="mtrack"><div class="mfill sw" id="crimpFill" style="width:72%"></div></div>
+      </div>
+      <div class="readout" id="crimpRead"></div>
+    </div>
+    <p class="note">This is exactly why modern builders reach for stitched biaxial/triaxial over old-style woven roving where strength matters.</p>
+
+    <details class="deep">
+      <summary>Field notes: where woven roving is actually used, and why mat goes between layers</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Where it's used:</b> woven roving is the default heavy reinforcement for large marine structures — hull bottoms and big panels — because it builds thickness fast (24 oz/yd² is the most common weight) and drapes well enough over hull curves. Woven roving is a flattened bundle weave with slightly more material in the warp (lengthwise) direction than the fill.</p>
+        <p style="margin-bottom:8px"><b>"Pre-buckled" / crimp:</b> because the bundles physically weave over-and-under the perpendicular bundles, each fiber is already bent before any load is ever applied. Under tension, that bent fiber has to straighten out first before it can carry full force — so you get more stretch and lower ultimate strength per weight than a straight (stitched) fiber of the same spec.</p>
+        <p style="margin-bottom:0"><b>Why mat between layers:</b> roving's coarse weave leaves poor contact between plies on its own. A layer of chopped strand mat between roving plies fills those gaps with random short fiber and extra resin, giving a real interlaminar bond and also helping block print-through. That's why the classic schedule alternates roving/mat/roving/mat rather than stacking roving directly on roving.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: ORIENTATION -->
+  <section class="panel" data-name="Fiber orientation">
+    <p class="kicker">Which way do they point?</p>
+    <h2>Build directional coverage</h2>
+    <p>A ply is only strong where its fibers run (that's the anisotropy from Module 1). Add plies at different angles and watch the coverage — and read what you've built.</p>
+    <div class="card">
+      <div class="toggles" id="oriToggles" role="group" aria-label="Add fiber directions">
+        <button class="tg" data-ang="0" aria-pressed="false">0° (fore–aft)</button>
+        <button class="tg" data-ang="90" aria-pressed="false">90° (athwart)</button>
+        <button class="tg" data-ang="45" aria-pressed="false">+45°</button>
+        <button class="tg" data-ang="-45" aria-pressed="false">−45°</button>
+      </div>
+      <svg class="demo-svg" id="oriSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <circle cx="200" cy="90" r="66" fill="#eef3f6" stroke="#c2ced6"/>
+        <circle cx="200" cy="90" r="3" fill="#42586b"/>
+        <g id="oriLines"></g>
+      </svg>
+      <div class="readout" id="oriRead">No plies yet — add a direction above.</div>
+    </div>
+    <p class="note">0/90 + ±45 together = <b>quasi-isotropic</b>: roughly equal strength every direction, the composite version of a plate of steel.</p>
+
+    <details class="deep">
+      <summary>Field notes: single vs. multiple load paths — how to actually decide</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Ask: can you point to one line on the part and say "this only ever gets pulled that way"? A stringer cap, a keel, a straight compression post — yes, <b>single/known load path</b>, so a unidirectional or dominant 0° layup is efficient. A hull skin, a transom, a chine taking slamming loads from unpredictable angles — no, <b>multiple/uncertain load paths</b>, so biaxial/triaxial or a full quasi-isotropic layup is the standard, safer choice. This exact judgment call is what a structural scantling calculation (e.g. ISO 12215) formalizes with numbers; as a builder you can make the same call by eye once you know what to look for.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 5: AREAL WEIGHT -->
+  <section class="panel" data-name="Fabric weight">
+    <p class="kicker">Reading the spec</p>
+    <h2>Heavier fabric: more glass, harder to wet</h2>
+    <p>Reinforcement is sold by weight per area — oz/yd² in the US, gsm elsewhere. Heavier means more glass and faster build, but it drapes worse and is harder to wet out fully. Slide it.</p>
+    <div class="card">
+      <svg class="demo-svg" id="awSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:120px">
+        <text x="200" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">one ply, cross-section</text>
+        <rect id="awPly" x="80" y="70" width="240" height="8" fill="#2f6f92"/>
+      </svg>
+      <div class="control">
+        <label for="awRange"><span>Fabric weight</span><span class="val" id="awVal">17 oz/yd²</span></label>
+        <input type="range" id="awRange" min="0.75" max="24" value="17" step="0.25">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Drape / conforms to curves</span><span id="drapeVal">low</span></div>
+        <div class="mtrack"><div class="mfill weight" id="drapeFill" style="width:25%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Wet-out difficulty</span><span id="wetVal">high</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="wetFill" style="width:75%"></div></div>
+      </div>
+      <div class="readout" id="awRead"></div>
+      <div class="callout"><b>Decode "1708":</b> a <b>17</b> oz/yd² ±45° <b>biaxial</b> stitched to a <b>0.75 oz</b> chopped mat backing ("08"). The number literally tells you the weight and the construction. (1 oz/yd² ≈ 34 gsm.)</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: when is cloth used most, and what is a "weave" / "styrene binder" exactly?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Cloth</b> is a fine, tight weave — typically 6–10 oz/yd², needing roughly 40–50 plies to build one inch of thickness. Because it's light and gives a smooth, low-texture surface, it's used for small parts, repairs, and cosmetic/finish layers, not for building structural bulk.</p>
+        <p style="margin-bottom:8px"><b>A weave</b> is the physical pattern created when perpendicular bundles — the warp (lengthwise) and the weft/fill (crosswise) — are interlaced over and under each other. That interlacing is what creates crimp (Section 3).</p>
+        <p style="margin-bottom:0"><b>The styrene binder:</b> chopped strand mat is held together by a binder applied to tack the randomly-cut fibers into a sheet. That binder is formulated to dissolve in the styrene monomer present in polyester and vinylester resin, letting the mat collapse and wet out properly. Epoxy has no styrene, so with epoxy the binder stays stiff and the mat won't wet out — the CSM+epoxy trap from Section 1.</p>
+      </div>
+    </details>
+
+    <div id="clothVideos"></div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 2 locked in.</h2>
+      <p>You can rank the fabric forms by strength, explain crimp, read fiber orientation and what "quasi-isotropic" means, decode a weight spec like 1708, and flag the CSM-with-epoxy trap.</p>
+      <p class="next-label">Up next → Module 3: The matrix — polyester, vinylester &amp; epoxy resins.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('fabVideos', CFS_VIDEOS.reinforcementTypes);
+  CFS.renderVideos('clothVideos', CFS_VIDEOS.handLayup);
+  CFS.initChatbot();
+
+  /* ---- 1. fabric forms ---- */
+  var randSegs='';
+  var seed=[[95,60,30],[150,120,-20],[210,70,55],[120,90,10],[260,130,-40],[300,80,25],[170,140,-15],[240,55,40],[110,130,-30],[300,120,15],[190,60,-50],[150,55,35],[270,100,-10],[210,140,45]];
+  seed.forEach(function(s){randSegs+='<line x1="'+s[0]+'" y1="'+s[1]+'" x2="'+(s[0]+Math.cos(s[2]*Math.PI/180)*34)+'" y2="'+(s[1]+Math.sin(s[2]*Math.PI/180)*34)+'" stroke="#2f6f92" stroke-width="3" stroke-linecap="round"/>';});
+  function weaveGrid(step,sw){
+    var s='';for(var x=90;x<=310;x+=step){s+='<line x1="'+x+'" y1="45" x2="'+x+'" y2="135" stroke="#3f7ea0" stroke-width="'+sw+'"/>';}
+    for(var y=50;y<=130;y+=step){s+='<line x1="90" y1="'+y+'" x2="310" y2="'+y+'" stroke="#2f6f92" stroke-width="'+sw+'" opacity="0.85"/>';}
+    return s;
+  }
+  function diagStraight(){
+    var s='';for(var k=-4;k<=4;k++){var off=k*26;s+='<line x1="'+(120+off)+'" y1="45" x2="'+(200+off)+'" y2="135" stroke="#2f6f92" stroke-width="3"/>';s+='<line x1="'+(280-off)+'" y1="45" x2="'+(200-off)+'" y2="135" stroke="#3f7ea0" stroke-width="3" opacity="0.75"/>';}
+    s+='<line x1="200" y1="45" x2="200" y2="135" stroke="#b98416" stroke-width="1.5" stroke-dasharray="4 4"/>';return s;
+  }
+  function uniLines(){var s='';for(var y=52;y<=128;y+=8){s+='<line x1="90" y1="'+y+'" x2="310" y2="'+y+'" stroke="#2f6f92" stroke-width="4"/>';}
+    for(var x=120;x<=280;x+=40){s+='<line x1="'+x+'" y1="45" x2="'+x+'" y2="135" stroke="#b98416" stroke-width="1" stroke-dasharray="3 5" opacity="0.8"/>';}return s;}
+  var fabrics={
+    csm:{svg:randSegs,str:28,epoxy:false,best:'Best for: bulk, blocking print-through, and bonding layers together.',
+      verdict:'Random short fibers held by a binder. The <b>weakest</b> reinforcement per weight — a filler and bond layer, not a strength layer. Its binder dissolves in styrene, so it\'s <b>polyester / vinylester only</b>, not epoxy.'},
+    woven:{svg:weaveGrid(18,7),str:64,epoxy:true,best:'Best for: fast bulk strength in thick polyester laminates.',
+      verdict:'Heavy fiber bundles woven over-and-under. Builds thickness fast, but the <b>crimp</b> from weaving pre-buckles the fibers and costs strength. Coarse — traditionally needs mat between layers.'},
+    cloth:{svg:weaveGrid(10,3),str:58,epoxy:true,best:'Best for: light, smooth finish and cosmetic layers.',
+      verdict:'A finer, tighter weave. Light and smooth with a clean surface, but still crimped and not a heavy structural builder.'},
+    biax:{svg:diagStraight(),str:90,epoxy:true,best:'Best for: strong, oriented structural laminate; shear and torsion.',
+      verdict:'Two layers of <b>straight</b> fibers stitched together — no crimp, so far stronger than a weave of the same weight. Oriented on purpose, and no styrene binder, so it works with epoxy.'},
+    ud:{svg:uniLines(),str:100,epoxy:true,best:'Best for: maximum strength along one known load path.',
+      verdict:'Nearly all fibers run one way — <b>maximum</b> strength and stiffness in that direction, and little across it. Placed where the load path is known.'}
+  };
+  var fabSeg=document.querySelectorAll('#fabSeg .seg');
+  function setFab(form){
+    var f=fabrics[form];
+    fabSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.form===form);});
+    document.getElementById('fabSvg').innerHTML=f.svg;
+    document.getElementById('fabStrVal').textContent=f.str;
+    document.getElementById('fabStrFill').style.width=f.str+'%';
+    document.getElementById('fabVerdict').innerHTML=f.verdict;
+    document.getElementById('fabBest').textContent=f.best;
+    var chip=document.getElementById('fabChip');
+    if(f.epoxy){chip.className='chip yes';chip.textContent='✓ Works with epoxy';}
+    else{chip.className='chip no';chip.textContent='✕ Not for epoxy (styrene-soluble binder)';}
+  }
+  fabSeg.forEach(function(b){b.addEventListener('click',function(){setFab(b.dataset.form);});});
+  setFab('csm');
+
+  CFS.initMatchGame('fabMatchGame', [
+    {left:'Chopped strand mat', right:'Bulk thickness, block print-through, bond layers'},
+    {left:'Woven roving', right:'Fast bulk strength in large marine panels'},
+    {left:'Cloth', right:'Small parts, repairs, cosmetic finish'},
+    {left:'Stitched biaxial', right:'Shear / torsion, structural, works with epoxy'},
+    {left:'Unidirectional', right:'Maximum strength on one known load path'}
+  ], {onComplete:function(){document.getElementById('fabMatchDone').style.display='block';}});
+
+  /* ---- 2. fiber roles ---- */
+  document.querySelectorAll('#fiberRoles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML=r.dataset.job;
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 3. crimp ---- */
+  var crimpSeg=document.querySelectorAll('#crimpSeg .seg');
+  function wovenWave(){
+    var threads='';for(var x=110;x<=290;x+=45){threads+='<line x1="'+x+'" y1="55" x2="'+x+'" y2="125" stroke="#c9d6ad" stroke-width="14"/>';}
+    var wave='<path d="M80 90 Q110 60 132 90 T200 90 T268 90 T340 90" fill="none" stroke="#ef5f2b" stroke-width="5"/>';
+    return threads+wave+'<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">fiber bends over &amp; under = crimp</text>';
+  }
+  function stitchStraight(){
+    var s='<line x1="80" y1="90" x2="340" y2="90" stroke="#ef5f2b" stroke-width="5"/>';
+    for(var x=110;x<=310;x+=30){s+='<line x1="'+x+'" y1="80" x2="'+x+'" y2="100" stroke="#42586b" stroke-width="2"/>';}
+    return s+'<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46">fiber stays straight, held by stitches</text>';
+  }
+  function setCrimp(c){
+    crimpSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===c);});
+    var svg=document.getElementById('crimpSvg'), val=document.getElementById('crimpVal'), fill=document.getElementById('crimpFill'), read=document.getElementById('crimpRead');
+    if(c==='woven'){svg.innerHTML=wovenWave();val.textContent=72;fill.style.width='72%';read.className='readout warn';
+      read.innerHTML='Crimped fibers must <b>straighten under load before they carry it</b>, so the laminate is softer and weaker — and it fails earlier at the bends.';}
+    else{svg.innerHTML=stitchStraight();val.textContent=90;fill.style.width='90%';read.className='readout ok';
+      read.innerHTML='Straight fibers carry load <b>immediately</b> — more strength and stiffness from the same glass at the same weight.';}
+  }
+  crimpSeg.forEach(function(b){b.addEventListener('click',function(){setCrimp(b.dataset.c);});});
+  setCrimp('woven');
+
+  /* ---- 4. orientation ---- */
+  var oriBtns=document.querySelectorAll('#oriToggles .tg');
+  function setOri(){
+    var angs=[];oriBtns.forEach(function(b){if(b.getAttribute('aria-pressed')==='true')angs.push(+b.dataset.ang);});
+    var cx=200,cy=90,r=66,lines='';
+    angs.forEach(function(a){var rad=a*Math.PI/180;var dx=r*Math.cos(rad),dy=r*Math.sin(rad);
+      lines+='<line x1="'+(cx-dx)+'" y1="'+(cy+dy)+'" x2="'+(cx+dx)+'" y2="'+(cy-dy)+'" stroke="#ef5f2b" stroke-width="5" stroke-linecap="round"/>';});
+    document.getElementById('oriLines').innerHTML=lines;
+    var read=document.getElementById('oriRead');
+    var has0=angs.indexOf(0)>-1,has90=angs.indexOf(90)>-1,hasP=angs.indexOf(45)>-1,hasM=angs.indexOf(-45)>-1;
+    var n=angs.length;
+    var msg,cls='readout';
+    if(n===0){msg='No plies yet — add a direction above.';}
+    else if(n===1){cls='readout warn';msg='Uniaxial: strong along '+angs[0]+'°, weak in every other direction. Fine only if the load is truly one-way.';}
+    else if(has0&&has90&&!hasP&&!hasM){cls='readout';msg='Biaxial 0/90: strong fore–aft and athwart, but weakest at 45° — the shear direction.';}
+    else if(hasP&&hasM&&!has0&&!has90){cls='readout';msg='Biaxial ±45: excellent for shear and torsion, but weak at 0/90. This is what "1708" gives you.';}
+    else if(has0&&has90&&hasP&&hasM){cls='readout ok';msg='Quasi-isotropic: fibers in all four directions — roughly equal strength every way. The balanced, all-purpose layup.';}
+    else{cls='readout';msg='Triaxial: three directions covered — getting close to balanced, with one weak axis left.';}
+    read.className=cls;read.textContent=msg;
+  }
+  oriBtns.forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')!=='true');setOri();});});
+  setOri();
+
+  /* ---- 5. areal weight ---- */
+  var awRange=document.getElementById('awRange');
+  function setAW(){
+    var w=+awRange.value;
+    document.getElementById('awVal').textContent=w+' oz/yd²';
+    document.getElementById('awPly').setAttribute('height',(4+w*1.6).toFixed(1));
+    document.getElementById('awPly').setAttribute('y',(78-(4+w*1.6)).toFixed(1));
+    var drape=Math.max(4,Math.round(100-(w/24)*92));
+    var wet=Math.max(6,Math.round((w/24)*100));
+    var dF=document.getElementById('drapeFill'),wF=document.getElementById('wetFill');
+    dF.style.width=drape+'%';wF.style.width=wet+'%';
+    document.getElementById('drapeVal').textContent=drape>66?'high':drape>33?'medium':'low';
+    document.getElementById('wetVal').textContent=wet>66?'high':wet>33?'medium':'low';
+    var read=document.getElementById('awRead');
+    if(w<=2){read.className='readout ok';read.textContent='Veil / light cloth: conforms to almost any shape and wets out easily, but you need many plies to build thickness.';}
+    else if(w<=12){read.className='readout ok';read.textContent='Mid-weight: a practical balance of build rate, drape, and wet-out — the everyday range.';}
+    else{read.className='readout warn';read.textContent='Heavy fabric: builds thickness fast, but it resists tight curves and is harder to fully wet out — watch for dry spots.';}
+  }
+  awRange.addEventListener('input',setAW);setAW();
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'Which reinforcement is generally the WEAKEST per unit weight — used mainly for bulk, blocking print-through, and bonding layers?',
+     opts:['Unidirectional','Woven roving','Chopped strand mat','Stitched biaxial'],correct:2,
+     why:'CSM is random short fibers, so it has the lowest structural strength per weight. It\'s a bulk/bond layer, not a strength layer.'},
+    {stem:'Why is a stitched biaxial typically stronger than a woven roving of the same fibers and weight?',
+     opts:['The stitching adds extra resin','Woven fibers are crimped (pre-buckled) and lose strength; stitched fibers stay straight','Woven roving is made from weaker glass','Biaxial contains more binder'],correct:1,
+     why:'Crimp: in a weave the fibers go over/under, so they must straighten under load before carrying it. Stitched fabrics keep fibers straight, so they work immediately.'},
+    {stem:'You are laminating a repair with EPOXY. Which is the poor choice because its binder won\'t dissolve?',
+     opts:['Stitched biaxial','Cloth','Standard chopped strand mat','Unidirectional carbon'],correct:2,
+     why:'Standard CSM\'s binder is dissolved by the styrene in polyester/vinylester — not by epoxy. With epoxy the mat stays stiff and wets out poorly.'},
+    {stem:'A fabric labeled "1708" is:',
+     opts:['17 oz woven roving only','A 17 oz/yd² ±45° biaxial stitched to a ~0.75 oz mat','1708 gsm cloth','A glass with 17.08% resin'],correct:1,
+     why:'The number encodes weight + construction: 17 oz/yd² biaxial plus an "08" (¾ oz) chopped-mat backing.'},
+    {stem:'A UNIDIRECTIONAL fabric makes the most sense where:',
+     opts:['Loads come equally from every direction','You need maximum strength along one known load path','You want a cosmetic finish layer','You need to block print-through'],correct:1,
+     why:'UD puts nearly all fibers in one direction — maximum strength/stiffness along that axis, very little across it.'},
+    {stem:'A carbon-fiber part is through-bolted directly to an aluminum bracket with no isolation. What is the main concern?',
+     opts:['The carbon will absorb water','Galvanic corrosion of the aluminum, since carbon is conductive and noble relative to it','The bolt will overheat during cure','The resin will not wet out the carbon'],correct:1,
+     why:'Carbon fiber is electrically conductive and sits far from aluminum on the galvanic series; direct contact in the presence of moisture drives rapid corrosion of the metal unless isolated.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-2'); }});
+})();
+</script>
+</body>
+</html>

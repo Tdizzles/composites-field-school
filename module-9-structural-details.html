@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 9 — Structural Details &amp; Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 9</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="The skeleton inside the skin">
+    <p class="kicker">Structural details — start here</p>
+    <h1>The skin isn't the structure</h1>
+    <p class="lead">Modules 1–2 were about one laminate: fiber + resin, <span class="tag fiber">anisotropic</span>, oriented on purpose for a known load path. A real hull is that laminate wrapped as a shell around an internal skeleton — stringers, floors, bulkheads, a transom, and the joints holding it all together. This module is that skeleton.</p>
+    <div class="card">
+      <div class="segmented" id="hookSeg" role="group" aria-label="Compare an unsupported panel to a stiffened one">
+        <button class="seg" data-hook="bare" aria-pressed="true">Hull skin alone</button>
+        <button class="seg" data-hook="stiff" aria-pressed="false">Hull skin + stringer</button>
+      </div>
+      <svg class="demo-svg" id="hookSvg" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="hookRead"></div>
+    </div>
+    <p class="note">Same panel, same glass. The difference is what's tying it back to the rest of the boat — that's what this module walks through, member by member.</p>
+  </section>
+
+  <!-- 2: HULL ANATOMY HOTSPOT DIAGRAM -->
+  <section class="panel" data-name="Hull anatomy">
+    <p class="kicker">Meet the skeleton</p>
+    <h2>Tap a member to open it up</h2>
+    <p>This is a stylized side profile of a hull — five structural members are marked. Tap each numbered point for its role, how it's typically built, and where it tends to fail.</p>
+    <div class="card">
+      <div class="hotspot-wrap" id="anatomyWrap">
+        <svg class="demo-svg" id="anatomySvg" viewBox="0 0 500 220" preserveAspectRatio="xMidYMid meet" style="height:auto;aspect-ratio:500/220" aria-hidden="true">
+          <path d="M55,68 C38,88 68,142 96,168 C150,206 232,206 262,196 C302,207 372,200 412,178 L433,58 C345,46 150,46 55,68 Z" fill="var(--core)" stroke="var(--ink)" stroke-width="2.5"/>
+          <line x1="150" y1="195" x2="150" y2="58" stroke="var(--fiber)" stroke-width="4" stroke-dasharray="6 5"/>
+          <line x1="210" y1="203" x2="210" y2="175" stroke="var(--fiber)" stroke-width="4" stroke-dasharray="6 5"/>
+          <line x1="130" y1="178" x2="390" y2="178" stroke="var(--fiber)" stroke-width="4" stroke-dasharray="6 5" opacity="0.85"/>
+          <line x1="130" y1="168" x2="390" y2="168" stroke="var(--fiber)" stroke-width="4" stroke-dasharray="6 5" opacity="0.85"/>
+          <line x1="316" y1="45" x2="342" y2="53" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+          <path d="M412,178 L433,58" stroke="var(--accent)" stroke-width="4" stroke-dasharray="3 3" opacity="0.9"/>
+          <text x="250" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">side profile (stylized — not to scale)</text>
+        </svg>
+        <button class="hotspot" type="button" aria-pressed="false" aria-label="Bulkhead" data-part="bulkhead" style="left:30%;top:54.5%;text-align:center;padding:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;line-height:26px;color:#fff"><span aria-hidden="true">1</span></button>
+        <button class="hotspot" type="button" aria-pressed="false" aria-label="Floor" data-part="floor" style="left:42%;top:86.4%;text-align:center;padding:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;line-height:26px;color:#fff"><span aria-hidden="true">2</span></button>
+        <button class="hotspot" type="button" aria-pressed="false" aria-label="Stringer" data-part="stringer" style="left:54%;top:80.9%;text-align:center;padding:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;line-height:26px;color:#fff"><span aria-hidden="true">3</span></button>
+        <button class="hotspot" type="button" aria-pressed="false" aria-label="Hull-to-deck joint" data-part="joint" style="left:66%;top:21.8%;text-align:center;padding:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;line-height:26px;color:#fff"><span aria-hidden="true">4</span></button>
+        <button class="hotspot" type="button" aria-pressed="false" aria-label="Transom" data-part="transom" style="left:84.4%;top:53.6%;text-align:center;padding:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;line-height:26px;color:#fff"><span aria-hidden="true">5</span></button>
+      </div>
+      <div class="callout" id="anatomyDetail"><b>Tap a numbered point above to begin.</b> 1 = bulkhead, 2 = floor, 3 = stringer, 4 = hull-to-deck joint, 5 = transom.</div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: core transitions</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">The curriculum also flags "core transitions" — the spot where a cored panel meets solid laminate, which happens right around joints like #4 and at any hardware cutout. The core has to stop and the skins have to be laminated solid together there, sealed so water can never reach the cut edge of the core. Module 10 covers this in detail for thru-hull fittings specifically; the short version here is the same principle that runs through this whole module — get the transition/joint right, or it becomes the failure point.</p>
+      </div>
+    </details>
+
+    <div id="anatomyVideos"></div>
+  </section>
+
+  <!-- 3: LOAD PATH TOGGLE -->
+  <section class="panel" data-name="Load paths decide fiber direction">
+    <p class="kicker">Building on Modules 1–2</p>
+    <h2>Same idea, now on real members</h2>
+    <p>Module 1's anisotropy slider and Module 2's load-path field notes already gave you the rule: find the load path, then choose fiber direction to match it. Toggle between two structural members and watch that rule get applied.</p>
+    <div class="card">
+      <div class="segmented" id="lpSeg" role="group" aria-label="Choose a structural member">
+        <button class="seg" data-lp="single" aria-pressed="true">Stringer / keel (single load path)</button>
+        <button class="seg" data-lp="multi" aria-pressed="false">Hull skin / transom / chine (multiple load paths)</button>
+      </div>
+      <svg class="demo-svg" id="lpSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="lpRead"></div>
+    </div>
+
+    <!-- TODO:VERIFY iso12215 -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific ISO 12215 scantling formulas/thresholds are outside this content pack — reference conceptually only.</div>
+    <p class="note">The formal version of this same judgment call is a scantling calculation (ISO 12215 is the usual reference) — it turns "trace the load path, pick the fiber direction" into a number. You don't need the math to make the call correctly; a shop's engineer or a scantling table does the arithmetic once you already understand why it's asking these questions.</p>
+
+    <details class="deep">
+      <summary>Field notes: hat-stiffened construction, and designing for a failure you can actually see</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Hat-stiffened construction is often used on commercial and military boats built for rough seas, for a specific reason: when it fails, it tends to fail first at the stiffener's attachment point to the hull. That sounds like a downside, but it's actually the design intent — a failure right at the visible attachment joint is easy to notice and easy to repair, versus a hidden structural failure buried somewhere else in the hull that nobody sees until it's serious.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: HULL-TO-DECK JOINT SELECTOR -->
+  <section class="panel" data-name="Hull-to-deck joints">
+    <p class="kicker">Where two moldings become one boat</p>
+    <h2>Pick a joint type, read the notes</h2>
+    <p>The hull-to-deck joint is one of the most heavily loaded seams on the boat — it has to carry <b>torsional (twisting) forces</b>, which increase as the boat's beam gets wider. Select a joint geometry to see how it's typically built.</p>
+    <div class="card">
+      <div class="segmented" id="jtSeg" role="group" aria-label="Choose a hull-to-deck joint type">
+        <button class="seg" data-jt="shoebox" aria-pressed="true">Shoebox / overlap joint</button>
+        <button class="seg" data-jt="flange" aria-pressed="false">Flange-to-flange joint</button>
+      </div>
+      <svg class="demo-svg" id="jtSvg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="readout" id="jtRead"></div>
+    </div>
+    <div class="callout"><b>Torsion and beam:</b> whichever geometry is used, the joint has to be built to handle the twisting loads for <i>that</i> boat's beam — a joint that was fine on a narrower hull can be under-built on a wider one.</div>
+
+    <!-- TODO:VERIFY fastener spacing/torque/adhesive-bead-size -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific fastener spacing, torque values, and adhesive-bead-size numbers for hull-to-deck joints are outside this content pack — reference conceptually only.</div>
+  </section>
+
+  <!-- 5: STRINGER INSTALLATION ORDER GAME -->
+  <section class="panel" data-name="Installing a stringer">
+    <p class="kicker">Put it in the right order</p>
+    <h2>Sequence the stringer install</h2>
+    <p>Two steps are called out as critical to installing a stringer: correct positioning, and proper tabbing (bonding it to the hull with overlapping laminate). The radius fillet at its base is what makes that joint actually work — a sharp inside corner concentrates stress and traps voids. Drag (or use the arrows) to put these three steps in order.</p>
+    <div class="card">
+      <div id="stringerOrderGame"></div>
+    </div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 9 locked in.</h2>
+      <p>You can name the members that turn a laminate skin into a hull — stringers, floors, bulkheads, transoms, and the hull-to-deck joint — trace a load path to a fiber-orientation decision, describe tabbing, and put a stringer install in the right order.</p>
+      <p class="next-label">Up next → Module 10: Hardware Installation &amp; Bonding.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('anatomyVideos', CFS_VIDEOS.structure);
+  CFS.initChatbot();
+
+  /* ---- 1. hook: bare vs stiffened panel ---- */
+  function barePanelSvg(){
+    return '<line x1="40" y1="40" x2="360" y2="40" stroke="#8fa3b1" stroke-width="2" stroke-dasharray="4 4"/>'+
+      '<path d="M40 55 Q200 105 360 55" fill="none" stroke="#2f6f92" stroke-width="6" stroke-linecap="round"/>'+
+      '<line x1="200" y1="60" x2="200" y2="128" stroke="#ef5f2b" stroke-width="4"/>'+
+      '<polygon points="200,132 192,116 208,116" fill="#ef5f2b"/>'+
+      '<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#42586b">nothing catches the load but the panel itself</text>';
+  }
+  function stiffPanelSvg(){
+    return '<line x1="40" y1="40" x2="360" y2="40" stroke="#8fa3b1" stroke-width="2" stroke-dasharray="4 4"/>'+
+      '<path d="M40 52 Q200 62 360 52" fill="none" stroke="#2f6f92" stroke-width="6" stroke-linecap="round"/>'+
+      '<rect x="150" y="60" width="100" height="16" rx="4" fill="#c9d6ad" stroke="#a9ba82"/>'+
+      '<line x1="200" y1="80" x2="200" y2="128" stroke="#ef5f2b" stroke-width="4"/>'+
+      '<polygon points="200,132 192,116 208,116" fill="#ef5f2b"/>'+
+      '<text x="200" y="150" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#155c46">the stringer ties the panel into the larger hull</text>';
+  }
+  var hookSeg=document.querySelectorAll('#hookSeg .seg');
+  function setHook(state){
+    hookSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.hook===state);});
+    var svg=document.getElementById('hookSvg'), read=document.getElementById('hookRead');
+    if(state==='bare'){svg.innerHTML=barePanelSvg();read.className='readout warn';
+      read.textContent='A wide, unsupported panel flexes under load — there\'s nothing tying it back to the rest of the boat, so it does all the work alone.';}
+    else{svg.innerHTML=stiffPanelSvg();read.className='readout ok';
+      read.textContent='Add a stringer and the panel is tied into the larger structure instead of flexing on its own. That\'s the job every member in this module does, one way or another.';}
+  }
+  hookSeg.forEach(function(b){b.addEventListener('click',function(){setHook(b.dataset.hook);});});
+  setHook('bare');
+
+  /* ---- 2. hull anatomy hotspots ---- */
+  var parts={
+    bulkhead:{name:'1 — Bulkhead',
+      role:'A transverse structural panel that spans from hull to deck at one station, subdividing the hull and tying the sides together for stiffness at that point.',
+      build:'Commonly built on a foam core/former, laminated over — the same approach used for stringers — then tabbed to the hull with overlapping laminate, with a radius fillet formed at the joint (putties are used to form that fillet).',
+      risk:'The tabbing/fillet joint where it meets the hull is the vulnerable point: skip the fillet or leave a sharp inside corner there and you get the same stress-concentration and trapped-void problem a stringer base gets.'},
+    floor:{name:'2 — Floor',
+      role:'A transverse stiffener that pairs with the stringers to distribute loads across the hull bottom — stringers running fore-and-aft, floors running athwartship.',
+      build:'Built and tabbed the same way as a stringer: positioned correctly, then bonded to the hull with overlapping laminate.',
+      risk:'Same tabbing risk as a stringer — a floor that\'s poorly bonded to the hull isn\'t actually distributing load, it\'s just sitting there.'},
+    stringer:{name:'3 — Stringer',
+      role:'Distributes local loads throughout the larger hull structure — the primary fore-and-aft stiffener.',
+      build:'Commonly a foam core/former, laminated over. Two steps are critical: correct positioning, and proper tabbing (overlapping laminate bond) to the hull, finished with a radius fillet at its base.',
+      risk:'A sharp inside corner at the base concentrates stress and traps voids — exactly what the fillet prevents. Poor tabbing here is a classic hidden failure point (see Section 5).'},
+    joint:{name:'4 — Hull-to-deck joint',
+      role:'Where the deck molding meets the hull molding. It has to carry torsional (twisting) forces, which increase as the boat\'s beam gets wider.',
+      build:'General approaches: a "shoebox"/overlap joint wraps the hull flange over the deck edge, or a flange-to-flange joint joins hull and deck edges side by side — either way, typically both bonded (adhesive/laminate) and mechanically fastened for redundancy. Details in Section 4.',
+      risk:'A joint that isn\'t built to handle the torsional loads for that beam — or that relies on only one fastening method instead of both — is a common failure mode as beam and loads increase.'},
+    transom:{name:'5 — Transom',
+      role:'On an outboard-powered boat, the mounting point for the propulsion system — it distributes the engine\'s thrust load into the rest of the vessel.',
+      build:'Commonly cored with plywood, laminated over with fiberglass.',
+      risk:'Like every other member here, the transom-to-hull bond depends on proper tabbing — done poorly, that secondary bond is the weak point under sustained thrust loads.'}
+  };
+  var hotspots=document.querySelectorAll('#anatomyWrap .hotspot');
+  function selectPart(id){
+    hotspots.forEach(function(h){
+      var on=h.dataset.part===id;
+      h.setAttribute('aria-pressed',on);
+      h.classList.add('done');
+    });
+    var p=parts[id];
+    document.getElementById('anatomyDetail').innerHTML=
+      '<b>'+p.name+'</b><br><br><b>Role:</b> '+p.role+'<br><br><b>How it\'s built:</b> '+p.build+'<br><br><b>Failure risk:</b> '+p.risk;
+  }
+  hotspots.forEach(function(h){h.addEventListener('click',function(){selectPart(h.dataset.part);});});
+
+  /* ---- 3. load path toggle ---- */
+  function singleLoadSvg(){
+    return '<rect x="170" y="30" width="60" height="120" rx="6" fill="#c9d6ad" stroke="#a9ba82"/>'+
+      (function(){var s='';for(var y=40;y<=140;y+=10){s+='<line x1="180" y1="'+y+'" x2="220" y2="'+y+'" stroke="#2f6f92" stroke-width="3"/>';}return s;})()+
+      '<line x1="200" y1="15" x2="200" y2="150" stroke="#ef5f2b" stroke-width="4"/>'+
+      '<polygon points="200,8 192,24 208,24" fill="#ef5f2b"/>'+
+      '<text x="200" y="168" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#42586b">one known direction — fiber runs straight along it</text>';
+  }
+  function multiLoadSvg(){
+    var lines='';
+    [0,90,45,-45].forEach(function(a){
+      var rad=a*Math.PI/180, cx=200, cy=90, r=55;
+      var dx=r*Math.cos(rad), dy=r*Math.sin(rad);
+      lines+='<line x1="'+(cx-dx)+'" y1="'+(cy+dy)+'" x2="'+(cx+dx)+'" y2="'+(cy-dy)+'" stroke="#2f6f92" stroke-width="3"/>';
+    });
+    var arrows='';
+    [[200,20,'v'],[80,90,'h'],[320,90,'h']].forEach(function(a){
+      if(a[2]==='v'){arrows+='<line x1="'+a[0]+'" y1="'+(a[1]-15)+'" x2="'+a[0]+'" y2="'+(a[1]+25)+'" stroke="#ef5f2b" stroke-width="4"/><polygon points="'+a[0]+','+(a[1]-22)+' '+(a[0]-8)+','+(a[1]-6)+' '+(a[0]+8)+','+(a[1]-6)+'" fill="#ef5f2b"/>';}
+      else{var dir=a[0]<200?1:-1;arrows+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+(a[0]+dir*40)+'" y2="'+a[1]+'" stroke="#ef5f2b" stroke-width="4"/><polygon points="'+(a[0]+dir*47)+','+a[1]+' '+(a[0]+dir*31)+','+(a[1]-8)+' '+(a[0]+dir*31)+','+(a[1]+8)+'" fill="#ef5f2b"/>';}
+    });
+    return '<circle cx="200" cy="90" r="58" fill="#eef3f6" stroke="#c2ced6"/>'+lines+arrows+
+      '<text x="200" y="168" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#42586b">loads from several directions — fiber covers every direction</text>';
+  }
+  var lpSeg=document.querySelectorAll('#lpSeg .seg');
+  function setLp(mode){
+    lpSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lp===mode);});
+    var svg=document.getElementById('lpSvg'), read=document.getElementById('lpRead');
+    if(mode==='single'){svg.innerHTML=singleLoadSvg();read.className='readout ok';
+      read.innerHTML='A stringer cap, a keel, a compression post — you can point to one line and say "this only ever gets pulled that way." That\'s a <b>single, known load path</b> (Module 2\'s field notes), so unidirectional fiber laid straight along it is the efficient choice. Off that axis strength falls off fast (Module 1\'s cos²θ), but here the load never leaves 0°, so it doesn\'t matter.';}
+    else{svg.innerHTML=multiLoadSvg();read.className='readout';
+      read.innerHTML='A hull skin, a transom, a chine taking slamming loads from unpredictable angles — <b>multiple/uncertain load paths</b>. No single fiber direction covers you, so biaxial/triaxial or a full quasi-isotropic layup (0°, 90°, ±45°) is the standard, safer choice — exactly Module 2\'s orientation conclusion, applied to a real member.';}
+  }
+  lpSeg.forEach(function(b){b.addEventListener('click',function(){setLp(b.dataset.lp);});});
+  setLp('single');
+
+  /* ---- 4. hull-to-deck joint selector ---- */
+  function shoeboxSvg(){
+    return '<path d="M70,170 L70,55 Q70,40 95,42 L150,50" fill="none" stroke="#2f6f92" stroke-width="8" stroke-linecap="round"/>'+
+      '<rect x="95" y="52" width="90" height="14" rx="3" fill="#e0a021" opacity="0.85"/>'+
+      '<circle cx="112" cy="59" r="4" fill="#42586b"/><circle cx="140" cy="59" r="4" fill="#42586b"/><circle cx="168" cy="59" r="4" fill="#42586b"/>'+
+      '<line x1="100" y1="50" x2="180" y2="50" stroke="#ef5f2b" stroke-width="3"/>'+
+      '<text x="30" y="115" font-family="Space Grotesk" font-size="12" fill="#42586b">hull</text>'+
+      '<text x="190" y="63" font-family="Space Grotesk" font-size="12" fill="#42586b">deck</text>'+
+      '<text x="200" y="30" font-family="Space Grotesk" font-size="12" fill="#8f2117">bond + fasteners</text>';
+  }
+  function flangeSvg(){
+    return '<path d="M90,170 L90,70 L150,70" fill="none" stroke="#2f6f92" stroke-width="8" stroke-linecap="round"/>'+
+      '<rect x="150" y="63" width="80" height="14" rx="3" fill="#e0a021" opacity="0.85"/>'+
+      '<circle cx="165" cy="70" r="4" fill="#42586b"/><circle cx="190" cy="70" r="4" fill="#42586b"/><circle cx="215" cy="70" r="4" fill="#42586b"/>'+
+      '<line x1="150" y1="63" x2="150" y2="77" stroke="#ef5f2b" stroke-width="3"/>'+
+      '<text x="30" y="120" font-family="Space Grotesk" font-size="12" fill="#42586b">hull flange</text>'+
+      '<text x="180" y="55" font-family="Space Grotesk" font-size="12" fill="#42586b">deck flange</text>'+
+      '<text x="140" y="100" font-family="Space Grotesk" font-size="12" fill="#8f2117">bonded + through-fastened</text>';
+  }
+  var jtSeg=document.querySelectorAll('#jtSeg .seg');
+  function setJt(type){
+    jtSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.jt===type);});
+    var svg=document.getElementById('jtSvg'), read=document.getElementById('jtRead');
+    if(type==='shoebox'){svg.innerHTML=shoeboxSvg();read.className='readout';
+      read.innerHTML='<b>Shoebox / overlap joint:</b> the hull flange wraps over the deck edge, like a lid over a box. Typically both bonded (adhesive/laminate) at the overlap <i>and</i> mechanically fastened through it — the mechanical fastening backs up the bond in case it ever lets go.';}
+    else{svg.innerHTML=flangeSvg();read.className='readout';
+      read.innerHTML='<b>Flange-to-flange joint:</b> hull and deck each turn outward into a flange, and the two flanges meet side by side at the sheer. Same general principle — bonded and mechanically fastened (bolted/screwed) together, rather than relying on either alone.';}
+  }
+  jtSeg.forEach(function(b){b.addEventListener('click',function(){setJt(b.dataset.jt);});});
+  setJt('shoebox');
+
+  /* ---- 5. stringer install order game ---- */
+  CFS.initOrderGame('stringerOrderGame', [
+    {id:'tab', label:'Tab it to the hull with overlapping laminate'},
+    {id:'fillet', label:'Add the radius fillet at its base'},
+    {id:'position', label:'Position the stringer correctly on the hull'}
+  ], ['position','tab','fillet'], {
+    correctMsg:'Correct — position it, tab it to the hull with overlapping laminate, then finish the joint with a radius fillet at the base.',
+    wrongMsg:'Not quite — green rows are already in the right spot. Positioning has to happen before you can tab it, and the fillet finishes the tabbed joint.'
+  });
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'What is the general purpose of hull stiffeners such as stringers, floors, and bulkheads?',
+     opts:['Distribute local loads throughout the larger hull structure','Provide the mounting point for propulsion','Prevent gelcoat print-through','Increase the resin-to-fiber ratio'],correct:0,
+     why:'Hull stiffeners exist to spread local loads out into the larger hull structure rather than letting one panel carry them alone. Propulsion mounting is the transom\'s job; print-through and resin ratio are Module 2/1 topics, not structural-member jobs.'},
+    {stem:'A stringer has one clear, known load path along its length. A hull skin taking unpredictable slamming loads does not. Which fiber choice follows, as taught in Modules 1–2 and applied here?',
+     opts:['Unidirectional fiber along the stringer; biaxial/quasi-isotropic for the hull skin','Chopped strand mat for both, for simplicity','Unidirectional fiber for the hull skin, to save weight','Fiber orientation makes no difference once resin cures'],correct:0,
+     why:'A single, known load path (the stringer) calls for unidirectional fiber laid along it. Multiple/uncertain load paths (the hull skin) call for biaxial/triaxial or quasi-isotropic coverage — exactly the Module 1–2 rule applied to real members.'},
+    {stem:'Why does a stringer (or bulkhead) get a radius fillet at its base instead of a sharp inside corner?',
+     opts:['A sharp corner concentrates stress and traps voids; the fillet improves local and overall strength','It\'s purely cosmetic, to hide the tabbing','It saves resin compared to a sharp corner','It\'s only needed when the core is plywood'],correct:0,
+     why:'A sharp inside corner concentrates stress and traps air/voids. The radius fillet makes the stiffener more effective in the local panel area and improves overall longitudinal strength.'},
+    {stem:'In general marine construction terms, what best describes a hull-to-deck joint?',
+     opts:['The hull flange overlaps the deck edge (shoebox) or hull/deck flanges join side by side (flange-to-flange), typically both bonded and mechanically fastened for redundancy','It is always one continuous molding with no seam at all','It is fastened with mechanical fasteners only, never bonded','It is a purely cosmetic trim strip with no structural role'],correct:0,
+     why:'Both common geometries — shoebox/overlap and flange-to-flange — are typically both bonded (adhesive/laminate) and mechanically fastened, since the joint has to carry real torsional loads that increase with beam.'},
+    {stem:'What is "tabbing" in structural fiberglass construction?',
+     opts:['Bonding a structural member (a stringer, bulkhead, etc.) to the hull using overlapping laminate','A style of gelcoat spray application','Cutting fabric into small strips for chopper-gun spray-up','A brand name for a category of resin'],correct:0,
+     why:'Tabbing is the overlapping-laminate bond that attaches a structural member to the hull. It\'s one of the two steps called out as critical to a proper stringer installation, along with correct positioning.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-9'); }});
+})();
+</script>
+</body>
+</html>

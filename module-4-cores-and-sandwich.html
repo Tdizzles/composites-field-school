@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Cores &amp; Sandwich Construction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 4</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - core carries shear, debond demo -->
+  <section class="panel active" data-name="Core carries shear">
+    <p class="kicker">Cores &amp; sandwich construction — start here</p>
+    <h1>The core has exactly one job</h1>
+    <p class="lead">As Module 1 showed, a lightweight core holds two thin skins apart and <b>carries shear</b> between them — that separation is what multiplies bending stiffness, the I-beam principle, for almost no added weight. The core is not there to be strong on its own. Watch what happens when that bond fails.</p>
+    <div class="card">
+      <div class="segmented" id="bondSeg" role="group" aria-label="Bond state">
+        <button class="seg" data-bond="bonded" aria-pressed="true">Bonded (healthy)</button>
+        <button class="seg" data-bond="debonded" aria-pressed="false">Debonded (simulated failure)</button>
+      </div>
+      <svg class="demo-svg" id="s1Svg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="control">
+        <label for="s1Range"><span>Core thickness</span><span class="val" id="s1CoreVal">0 mm (solid laminate)</span></label>
+        <input type="range" id="s1Range" min="0" max="40" value="20" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Stiffness (relative)</span><span id="s1StiffVal">8</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="s1StiffFill" style="width:8%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Weight (relative)</span><span id="s1WtVal">30</span></div>
+        <div class="mtrack"><div class="mfill weight" id="s1WtFill" style="width:30%"></div></div>
+      </div>
+      <div class="readout" id="s1Read"></div>
+    </div>
+    <p class="note">Numbers are relative and illustrative, to show the trend — not engineering values.</p>
+
+    <details class="deep">
+      <summary>Field notes: why does debonding matter so much in the real world?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px">A skin-to-core bond can fail from day one — poor wet-out or consolidation during layup, not enough resin or pressure to actually bond the skin to the core — or it can develop over time, from water intrusion degrading the bond or a hard local impact separating the two.</p>
+        <p style="margin-bottom:0">Either way, once the skin and core separate, the core stops doing its shear job. That section of panel behaves close to two thin, floppy skins with dead weight stuck between them — exactly what the meter above shows when you flip to "debonded."</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: CORE MATERIAL SELECTOR -->
+  <section class="panel" data-name="Choosing a core material">
+    <p class="kicker">The materials themselves</p>
+    <h2>Three cores, three trade-offs</h2>
+    <p>Every core material trades stiffness-to-weight against water tolerance, impact resistance, and cost. There's no single "best" core — only the right one for the panel and the budget. Tap through.</p>
+    <div class="card">
+      <div class="segmented" id="coreMatSeg" role="group" aria-label="Choose a core material">
+        <button class="seg" data-mat="balsa" aria-pressed="true">End-grain balsa</button>
+        <button class="seg" data-mat="foam" aria-pressed="false">PVC / SAN foam</button>
+        <button class="seg" data-mat="honeycomb" aria-pressed="false">Honeycomb (Nomex/aluminum)</button>
+      </div>
+      <svg class="demo-svg" id="coreMatSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="statrow"><span class="chip" id="coreMatChip"></span></div>
+      <div class="meter">
+        <div class="mlab"><span>Stiffness-to-weight (relative)</span><span id="matStiffVal">90</span></div>
+        <div class="mtrack"><div class="mfill sw" id="matStiffFill" style="width:90%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Water resistance (relative)</span><span id="matWaterVal">25</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="matWaterFill" style="width:25%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Impact tolerance (relative)</span><span id="matImpactVal">55</span></div>
+        <div class="mtrack"><div class="mfill weight" id="matImpactFill" style="width:55%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Relative cost</span><span id="matCostVal">20</span></div>
+        <div class="mtrack"><div class="mfill sw" id="matCostFill" style="width:20%"></div></div>
+      </div>
+      <div class="verdict" id="coreMatVerdict"></div>
+      <p class="note" id="coreMatBest"></p>
+    </div>
+    <p class="note">All four bars are relative and illustrative — the point is the ranking between the three materials, not an exact number.</p>
+
+    <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact foam density grade numbers and Nomex/aluminum honeycomb specific property values are not locked in this content pack -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact foam density grade numbers and Nomex/aluminum honeycomb specific property values are not locked in this content pack — confirm before treating any specific number as an exam fact.</div>
+
+    <div class="callout"><b>Plywood, too — but differently:</b> plywood also shows up as a core material, but as a <b>solid</b> backing core for specific high-load flat areas (like transoms) — not as a flexible sandwich core the way balsa, foam, or honeycomb are used across a hull or deck.</div>
+
+    <details class="deep">
+      <summary>Field notes: kerfs — how rigid core sheets follow a curved hull</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Kerfs (scoring cuts) let a rigid core sheet bend to follow curved hull and deck shapes without breaking. But every kerf is also a cut edge that exposes raw core right under the laminate — if those kerf channels aren't fully filled with laminating or bedding resin, they become a wick path for water straight into an otherwise sealed core. Full encapsulation of every cut edge, kerfs included, is what keeps a balsa or foam core dry for the life of the boat.</p>
+      </div>
+    </details>
+
+    <div id="coreVideos"></div>
+  </section>
+
+  <!-- 3: FAILURE MODE SELECTOR -->
+  <section class="panel" data-name="Four ways a sandwich fails">
+    <p class="kicker">Know these cold — they're exam favorites</p>
+    <h2>Four sandwich failure modes</h2>
+    <p>Every sandwich failure traces back to one of four things going wrong. Tap each to see the diagram, what it looks like, and how it's generally prevented.</p>
+    <div class="card">
+      <div class="segmented" id="failSeg" role="group" aria-label="Choose a failure mode">
+        <button class="seg" data-mode="debond" aria-pressed="true">Skin-to-core debond</button>
+        <button class="seg" data-mode="shear" aria-pressed="false">Core shear</button>
+        <button class="seg" data-mode="crush" aria-pressed="false">Core crush</button>
+        <button class="seg" data-mode="print" aria-pressed="false">Print-through</button>
+      </div>
+      <svg class="demo-svg" id="failSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="verdict" id="failVerdict"></div>
+    </div>
+    <p class="note">These four are named directly in the curriculum. What's below is standard, qualitative composites understanding — no invented numbers or test values.</p>
+
+    <details class="deep">
+      <summary>Field notes: why sandwich failures are harder to catch than solid-laminate damage</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">This is part of why solid laminate is flagged as easier to inspect for structural damage: a crack in a solid laminate is usually visible right on the surface. A sandwich failure often hides between two intact-looking skins — a debond, a sheared core, or a crushed core can all sit under a surface that still looks fine, which is exactly why systematic checks (not just a glance) matter on cored hulls and decks.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: CORED VS SOLID DECISION -->
+  <section class="panel" data-name="Cored vs. solid — deciding where">
+    <p class="kicker">Putting it together</p>
+    <h2>Where boats use cored vs. solid — and why</h2>
+    <p>Sandwich construction wins on stiffness-per-weight, but it isn't the right call everywhere. Tap each zone to see which construction wins there and why.</p>
+    <div class="roles" id="decisionRoles">
+      <button class="role" aria-expanded="false" data-job="Usually <b>solid laminate</b> here: it gives the greatest primary-axis reinforcement for resisting hull-girder bending, it's stronger — not just stiffer — for a given thickness, and it's easier to inspect for structural damage after a grounding or impact.">
+        <h3>Hull bottom &amp; keel</h3><div style="font-size:13px;color:#42586b">primary bending</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="A natural fit for <b>cored sandwich</b>: separating the skins multiplies bending stiffness for barely any added weight (Module 1) — exactly what a large, weight-sensitive flat panel needs.">
+        <h3>Deck &amp; cabin sides</h3><div style="font-size:13px;color:#42586b">large flat panels</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Commonly a <b>solid core</b> — plywood is the classic transom core, built to back up the heavy, concentrated point loads from mounting an outboard or sterndrive.">
+        <h3>Transom</h3><div style="font-size:13px;color:#42586b">concentrated point loads</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Builders avoid leaving core exposed here — or isolate and seal it fully. If water reaches an exposed core edge at a hole, it can wick sideways through the core, so the core must never sit in direct, unsealed contact with the fitting.">
+        <h3>Near thru-hull fittings</h3><div style="font-size:13px;color:#42586b">at or below the waterline</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: cored hulls below the waterline</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Module 10 covers the exact procedure for a thru-hull fitting. The "why" is simple: water only needs one unsealed path to a core edge to start wicking sideways through it, and that damage is invisible from outside until it's advanced. That's the same reasoning behind sealing every kerf cut (Section 2) — an exposed core edge anywhere is a way in for water.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 5: MATCH GAME - failure modes -->
+  <section class="panel" data-name="Match: name the failure mode">
+    <p class="kicker">Lock in the vocabulary</p>
+    <h2>Match the failure mode to what you'd actually see</h2>
+    <p>Same four failure modes from Section 3 — this time matched from the other direction: what you'd observe, back to its name.</p>
+    <div class="card">
+      <div id="failMatchGame"></div>
+      <div class="readout" id="failMatchDone" style="display:none">All matched. Naming the failure mode from what you observe is exactly what the exam — and a real hull inspection — asks you to do.</div>
+    </div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 4 locked in.</h2>
+      <p>You can explain that the core's job is carrying shear and spacing the skins, compare balsa/foam/honeycomb trade-offs, name and picture the four sandwich failure modes, and decide where a hull should be cored versus solid.</p>
+      <p class="next-label">Up next → Module 5: Safety — hazard identification, PPE &amp; HazCom.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- shared svg helpers ---- */
+  function arrowLine(cx,cy,dir,color){
+    var len=44, x1=cx-dir*len/2, x2=cx+dir*len/2;
+    var tri = dir>0
+      ? '<path d="M'+(x2-9)+' '+(cy-5)+' L'+x2+' '+cy+' L'+(x2-9)+' '+(cy+5)+' Z" fill="'+color+'"/>'
+      : '<path d="M'+(x2+9)+' '+(cy-5)+' L'+x2+' '+cy+' L'+(x2+9)+' '+(cy+5)+' Z" fill="'+color+'"/>';
+    return '<line x1="'+x1+'" y1="'+cy+'" x2="'+x2+'" y2="'+cy+'" stroke="'+color+'" stroke-width="2.5"/>'+tri;
+  }
+
+  /* ---- 1. debond / bend demo ---- */
+  var s1Range=document.getElementById('s1Range');
+  var bondSeg=document.querySelectorAll('#bondSeg .seg');
+  var bonded=true;
+  function sandwichSvg(coreH,bonded){
+    var topY=90-coreH, gap=bonded?0:16, s='';
+    s+='<text x="200" y="18" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">cross-section, side view</text>';
+    s+='<rect x="110" y="'+(topY-10-gap)+'" width="180" height="10" fill="#2f6f92"/>';
+    if(!bonded){
+      s+='<rect x="110" y="'+(topY-gap)+'" width="180" height="'+gap+'" fill="#fff" stroke="#c33a2c" stroke-width="1.5" stroke-dasharray="3 3"/>';
+      s+='<text x="300" y="'+(topY-gap/2+4)+'" font-family="Space Grotesk" font-size="10" fill="#8f2117">gap</text>';
+      s+='<text x="200" y="'+(topY-gap/2+4)+'" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">✕ no shear transfer</text>';
+    }
+    s+='<rect x="110" y="'+topY+'" width="180" height="'+Math.max(0.1,coreH)+'" fill="#c9d6ad" stroke="#a9ba82"/>';
+    s+='<rect x="110" y="'+(topY+coreH)+'" width="180" height="10" fill="#2f6f92"/>';
+    if(bonded && coreH>1){
+      s+=arrowLine(150, topY-2, 1, '#54622f');
+      s+=arrowLine(250, topY+coreH+2, -1, '#54622f');
+      s+='<text x="200" y="'+(topY+coreH+30)+'" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#54622f">shear carried through the core</text>';
+    }
+    return s;
+  }
+  function setS1(){
+    var c=+s1Range.value, coreH=c*2.2;
+    document.getElementById('s1Svg').innerHTML=sandwichSvg(coreH,bonded);
+    document.getElementById('s1CoreVal').textContent = c>0 ? c+' mm core' : '0 mm (solid laminate)';
+    var stiff = bonded ? Math.round(8 + (Math.pow(c,1.55)/Math.pow(40,1.55))*92) : 8;
+    var wt = Math.round(30 + c*0.6);
+    document.getElementById('s1StiffVal').textContent=stiff;
+    document.getElementById('s1StiffFill').style.width=stiff+'%';
+    document.getElementById('s1WtVal').textContent=wt;
+    document.getElementById('s1WtFill').style.width=wt+'%';
+    var read=document.getElementById('s1Read');
+    if(c===0){
+      read.className='readout'; read.textContent='A solid laminate: to make it stiffer you\'d have to make it heavier.';
+    } else if(bonded){
+      var mult=(stiff/8).toFixed(1);
+      read.className='readout ok';
+      read.innerHTML='Stiffness is now ~'+mult+'× the solid skins for ~'+(wt/30).toFixed(1)+'× the weight. The core is doing its job: carrying shear and holding the skins apart.';
+    } else {
+      read.className='readout warn';
+      read.innerHTML='<b>Debonded:</b> the skins can no longer transfer shear through the core, so stiffness collapses back to roughly the solid-laminate baseline — but you\'re still carrying all of the core\'s weight. This is the <b>skin-to-core debond</b> failure mode.';
+    }
+  }
+  bondSeg.forEach(function(b){
+    b.addEventListener('click',function(){
+      bonded = b.dataset.bond==='bonded';
+      bondSeg.forEach(function(x){x.setAttribute('aria-pressed', x===b);});
+      setS1();
+    });
+  });
+  s1Range.addEventListener('input', setS1);
+  setS1();
+
+  /* ---- 2. core material selector ---- */
+  function grainSvg(){
+    var s='<rect x="110" y="45" width="180" height="60" rx="4" fill="#dfe6c9" stroke="#a9ba82"/>';
+    for(var x=122;x<=278;x+=13){ s+='<line x1="'+x+'" y1="48" x2="'+x+'" y2="102" stroke="#9fae76" stroke-width="2"/>'; }
+    s+='<text x="200" y="128" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#54622f">end-grain: fibers stand on end, facing the skins</text>';
+    return s;
+  }
+  function foamSvg(){
+    var s='<rect x="110" y="45" width="180" height="60" rx="4" fill="#e6eef2" stroke="#9bb2c2"/>';
+    for(var y=55;y<=95;y+=14){ for(var x=122;x<=278;x+=18){ s+='<circle cx="'+x+'" cy="'+y+'" r="4.5" fill="#c7dbe6" stroke="#7fa0b5"/>'; } }
+    s+='<text x="200" y="128" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#1d4f6c">closed-cell foam: uniform, consistent structure</text>';
+    return s;
+  }
+  function honeySvg(){
+    var s='<rect x="110" y="45" width="180" height="60" rx="4" fill="#f4efe0" stroke="#c9b98a"/>';
+    function hex(cx,cy,r){
+      var pts=[];
+      for(var i=0;i<6;i++){var a=Math.PI/180*(60*i);pts.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}
+      return '<path d="M'+pts.join('L')+'Z" fill="none" stroke="#a8935a" stroke-width="1.5"/>';
+    }
+    for(var row=0;row<3;row++){
+      for(var col=0;col<7;col++){
+        var cx=126+col*24+(row%2?12:0), cy=58+row*20;
+        if(cx<280) s+=hex(cx,cy,11);
+      }
+    }
+    s+='<text x="200" y="128" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#8a6109">honeycomb cells: light, stiff, unforgiving of a breach</text>';
+    return s;
+  }
+  var coreMats={
+    balsa:{svg:grainSvg(), stiff:90, water:25, impact:55, cost:20, chip:{cls:'warn', text:'⚠ Must stay fully sealed — rot risk'},
+      verdict:'<b>End-grain balsa</b> gives excellent stiffness-to-weight at low cost — the classic marine core. Its catch: it absorbs water readily and can rot if that water gets in, so every cut edge and kerf must be fully sealed and encapsulated with resin.',
+      best:'Best for: hulls and decks where max stiffness-to-weight and low cost matter, and the skin can be reliably kept watertight.'},
+    foam:{svg:foamSvg(), stiff:75, water:90, impact:65, cost:55, chip:{cls:'ok', text:'✓ Does not rot'},
+      verdict:'<b>Cross-linked PVC or SAN foam</b> doesn\'t rot the way balsa can if water gets in, and its closed-cell structure gives more consistent properties panel to panel — but it typically costs more than balsa.',
+      best:'Best for: hulls and decks with higher moisture exposure risk, or where consistency is worth the added cost.'},
+    honeycomb:{svg:honeySvg(), stiff:97, water:45, impact:35, cost:95, chip:{cls:'warn', text:'⚠ Least forgiving of impact/moisture'},
+      verdict:'<b>Honeycomb (Nomex or aluminum)</b> offers the best stiffness-to-weight of the three — but it\'s the most expensive, and it\'s the least forgiving of a local impact or moisture intrusion once a cell is breached.',
+      best:'Best for: weight-critical, high-performance builds where cost is a secondary concern.'}
+  };
+  var coreMatSeg=document.querySelectorAll('#coreMatSeg .seg');
+  function setCoreMat(mat){
+    var m=coreMats[mat];
+    coreMatSeg.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.mat===mat);});
+    document.getElementById('coreMatSvg').innerHTML=m.svg;
+    document.getElementById('matStiffVal').textContent=m.stiff; document.getElementById('matStiffFill').style.width=m.stiff+'%';
+    document.getElementById('matWaterVal').textContent=m.water; document.getElementById('matWaterFill').style.width=m.water+'%';
+    document.getElementById('matImpactVal').textContent=m.impact; document.getElementById('matImpactFill').style.width=m.impact+'%';
+    document.getElementById('matCostVal').textContent=m.cost; document.getElementById('matCostFill').style.width=m.cost+'%';
+    document.getElementById('coreMatVerdict').innerHTML=m.verdict;
+    document.getElementById('coreMatBest').textContent=m.best;
+    var chip=document.getElementById('coreMatChip');
+    chip.className='chip '+m.chip.cls; chip.textContent=m.chip.text;
+  }
+  coreMatSeg.forEach(function(b){b.addEventListener('click',function(){setCoreMat(b.dataset.mat);});});
+  setCoreMat('balsa');
+  CFS.renderVideos('coreVideos', CFS_VIDEOS.core);
+
+  /* ---- 3. failure mode selector ---- */
+  function debondSvg(){
+    var s='<rect x="110" y="34" width="180" height="10" fill="#2f6f92"/>';
+    s+='<rect x="110" y="52" width="180" height="14" fill="#fff" stroke="#c33a2c" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    s+='<rect x="110" y="66" width="180" height="26" fill="#c9d6ad" stroke="#a9ba82"/>';
+    s+='<rect x="110" y="92" width="180" height="10" fill="#2f6f92"/>';
+    s+='<text x="300" y="63" font-family="Space Grotesk" font-size="10" fill="#8f2117">gap</text>';
+    s+='<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">skin has separated — no shear transfer</text>';
+    return s;
+  }
+  function shearSvg(){
+    var s='<rect x="110" y="34" width="180" height="10" fill="#2f6f92"/>';
+    s+='<rect x="110" y="44" width="180" height="46" fill="#c9d6ad" stroke="#a9ba82"/>';
+    s+='<rect x="110" y="90" width="180" height="10" fill="#2f6f92"/>';
+    s+='<path d="M160 44 L220 90" stroke="#8f2117" stroke-width="3" fill="none"/>';
+    s+=arrowLine(150,42,1,'#54622f'); s+=arrowLine(250,92,-1,'#54622f');
+    s+='<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">core fails/shears between the skins</text>';
+    return s;
+  }
+  function crushSvg(){
+    var s='<rect x="110" y="34" width="180" height="10" fill="#2f6f92"/>';
+    s+='<path d="M110 44 L175 44 L188 68 L212 68 L225 44 L290 44 L290 90 L110 90 Z" fill="#c9d6ad" stroke="#a9ba82"/>';
+    s+='<rect x="110" y="90" width="180" height="10" fill="#2f6f92"/>';
+    s+='<line x1="200" y1="16" x2="200" y2="42" stroke="#8f2117" stroke-width="3"/>';
+    s+='<path d="M192 32 L200 44 L208 32 Z" fill="#8f2117"/>';
+    s+='<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">local load crushes the core at one point</text>';
+    return s;
+  }
+  function printSvg(){
+    var s='<path d="M110 40 Q125 30 140 40 T170 40 T200 40 T230 40 T260 40 T290 40" fill="none" stroke="#2f6f92" stroke-width="8" stroke-linecap="round"/>';
+    s+='<line x1="110" y1="30" x2="290" y2="30" stroke="#42586b" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>';
+    s+='<rect x="110" y="50" width="180" height="40" fill="#c9d6ad" stroke="#a9ba82"/>';
+    for(var x=118;x<=282;x+=16){ s+='<line x1="'+x+'" y1="50" x2="'+x+'" y2="90" stroke="#a9ba82" stroke-width="1"/>'; }
+    s+='<rect x="110" y="90" width="180" height="10" fill="#2f6f92"/>';
+    s+='<text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#8f2117">core/fabric pattern telegraphs through the outer skin</text>';
+    return s;
+  }
+  var failModes={
+    debond:{svg:debondSvg(), html:'<b>What it looks like:</b> a dull, hollow sound when tapped, sometimes a slight flex where a solid area should feel stiff.<br><b>Cause:</b> the skin never fully bonded to the core during layup (poor wet-out/consolidation), or a good bond later degraded from water intrusion or a hard impact.<br><b>Prevention:</b> full resin wet-out and consolidation to the core during layup, and keeping water out of the core so a good bond can\'t degrade later.'},
+    shear:{svg:shearSvg(), html:'<b>What it looks like:</b> a diagonal failure line running through the depth of the core itself.<br><b>Cause:</b> the core is loaded beyond what it can carry in shear — often an undersized or wrong-spec core for the panel\'s span and load.<br><b>Prevention:</b> selecting a core thickness and type sized to the actual span and load the panel sees, per the laminate schedule/structural design — not downsizing without a spec.'},
+    crush:{svg:crushSvg(), html:'<b>What it looks like:</b> a visible dent or soft spot right at one point, even where the skins themselves aren\'t broken.<br><b>Cause:</b> a concentrated local load — an impact, a hard point, fastener/clamping pressure, or a slamming load — exceeds what the core can take right there.<br><b>Prevention:</b> use solid laminate or a backing/doubler plate at hardware and other high local-load points instead of raw core, and design for the actual point loads, not just the average panel load.'},
+    print:{svg:printSvg(), html:'<b>What it looks like:</b> a faint waffle or weave texture visible on the outer surface under the gelcoat.<br><b>Cause:</b> the pattern of the reinforcement fabric or core cells telegraphs through to the visible surface — usually not enough resin-rich surfacing/skin-coat layer between the reinforcement and the gelcoat.<br><b>Prevention:</b> an adequate surfacing layer (the same print-through-blocking job chopped strand mat plays in Module 2) between the structural reinforcement and the gelcoat.'}
+  };
+  var failSeg=document.querySelectorAll('#failSeg .seg');
+  function setFail(mode){
+    failSeg.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.mode===mode);});
+    document.getElementById('failSvg').innerHTML=failModes[mode].svg;
+    document.getElementById('failVerdict').innerHTML=failModes[mode].html;
+  }
+  failSeg.forEach(function(b){b.addEventListener('click',function(){setFail(b.dataset.mode);});});
+  setFail('debond');
+
+  /* ---- 4. cored vs solid roles ---- */
+  document.querySelectorAll('#decisionRoles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML=r.dataset.job;
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 5. match game ---- */
+  CFS.initMatchGame('failMatchGame', [
+    {left:'Skin-to-core debond', right:'The skin has separated from the core and no longer transfers shear into it'},
+    {left:'Core shear', right:'The core itself fails along a diagonal line under load between the two skins'},
+    {left:'Core crush', right:'A concentrated local load collapses/compresses the core right at that point'},
+    {left:'Print-through', right:'The pattern of the fabric or core telegraphs visibly through the outer skin'}
+  ], {onComplete:function(){document.getElementById('failMatchDone').style.display='block';}});
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'What is the core\'s actual structural job in a sandwich laminate?',
+     opts:['To add tensile strength directly, like a third layer of fiberglass','To carry shear between the two skins and hold them apart, multiplying bending stiffness for little added weight','To make the panel waterproof on its own','To replace the need for any resin between plies'],correct:1,
+     why:'The core\'s job is shear transfer and spacing the skins apart — the I-beam principle from Module 1 — not to be a strength layer itself.'},
+    {stem:'Which statement about balsa vs. PVC/SAN foam core water behavior is accurate?',
+     opts:['Both rot equally if water gets in','End-grain balsa can absorb water and rot if its seal is breached; PVC/SAN foam does not rot, though it typically costs more','PVC/SAN foam rots faster than balsa','Neither core material is affected by water'],correct:1,
+     why:'Balsa is organic and can rot once water reaches it; PVC/SAN foam does not rot, which is part of why it often costs more.'},
+    {stem:'A hull section sounds hollow when tapped, and the skin has separated so it no longer transfers shear through the core. This is:',
+     opts:['Core crush','Print-through','Skin-to-core debond','Core shear'],correct:2,
+     why:'Skin-to-core debond is exactly this: the bond between a skin and the core fails, so the skin can no longer transfer shear into the core.'},
+    {stem:'A hardware mounting point shows a visible local dent in the panel even though the skins aren\'t broken. This is most consistent with:',
+     opts:['Core crush','Print-through','Core shear','Skin-to-core debond'],correct:0,
+     why:'Core crush is a concentrated local load collapsing/compressing the core right at that point — hardware and impact points are classic locations for it.'},
+    {stem:'Why do builders generally avoid leaving cored (sandwich) construction exposed and unsealed right around a thru-hull fitting?',
+     opts:['Cored laminate is too heavy for that area','If water reaches the exposed core edge at the hole, it can wick sideways into the core','Cored panels cannot be drilled at all','It voids the gelcoat warranty'],correct:1,
+     why:'The core must be isolated/sealed from a thru-hull fitting so water can\'t travel through the exposed core edge — improper installation lets water wick into and eventually degrade the core.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-4'); }});
+})();
+</script>
+</body>
+</html>

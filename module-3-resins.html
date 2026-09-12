@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — The Matrix: Resins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 3</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - resin family selector -->
+  <section class="panel active" data-name="Three resin families">
+    <p class="kicker">The matrix — start here</p>
+    <h1>The right resin is a trade-off, not "strongest wins"</h1>
+    <p class="lead">All three resin families are <span class="tag resin">thermosets</span>: once cured, the cure is a one-way, non-reversible, exothermic chemical reaction — unlike a <span class="tag fiber">thermoplastic</span>, which has no cross-linking and can be melted and reformed. Tap each family.</p>
+    <div class="card">
+      <div class="segmented" id="resinSeg" role="group" aria-label="Choose a resin family">
+        <button class="seg" data-r="polyester" aria-pressed="true">Polyester</button>
+        <button class="seg" data-r="vinylester" aria-pressed="false">Vinylester</button>
+        <button class="seg" data-r="epoxy" aria-pressed="false">Epoxy</button>
+      </div>
+      <svg class="demo-svg" id="resinSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="meter"><div class="mlab"><span>Cost</span><span id="cCost">low</span></div><div class="mtrack"><div class="mfill weight" id="fCost" style="width:20%"></div></div></div>
+      <div class="meter"><div class="mlab"><span>Blister / water resistance</span><span id="cBlis">low</span></div><div class="mtrack"><div class="mfill sw" id="fBlis" style="width:25%"></div></div></div>
+      <div class="meter"><div class="mlab"><span>Bond strength (to itself &amp; others)</span><span id="cBond">fair</span></div><div class="mtrack"><div class="mfill stiff" id="fBond" style="width:35%"></div></div></div>
+      <div class="verdict" id="resinVerdict"></div>
+    </div>
+    <p class="note">Values are relative and illustrative — the ranking is the point, not the exact number.</p>
+
+    <details class="deep">
+      <summary>Field notes: what's actually in each resin</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Polyester</b> = an unsaturated acid (maleic anhydride) + a saturated acid (isophthalic or orthophthalic) + a glycol (ethylene glycol) + a monomer (styrene). <b>Isophthalic</b> polyester has better mechanical properties, better chemical resistance, and more resistance to water permeation than <b>orthophthalic</b> — at a higher cost. Gelcoat is typically an isophthalic resin with no surfacing agent.</p>
+        <p style="margin-bottom:8px"><b>Vinylester</b> = an unsaturated acid (methacrylic or acrylic) + a bisphenol diepoxide backbone + an unsaturated monomer (styrene) — it borrows epoxy's backbone but cures like polyester. That's why it lands between the two: much better blister resistance and secondary bonding than polyester, at a lower cost than full epoxy.</p>
+        <p style="margin-bottom:0">One resin family worth knowing for the exam even though it's rarely a whole hull: <b>phenolic resin</b> is inherently fire-retardant because its chemistry incorporates water — and it's also the resin that <b>launched modern composites</b> in the first place.</p>
+      </div>
+    </details>
+
+    <div id="resinVideos"></div>
+  </section>
+
+  <!-- 2: ONE-WAY BOND -->
+  <section class="panel" data-name="The one-way bond street">
+    <p class="kicker">Secondary bonding</p>
+    <h2>Not every resin sticks to every resin</h2>
+    <p>Laminating one resin over another already-cured resin is a one-way street. Pick a base (already cured) and what you want to laminate over it, and see if it bonds.</p>
+    <div class="card">
+      <div class="segmented" id="baseSeg" role="group" aria-label="Cured base layer">
+        <button class="seg" data-base="polyester" aria-pressed="true">Cured polyester</button>
+        <button class="seg" data-base="vinylester" aria-pressed="false">Cured vinylester</button>
+        <button class="seg" data-base="epoxy" aria-pressed="false">Cured epoxy</button>
+      </div>
+      <p style="font-weight:600;font-family:var(--display);margin:14px 0 8px">Laminating over it with:</p>
+      <div class="segmented" id="topSeg" role="group" aria-label="New resin to apply">
+        <button class="seg" data-top="polyester" aria-pressed="true">Polyester</button>
+        <button class="seg" data-top="vinylester" aria-pressed="false">Vinylester</button>
+        <button class="seg" data-top="epoxy" aria-pressed="false">Epoxy</button>
+      </div>
+      <div class="readout" id="bondRead"></div>
+    </div>
+    <div class="callout"><b>The one-way rule, in one line:</b> epoxy bonds well to nearly everything (including cured polyester/vinylester); polyester and vinylester bond poorly to fully-cured epoxy unless it's heavily sanded and prepped. Epoxy is the resin of choice for secondary/structural bonding and repairs for exactly this reason.</div>
+  </section>
+
+  <!-- 3: CATALYST CALCULATOR -->
+  <section class="panel" data-name="Catalyst, not more = stronger">
+    <p class="kicker">The ratio myth-buster</p>
+    <h2>MEKP catalyzes — it isn't a hardener you add "more of" for strength</h2>
+    <p>Polyester/vinylester cure by <b>free-radical</b> reaction: MEKP just starts (initiates) it. More MEKP does not make a stronger part — it only cures faster and hotter, and can ruin the laminate. (Epoxy is different: it's a stoichiometric two-part reaction, and getting that ratio wrong under-cures it — see the callout below.)</p>
+    <div class="card">
+      <div class="control">
+        <label for="volRange"><span>Batch size</span><span class="val" id="volVal">1 cup (8 oz)</span></label>
+        <input type="range" id="volRange" min="4" max="128" value="8" step="4">
+      </div>
+      <div class="control">
+        <label for="pctRange"><span>Catalyst percentage</span><span class="val" id="pctVal">1.0%</span></label>
+        <input type="range" id="pctRange" min="1" max="4" value="1" step="0.25">
+      </div>
+      <div class="readout" id="mekpRead"></div>
+      <p class="note">Shop rule of thumb used here: 1 oz ≈ 30 ml. Typical working range is 1%–2.5% MEKP by weight, adjusted down in hot shops and up in cold ones — 4% is shown only to demonstrate the danger zone.</p>
+    </div>
+    <div class="callout warn"><b>Myth-buster:</b> doubling the catalyst does not double the cure or the strength — it mostly shortens working time and raises exotherm, risking cracking, warping, or pre-release. The usual ratio is <b>1% to 2.5%</b> (and can range 1–4% depending on temperature); an <b>inhibitor</b> in the resin is what gives you working time by slowing polymerization in the first place.</div>
+  </section>
+
+  <!-- 4: AIR INHIBITION vs BLUSH -->
+  <section class="panel" data-name="The surface problem each resin has">
+    <p class="kicker">Why the surface is never quite like the rest</p>
+    <h2>Air-inhibition (polyester) vs. amine blush (epoxy)</h2>
+    <p>Both major resin families have a surface-cure quirk you have to plan around before recoating. Toggle between them.</p>
+    <div class="card">
+      <div class="segmented" id="surfSeg" role="group" aria-label="Resin surface issue">
+        <button class="seg" data-s="polyester" aria-pressed="true">Polyester / vinylester</button>
+        <button class="seg" data-s="epoxy" aria-pressed="false">Epoxy</button>
+      </div>
+      <div class="readout" id="surfRead"></div>
+    </div>
+    <p class="note">Get this wrong and you either lay a fresh layer over a tacky, uncured surface (polyester) or over an invisible waxy film that kills the bond (epoxy) — both look "fine" until the part fails.</p>
+  </section>
+
+  <!-- 5: JOB -> RESIN MATCHER -->
+  <section class="panel" data-name="Match resin to job">
+    <p class="kicker">Putting it together</p>
+    <h2>Pick the resin for the job</h2>
+    <p>Match each job on the left to the resin family that fits it best.</p>
+    <div id="jobMatchGame"></div>
+    <div class="readout" id="jobMatchDone" style="display:none">All matched — that's the whole point of "the right resin is a system trade-off."</div>
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> exact cost multipliers and precise blister-warranty language vary by manufacturer and boat class; the rankings above are relative, not a specific product spec. Confirm any specific numeric claim against current resin manufacturer data sheets before treating it as an exam fact.</div>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions. Read the distractors carefully.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 3 locked in.</h2>
+      <p>You can rank polyester/vinylester/epoxy on the properties that matter, apply the one-way bonding rule, tell catalyst from hardener, handle air-inhibition vs. blush, and match resin to job.</p>
+      <p class="next-label">Up next → Module 4: Cores &amp; sandwich construction.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('resinVideos', CFS_VIDEOS.resinComparison);
+  CFS.initChatbot();
+
+  /* ---- 1. resin family selector ---- */
+  function drip(color){return '<rect x="60" y="40" width="280" height="70" rx="10" fill="'+color+'" opacity="0.55"/><rect x="60" y="40" width="280" height="70" rx="10" fill="none" stroke="'+color+'" stroke-width="2"/>';}
+  var resins={
+    polyester:{svg:drip('#e0a021'),cost:20,blis:25,bond:30,
+      verdict:'<strong>Cheapest, most forgiving.</strong> Low need for mixing accuracy, readily available, the default for cost-sensitive production. Weakest of the three on blister resistance and secondary bonding.'},
+    vinylester:{svg:drip('#c98a1f'),cost:55,blis:80,bond:65,
+      verdict:'<strong>The middle ground.</strong> Superior corrosion/blister resistance and hydrolytic stability versus polyester, better secondary bonding, and strong impact/fatigue resistance — at a higher cost. Common at and below the waterline.'},
+    epoxy:{svg:drip('#8a6109'),cost:90,blis:95,bond:98,
+      verdict:'<strong>The performance (and bonding) champion.</strong> Best secondary-bonding characteristics of the three, excellent water resistance, but the most expensive and needs accurate two-part ratios (unlike MEKP-catalyzed resins, epoxy is stoichiometric — a bad ratio under-cures it).'}
+  };
+  var resinSeg=document.querySelectorAll('#resinSeg .seg');
+  function setResin(r){
+    var d=resins[r];
+    resinSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.r===r);});
+    document.getElementById('resinSvg').innerHTML=d.svg;
+    document.getElementById('fCost').style.width=d.cost+'%';document.getElementById('cCost').textContent=d.cost<35?'low':d.cost<70?'medium':'high';
+    document.getElementById('fBlis').style.width=d.blis+'%';document.getElementById('cBlis').textContent=d.blis<40?'low':d.blis<75?'good':'excellent';
+    document.getElementById('fBond').style.width=d.bond+'%';document.getElementById('cBond').textContent=d.bond<40?'fair':d.bond<75?'good':'excellent';
+    document.getElementById('resinVerdict').innerHTML=d.verdict;
+  }
+  resinSeg.forEach(function(b){b.addEventListener('click',function(){setResin(b.dataset.r);});});
+  setResin('polyester');
+
+  /* ---- 2. one-way bond matrix ---- */
+  var bondMatrix={
+    polyester:{polyester:'good',vinylester:'good',epoxy:'best'},
+    vinylester:{polyester:'fair',vinylester:'good',epoxy:'best'},
+    epoxy:{polyester:'poor',vinylester:'poor',epoxy:'best'}
+  };
+  var bondText={
+    good:{cls:'readout ok',msg:'Good bond. Same-family (or compatible) resin over a properly prepped surface bonds well.'},
+    best:{cls:'readout ok',msg:'Excellent bond. Epoxy bonds well to nearly any properly prepped substrate — this is why it\'s the go-to resin for repairs and secondary bonding.'},
+    fair:{cls:'readout',msg:'Workable with good surface prep (sand + clean), but not as strong as a same-family or epoxy bond.'},
+    poor:{cls:'readout warn',msg:'Poor bond. Polyester/vinylester do not reliably stick to fully-cured epoxy — the smooth, inert epoxy surface and any amine blush resist it, even with sanding. Avoid this combination structurally.'}
+  };
+  var baseSeg=document.querySelectorAll('#baseSeg .seg'), topSeg=document.querySelectorAll('#topSeg .seg');
+  var curBase='polyester', curTop='polyester';
+  function setBondRead(){
+    var key=bondMatrix[curBase][curTop];
+    var t=bondText[key];
+    var read=document.getElementById('bondRead');
+    read.className=t.cls;
+    read.innerHTML='<b>Cured '+curBase+'</b> + new <b>'+curTop+'</b> laminated on top: '+t.msg;
+  }
+  baseSeg.forEach(function(b){b.addEventListener('click',function(){baseSeg.forEach(function(x){x.setAttribute('aria-pressed',x===b);});curBase=b.dataset.base;setBondRead();});});
+  topSeg.forEach(function(b){b.addEventListener('click',function(){topSeg.forEach(function(x){x.setAttribute('aria-pressed',x===b);});curTop=b.dataset.top;setBondRead();});});
+  setBondRead();
+
+  /* ---- 3. catalyst calculator ---- */
+  var volRange=document.getElementById('volRange'), pctRange=document.getElementById('pctRange');
+  function setMekp(){
+    var oz=+volRange.value, pct=+pctRange.value;
+    var ml = oz*30*pct/100;
+    document.getElementById('volVal').textContent = oz+' oz'+(oz===8?' (1 cup)':oz===32?' (1 quart)':oz===128?' (1 gallon)':'');
+    document.getElementById('pctVal').textContent = pct.toFixed(2).replace(/0$/,'').replace(/\.$/,'')+'%';
+    var read=document.getElementById('mekpRead');
+    var cls = pct>2.5? 'readout warn':'readout ok';
+    read.className=cls;
+    read.innerHTML = 'Add <b>'+ml.toFixed(1)+' ml</b> of MEKP to '+oz+' oz of resin at '+pct+'%.'+
+      (pct>2.5?' That\'s above the typical 1–2.5% working range — cure will be fast and hot, risking cracking or pre-release.':' Within the normal working range.');
+  }
+  volRange.addEventListener('input',setMekp); pctRange.addEventListener('input',setMekp); setMekp();
+
+  /* ---- 4. air inhibition vs blush ---- */
+  var surfSeg=document.querySelectorAll('#surfSeg .seg');
+  function setSurf(s){
+    surfSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.s===s);});
+    var read=document.getElementById('surfRead');
+    if(s==='polyester'){
+      read.className='readout warn';
+      read.innerHTML='<b>Air inhibition:</b> atmospheric oxygen stops styrene at the exposed surface from fully curing, leaving it tacky. Structural (laminating) layers are left uncovered between coats on purpose — that tacky surface is what a later layer chemically bonds to. The <em>final</em> coat needs a wax/surfacing additive that migrates to the surface and seals out air so it cures hard.';
+    } else {
+      read.className='readout warn';
+      read.innerHTML='<b>Amine blush:</b> in humid or cool conditions, epoxy\'s amine curing agent can react with atmospheric moisture and CO₂ to leave a thin, waxy, water-soluble film on the surface. It must be washed off with water and abraded before the next layer or it will ruin the bond — even though the epoxy underneath cured properly.';
+    }
+  }
+  surfSeg.forEach(function(b){b.addEventListener('click',function(){setSurf(b.dataset.s);});});
+  setSurf('polyester');
+
+  /* ---- 5. job matcher ---- */
+  CFS.initMatchGame('jobMatchGame', [
+    {left:'Cost-sensitive production hull, no unusual water exposure', right:'Polyester (orthophthalic)'},
+    {left:'Below-waterline hull needing blister resistance', right:'Vinylester'},
+    {left:'Structural repair bonding to an old, cured laminate', right:'Epoxy'},
+    {left:'Outer cosmetic/protective layer sprayed into the mold first', right:'Isophthalic polyester (gelcoat)'}
+  ], {onComplete:function(){document.getElementById('jobMatchDone').style.display='block';}});
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'What is the key difference between a thermoset and a thermoplastic resin?',
+     opts:['Thermosets are always more expensive','Thermosets cross-link permanently during cure and cannot be re-melted; thermoplastics do not cross-link and can be reformed','Thermoplastics cannot be used in boatbuilding','There is no real difference'],correct:1,
+     why:'Thermoset molecules cross-link during an irreversible, exothermic cure. Thermoplastics have no cross-linking, so they can be melted and reshaped.'},
+    {stem:'Compared to standard (orthophthalic) polyester, isophthalic polyester offers:',
+     opts:['Lower cost only','Better mechanical properties, chemical resistance, and water-permeation resistance, at higher cost','Faster cure with no catalyst needed','Compatibility with epoxy binders'],correct:1,
+     why:'Isophthalic acid in place of orthophthalic gives better mechanical properties and water/chemical resistance — at a higher price. Gelcoat is typically isophthalic.'},
+    {stem:'You need to laminate new material onto a boat hull that is fully-cured EPOXY. Which resin choice is most likely to give a strong bond?',
+     opts:['Standard orthophthalic polyester','Any resin — epoxy bonds equally well to everything applied to it','Epoxy','Vinylester, because it contains styrene'],correct:2,
+     why:'The one-way bond rule: epoxy bonds well to nearly everything, but polyester and vinylester bond poorly to fully-cured epoxy. To build on cured epoxy, use epoxy.'},
+    {stem:'Doubling the percentage of MEKP catalyst in a polyester resin batch will mainly:',
+     opts:['Double the cured strength of the laminate','Speed up and intensify the cure (more exotherm), not increase ultimate strength','Have no effect at all','Turn the resin into an epoxy'],correct:1,
+     why:'MEKP initiates a free-radical cure; more of it cures faster and hotter, risking cracking or pre-release — it does not make the part stronger.'},
+    {stem:'A partially-cured epoxy surface feels slightly waxy and slippery before the next layer is applied. What should happen before laminating over it?',
+     opts:['Nothing — laminate directly over it','Wash off the amine blush with water and abrade the surface','Apply extra hardener to melt the wax','Heat the surface with a torch'],correct:1,
+     why:'That waxy film is amine blush, a byproduct of epoxy curing in humid/cool conditions. It must be washed off and sanded before recoating or the new layer won\'t bond.'},
+    {stem:'A resin-rich outer laminating layer of polyester stays tacky to the touch even after curing time has passed, but this is expected at that stage. Why?',
+     opts:['The resin was never catalyzed','Air inhibition — atmospheric oxygen stops surface styrene from fully curing until a wax-additive finish coat seals it','The mold released too early','The glass-to-resin ratio was too high'],correct:1,
+     why:'Air-inhibited (tacky) surfaces are normal between structural layers — that tackiness is what the next layer bonds to. Only the final coat needs a surfacing/wax additive to cure hard.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-3'); }});
+})();
+</script>
+</body>
+</html>

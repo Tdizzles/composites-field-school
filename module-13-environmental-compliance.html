@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 13 — Environmental &amp; Regulatory Compliance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 13</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK -->
+  <section class="panel active" data-name="The compliance layer">
+    <p class="kicker">Environmental &amp; regulatory compliance — start here</p>
+    <h1>Everything you laminate has to go somewhere</h1>
+    <p class="lead">Resin, gelcoat, acetone, dust, styrene vapor — none of it just disappears when the part comes out of the mold. This module is the compliance layer the exam expects a builder to know: what's regulated, why, and how a shop stays on the right side of it.</p>
+    <div class="card">
+      <svg class="demo-svg" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <rect x="150" y="70" width="100" height="90" rx="4" fill="#2f6f92"/>
+        <rect x="150" y="70" width="100" height="26" fill="#c0392b"/>
+        <text x="200" y="88" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="12" fill="#fff">FLAMMABLE</text>
+        <text x="200" y="130" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#fff">RESIN</text>
+        <path d="M170 68 Q160 45 172 30" fill="none" stroke="#8fa6b3" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+        <path d="M198 68 Q188 40 202 20" fill="none" stroke="#8fa6b3" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+        <path d="M228 68 Q218 45 232 30" fill="none" stroke="#8fa6b3" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+        <text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#42586b">styrene vapor — a regulated emission</text>
+      </svg>
+    </div>
+    <p>Two agencies frame this module. <b>OSHA</b> governs workplace safety broadly — respirator programs, hazard communication, the PPE and ventilation rules from Module 5. <b>The EPA (Environmental Protection Agency)</b> governs what leaves the building: air emissions and waste disposal. This module is the EPA side.</p>
+    <div class="callout"><b>The one substance to know cold:</b> <b>styrene</b> — the solvent in polyester/vinylester resin and gelcoat — is both a <b>VOC</b> (volatile organic compound) and a <b>HAP</b> (hazardous air pollutant). That double status is exactly why it's regulated, and it's the thread running through this whole module.</p>
+
+    <details class="deep">
+      <summary>Field notes: why does a boatbuilder need to know any of this?</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Because open-mold boatbuilding uses a lot of styrene-based resin over a lot of exposed surface area, marine composites shops are a named category in federal air-quality rules. You don't need to be a compliance officer — but you do need to recognize a regulated material when you see one (red label, SDS on file), know how to dispose of shop waste without creating a fire or spill problem, and understand why the industry has been moving toward closed molding. That's awareness-level knowledge, and it's exactly what the exam checks.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2: WASTE SORTER -->
+  <section class="panel" data-name="Waste disposal">
+    <p class="kicker">Get this wrong and something catches fire</p>
+    <h2>Sort the shop waste</h2>
+    <p>Four things every composites shop generates. Match each to how it actually gets handled. One of these is a genuine fire hazard that surprises people — watch for it.</p>
+    <div class="callout warn"><b>The one that catches people off guard:</b> solvent-soaked rags (acetone, styrene, resin) can <b>spontaneously combust</b> — the drying solvent oxidizes and generates its own heat inside a balled-up rag until it ignites, with no spark or flame needed. That's why they never go in a regular trash bin.</div>
+    <div class="card">
+      <div id="wasteMatchGame"></div>
+      <div class="readout" id="wasteMatchDone" style="display:none">All sorted. The rag-fire hazard and the "don't let it reach a floor drain" rule are the two the exam leans on hardest.</div>
+    </div>
+    <p class="note">Underneath all four: the <b>SDS</b> (Safety/Material Data Sheet) is the reference document for a chemical's hazards, handling, and disposal guidance — when in doubt, that's where you look.</p>
+
+    <details class="deep">
+      <summary>Field notes: what a "large spill" procedure actually looks like</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">For a large gelcoat or resin spill, the sequence is: <b>contain it immediately</b>, <b>alert management</b>, and <b>keep it out of floor drains</b> — in that rough order, done fast. A red label on a resin or gelcoat drum tells you before anything spills that the contents are flammable, which is exactly the information you need to decide how urgently to react.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 3: STYRENE VOC/HAP CONCEPT CARD -->
+  <section class="panel" data-name="Styrene: VOC and HAP">
+    <p class="kicker">One molecule, two regulatory hats</p>
+    <h2>Why styrene gets singled out</h2>
+    <p>Styrene isn't regulated because someone decided resin should be annoying — it's regulated because it checks two separate boxes at once. Tap each to see what it means.</p>
+    <div class="roles" id="styreneRoles">
+      <button class="role" aria-expanded="false" data-job="A <b>VOC</b> readily evaporates into the air at room temperature. That's what you're smelling over open resin or gelcoat, and it's the reason emissions are an air-quality issue at all — the styrene doesn't stay in the laminate, it leaves the shop.">
+        <div class="swatch" style="background:var(--fiber)"></div>
+        <h3>VOC</h3><div style="font-size:13px;color:#42586b">volatile organic compound</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="A <b>HAP</b> is a specific category of air pollutant known to cause serious health effects. Styrene carries central-nervous-system (CNS) effects at elevated exposure — this is the health-and-workplace-exposure side, distinct from the general air-quality side.">
+        <div class="swatch" style="background:#1d4f6c"></div>
+        <h3>HAP</h3><div style="font-size:13px;color:#42586b">hazardous air pollutant</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="Styrene is on <b>California's Proposition 65</b> list of substances known to the state to cause harm at elevated exposure — one concrete sign of how seriously it's treated as a regulated chemical, alongside its strong, persistent odor.">
+        <div class="swatch" style="background:#8a6109"></div>
+        <h3>Prop 65</h3><div style="font-size:13px;color:#42586b">listed substance</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+      <button class="role" aria-expanded="false" data-job="The primary control is <b>ventilation</b>, backed by an organic-vapor cartridge respirator (Module 5) when you're mixing or spraying. The strong odor is actually useful — it's an early warning that exposure is happening.">
+        <div class="swatch" style="background:#155c46"></div>
+        <h3>Control</h3><div style="font-size:13px;color:#42586b">how you manage it</div>
+        <div class="job"></div><div class="hint">Tap to reveal</div>
+      </button>
+    </div>
+
+    <div class="callout"><b>General regulatory background</b> (not a specific quiz-tested number): EPA's authority here traces to the Clean Air Act's National Emission Standards for Hazardous Air Pollutants (NESHAP) for Reinforced Plastic Composites Production — a rule that specifically targets styrene as a regulated HAP from operations like yours. Knowing that this framework exists, and that styrene is its target, is the awareness level this module asks for.</div>
+    <!-- TODO: VERIFY with Tyler / ABYC study guide: specific NESHAP/EPA numeric emission limits and permit thresholds are outside this content pack — confirm current figures before citing them as exam facts. -->
+    <div class="callout todo"><b>TODO: VERIFY with Tyler / ABYC study guide:</b> specific NESHAP/EPA numeric emission limits and permit thresholds are outside this content pack — confirm current figures before citing them as exam facts.</div>
+
+    <details class="deep">
+      <summary>Field notes: acetone is not styrene — don't mix them up</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Acetone (used for cleanup and tool washing) is a different hazard: it's classified as <b>flammable</b>, so it's controlled by keeping it away from ignition sources and using adequate ventilation, not by VOC/HAP/Prop-65 status. Both need respect, but for different reasons — styrene is an air-emissions and CNS-exposure concern, acetone is primarily a fire-and-flammability concern.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: OPEN VS CLOSED MOLDING EMISSIONS -->
+  <section class="panel" data-name="Open vs. closed molding emissions">
+    <p class="kicker">Same process from Module 7, seen through the regulatory lens</p>
+    <h2>What actually drives emissions</h2>
+    <p>You met open and closed molding in Module 7 as production methods. Here's the compliance version of that same fact: <b>emissions scale with the surface area of resin/gelcoat exposed to air — not the thickness of the material.</b> Try both controls below.</p>
+    <div class="card">
+      <div class="segmented" id="moldSeg" role="group" aria-label="Open vs closed molding">
+        <button class="seg" data-m="open" aria-pressed="true">Open molding</button>
+        <button class="seg" data-m="closed" aria-pressed="false">Closed molding</button>
+      </div>
+      <svg class="demo-svg" id="moldSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <div class="control">
+        <label for="thickRange"><span>Laminate thickness (does NOT change emissions)</span><span class="val" id="thickVal">thin</span></label>
+        <input type="range" id="thickRange" min="1" max="10" value="3" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Styrene VOC/HAP emissions</span><span id="emitVal">high</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="emitFill" style="width:85%"></div></div>
+      </div>
+      <div class="readout" id="moldRead"></div>
+    </div>
+    <p class="note">Notice the thickness slider never moves the emissions meter. Only the open/closed toggle does — because the exposed surface is what's evaporating, not the mass underneath it.</p>
+
+    <details class="deep">
+      <summary>Field notes: why closed molding cuts emissions so much</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Closed molding — vacuum infusion, VARTM, RTM — encloses the resin/catalyst reaction inside a sealed mold or vacuum bag instead of leaving it open to the shop air. With no exposed resin surface for styrene to evaporate from, VOC/HAP emissions drop dramatically compared with open molding (hand lay-up or spray-up), on top of the process benefits from Module 7: better surface finish, less material waste, and tighter control of fiber-to-resin ratio. Same chemistry, same styrene — the difference is entirely whether the reaction is sealed away from the air.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 5: COMPLIANCE DO/DON'T CHECKLIST -->
+  <section class="panel" data-name="Shop compliance checklist">
+    <p class="kicker">Put it into practice</p>
+    <h2>Do this. Not that.</h2>
+    <p>Six shop situations. For each, decide: is this a compliance <b>Do</b> or a <b>Don't</b>? Everything here traces back to what you just covered.</p>
+    <div class="card">
+      <div id="complianceChecklist"></div>
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: what "compliance" is really asking for in this module</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">None of this checklist requires memorizing a regulation number. It requires recognizing a hazard label, keeping the SDS habit from Module 5, and defaulting to containment over convenience — contain spills instead of letting them run, seal rags instead of tossing them loose, and reach for closed molding where the job allows it. That instinct is what both the exam and an actual EPA inspector are checking for.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions on the compliance layer. Read carefully — the distractors are built to look right.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 13 locked in.</h2>
+      <p>You can identify styrene as a regulated VOC/HAP, sort shop waste correctly (including the solvent-rag fire hazard), explain why emissions track exposed surface area rather than thickness, and name the EPA as the agency behind it all.</p>
+      <p class="next-label">Up next → Module 14: Capstone — full practice exam.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.initChatbot();
+
+  /* ---- 2. waste sorter ---- */
+  CFS.initMatchGame('wasteMatchGame', [
+    {left:'Solvent-soaked rags', right:'Sealed, fire-rated container — never a regular trash bin (spontaneous-combustion risk)'},
+    {left:'Waste acetone', right:'Handled as flammable waste — kept away from ignition sources, per the SDS'},
+    {left:'Resin/gelcoat spill (large)', right:'Contain immediately, alert management, keep it out of floor drains'},
+    {left:'Fiberglass/resin sanding dust', right:'Not a solvent hazard — swept/vacuumed as solid waste, particulate PPE per the SDS'}
+  ], {onComplete:function(){document.getElementById('wasteMatchDone').style.display='block';}});
+
+  /* ---- 3. styrene tap-reveal ---- */
+  document.querySelectorAll('#styreneRoles .role').forEach(function(r){
+    r.querySelector('.job').innerHTML=r.dataset.job;
+    r.addEventListener('click',function(){r.setAttribute('aria-expanded', r.getAttribute('aria-expanded')!=='true');});
+  });
+
+  /* ---- 4. open vs closed molding emissions ---- */
+  var moldSeg=document.querySelectorAll('#moldSeg .seg');
+  var thickRange=document.getElementById('thickRange');
+  function openSvg(h){
+    var top=140-h;
+    return '<rect x="70" y="'+top+'" width="260" height="'+h+'" fill="#2f6f92"/>'+
+      '<text x="200" y="158" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#42586b">open pan — resin surface exposed to air</text>'+
+      '<path d="M100 '+(top-2)+' Q90 '+(top-30)+' 102 '+(top-48)+'" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" opacity="0.85"/>'+
+      '<path d="M150 '+(top-2)+' Q140 '+(top-34)+' 152 '+(top-54)+'" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" opacity="0.8"/>'+
+      '<path d="M200 '+(top-2)+' Q190 '+(top-30)+' 202 '+(top-48)+'" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" opacity="0.85"/>'+
+      '<path d="M250 '+(top-2)+' Q240 '+(top-34)+' 252 '+(top-54)+'" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" opacity="0.8"/>'+
+      '<path d="M300 '+(top-2)+' Q290 '+(top-30)+' 302 '+(top-48)+'" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" opacity="0.85"/>';
+  }
+  function closedSvg(h){
+    var top=140-h;
+    return '<rect x="70" y="'+top+'" width="260" height="'+h+'" fill="#2f6f92"/>'+
+      '<path d="M55 '+(top-14)+' Q200 '+(top-40)+' 345 '+(top-14)+' L345 145 Q200 158 55 145 Z" fill="none" stroke="#155c46" stroke-width="4"/>'+
+      '<text x="200" y="158" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#155c46">sealed bag/mold — reaction enclosed, nothing escapes</text>';
+  }
+  function setMold(m){
+    moldSeg.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===m);});
+    updateMold();
+  }
+  function updateMold(){
+    var m = document.querySelector('#moldSeg .seg[aria-pressed="true"]').dataset.m;
+    var t = +thickRange.value;
+    var h = 8 + t*4;
+    document.getElementById('thickVal').textContent = t<=3?'thin':t<=7?'medium':'thick';
+    var svg=document.getElementById('moldSvg'), read=document.getElementById('moldRead');
+    var emitVal=document.getElementById('emitVal'), emitFill=document.getElementById('emitFill');
+    if(m==='open'){
+      svg.innerHTML=openSvg(h);
+      emitVal.textContent='high'; emitFill.style.width='85%'; emitFill.className='mfill stiff';
+      read.className='readout warn';
+      read.innerHTML='Open to the air: styrene evaporates freely off the exposed surface. Making the laminate thicker or thinner changes how much resin is <i>underneath</i>, but not how much surface is exposed — emissions stay high either way.';
+    } else {
+      svg.innerHTML=closedSvg(h);
+      emitVal.textContent='low'; emitFill.style.width='15%'; emitFill.className='mfill sw';
+      read.className='readout ok';
+      read.innerHTML='Sealed inside a mold or bag: there is no exposed resin surface for styrene to evaporate from, so VOC/HAP emissions drop dramatically — regardless of thickness.';
+    }
+  }
+  moldSeg.forEach(function(b){b.addEventListener('click',function(){setMold(b.dataset.m);});});
+  thickRange.addEventListener('input',updateMold);
+  setMold('open');
+
+  /* ---- 5. compliance do/don't checklist ---- */
+  var checklistItems=[
+    {text:'Keep an SDS on file and reachable for every chemical product used in the shop.', correct:'do'},
+    {text:'Store solvent-soaked rags in a sealed, fire-rated container.', correct:'do'},
+    {text:'Toss a solvent-soaked rag in the regular shop trash bin once it looks dry.', correct:'dont'},
+    {text:'If a resin/gelcoat spill happens, contain it immediately and alert management before it reaches a floor drain.', correct:'do'},
+    {text:'Let a small spill run toward the floor drain since it is "only a small amount."', correct:'dont'},
+    {text:'Favor closed molding (vacuum infusion / VARTM / RTM) over open molding where the job allows it, to cut styrene emissions.', correct:'do'}
+  ];
+  (function renderChecklist(){
+    var root=document.getElementById('complianceChecklist');
+    checklistItems.forEach(function(item,i){
+      var row=document.createElement('div');
+      row.className='card';
+      row.style.marginBottom='10px';
+      row.innerHTML='<p style="margin:0 0 10px 0">'+item.text+'</p>'+
+        '<div class="segmented" role="group" aria-label="Do or Don\'t">'+
+        '<button type="button" class="seg" data-choice="do" aria-pressed="false">Do</button>'+
+        '<button type="button" class="seg" data-choice="dont" aria-pressed="false">Don\'t</button>'+
+        '</div><div class="readout" style="display:none;margin-top:10px"></div>';
+      var btns=row.querySelectorAll('.seg');
+      var read=row.querySelector('.readout');
+      btns.forEach(function(b){
+        b.addEventListener('click',function(){
+          btns.forEach(function(x){x.setAttribute('aria-pressed', x===b);});
+          var right = b.dataset.choice===item.correct;
+          read.style.display='block';
+          read.className = right ? 'readout ok' : 'readout warn';
+          read.textContent = right ? 'Correct.' : ('Not quite — this one is a "'+(item.correct==='do'?'Do':"Don't")+'."');
+        });
+      });
+      root.appendChild(row);
+    });
+  })();
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'Styrene, the solvent in polyester/vinylester resin and gelcoat, is classified as:',
+     opts:['A HAP only, not a VOC','A VOC only, not a HAP','Both a VOC and a HAP','Neither — it is unregulated'],correct:2,
+     why:'Styrene is both a VOC (volatile organic compound) and a HAP (hazardous air pollutant), with CNS effects at elevated exposure and a listing on California\'s Proposition 65.'},
+    {stem:'Why must solvent-soaked rags be disposed of in a sealed, fire-rated container rather than a regular trash bin?',
+     opts:['They are a recyclable material','They can spontaneously combust','They smell bad in open trash','They are classified as biohazard waste'],correct:1,
+     why:'Solvent-soaked (oily) rags can spontaneously combust, so they must go into a sealed, fire-rated container — never loose in regular trash.'},
+    {stem:'What actually determines the amount of styrene VOC/HAP emissions coming off an open mold?',
+     opts:['The thickness of the laminate','The surface area of resin/gelcoat exposed to air','The color of the gelcoat','The brand of resin used'],correct:1,
+     why:'Emissions scale with the surface area of resin/gelcoat exposed to the air — not the thickness of the material underneath it.'},
+    {stem:'Why does closed molding (vacuum infusion, VARTM, RTM) cut environmental emissions compared with open molding?',
+     opts:['It uses a resin that contains no styrene','It encloses the resin/catalyst reaction inside a sealed mold or bag, removing the exposed evaporating surface','It requires no gelcoat at all','It is always done outdoors'],correct:1,
+     why:'Closed molding encloses the reaction inside a sealed mold/bag, eliminating the exposed resin surface that styrene would otherwise evaporate from — dramatically cutting VOC/HAP emissions versus open molding.'},
+    {stem:'Which agency is primarily responsible for regulating a boat builder\'s environmental emissions and waste disposal?',
+     opts:['OSHA','The EPA (Environmental Protection Agency)','The U.S. Coast Guard','ABYC'],correct:1,
+     why:'The EPA controls environmental regulations for boat builders (air emissions, waste disposal). OSHA, by contrast, governs workplace safety broadly.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-13'); }});
+})();
+</script>
+</body>
+</html>

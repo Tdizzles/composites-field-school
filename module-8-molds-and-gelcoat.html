@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 8 — Molds, Tooling &amp; Gelcoat Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <div class="brand">Composites Field School · <span>Module 8</span></div>
+    <div class="counter" id="counter">Section 1 / 6</div>
+  </div>
+  <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+</header>
+
+<div class="wrap">
+<div class="stage" id="stage">
+
+  <!-- 1: HOOK - the mold is the product -->
+  <section class="panel active" data-name="Molds, plugs & gelcoat">
+    <p class="kicker">Molds, tooling &amp; gelcoat — start here</p>
+    <h1>Gelcoat goes in first — before the boat exists</h1>
+    <p class="lead">Everyone thinks of gelcoat as "the color." It isn't. It's the <b>first material sprayed</b>, into an empty mold, before a single strand of glass goes in. Whatever that mold surface looks like, every part pulled from it looks like too.</p>
+
+    <div class="card">
+      <svg class="demo-svg" viewBox="0 0 440 190" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:190px">
+        <text x="60" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" font-weight="600" fill="#42586b">Plug</text>
+        <path d="M20 150 Q60 40 100 150 Z" fill="#2f6f92" opacity="0.85"/>
+        <text x="60" y="170" text-anchor="middle" font-family="Space Grotesk" font-size="10.5" fill="#42586b">smooth gelcoat finish</text>
+
+        <path d="M112 95 L150 95" stroke="#42586b" stroke-width="2" marker-end="url(#arrM8)"/>
+
+        <text x="220" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" font-weight="600" fill="#42586b">Mold</text>
+        <path d="M160 150 Q220 30 280 150" fill="none" stroke="#1d4f6c" stroke-width="10"/>
+        <path d="M160 150 Q220 30 280 150" fill="none" stroke="#b98416" stroke-width="3" stroke-dasharray="1 0" opacity="0.9"/>
+        <text x="220" y="170" text-anchor="middle" font-family="Space Grotesk" font-size="10.5" fill="#42586b">negative, cast off the plug</text>
+
+        <path d="M292 95 L330 95" stroke="#42586b" stroke-width="2" marker-end="url(#arrM8)"/>
+
+        <text x="380" y="20" text-anchor="middle" font-family="Space Grotesk" font-size="12.5" font-weight="600" fill="#42586b">Part</text>
+        <path d="M340 150 Q380 45 420 150 Z" fill="#ef5f2b" opacity="0.18" stroke="#ef5f2b" stroke-width="3"/>
+        <path d="M340 150 Q380 45 420 150" fill="none" stroke="#c9a227" stroke-width="4"/>
+        <text x="380" y="170" text-anchor="middle" font-family="Space Grotesk" font-size="10.5" fill="#42586b">gelcoat surface, formed inside</text>
+        <defs><marker id="arrM8" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#42586b"/></marker></defs>
+      </svg>
+      <div class="readout info">Every imperfection on the <b>plug</b> reproduces onto the <b>mold face</b> — and every imperfection on the mold face reproduces onto <b>every single part</b> pulled from it. There is no fixing a bad mold part-by-part; you fix the mold.</div>
+    </div>
+
+    <div class="callout"><b>Mold, defined:</b> a frame or model around or on which something (a part) is formed or shaped. Production boat molds are typically made from <b>fiberglass composite materials</b> themselves.</div>
+    <div class="callout"><b>No matter what a plug is made from</b> — wood, foam, machined tooling board — its surface must have a smooth <b>gelcoat finish</b>, because every surface flaw on the plug carries all the way through to the finished part.</div>
+
+    <details class="deep">
+      <summary>Field notes: draft angle, framing, and mold inspection</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Draft.</b> A mold releases cleanly (independent of any wax or chemical) only if it has a <b>positive draft margin of at least 2°</b> — a slight taper so the part can pull free without being locked in by an undercut — or the mold is built as a <b>split mold</b> that opens in sections around a shape that can't draft in one piece.</p>
+        <p style="margin-bottom:8px"><b>Framing.</b> The structural framework built around a mold exists to make sure the mold <b>holds its original shape</b> through repeated part construction and cure cycles — a mold that flexes or sags produces parts that are off-spec even if the gelcoat and layup are perfect.</p>
+        <p style="margin-bottom:0"><b>Before every use, a visual mold inspection</b> checks for heat damage, nicks, scratches, cracks, and surface contamination — because, again, whatever is wrong with the mold is wrong with the part. And never rinse a gelcoated mold with <b>soapy water</b> — residue interferes with release and surface finish.</p>
+      </div>
+    </details>
+
+    <div id="hookVideos"></div>
+  </section>
+
+  <!-- 2: PRODUCTION SEQUENCE ORDER GAME -->
+  <section class="panel" data-name="The production sequence">
+    <p class="kicker">Objective: put the build sequence in order</p>
+    <h2>Seven steps, and the order is not negotiable</h2>
+    <p>Drag the steps into the correct production order — or use the arrow buttons. This is the single most-tested sequence in this module.</p>
+    <div class="card">
+      <div id="seqGame"></div>
+    </div>
+    <div class="callout"><b>Recall focus:</b> gelcoat is sprayed <b>in-mold, first</b> — before any structural fiber goes in. It's a manufacturing step, applied under controlled conditions, not a paint coat added at the end.</div>
+
+    <details class="deep">
+      <summary>Field notes: what a "skin coat" actually does</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px">The skin coat is the first layer of fiber laid directly against the cured gelcoat — applied by <b>chopper gun or hand lay-up</b>. It acts as a <b>corrosion barrier</b> that increases resistance to blisters, and it <b>supports/backs up the gelcoat film</b> so the thin gelcoat layer isn't left unsupported against the mold.</p>
+        <p style="margin-bottom:0">Before the bulk structural laminate goes on top, the skin coat should be checked for adequate <b>Barcol hardness</b> development — confirming it has cured enough to safely build more layers on top of it.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 3: MOLD RELEASE AGENT SELECTOR -->
+  <section class="panel" data-name="Mold release agents">
+    <p class="kicker">Objective: explain mold release (wax vs. PVA)</p>
+    <h2>Nothing gets laid up until release is covered</h2>
+    <p>Release agents let the finished part separate cleanly from the mold. There are three common types — tap each to see what it is and when it's used.</p>
+    <div class="card">
+      <div class="segmented" id="relSeg" role="group" aria-label="Choose a release agent type">
+        <button class="seg" data-rel="wax" aria-pressed="true">Mold release wax</button>
+        <button class="seg" data-rel="pva" aria-pressed="false">PVA</button>
+        <button class="seg" data-rel="chem" aria-pressed="false">Chemical release agent</button>
+      </div>
+      <div class="readout" id="relRead"></div>
+      <div class="callout"><b>The one rule that never changes:</b> whichever product you use, there must always be <b>sufficient release agent covering the whole mold surface</b> before a part is laid up — application specifics depend on that product's own instructions.</div>
+    </div>
+
+    <div class="callout todo">
+      <b>TODO: VERIFY with Tyler / ABYC study guide:</b> the common shop rule of thumb that <b>PVA is generally reserved for one-off/plug work or as a backup/secondary release</b> (it's a sacrificial film, brushed or sprayed on, that's washed off with water afterward) while <b>wax is the default for repeat production molds</b> (it's buffed, not consumed, so it can be reapplied cycle after cycle) is common shop knowledge but is not explicitly stated in the vetted source material for this module — confirm before teaching it as a testable fact.
+      <!-- TODO: VERIFY content with Tyler / ABYC study guide: exact selection criteria for wax vs. PVA vs. chemical release agents beyond "three common types exist" and "sufficient coverage is always required" -->
+    </div>
+
+    <details class="deep">
+      <summary>Field notes: why release matters this much</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:0">Release agent problems don't show up as a cosmetic flaw — they show up as a part that <b>won't come out</b>, or worse, one that comes out <b>too early</b> (pre-release, covered in Section 5). Both are production-stopping, expensive failures, which is why release gets checked before every single layup, not just when a mold is new.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 4: GELCOAT MIL-THICKNESS SLIDER -->
+  <section class="panel" data-name="Gelcoat film thickness">
+    <p class="kicker">Objective: explain gelcoat film-thickness effects</p>
+    <h2>Gelcoat thickness is a manufacturing spec, not a feel</h2>
+    <p>Gelcoat is sprayed to a target wet-film thickness measured with a mil (wet-gauge) gauge. Drag the slider across the range shops actually see and read what happens at each extreme.</p>
+    <div class="card">
+      <svg class="demo-svg" id="sprayGunSvg" viewBox="0 0 400 130" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:130px">
+        <rect x="10" y="55" width="60" height="20" rx="4" fill="#42586b"/>
+        <rect x="60" y="48" width="14" height="34" rx="3" fill="#1c1f26"/>
+        <path id="sprayCone" d="M74 50 L200 20 L200 110 L74 80 Z" fill="#ef5f2b" opacity="0.25"/>
+        <line x1="74" y1="65" x2="200" y2="65" stroke="#ef5f2b" stroke-width="1.5" stroke-dasharray="3 4"/>
+        <rect x="200" y="15" width="10" height="100" fill="#c2ced6"/>
+        <text x="205" y="10" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#42586b">mold face</text>
+        <text id="sprayDistLabel" x="140" y="118" text-anchor="middle" font-family="Space Grotesk" font-size="11" fill="#42586b">proper spray distance: 12–18 in</text>
+      </svg>
+      <div class="control">
+        <label for="milRange"><span>Gelcoat wet-film thickness</span><span class="val" id="milVal">20 mils</span></label>
+        <input type="range" id="milRange" min="6" max="34" value="20" step="1">
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Undercure / print-through risk</span><span id="thinRiskVal">low</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="thinRiskFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="mlab"><span>Cracking risk (excess shrinkage)</span><span id="thickRiskVal">low</span></div>
+        <div class="mtrack"><div class="mfill weight" id="thickRiskFill" style="width:0%"></div></div>
+      </div>
+      <div class="readout" id="milRead"></div>
+    </div>
+
+    <div class="callout"><b>The spec:</b> gelcoat is sprayed to roughly <b>18–22 mils wet</b>, curing down to about <b>18 mils</b> final thickness. That range is the target for the whole slider above.</div>
+
+    <details class="deep">
+      <summary>Field notes: what gelcoat is actually doing for you, and how it's mixed/sprayed</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>Function:</b> gelcoat is a protective layer, a cosmetic finish, a water-tight barrier, the pigment/color layer, and it aids release from the mold — five jobs from one sprayed film.</p>
+        <p style="margin-bottom:8px"><b>Resin type:</b> gelcoat is typically an <b>isophthalic polyester</b> resin, formulated with <b>no surfacing agent</b> (unlike laminating resin, which needs one to cure tack-free in open air — gelcoat cures against the closed mold face instead).</p>
+        <p style="margin-bottom:8px"><b>Mixing &amp; thinning:</b> gelcoat should be mixed every <b>24 hours</b>, for about <b>10 minutes</b>, to keep pigments and fillers in suspension. If it needs thinning, that's done with <b>acetone</b> — sometimes called a "false monomer" because it thins the viscosity without taking part in the cure the way styrene does.</p>
+        <p style="margin-bottom:0"><b>Flow rate</b> for spraying gelcoat is set by three things together: spray-tip size, gelcoat viscosity, and pump pressure. Before spraying, inspect fittings, lines, and filters for leaks.</p>
+      </div>
+    </details>
+
+    <div id="gelcoatVideos"></div>
+  </section>
+
+  <!-- 5: DEFECT DIAGNOSIS MATCH GAME -->
+  <section class="panel" data-name="Gelcoat defect diagnosis">
+    <p class="kicker">Objective: diagnose gelcoat defects</p>
+    <h2>Every defect has a specific cause — match them</h2>
+    <p>Click a defect on the left, then its cause on the right. These four are the ones an inspector — and the exam — will name directly.</p>
+    <div class="card">
+      <div id="defectMatchGame"></div>
+      <div class="readout ok" id="defectMatchDone" style="display:none">All matched. Notice the pattern: nearly every defect traces back to too much (or too little) film thickness, catalyst, heat, or turbulence.</div>
+    </div>
+
+    <div class="callout"><b>Spraying technique that avoids some of this outright:</b> hold the gun <b>90° to the surface</b>, spray from <b>12–18 inches</b>, and overlap each pass by about <b>50%</b>, crossing directions. Start the gun at <b>zero pressure</b> and step up in <b>~10 psi increments</b> until you get a full, even fan pattern — and spray the flange perimeter first, so any off-ratio burst at gun start-up lands outside the finished part surface.</div>
+
+    <details class="deep">
+      <summary>Field notes: safety, cleanup, and equipment upkeep around gelcoat</summary>
+      <div class="deep-body">
+        <p style="margin-bottom:8px"><b>PPE for gelcoat:</b> safety glasses, a properly cartridge-rated respirator, and gloves. For trimming and grinding afterward: a properly rated (particulate) respirator plus eye and skin protection.</p>
+        <p style="margin-bottom:8px"><b>Spills &amp; labeling:</b> a red label on a drum means <b>flammable</b>. A large spill must be <b>contained immediately</b>, management alerted, and the material kept from reaching floor drains — the <b>EPA</b> is the regulatory body governing this. <b>Controlled spraying</b> (vs. open/uncontrolled) reduces emissions, reduces overspray, improves transfer efficiency, and cuts waste.</p>
+        <p style="margin-bottom:0"><b>Equipment:</b> an internal-mix spray gun must be <b>flushed after every use</b>. Robotic gelcoat application's main advantage is <b>consistency</b> of thickness and coverage part-to-part. After cure, demold with <b>hooks, straps, and wedges</b> rather than prying on the laminate — and only once the part has cooled to <b>room temperature</b>. A hoist, when used, is a <b>two-employee</b> job. Interior gelcoat is applied only after cutting, grinding, and sanding are complete, and the most common trim method is simply using the <b>mold flange</b> as a guide.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 6: RECALL -->
+  <section class="panel" data-name="Recall check">
+    <p class="kicker">Prove it stuck</p>
+    <h2>Recall check</h2>
+    <p>Five exam-style questions built directly from what's on this page.</p>
+    <div class="card">
+      <div id="quizContainer"></div>
+      <div class="score" id="scoreLine"></div>
+    </div>
+    <div class="done-box" id="doneBox">
+      <h2>Module 8 locked in.</h2>
+      <p>You can order the production sequence, explain why gelcoat goes in-mold first, tell wax/PVA/chemical release apart, read what mil-thickness extremes do to a part, and diagnose alligatoring, pre-release, crazing, and porosity by cause.</p>
+      <p class="next-label">Up next → Module 9: Structural details &amp; design.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="foot-row">
+    <button class="btn ghost" id="backBtn" disabled>Back</button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+</footer>
+
+<script src="assets/knowledge-base.js"></script>
+<script src="assets/videos.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+(function(){
+  CFS.initNav();
+  CFS.renderVideos('hookVideos', CFS_VIDEOS.processes);
+  CFS.renderVideos('gelcoatVideos', CFS_VIDEOS.gelcoat);
+  CFS.initChatbot();
+
+  /* ---- 2. production sequence order game ---- */
+  var seqItems=[
+    {id:'prep',label:'Mold preparation (inspect &amp; clean the mold surface)'},
+    {id:'release',label:'Apply release agent'},
+    {id:'gel',label:'Spray gelcoat'},
+    {id:'skin',label:'Apply skin coat'},
+    {id:'lam',label:'Lay up structural laminate'},
+    {id:'cure',label:'Cure'},
+    {id:'demold',label:'Demold'}
+  ];
+  var seqCorrect=['prep','release','gel','skin','lam','cure','demold'];
+  CFS.initOrderGame('seqGame', seqItems, seqCorrect, {
+    correctMsg:'Correct — mold prep, release, gelcoat, skin coat, structural laminate, cure, demold. That order never changes.',
+    wrongMsg:'Not quite — green rows are already in the right spot. Remember: gelcoat goes in before any fiber does.'
+  });
+
+  /* ---- 3. release agent selector ---- */
+  var releases={
+    wax:{title:'Mold release wax',
+      text:'A wax film buffed onto the mold surface. One of the three common release agent types, alongside PVA and chemical release agents. Like every release method, it only works if it <b>fully covers</b> the mold surface before layup.'},
+    pva:{title:'PVA (polyvinyl alcohol)',
+      text:'A separate liquid release agent — one of the three common types alongside wax and chemical agents. Same governing rule applies: full, sufficient coverage of the mold before the part is laid up, per that product\'s own instructions.'},
+    chem:{title:'Chemical release agents',
+      text:'The third common category of release agent. Product instructions vary by manufacturer, but the requirement is identical to wax and PVA: sufficient coverage of the entire mold surface before layup.'}
+  };
+  var relSeg=document.querySelectorAll('#relSeg .seg');
+  function setRel(k){
+    relSeg.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.rel===k);});
+    var r=releases[k];
+    var read=document.getElementById('relRead');
+    read.className='readout info';
+    read.innerHTML='<b>'+r.title+'.</b> '+r.text;
+  }
+  relSeg.forEach(function(b){b.addEventListener('click',function(){setRel(b.dataset.rel);});});
+  setRel('wax');
+
+  /* ---- 4. gelcoat mil-thickness slider ---- */
+  var milRange=document.getElementById('milRange');
+  function setMil(){
+    var m=+milRange.value;
+    document.getElementById('milVal').textContent=m+' mils';
+    var thin=Math.max(0,Math.round((20-m)/14*100));
+    var thick=Math.max(0,Math.round((m-20)/14*100));
+    thin=Math.min(100,thin); thick=Math.min(100,thick);
+    document.getElementById('thinRiskFill').style.width=thin+'%';
+    document.getElementById('thickRiskFill').style.width=thick+'%';
+    document.getElementById('thinRiskVal').textContent=thin>60?'high':thin>15?'medium':'low';
+    document.getElementById('thickRiskVal').textContent=thick>60?'high':thick>15?'medium':'low';
+    var read=document.getElementById('milRead');
+    if(m<18){
+      read.className='readout warn';
+      read.innerHTML='<b>Too thin.</b> Gelcoat applied too thinly is the direct cause of <b>alligatoring</b> — and laminating too early over an under-thickness, under-cured film makes it worse. Print-through and undercure risk climb fast below spec.';
+    } else if(m>22){
+      read.className='readout warn';
+      read.innerHTML='<b>Too thick.</b> An over-thickness film cures faster and shrinks more, building internal stress that shows up as <b>cracking in a radial or divergent (starburst) pattern</b>.';
+    } else {
+      read.className='readout ok';
+      read.innerHTML='<b>18–22 mils wet — on spec.</b> This is the target range gelcoat is sprayed to, curing down to about 18 mils final thickness.';
+    }
+  }
+  milRange.addEventListener('input',setMil); setMil();
+
+  /* ---- 5. defect diagnosis match game ---- */
+  CFS.initMatchGame('defectMatchGame', [
+    {left:'Alligatoring', right:'Gelcoat applied too thinly, or laminate applied too early over it'},
+    {left:'Pre-release', right:'Too much catalyst/promoter, excess film thickness, elevated shop/mold temperature, or wrong release agent'},
+    {left:'Crazing / cracking', right:'Gelcoat too thick or over-catalyzed, curing too fast with excess shrinkage'},
+    {left:'Porosity', right:'High-speed/turbulent mixing, too-high spray pressure, spraying too close, or water contamination'}
+  ], {onComplete:function(){document.getElementById('defectMatchDone').style.display='block';}});
+
+  /* ---- 6. quiz ---- */
+  var questions=[
+    {stem:'In the production sequence, when is gelcoat applied relative to the structural laminate?',
+     opts:['After the structural laminate has cured','Before the skin coat and structural laminate — sprayed in-mold first','At the same time as the structural laminate','Only after demolding'],correct:1,
+     why:'The sequence is mold prep → release agent → gelcoat → skin coat → structural laminate → cure → demold. Gelcoat goes in-mold, first.'},
+    {stem:'Which of these is NOT one of the three common mold release agent types?',
+     opts:['Mold release wax','PVA','Chemical release agents','Acetone'],correct:3,
+     why:'The three common release agent types are mold release wax, PVA, and chemical release agents. Acetone is used to thin gelcoat, not to release a mold.'},
+    {stem:'Gelcoat sprayed noticeably UNDER the 18–22 mil wet-gauge target is most likely to cause:',
+     opts:['Cracking in a radial/divergent pattern','Alligatoring and undercure/print-through risk','Faster demold times with no downside','Better pigmentation'],correct:1,
+     why:'Too-thin gelcoat is a direct cause of alligatoring, and increases the risk of undercure and print-through showing through the surface.'},
+    {stem:'Gelcoat sprayed noticeably OVER the 18–22 mil wet-gauge target is most likely to cause:',
+     opts:['Alligatoring','Porosity from turbulent mixing','Cracking in a radial or divergent (starburst) pattern from excess shrinkage','Improved release from the mold'],correct:2,
+     why:'A too-thick film cures faster and shrinks more, building internal stress that shows up as radial/divergent cracking.'},
+    {stem:'A part separates from the mold earlier than it should (pre-release). Which of these is a listed cause?',
+     opts:['Spraying too far from the mold surface','Too much catalyst or promoter, excess film thickness, or elevated shop/mold temperature','Using mat between laminate layers','Flushing the spray gun after use'],correct:1,
+     why:'Pre-release is caused by too much catalyst, too much promoter/accelerator, excessive film thickness, elevated shop/mold temperature, or an improper release agent.'}
+  ];
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-8'); }});
+})();
+</script>
+</body>
+</html>
