@@ -132,7 +132,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions — the distractors are built to look right, so read carefully.</p>
+    <div id="mustWatch9"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -161,7 +162,8 @@
 <script>
 (function(){
   CFS.initNav();
-  CFS.renderVideos('anatomyVideos', CFS_VIDEOS.structure);
+  CFS.renderMustWatch('mustWatch9', CFS_VIDEOS.structure[0], {id: 'module-9-required'});
+  CFS.renderVideos('anatomyVideos', CFS_VIDEOS.structure.slice(1));
   CFS.initChatbot();
 
   /* ---- 1. hook: bare vs stiffened panel ---- */
@@ -307,22 +309,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'What is the general purpose of hull stiffeners such as stringers, floors, and bulkheads?',
-     opts:['Distribute local loads throughout the larger hull structure','Provide the mounting point for propulsion','Prevent gelcoat print-through','Increase the resin-to-fiber ratio'],correct:0,
+     opts:['Distribute local loads out into the larger hull structure so no single panel carries them alone','Provide the mounting point for the propulsion system and carry its thrust load','Prevent gelcoat print-through from showing on the finished hull surface','Increase the resin-to-fiber ratio so the panel wets out more completely'],correct:0,
      why:'Hull stiffeners exist to spread local loads out into the larger hull structure rather than letting one panel carry them alone. Propulsion mounting is the transom\'s job; print-through and resin ratio are Module 2/1 topics, not structural-member jobs.'},
     {stem:'A stringer has one clear, known load path along its length. A hull skin taking unpredictable slamming loads does not. Which fiber choice follows, as taught in Modules 1–2 and applied here?',
-     opts:['Unidirectional fiber along the stringer; biaxial/quasi-isotropic for the hull skin','Chopped strand mat for both, for simplicity','Unidirectional fiber for the hull skin, to save weight','Fiber orientation makes no difference once resin cures'],correct:0,
+     opts:['Unidirectional fiber along the stringer; biaxial/quasi-isotropic coverage for the hull skin','Chopped strand mat for both members, chosen for simplicity','Unidirectional fiber for the hull skin instead, to save weight','Fiber orientation makes no real difference once the resin fully cures'],correct:0,
      why:'A single, known load path (the stringer) calls for unidirectional fiber laid along it. Multiple/uncertain load paths (the hull skin) call for biaxial/triaxial or quasi-isotropic coverage — exactly the Module 1–2 rule applied to real members.'},
     {stem:'Why does a stringer (or bulkhead) get a radius fillet at its base instead of a sharp inside corner?',
-     opts:['A sharp corner concentrates stress and traps voids; the fillet improves local and overall strength','It\'s purely cosmetic, to hide the tabbing','It saves resin compared to a sharp corner','It\'s only needed when the core is plywood'],correct:0,
+     opts:['A sharp corner concentrates stress and traps voids; the fillet improves local and overall strength','It\'s purely cosmetic, added only to make the tabbing look finished','It saves resin compared to a sharp corner, cutting material cost','It\'s only required when the stringer core is plywood rather than foam'],correct:0,
      why:'A sharp inside corner concentrates stress and traps air/voids. The radius fillet makes the stiffener more effective in the local panel area and improves overall longitudinal strength.'},
     {stem:'In general marine construction terms, what best describes a hull-to-deck joint?',
-     opts:['The hull flange overlaps the deck edge (shoebox) or hull/deck flanges join side by side (flange-to-flange), typically both bonded and mechanically fastened for redundancy','It is always one continuous molding with no seam at all','It is fastened with mechanical fasteners only, never bonded','It is a purely cosmetic trim strip with no structural role'],correct:0,
+     opts:['The hull flange overlaps the deck edge (shoebox) or hull/deck flanges join side by side (flange-to-flange), typically both bonded and mechanically fastened for redundancy','It is always one continuous molding with no seam of any kind','It is joined with mechanical fasteners only, and is never bonded with adhesive or laminate','It is a purely cosmetic trim strip that carries no structural load'],correct:0,
      why:'Both common geometries — shoebox/overlap and flange-to-flange — are typically both bonded (adhesive/laminate) and mechanically fastened, since the joint has to carry real torsional loads that increase with beam.'},
     {stem:'What is "tabbing" in structural fiberglass construction?',
-     opts:['Bonding a structural member (a stringer, bulkhead, etc.) to the hull using overlapping laminate','A style of gelcoat spray application','Cutting fabric into small strips for chopper-gun spray-up','A brand name for a category of resin'],correct:0,
-     why:'Tabbing is the overlapping-laminate bond that attaches a structural member to the hull. It\'s one of the two steps called out as critical to a proper stringer installation, along with correct positioning.'}
+     opts:['Bonding a structural member (a stringer, bulkhead, etc.) to the hull using overlapping laminate','A style of gelcoat spray application used to build up film thickness in stages','Cutting reinforcement fabric into small strips to feed a chopper gun','A brand name for a category of vinylester laminating resin'],correct:0,
+     why:'Tabbing is the overlapping-laminate bond that attaches a structural member to the hull. It\'s one of the two steps called out as critical to a proper stringer installation, along with correct positioning.'},
+    {stem:'How do you decide whether a hull member has a single, known load path versus multiple/uncertain load paths?',
+     opts:['Ask whether you can point to one line on the part and say it only ever gets pulled that way; if not, treat it as a multiple/uncertain load path','Measure the member\'s total laminate thickness — anything under a set thickness is treated as multi-directional','Check whether the member is cored or solid laminate — cored members are always single load path','Ask whether the member sits above or below the waterline — above the waterline is always single load path'],correct:0,
+     why:'The test is whether you can point to one line on the part and say "this only ever gets pulled that way." If you can\'t, treat it as a multiple/uncertain load path and cover every direction.'},
+    {stem:'What material is commonly used as the core/former for stringers and bulkheads before laminating over it?',
+     opts:['Rigid foam, shaped to the stringer\'s final cross-section','Solid mahogany, milled to the stringer\'s final cross-section','Aluminum extrusion, bonded in with structural adhesive','Pre-cured fiberglass rod, laid in before the hull skin cures'],correct:0,
+     why:'Stringers and bulkheads are commonly built on a foam core/former, then laminated over and tabbed to the hull.'},
+    {stem:'What two things are called out as critical to a proper stringer installation?',
+     opts:['Correct positioning on the hull, and proper tabbing (bonding with overlapping laminate)','Correct positioning on the hull, and painting it before the hull skin cures','Proper tabbing, and drilling weep holes along its full length','Correct positioning, and coring it with plywood instead of foam'],correct:0,
+     why:'The two steps called out as critical to installing a stringer are correct positioning and proper tabbing to the hull with overlapping laminate.'},
+    {stem:'On an outboard-powered boat, what is the transom\'s structural function?',
+     opts:['It\'s the mounting point for the propulsion system and distributes the engine\'s thrust load into the rest of the vessel','It\'s the primary fore-and-aft stiffener that distributes local loads throughout the hull','It\'s the transverse panel that ties the hull sides together at one station','It\'s the joint where the deck molding meets the hull molding'],correct:0,
+     why:'The transom is the mounting point for the propulsion system on an outboard boat, distributing the engine\'s thrust into the rest of the vessel. The other options describe the stringer, bulkhead, and hull-to-deck joint instead.'},
+    {stem:'What material is commonly used as a core for transoms?',
+     opts:['Plywood, cut and sealed to the transom\'s shape before laminating over it','Balsa end-grain, identical to typical hull-panel coring','Extruded aluminum sheet, for maximum stiffness under thrust load','Solid fiberglass laminate with no core material at all'],correct:0,
+     why:'Transoms are commonly cored with plywood, laminated over with fiberglass.'},
+    {stem:'Why is hat-stiffened construction often chosen for commercial and military boats built for rough seas?',
+     opts:['When it fails, it tends to fail first at the stiffener\'s attachment point — a failure that\'s easy to notice and repair, versus a hidden failure elsewhere','It eliminates the need for tabbing or a radius fillet at any stiffener-to-hull joint','It reduces total laminate weight more than any other stiffener shape','It removes torsional loading from the hull-to-deck joint entirely'],correct:0,
+     why:'Hat-stiffened construction is chosen because when it fails, it tends to fail first at the visible attachment joint — easy to notice and repair, versus a hidden structural failure buried elsewhere in the hull.'},
+    {stem:'Why can a hull-to-deck joint design that was fine on a narrower hull be under-built on a wider one?',
+     opts:['Torsional (twisting) forces on the joint increase as the boat\'s beam gets wider','Wider hulls always use thinner gelcoat, which weakens the joint bond','Wider beams require the joint to be bonded only, with no mechanical fasteners','Wider hulls eliminate the need for a radius fillet at the joint'],correct:0,
+     why:'The hull-to-deck joint has to carry torsional forces that increase as beam gets wider — a joint sized for a narrower hull can be under-built once beam increases.'},
+    {stem:'What are putties used for in stringer and bulkhead installation?',
+     opts:['Filleting — forming the radius fillet at the tabbing joint','Thinning the laminating resin before it\'s applied over the core','Replacing gelcoat as the cosmetic finish coat on interior surfaces','Bonding the hull-to-deck flanges in place of mechanical fasteners'],correct:0,
+     why:'Putties are used for filleting bulkheads and stringers — forming the radius fillet at the tabbing joint.'},
+    {stem:'What effect would deviating from the designed lamination schedule have on a structural member?',
+     opts:['Reduced strength, increased risk of delamination, or changes in dimensional stability versus the design intent','No measurable effect, as long as the total fiber weight stays the same','Improved strength, since additional plies always add safety margin','A change in gelcoat color only, with no effect on structural performance'],correct:0,
+     why:'Changing the lamination schedule from the design intent can reduce strength, increase delamination risk, or change the part\'s dimensional stability.'},
+    {stem:'What is a bulkhead\'s structural role?',
+     opts:['A transverse panel spanning hull to deck at one station, subdividing the hull and tying the sides together for stiffness','A fore-and-aft member that distributes local loads throughout the whole hull length','The mounting point that carries the propulsion system\'s thrust load','The seam where the hull and deck moldings are joined together'],correct:0,
+     why:'A bulkhead is a transverse structural panel spanning hull to deck at one station, subdividing the hull and tying the sides together for stiffness at that point — the other options describe the stringer, transom, and hull-to-deck joint.'},
+    {stem:'How does a floor differ from a stringer in hull construction?',
+     opts:['A floor is a transverse stiffener running athwartship, while a stringer is the primary fore-and-aft stiffener','A floor is laminated only with epoxy, while a stringer always uses polyester resin','A floor carries propulsion thrust, while a stringer carries hull-to-deck joint torsional loads','A floor is only used on cored hulls, while a stringer is only used on solid-laminate hulls'],correct:0,
+     why:'Floors are transverse stiffeners running athwartship that pair with stringers, which run fore-and-aft — together they distribute loads across the hull bottom.'},
+    {stem:'What has to happen at a "core transition" — where a cored panel meets solid laminate, such as near a hull-to-deck joint or hardware cutout?',
+     opts:['The core has to stop and the skins be laminated solid together, sealed so water can never reach the cut edge of the core','The core material has to change from foam to plywood at every transition point','The gelcoat has to be applied at double thickness across the transition','The transition has to be left uncored on both sides to allow flexing'],correct:0,
+     why:'At a core transition, the core stops and the skins are laminated solid together, sealed so water can never reach the cut edge of the core — get this wrong and the transition becomes the failure point.'},
+    {stem:'Why are hull-to-deck joints typically both bonded (adhesive/laminate) and mechanically fastened, rather than relying on one method alone?',
+     opts:['The mechanical fastening backs up the bond in case it ever lets go, given the real torsional loads the joint carries','Adhesive bonds are purely cosmetic on a hull-to-deck joint and carry no load','Mechanical fasteners alone can\'t physically be installed without a bonded joint present first','Regulatory rules require two fastening methods regardless of the loads involved'],correct:0,
+     why:'Both bonding and mechanical fastening are used so the fasteners back up the bond in case it ever lets go — necessary given the real torsional loads a hull-to-deck joint carries.'},
+    {stem:'In the module\'s opening comparison, what changes between a bare hull-skin panel and the same panel with a stringer added?',
+     opts:['The stringer ties the panel into the larger hull structure instead of it flexing on its own under load','The stringer replaces the need for any gelcoat on that panel','The stringer changes the panel\'s fiber orientation from biaxial to unidirectional','The stringer removes the need for a hull-to-deck joint nearby'],correct:0,
+     why:'A wide, unsupported panel flexes under load with nothing tying it back to the rest of the boat. Add a stringer and the panel is tied into the larger structure instead of flexing alone.'},
+    {stem:'What is typically the most vulnerable point in a stringer or bulkhead installation?',
+     opts:['The tabbing/fillet joint where the member meets the hull','The foam core material itself, which fails before the joint does','The gelcoat layer on the hull skin nearest the member','The mechanical fasteners holding the hull-to-deck joint'],correct:0,
+     why:'The tabbing/fillet joint where a stringer or bulkhead meets the hull is the vulnerable point — skip the fillet or leave a sharp corner there and you get stress concentration and trapped voids.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-9'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-9'); CFS.recordScore('module-9', c, t); }});
 })();
 </script>
 </body>

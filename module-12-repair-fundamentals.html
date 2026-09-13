@@ -150,7 +150,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. Read the distractors carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest — a full-detail walkthrough of an actual fiberglass and gelcoat repair. Then: 20 exam-style questions. Read the distractors carefully.</p>
+    <div id="mustWatch12"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -179,6 +180,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch12', CFS_VIDEOS.repair[0], {id: 'module-12-required'});
   CFS.initChatbot();
 
   /* ---- 2. triage: wet-rag / tap test toggle ---- */
@@ -269,7 +271,7 @@
   });
 
   /* ---- 5. blister/osmosis match game ---- */
-  CFS.renderVideos('repairVideos', CFS_VIDEOS.repair);
+  CFS.renderVideos('repairVideos', CFS_VIDEOS.repair.slice(1));
   CFS.initMatchGame('blisterMatchGame', [
     {left:'Diagnose', right:'Identify the blisters/osmosis and how far the moisture damage extends before doing any repair work'},
     {left:'Dry out', right:'Open the blisters and let the laminate dry out thoroughly before repairing'},
@@ -279,7 +281,7 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'You tap a suspect area and get a noticeably duller, hollower sound than the solid laminate right next to it. What does this suggest?',
-     opts:['The area is just cosmetically scuffed and needs polishing','Possible delamination or a void beneath the surface — treat it as a structural concern until proven otherwise','The gelcoat is simply thicker there','Tap sound has no diagnostic value'],correct:1,
+     opts:['The area is only cosmetically scuffed and needs polishing to restore gloss','Possible delamination or a void beneath the surface — treat it as a structural concern until proven otherwise','The gelcoat happens to be thicker at that spot, changing the tone','Tap sound is not a reliable indicator and should be ignored'],correct:1,
      why:'A tap test compares the sound over a suspect area against a known-good area of laminate; a dull or hollow sound can indicate voids or delamination beneath the surface that you can\'t see.'},
     {stem:'What is the typical AND minimum scarf ratio for repairing a single-skin hole?',
      opts:['6:1','12:1','20:1','3:1'],correct:1,
@@ -288,13 +290,58 @@
      opts:['2 inches','4 inches','About 6 inches','12 inches'],correct:2,
      why:'The minimum finished scarf diameter is about 6 inches, even for small damage — on thin laminate the 12:1 taper math alone can call for less, but the 6-inch floor overrides it.'},
     {stem:'You\'re laminating a new repair layer over laminate that fully cured days ago (it\'s well past the "green" window). What should you do to the surface first for a solid secondary bond?',
-     opts:['Nothing — resin bonds equally well to any surface, cured or not','Sand the surface and wipe it with solvent before laminating','Add extra catalyst to reactivate the old resin','Coat it with wax to seal it first'],correct:1,
+     opts:['Nothing — resin bonds equally well to any surface, whether cured or still green','Sand the surface and wipe it with solvent before laminating','Add extra catalyst to try to reactivate the old, fully-cured resin','Coat the surface with wax first to help the new layer release cleanly'],correct:1,
      why:'Once a laminate is fully cured, the green window for a strong chemical bond has closed — a new layer only gets a weaker secondary/mechanical bond, so the surface needs sanding plus a solvent wipe first.'},
     {stem:'When repairing a hole through a single-skin laminate, what is Formica typically used for?',
-     opts:['As a catalyst measuring cup','As a splash mold — a smooth, non-stick backing to rebuild the outer contour from behind the hole','As a UV-resistant topcoat','As a fabric reinforcement layer'],correct:1,
-     why:'Formica gives a smooth, non-stick backing surface (a splash mold) so you can rebuild the outer contour and gelcoat surface from behind the hole.'}
+     opts:['As a disposable measuring cup for catalyzing small batches of resin','As a splash mold — a smooth, non-stick backing to rebuild the outer contour from behind the hole','As a UV-resistant topcoat applied over the finished gelcoat','As a fabric reinforcement layer laminated into the repair'],correct:1,
+     why:'Formica gives a smooth, non-stick backing surface (a splash mold) so you can rebuild the outer contour and gelcoat surface from behind the hole.'},
+    {stem:'Why is epoxy the default resin choice for repair and secondary bonding work?',
+     opts:['It has the best secondary-bonding characteristics of the three resin families and bonds well to nearly everything, including cured polyester or vinylester','It is the cheapest of the three resin families, making it the practical default for repair work','It cures faster than polyester or vinylester, so repairs return to service sooner','It requires no sanding or solvent wipe before bonding to any cured surface'],correct:0,
+     why:'Epoxy has the best secondary-bonding characteristics of the three resin families and bonds well to nearly everything — that\'s exactly why it\'s the default for repair and secondary bonding.'},
+    {stem:'How does polyester or vinylester resin bond to a fully-cured epoxy surface, compared to epoxy itself?',
+     opts:['Poorly, without heavy surface preparation','Just as well as epoxy does, with no extra prep needed','Better than epoxy bonds to itself, due to styrene cross-linking','Only when applied while the epoxy is still in its green window'],correct:0,
+     why:'Polyester and vinylester bond poorly to fully-cured epoxy without heavy prep — the one-way street that makes epoxy the safer default for repair work.'},
+    {stem:'What is the "green window" in repair work, and why does it matter?',
+     opts:['The period while a laminate is still curing, during which a fresh layer can chemically bond to it — once fully cured, a new layer only gets a weaker secondary/mechanical bond','The time window during which gelcoat must be tinted to match the surrounding color','The period during which MEKP and accelerator must never be combined directly','The window during which a Barcol hardness reading must be taken before it closes'],correct:0,
+     why:'While a laminate is still "green" (curing), a fresh layer can chemically bond to it. Once fully cured, later layers only get a weaker secondary/mechanical bond.'},
+    {stem:'Which of these does this module explicitly flag as NOT having a vetted, specific procedure yet?',
+     opts:['The exact wet-rag test procedure and how to interpret its result','The 12:1 scarf ratio for single-skin hole repairs','The clean/grind → fill → fair → gelcoat → sand → polish order for a gelcoat repair','The recommendation to use epoxy as the default repair resin'],correct:0,
+     why:'The module names the wet-rag test per the curriculum but flags that it doesn\'t have a vetted step-by-step procedure or interpretation for it — confirm against the ABYC study guide before treating any specific procedure as exam fact.'},
+    {stem:'This module recaps a rule from Module 11 for laminate affected by drainage or moisture. What is the correct order?',
+     opts:['Inspect the extent of the damage, remove the trapped moisture, then repair the affected area','Repair the affected area immediately, then check afterward for remaining moisture','Remove all visible moisture first, then decide if inspection is even necessary','Apply a barrier coat right away, then inspect and dry out afterward'],correct:0,
+     why:'The sequence is inspect the extent of the damage, remove the trapped moisture, then repair the affected area — the same order that reappears in blister/osmosis repair.'},
+    {stem:'What are the two field checks this module names for triaging cosmetic vs. structural damage?',
+     opts:['The wet-rag test and the tap test','The Barcol hardness test and the moisture meter','The visual inspection and the fiber-content calculation','The scarf-ratio check and the splash-mold fit test'],correct:0,
+     why:'The curriculum names the wet-rag test and the tap test as the go-to field checks for triage before committing to a repair.'},
+    {stem:'What does the tap test actually compare when triaging suspected damage?',
+     opts:['The sound over the suspect area against a known-good area of laminate nearby','The Barcol hardness reading before and after grinding the area','The moisture-meter reading at the center versus the edge of the damage','The gelcoat color match between the repair and the surrounding surface'],correct:0,
+     why:'The tap test compares the sound over a suspect spot to a known-good area of laminate nearby — a dull/hollow sound versus a sharp/solid one is the signal.'},
+    {stem:'A surface gelcoat scratch or small chip taps solid and consistent with the surrounding laminate, with no crack through to the inside. How should it be triaged?',
+     opts:['Cosmetic — a surface-only repair','Structural — treat it as a possible delamination until proven otherwise','Structural — any visible gelcoat damage requires a full laminate repair','Cosmetic, but only if it is smaller than the 6-inch scarf minimum'],correct:0,
+     why:'A tap test that sounds solid all around, with no through-crack, is exactly what marks this as a surface-only cosmetic repair.'},
+    {stem:'A crack or star-break is visible from both the outside and the inside of the hull. How should it be triaged?',
+     opts:['Structural — damage that goes all the way through the laminate needs a structural repair, not a gelcoat touch-up','Cosmetic — as long as the tap test also sounds solid on both sides','Cosmetic — star-breaks are gelcoat-only damage by definition','Structural only if the crack is longer than 6 inches across'],correct:0,
+     why:'Damage that goes all the way through to the inside of the hull is laminate damage, not cosmetic — it needs a structural repair, not a gelcoat touch-up.'},
+    {stem:'A soft, spongy, or damp area turns up during triage. What does this module call for?',
+     opts:['Treat it as structural — a possible trapped-moisture case needing the inspect → remove moisture → repair sequence from Module 11','Treat it as cosmetic, since sponginess is usually just a soft gelcoat batch','Treat it as structural only if the tap test also sounds solid','Treat it as cosmetic and simply let the area air-dry before painting'],correct:0,
+     why:'A soft, spongy, or damp area is a possible trapped-moisture case — the Module 11 recap applies: inspect, remove the moisture, then repair, not paint over it.'},
+    {stem:'For a single-skin hole repair, what is significant about the 12:1 scarf ratio?',
+     opts:['It is both the typical and the minimum ratio — there is no acceptable ratio less than 12:1','It is the maximum allowed ratio — anything steeper wastes material','It only applies to cored hulls, not single-skin laminate','It is a starting point that is always increased for damage larger than 6 inches'],correct:0,
+     why:'12:1 isn\'t just a typical target — it\'s also the floor. Nothing shallower than 12:1 is acceptable for a single-skin hole repair.'},
+    {stem:'On thin laminate, the 12:1 taper math alone can call for a scarf diameter under 6 inches. What governs in that case?',
+     opts:['The 6-inch minimum finished scarf diameter overrides the 12:1 math and sets the floor','The 12:1 ratio always overrides the 6-inch minimum, regardless of thickness','Whichever number is smaller is used, to conserve material','The technician defaults to a 20:1 ratio instead on thin laminate'],correct:0,
+     why:'No matter how small the damage or how thin the laminate, the finished scarf diameter shouldn\'t be less than about 6 inches — that floor overrides the 12:1 math when the two disagree.'},
+    {stem:'This module names "matching a repair laminate schedule" to the original construction as an objective. What does it say about doing this precisely?',
+     opts:['There is no vetted method for reverse-engineering an unknown original schedule — match ply count, fabric type, and orientation qualitatively instead','It provides an exact numeric formula for reconstructing any original lamination schedule','It says schedule matching is unnecessary as long as the scarf ratio is correct','It recommends always adding one extra ply beyond the original estimate for safety margin'],correct:0,
+     why:'This content pack has no vetted method for reverse-engineering an unknown original schedule — treat it qualitatively, matching ply count, fabric type, and orientation as closely as you can.'},
+    {stem:'What is the correct order for a cosmetic gelcoat repair?',
+     opts:['Clean/grind out the damage → fill/laminate to thickness → fair the surface → apply gelcoat → sand → polish','Apply gelcoat → clean/grind out the damage → fill/laminate → fair → sand → polish','Fair the surface → clean/grind out the damage → fill/laminate → gelcoat → sand → polish','Clean/grind out the damage → apply gelcoat → fill/laminate → fair → sand → polish'],correct:0,
+     why:'The sequence is clean/grind out → fill/laminate → fair → gelcoat → sand → polish — every step builds on the one before it.'},
+    {stem:'What is the correct order for blister/osmosis repair?',
+     opts:['Diagnose the extent of the damage → dry the laminate out thoroughly → apply a barrier coat','Apply a barrier coat → diagnose the damage → dry the laminate out','Dry the laminate out → apply a barrier coat → diagnose the extent of the damage','Diagnose the damage → apply a barrier coat → dry the laminate out afterward'],correct:0,
+     why:'Blister/osmosis repair follows the same inspect-then-dry-then-repair logic as moisture damage generally: diagnose the extent, dry it out fully, then seal it back up.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-12'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-12'); CFS.recordScore('module-12', c, t); }});
 })();
 </script>
 </body>

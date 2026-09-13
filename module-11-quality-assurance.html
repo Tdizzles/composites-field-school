@@ -109,7 +109,7 @@
     <p>A Barcol hardness tester presses a spring-loaded indentor into the laminate and reads how deep it penetrates. <b>Less penetration (a harder surface) means more cure has developed.</b> Slide through the cure timeline and watch what the indentor does.</p>
     <div class="card">
       <div class="control">
-        <label for="barRange"><span>Cure progress (illustrative timeline)</span><span class="val" id="barVal">Just gelled</span></label>
+        <label for="barRange"><span>Barcol hardness reading (GYZJ 934-1 scale)</span><span class="val" id="barVal">10 Barcol</span></label>
         <input type="range" id="barRange" min="0" max="100" value="10" step="1">
       </div>
       <svg class="demo-svg" id="barSvg" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
@@ -119,12 +119,12 @@
         <text x="200" y="160" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">indentor tip, viewed from the side</text>
       </svg>
       <div class="meter">
-        <div class="mlab"><span>Indentation depth (illustrative — less depth = harder / more cured)</span><span id="barDepthVal">deep</span></div>
+        <div class="mlab"><span>Indentation depth (less depth = harder / more cured)</span><span id="barDepthVal">deep</span></div>
         <div class="mtrack"><div class="mfill stiff" id="barDepthFill" style="width:85%"></div></div>
       </div>
       <div class="readout" id="barRead"></div>
     </div>
-    <p class="note">Why check it at all: the skin coat should be checked for Barcol hardness development <b>before more layers are applied on top</b> — building bulk laminate on top of an undercured skin coat can trap uncured resin and risks a weaker, unpredictable bond.</p>
+    <p class="note">0–100 is the tester's own real scale, not an illustrative percentage — a Barcol impressor genuinely reads out in Barcol units. Cured polyester/vinylester laminates commonly land in roughly the mid-30s to low-50s once fully hardened (a widely cited general range, not this course's invented number) — which is why a low-30s-or-below reading on a skin coat is a real, recognizable "not there yet" signal, distinct from the exact ABYC pass/fail threshold flagged below.</p>
     <div id="barcolVideos"></div>
 
     <details class="deep">
@@ -168,7 +168,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. The distractors borrow causes from other defects on this page — read carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest — watching an actual Barcol hardness test performed is worth more than the slider demo alone. Then: 20 exam-style questions, distractors borrow causes from other defects on this page, so read carefully.</p>
+    <div id="mustWatch11"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -197,6 +198,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch11', CFS_VIDEOS.qa[0], {id: 'module-11-required'});
   CFS.initChatbot();
 
   /* ---- 1. hook: good vs porosity vs delamination ---- */
@@ -284,8 +286,7 @@
   var barRange=document.getElementById('barRange');
   function setBar(){
     var c=+barRange.value;
-    var label = c<20?'Just gelled':c<50?'Early cure':c<80?'Post-cure':'Well cured';
-    document.getElementById('barVal').textContent=label;
+    document.getElementById('barVal').textContent=c+' Barcol';
     var depth = Math.max(4, 34 - c*0.3);
     var depthPct = Math.max(4,Math.round(100-c*0.9));
     document.getElementById('barIndentor').innerHTML =
@@ -295,12 +296,12 @@
     document.getElementById('barDepthFill').style.width=depthPct+'%';
     document.getElementById('barDepthVal').textContent = depthPct>66?'deep (soft)':depthPct>33?'moderate':'shallow (hard)';
     var read=document.getElementById('barRead');
-    if(c<40){read.className='readout warn';read.textContent='Indentor sinks deep — the surface is still soft. Barcol hardness has not developed enough to add more layers on top yet.';}
-    else if(c<75){read.className='readout';read.textContent='Hardness is developing. Depending on the process, this may or may not be far enough along — that\'s exactly why you take an actual reading instead of guessing.';}
-    else{read.className='readout ok';read.textContent='Shallow penetration — the surface has developed real hardness. This is the kind of reading that clears a skin coat to take more layers.';}
+    if(c<35){read.className='readout warn';read.textContent=c+' Barcol — indentor sinks deep, the surface is still soft. Below the mid-30s is a widely recognized "not there yet" range for a polyester/vinylester skin coat; check your process\'s actual spec rather than guessing.';}
+    else if(c<55){read.className='readout';read.textContent=c+' Barcol — hardness is developing and in the commonly-cited cured range for many laminates. Whether it clears YOUR process\'s spec is exactly why you take an actual reading instead of a finger test.';}
+    else{read.className='readout ok';read.textContent=c+' Barcol — shallow penetration, well into the hardened range. This is the kind of reading that clears a skin coat to take more layers.';}
   }
   barRange.addEventListener('input', setBar); setBar();
-  CFS.renderVideos('barcolVideos', CFS_VIDEOS.qa);
+  CFS.renderVideos('barcolVideos', CFS_VIDEOS.qa.slice(1));
 
   /* ---- 5. inspection method matcher ---- */
   CFS.initMatchGame('inspectMatchGame', [
@@ -315,19 +316,64 @@
      opts:['(Weight of resin ÷ weight of fiber) × 100%','(Weight of fiber ÷ total weight of the cured laminate) × 100%','(Volume of fiber ÷ volume of the mold) × 100%','(Weight of the cured laminate ÷ weight of fiber) × 100%'],correct:1,
      why:'Percent fiber content = weight of fiber divided by total weight of the cured laminate, times 100%. That single calculation is the actual QA check, not a visual guess.'},
     {stem:'What does a Barcol hardness reading actually measure, and why check it on a skin coat before adding more layers?',
-     opts:['Gelcoat gloss level — purely cosmetic','The depth of penetration of a spring-loaded indentor under load, used to verify the layer has cured enough before more material goes on top','The exact resin-to-catalyst ratio used','The wet-film thickness that was sprayed'],correct:1,
+     opts:['The gelcoat\'s gloss level, checked purely as a cosmetic finish indicator','The depth of penetration of a spring-loaded indentor under load, used to verify the layer has cured enough before more material goes on top','The exact resin-to-catalyst ratio that was mixed for that batch','The wet-film thickness that was sprayed onto the surface'],correct:1,
      why:'Barcol hardness characterizes indentation hardness — depth of penetration under load. Checking it before adding layers confirms the skin coat has actually developed enough cure to build on.'},
     {stem:'During a tap/sounding test, one spot on the panel gives a dull, hollow sound while the surrounding area sounds sharp and solid. What does that most likely indicate?',
-     opts:['Normal, healthy core material','A possible void or delamination beneath the surface at that spot','The resin is over-catalyzed','Excess fiber content at that spot'],correct:1,
+     opts:['Normal, healthy core material with no cause for concern','A possible void or delamination beneath the surface at that spot','A batch of resin that was over-catalyzed before lay-up','A localized area of excess fiber content at that spot'],correct:1,
      why:'A dull/hollow tap-test sound compared to a sharp/solid one is the classic sign of a void or delamination hiding under the surface at that location.'},
     {stem:'On the fiber-content quality meter, what happens if glass content is pushed too high for the resin to fully wet it out?',
-     opts:['The laminate gets heavier and weaker (resin-rich)','Voids start forming and strength drops','Nothing changes — more glass is always better','The laminate cures faster with no downside'],correct:1,
+     opts:['The laminate becomes heavier and weaker, since it turns resin-rich instead of resin-starved','Voids start forming because the resin can no longer fully wet the fiber, and strength drops','Nothing changes, since more glass always improves strength-to-weight','The laminate cures faster with no effect on strength'],correct:1,
      why:'Too little resin for the amount of glass means the fibers can\'t be fully wetted, so voids form and strength drops — the dry, resin-starved end of the ratio.'},
     {stem:'Which of these is an actual known cause of porosity in a laminate or gelcoat?',
-     opts:['Too much catalyst','Gelcoat applied too thick','High-speed/turbulent mixing, too-high spray pressure, spraying too close, or water contamination','Laminating too early over the gelcoat'],correct:2,
-     why:'Porosity comes from turbulent/high-speed mixing, too-high spray pressure, spraying too close to the surface, or water contamination. The other options are causes of pre-release, crazing, and alligatoring, respectively — not porosity.'}
+     opts:['Too much catalyst added to the gelcoat batch before spraying','Gelcoat applied too thick over the mold surface','High-speed/turbulent mixing, too-high spray pressure, spraying too close, or water contamination','Laminating structural fabric too early over the gelcoat'],correct:2,
+     why:'Porosity comes from turbulent/high-speed mixing, too-high spray pressure, spraying too close to the surface, or water contamination. The other options are causes of pre-release, crazing, and alligatoring, respectively — not porosity.'},
+    {stem:'What defines a "well-consolidated" laminate, versus one showing porosity or delamination?',
+     opts:['Even resin distribution, trapped air rolled out, and layers fully compacted and wetted during lay-up','A resin-rich surface with extra catalyst added to speed the cure','A thicker gelcoat layer applied to hide surface irregularities','A lamination schedule with more plies than the design originally specified'],correct:0,
+     why:'All three hook-panel conditions use the same fiber and resin — the only difference is how well the laminate was consolidated while it was being built.'},
+    {stem:'What causes alligatoring — a cracked, reptile-skin surface pattern in gelcoat?',
+     opts:['Gelcoat applied too thin, or structural laminate applied too early before the gelcoat reached adequate cure','High-speed or turbulent mixing during gelcoat application','Too much catalyst or promoter added to the gelcoat batch','Water contamination from the mold surface during spraying'],correct:0,
+     why:'Alligatoring comes from gelcoat applied too thin, or laminate applied too early over it before the gelcoat reached adequate cure — not from mixing, catalyst level, or water contamination.'},
+    {stem:'What causes pre-release — the part separating from the mold too early?',
+     opts:['Too much catalyst, too much promoter/accelerator, excessive film thickness, an elevated shop or mold temperature, or an improper release agent','Gelcoat applied too thin over the mold surface','Not enough resin to fully wet the reinforcement fabric','A poor interlaminar bond from skipping the green window'],correct:0,
+     why:'Pre-release traces to too much catalyst/promoter, excess film thickness, elevated temperature, or the wrong release agent — not to gelcoat thickness, resin starvation, or interlaminar bonding.'},
+    {stem:'What causes crazing/cracking — fine stress cracks in gelcoat?',
+     opts:['Gelcoat that\'s too thick or over-catalyzed, curing too fast and shrinking more than it can handle','Spraying gelcoat too close to the surface, blowing air into the film','A lamination schedule that was changed from the design intent','Trapped air or voids blocking full ply-to-ply contact'],correct:0,
+     why:'Crazing/cracking comes from gelcoat that\'s too thick or over-catalyzed, which cures too fast and shrinks more than it can handle without cracking.'},
+    {stem:'What causes dry spots / resin-starved patches in a laminate?',
+     opts:['Not applying enough resin, or not properly consolidating the laminate during lay-up','Over-catalyzing the resin before application','Spraying gelcoat with too much pressure','An elevated shop or mold temperature during cure'],correct:0,
+     why:'Dry spots come from not applying enough resin, or not properly consolidating the laminate (rolling out air, working resin through the fabric) during lay-up.'},
+    {stem:'What causes delamination — layers separating from each other instead of acting as one laminate?',
+     opts:['A poor interlaminar bond: laminating over a fully-cured surface without sanding/solvent wipe, trapped air/voids, or a changed lamination schedule','Gelcoat applied too thin at the surface','High-speed or turbulent mixing during resin application','Excess film thickness combined with an elevated mold temperature'],correct:0,
+     why:'Delamination traces to a poor interlaminar bond — missing the green window before laminating over cured material, trapped air/voids, or a lamination schedule changed from the design intent.'},
+    {stem:'What unit is fiberglass reinforcement typically weight-rated in?',
+     opts:['Ounces per square foot or grams per square meter, depending on the product','Pounds per cubic inch of cured laminate','Mils of wet-film thickness','Percent by volume of the mold cavity'],correct:0,
+     why:'Fiberglass reinforcement is expressed in ounces per square foot or grams per square meter — always confirm which unit a given spec sheet is using.'},
+    {stem:'What does "consolidating" a laminate mean during lay-up?',
+     opts:['Achieving even resin distribution, removing trapped air pockets, and rolling down the fibers so layers are fully compacted and wetted','Adding extra catalyst so the resin kicks faster during lay-up','Applying a thicker gelcoat coat to seal the surface before laminating','Increasing the fiber content past the target ratio for extra strength'],correct:0,
+     why:'Consolidating means even resin distribution, removing trapped air, and rolling down the fibers so the layers are fully compacted and wetted — not a cure-speed or fiber-content change.'},
+    {stem:'On the fiber-content quality meter, why does a QA check calculate percent fiber content instead of just eyeballing the laminate?',
+     opts:['It gives an actual number to confirm the laminate hit its target ratio, rather than a visual guess','It replaces the need for a tap test on the finished part','It measures how well the gelcoat has cured before demolding','It\'s the only way to detect delamination between plies'],correct:0,
+     why:'A QA check proves the part matches spec with a number, not a feeling — percent fiber content is the actual calculation, not a visual estimate.'},
+    {stem:'In a Barcol hardness test, what does less indentation depth from the spring-loaded indentor indicate?',
+     opts:['A harder surface, meaning more cure has developed','A higher fiber content in that spot','A thicker gelcoat layer beneath the indentor','An earlier stage of the resin\'s pot life'],correct:0,
+     why:'Less penetration means a harder surface, which means more cure has developed — that\'s the whole basis of the Barcol reading.'},
+    {stem:'Why does this module distinguish "tack-free" from "fully cured"?',
+     opts:['A laminate can feel dry to the touch well before it develops real hardness, since curing continues through post-cure and full-cure phases after gel','Tack-free and fully cured are two names for exactly the same point in the cure cycle','Tack-free only applies to gelcoat, while fully cured only applies to structural laminate','A tack-free surface always has lower fiber content than a fully cured one'],correct:0,
+     why:'Curing runs through phases — gel, post-cure, full-cure — and a laminate can feel dry well before it has developed real hardness. A Barcol reading catches that gap; a finger test can\'t.'},
+    {stem:'What does a visual inspection actually check for on a finished composite part?',
+     opts:['Cracks, blisters, discoloration, surface contamination, and other visible surface defects','Moisture content trapped beneath the surface','A void or delamination hidden beneath the surface','The exact percent fiber content of the cured laminate'],correct:0,
+     why:'Visual inspection is the first, simplest check — looking for cracks, blisters, discoloration, contamination, and other defects you can actually see.'},
+    {stem:'What does an elevated moisture-meter reading on a laminate suggest?',
+     opts:['Possible water intrusion, such as into a cored laminate or as an early precursor to osmotic blistering','A laminate that is resin-rich and heavier than its target ratio','A defect in the original lamination schedule','An undercured skin coat that hasn\'t reached Barcol hardness yet'],correct:0,
+     why:'A moisture meter reads moisture content non-destructively; an elevated reading suggests water intrusion, including as an early precursor to osmotic blistering.'},
+    {stem:'If a laminate shows drainage/moisture damage, what is the correct order of response?',
+     opts:['Inspect the extent of the damage, remove the trapped moisture, then repair the affected area','Repair the affected area first, then inspect for any remaining moisture','Remove the trapped moisture first, then decide whether inspection is needed','Apply a barrier coat immediately, then inspect and dry afterward'],correct:0,
+     why:'The sequence is inspect the extent of the damage, remove the trapped moisture, then repair the affected area — in that order, every time.'},
+    {stem:'Which of the following does this module explicitly flag as NOT locked down by a vetted, specific number?',
+     opts:['Void-content percentage, moisture-meter reading thresholds, and Barcol hardness target values','The formula for calculating percent fiber content by weight','The general relationship that less Barcol indentation means more cure','The general causes of porosity such as turbulent mixing or high spray pressure'],correct:0,
+     why:'The module\'s TODO callouts flag specific numeric acceptance criteria — void %, moisture-meter thresholds, Barcol target values — as not locked in this content pack, unlike the general principles it does confirm.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-11'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-11'); CFS.recordScore('module-11', c, t); }});
 })();
 </script>
 </body>

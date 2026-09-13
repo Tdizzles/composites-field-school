@@ -204,7 +204,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions — the distractors are built to look right, so read carefully.</p>
+    <div id="mustWatch2"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -233,7 +234,8 @@
 <script>
 (function(){
   CFS.initNav();
-  CFS.renderVideos('fabVideos', CFS_VIDEOS.reinforcementTypes);
+  CFS.renderVideos('fabVideos', CFS_VIDEOS.reinforcementTypes.slice(1));
+  CFS.renderMustWatch('mustWatch2', CFS_VIDEOS.reinforcementTypes[0], {id: 'module-2-required'});
   CFS.renderVideos('clothVideos', CFS_VIDEOS.handLayup);
   CFS.initChatbot();
 
@@ -366,22 +368,64 @@
      opts:['Unidirectional','Woven roving','Chopped strand mat','Stitched biaxial'],correct:2,
      why:'CSM is random short fibers, so it has the lowest structural strength per weight. It\'s a bulk/bond layer, not a strength layer.'},
     {stem:'Why is a stitched biaxial typically stronger than a woven roving of the same fibers and weight?',
-     opts:['The stitching adds extra resin','Woven fibers are crimped (pre-buckled) and lose strength; stitched fibers stay straight','Woven roving is made from weaker glass','Biaxial contains more binder'],correct:1,
+     opts:['The stitching process adds a measurable amount of extra resin during lay-up','Woven fibers are crimped (pre-buckled) and lose strength; stitched fibers stay straight','Woven roving is manufactured from a lower tensile-strength grade of glass','Biaxial fabric carries more binder content than a comparable woven fabric'],correct:1,
      why:'Crimp: in a weave the fibers go over/under, so they must straighten under load before carrying it. Stitched fabrics keep fibers straight, so they work immediately.'},
     {stem:'You are laminating a repair with EPOXY. Which is the poor choice because its binder won\'t dissolve?',
-     opts:['Stitched biaxial','Cloth','Standard chopped strand mat','Unidirectional carbon'],correct:2,
+     opts:['Stitched biaxial','Woven fiberglass cloth','Standard chopped strand mat','Unidirectional carbon'],correct:2,
      why:'Standard CSM\'s binder is dissolved by the styrene in polyester/vinylester — not by epoxy. With epoxy the mat stays stiff and wets out poorly.'},
     {stem:'A fabric labeled "1708" is:',
-     opts:['17 oz woven roving only','A 17 oz/yd² ±45° biaxial stitched to a ~0.75 oz mat','1708 gsm cloth','A glass with 17.08% resin'],correct:1,
+     opts:['A 17 oz/yd² single-direction woven roving with no mat backing','A 17 oz/yd² ±45° biaxial fabric stitched to a ~0.75 oz mat backing','A 1708 gsm cloth used only for cosmetic finish layers','A fabric containing 17.08% resin content by weight'],correct:1,
      why:'The number encodes weight + construction: 17 oz/yd² biaxial plus an "08" (¾ oz) chopped-mat backing.'},
     {stem:'A UNIDIRECTIONAL fabric makes the most sense where:',
      opts:['Loads come equally from every direction','You need maximum strength along one known load path','You want a cosmetic finish layer','You need to block print-through'],correct:1,
      why:'UD puts nearly all fibers in one direction — maximum strength/stiffness along that axis, very little across it.'},
     {stem:'A carbon-fiber part is through-bolted directly to an aluminum bracket with no isolation. What is the main concern?',
-     opts:['The carbon will absorb water','Galvanic corrosion of the aluminum, since carbon is conductive and noble relative to it','The bolt will overheat during cure','The resin will not wet out the carbon'],correct:1,
-     why:'Carbon fiber is electrically conductive and sits far from aluminum on the galvanic series; direct contact in the presence of moisture drives rapid corrosion of the metal unless isolated.'}
+     opts:['The carbon fiber will absorb water and swell around the bolt hole','Galvanic corrosion of the aluminum, since carbon is conductive and noble relative to it','The bolt will overheat from resin exotherm during cure','The resin will fail to wet out the carbon fiber at the bolt hole'],correct:1,
+     why:'Carbon fiber is electrically conductive and sits far from aluminum on the galvanic series; direct contact in the presence of moisture drives rapid corrosion of the metal unless isolated.'},
+    {stem:'Roughly what share of production boat fiberglass is E-glass, and why?',
+     opts:['About 90%, because it\'s inexpensive and easy to wet out for most structural work','About 50%, split evenly with S-glass across most hulls','About 25%, since carbon and aramid dominate most modern hulls','About 90%, because it\'s the only fiber compatible with epoxy resin'],correct:0,
+     why:'E-glass covers roughly 90% of production boat glass because it\'s cheap and easy to wet out — the exotic fibers earn their place only where one specific property is worth the added cost.'},
+    {stem:'How does S-glass compare to standard E-glass?',
+     opts:['About 30% stronger and stiffer, with better heat resistance, at a higher price','About half the strength of E-glass, but much cheaper','Electrically conductive, unlike E-glass, requiring isolation from metal fittings','Compatible only with polyester resin, unlike E-glass which works with epoxy'],correct:0,
+     why:'S-glass is roughly 30% stronger and stiffer than E-glass with better heat resistance, at a higher cost — a step up in performance without jumping to carbon.'},
+    {stem:'What distinguishes E-CR glass from standard E-glass?',
+     opts:['It is a boron-free, corrosion-resistant variant suited to below-the-waterline laminates','It is a chopped-only form of E-glass that cannot be woven into fabric','It replaces glass fiber entirely with a resin-compatible ceramic fiber','It is E-glass pre-impregnated with epoxy at the factory'],correct:0,
+     why:'E-CR glass is a corrosion-resistant, boron-free version of E-glass, made for better water and acid resistance — useful knowledge for below-the-waterline laminates.'},
+    {stem:'Why does aramid (Kevlar) rarely get used as a whole hull laminate, despite its excellent impact toughness?',
+     opts:['It absorbs water, is difficult to cut/sand/fair, and is weak in compression','It cannot be wetted out by any resin, polyester or epoxy','It is heavier per square yard than woven roving of the same thickness','It conducts electricity and drives galvanic corrosion against aluminum'],correct:0,
+     why:'Aramid has outstanding impact/abrasion toughness, but it absorbs water, is hard to cut and fair, and is weak in compression — so it\'s used in impact zones rather than as a whole hull.'},
+    {stem:'What two categories do woven composite reinforcements generally fall into?',
+     opts:['Cloth and woven roving','Biaxial and triaxial','E-glass and S-glass','Chopped strand mat and veil'],correct:0,
+     why:'Woven reinforcements generally split into cloth (fine, light) and woven roving (heavy, coarse) — both share the over-under weave that causes crimp.'},
+    {stem:'Woven roving bundles carry slightly more material in one direction than the other. Which direction, and what is it called?',
+     opts:['Slightly more in the warp (lengthwise) direction than the fill (crosswise)','Slightly more in the fill (crosswise) direction than the warp (lengthwise)','Equal material in both directions, unlike biaxial fabric','More material at ±45° than at 0° or 90°'],correct:0,
+     why:'Woven roving is a flattened bundle weave with slightly more material in the warp (lengthwise) direction than the fill (crosswise).'},
+    {stem:'Why is chopped strand mat often placed between plies of woven roving in a hand-lay schedule?',
+     opts:['Roving\'s coarse weave leaves poor contact between plies, and mat\'s random fiber and extra resin fill the gaps for a real bond','Mat is cheaper than roving, so alternating layers reduces total material cost','Mat blocks UV light from degrading the roving underneath during cure','Mat increases the laminate\'s resistance to galvanic corrosion between plies'],correct:0,
+     why:'Roving\'s coarse weave leaves poor interlaminar contact on its own; mat between layers fills the gaps with random short fiber and resin for a real bond, which is why the classic schedule alternates roving/mat/roving/mat.'},
+    {stem:'What is the everyday nickname for a very light, thin surfacing fabric used as a finish layer?',
+     opts:['Veil','Roving','Selvage','Tow'],correct:0,
+     why:'Veil, sometimes called "boat cloth," is a very light, thin surfacing fabric used for a smooth cosmetic finish layer.'},
+    {stem:'A stringer cap that only ever gets pulled straight along its length has one clear, known load path. What\'s the efficient fiber choice for it?',
+     opts:['Unidirectional fiber laid straight along that load path','A full quasi-isotropic layup covering every direction equally','Chopped strand mat, since bulk matters more than direction here','Biaxial fabric angled at ±45° to the load path'],correct:0,
+     why:'When you can point to one line on the part and say "this only ever gets pulled that way," unidirectional fiber along that axis is the efficient answer — quasi-isotropic coverage is for uncertain load paths.'},
+    {stem:'Heavier fabric (higher oz/yd²) builds thickness faster, but what trade-off does it bring?',
+     opts:['Worse drape over curves and greater difficulty fully wetting out the fabric','Better drape over curves, since more fiber makes the fabric more flexible','No trade-off — heavier fabric is strictly better in every property','Reduced strength-to-weight compared to a lighter fabric of the same type'],correct:0,
+     why:'Heavier fabric packs in more glass and builds thickness fast, but it resists tight curves and is harder to fully wet out, risking dry spots.'},
+    {stem:'Stitched biaxial is stronger per pound than woven roving or mat, yet builders still use the cheaper forms for a lot of work. Why not use biaxial everywhere?',
+     opts:['It costs more per pound and can\'t be applied by spray-up/chopper gun, which is a large share of production boatbuilding','It cannot be cut to shape without the stitching unraveling on the spot','It only works with epoxy resin and is incompatible with polyester or vinylester','It has no measurable strength advantage over chopped strand mat'],correct:0,
+     why:'Stitched fabric costs more than roving or mat and can\'t be sprayed by chopper gun — a large share of production boatbuilding — so the cheaper forms still win on cost and labor time for bulk or sprayed work.'},
+    {stem:'What physically causes "crimp" in a woven fabric?',
+     opts:['The fiber bundles bend over-and-under the perpendicular bundles as they\'re interlaced during weaving','The fiber bundles are twisted around their own axis before being woven','The resin partially cures before the weaving process is complete','The binder used to hold mat together also stiffens woven fabrics'],correct:0,
+     why:'A weave is created when perpendicular bundles (warp and fill) interlace over and under each other — that interlacing is what bends (crimps) each fiber.'},
+    {stem:'A hull skin takes hoop, longitudinal, and slamming loads from unpredictable directions. Per this module\'s guidance, what fiber orientation is the safer choice?',
+     opts:['A quasi-isotropic layup (0°, 90°, and both ±45°) so no direction is left uncovered','Unidirectional fiber at 0° only, for maximum strength along the keel line','A single ply of chopped strand mat, since direction doesn\'t affect random fiber','Stitched biaxial at +45° only, ignoring the 0°/90° directions'],correct:0,
+     why:'When loads come from multiple or uncertain directions, a quasi-isotropic layup (0/90/±45) covers every direction so no axis is left for the resin alone to carry.'},
+    {stem:'In the "1708" fabric spec name, what does the trailing "08" refer to?',
+     opts:['A 0.75 oz chopped-strand-mat backing stitched to the biaxial fabric','An 8-harness satin weave pattern used for the outer layer','A cure schedule of 8 hours before the fabric can be de-molded','8% styrene content in the fabric\'s pre-applied binder'],correct:0,
+     why:'The number decodes the construction: 17 oz/yd² ±45° biaxial fabric stitched to a 0.75 oz chopped-mat backing — the "08" being that mat backing.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-2'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-2'); CFS.recordScore('module-2', c, t); }});
 })();
 </script>
 </body>

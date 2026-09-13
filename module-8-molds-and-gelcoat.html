@@ -184,7 +184,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions built directly from what's on this page.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions built directly from what's on this page — the distractors are written to look right, so read carefully.</p>
+    <div id="mustWatch8"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -213,8 +214,9 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch8', CFS_VIDEOS.gelcoat[0], {id: 'module-8-required'});
   CFS.renderVideos('hookVideos', CFS_VIDEOS.processes);
-  CFS.renderVideos('gelcoatVideos', CFS_VIDEOS.gelcoat);
+  CFS.renderVideos('gelcoatVideos', CFS_VIDEOS.gelcoat.slice(1));
   CFS.initChatbot();
 
   /* ---- 2. production sequence order game ---- */
@@ -290,22 +292,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'In the production sequence, when is gelcoat applied relative to the structural laminate?',
-     opts:['After the structural laminate has cured','Before the skin coat and structural laminate — sprayed in-mold first','At the same time as the structural laminate','Only after demolding'],correct:1,
+     opts:['After the structural laminate has fully cured, as a top-coat finish','Before the skin coat and structural laminate — sprayed in-mold first','At the same time as the structural laminate, mixed into the same batch','Only after demolding, once the part has cooled to room temperature'],correct:1,
      why:'The sequence is mold prep → release agent → gelcoat → skin coat → structural laminate → cure → demold. Gelcoat goes in-mold, first.'},
     {stem:'Which of these is NOT one of the three common mold release agent types?',
-     opts:['Mold release wax','PVA','Chemical release agents','Acetone'],correct:3,
+     opts:['Mold release wax, which is buffed onto the mold surface','PVA (polyvinyl alcohol), which is applied as a liquid','Chemical release agents, whose coverage still has to be complete','Acetone, which is normally used to thin gelcoat'],correct:3,
      why:'The three common release agent types are mold release wax, PVA, and chemical release agents. Acetone is used to thin gelcoat, not to release a mold.'},
     {stem:'Gelcoat sprayed noticeably UNDER the 18–22 mil wet-gauge target is most likely to cause:',
-     opts:['Cracking in a radial/divergent pattern','Alligatoring and undercure/print-through risk','Faster demold times with no downside','Better pigmentation'],correct:1,
+     opts:['Cracking in a radial or divergent (starburst) pattern from excess internal shrinkage stress','Alligatoring, along with increased undercure and print-through risk','Faster, cleaner demolding with no measurable effect on part quality','Deeper, more saturated pigmentation with no change in cure behavior'],correct:1,
      why:'Too-thin gelcoat is a direct cause of alligatoring, and increases the risk of undercure and print-through showing through the surface.'},
     {stem:'Gelcoat sprayed noticeably OVER the 18–22 mil wet-gauge target is most likely to cause:',
-     opts:['Alligatoring','Porosity from turbulent mixing','Cracking in a radial or divergent (starburst) pattern from excess shrinkage','Improved release from the mold'],correct:2,
+     opts:['Alligatoring, from an under-thickness film that hasn\'t cured enough to build on','Porosity, from high-speed turbulent mixing trapping air in the film','Cracking in a radial or divergent (starburst) pattern, from excess shrinkage as the thicker film cures faster','Improved release from the mold, since a thicker film separates more easily'],correct:2,
      why:'A too-thick film cures faster and shrinks more, building internal stress that shows up as radial/divergent cracking.'},
     {stem:'A part separates from the mold earlier than it should (pre-release). Which of these is a listed cause?',
-     opts:['Spraying too far from the mold surface','Too much catalyst or promoter, excess film thickness, or elevated shop/mold temperature','Using mat between laminate layers','Flushing the spray gun after use'],correct:1,
-     why:'Pre-release is caused by too much catalyst, too much promoter/accelerator, excessive film thickness, elevated shop/mold temperature, or an improper release agent.'}
+     opts:['Spraying from too great a distance, leaving the film under-thickness','Too much catalyst or promoter, excess film thickness, or elevated shop/mold temperature','Using chopped strand mat instead of woven roving between laminate layers','Flushing the spray gun with solvent after every use, per standard maintenance'],correct:1,
+     why:'Pre-release is caused by too much catalyst, too much promoter/accelerator, excessive film thickness, elevated shop/mold temperature, or an improper release agent.'},
+    {stem:'How does a mold release cleanly from a part without relying on wax or a chemical release agent?',
+     opts:['It needs a positive draft margin of at least 2°, or must be built as a split mold that opens in sections','It needs a completely flat, undercut-free face regardless of angle','It needs to be coated in gelcoat at double the normal thickness','It needs to be cured at a lower temperature than the part itself'],correct:0,
+     why:'A mold releases cleanly on its own only with a positive draft margin of at least 2° — a slight taper — or by being built as a split mold for shapes that can\'t draft in one piece.'},
+    {stem:'What is the structural framework built around a mold designed to do?',
+     opts:['Keep the mold from flexing so it holds its original shape through repeated cure cycles','Provide the mounting points for the release-agent spray equipment','Absorb exothermic heat away from the part during cure','Allow the mold to be split into sections for parts with undercuts'],correct:0,
+     why:'The framing around a mold exists to make sure the mold holds its original shape through repeated part construction and cure cycles — a mold that flexes or sags produces off-spec parts.'},
+    {stem:'As used in this module, how is a "mold" defined?',
+     opts:['A frame or model around or on which something (a part) is formed or shaped','A permanent structural member that remains bonded inside the finished part','Any tool used exclusively to mix and dispense catalyzed resin','The finished plug once it has been coated in gelcoat and cured'],correct:0,
+     why:'A mold is defined as a frame or model around or on which something (a part) is formed or shaped.'},
+    {stem:'What should a visual mold inspection check for before every use?',
+     opts:['Heat damage, nicks, scratches, cracks, and surface contamination','Ambient shop temperature, catalyst freshness, and fiber lot number','Gelcoat color match, pigment suspension, and viscosity only','Fastener torque, backing-plate condition, and bedding-compound cure'],correct:0,
+     why:'A visual mold inspection checks for heat damage, nicks, scratches, cracks, and surface contamination — because whatever is wrong with the mold shows up on the part.'},
+    {stem:'What should never be used to rinse a gelcoated mold?',
+     opts:['Soapy water, since residue interferes with release and surface finish','Clean water alone, since it leaves mineral deposits behind','Acetone, since it dissolves the cured gelcoat surface','Compressed air, since it can force contaminants into the mold surface'],correct:0,
+     why:'A gelcoated mold should never be rinsed with soapy water — leftover residue interferes with release and surface finish.'},
+    {stem:'What is cab-o-sil, and what is it used for?',
+     opts:['Fumed silica, used as a thickener/filler to build a radius or fillet and control resin viscosity','A calcium-carbonate filler used only to reduce resin cost in non-structural parts','A pigment additive used to match gelcoat color across batches','A wax-based release compound applied before spraying gelcoat'],correct:0,
+     why:'Cab-o-sil is fumed silica, used as a thickener/filler to fill in or round out a radius or fillet, and to control resin viscosity/thixotropy.'},
+    {stem:'What type of resin is gelcoat, and how does it differ from standard laminating resin?',
+     opts:['An isophthalic polyester resin formulated with no surfacing agent, since it cures against the closed mold face instead of open air','A vinylester resin formulated with extra surfacing agent, to cure tack-free faster than laminating resin','An epoxy resin requiring no catalyst, since it cures purely from UV exposure in the mold','The exact same orthophthalic polyester used for structural laminate, just tinted with pigment'],correct:0,
+     why:'Gelcoat is typically an isophthalic polyester resin with no surfacing agent — unlike laminating resin, which needs one to cure tack-free in open air, gelcoat cures against the closed mold face instead.'},
+    {stem:'How often should gelcoat be mixed on the shop floor, and for how long?',
+     opts:['Every 24 hours, for about 10 minutes, to keep pigments and fillers in suspension','Every 4 hours, for about 30 seconds, just enough to disperse the catalyst','Once per production run, for as long as it takes to fill the day\'s spray pots','Only when a new batch arrives from the supplier, for about 2 minutes'],correct:0,
+     why:'Gelcoat should be mixed every 24 hours, for about 10 minutes, to keep pigments and fillers in suspension.'},
+    {stem:'Which of the following best lists gelcoat\'s functions in a finished part?',
+     opts:['Protective layer, cosmetic finish, water-tight barrier, pigment/color layer, and it aids mold release','Structural reinforcement, thermal insulation, sound dampening, and UV-cure catalyst','Primary load-bearing skin, fire retardant, adhesive primer, and anti-fouling coating','Corrosion barrier only, with cosmetic color handled entirely by a separate topcoat'],correct:0,
+     why:'Gelcoat does five jobs from one sprayed film: protective layer, cosmetic finish, water-tight barrier, pigment/color, and it aids release from the mold.'},
+    {stem:'What three factors together set the flow rate when spraying gelcoat?',
+     opts:['Spray-tip size, gelcoat viscosity, and pump pressure','Ambient humidity, catalyst percentage, and mold temperature','Fan width, gun distance from the mold, and gelcoat color','Compressor size, hose length, and resin batch age'],correct:0,
+     why:'Flow rate for spraying gelcoat is set by spray-tip size, gelcoat viscosity, and pump pressure together.'},
+    {stem:'What PPE is called for when spraying gelcoat, versus when trimming and grinding a cured part afterward?',
+     opts:['Spraying: safety glasses, a cartridge-rated respirator, and gloves; trimming/grinding: a particulate-rated respirator plus eye and skin protection','Spraying: hearing protection and steel-toe boots only; trimming/grinding: safety glasses alone','Spraying: a full-face shield with no respirator needed; trimming/grinding: a cartridge-rated respirator only','Both steps require identical PPE: gloves and safety glasses, with no respirator either time'],correct:0,
+     why:'Gelcoat spraying calls for safety glasses, a cartridge-rated respirator, and gloves; trimming and grinding afterward calls for a particulate-rated respirator plus eye and skin protection.'},
+    {stem:'What is the main advantage of applying gelcoat robotically instead of by hand?',
+     opts:['Consistency of thickness and coverage from part to part','It eliminates the need for a mil-thickness gauge check entirely','It allows gelcoat to be sprayed without any mixing beforehand','It reduces the required draft angle on the mold'],correct:0,
+     why:'Robotic gelcoat application\'s main advantage is consistency of thickness and coverage, part to part.'},
+    {stem:'How can an off-ratio burst — a slug of improperly catalyzed material at gun start-up — be kept off the finished part?',
+     opts:['Spray the flange perimeter first, so any off-ratio burst lands outside the finished part surface','Run the gun at maximum pressure for the first pass to burn off any excess catalyst','Pre-spray a test panel and discard it before starting on the actual mold','Start spraying at the center of the part, working outward toward the flange'],correct:0,
+     why:'Spraying the flange perimeter first means any off-ratio burst at gun start-up lands outside the finished part surface.'},
+    {stem:'What spray technique is recommended when applying gelcoat?',
+     opts:['Hold the gun 90° to the surface, spray from 12–18 inches, and overlap each pass by about 50%, crossing directions','Hold the gun at a 45° angle, spray from 6 inches, with no pass overlap needed','Hold the gun 90° to the surface, spray from 30–36 inches, in a single straight pass','Angle the gun away from the surface and spray in one direction only, without crossing passes'],correct:0,
+     why:'Gelcoat spray technique is: gun 90° to the surface, 12–18 inches away, each pass overlapping the last by about 50%, crossing directions.'},
+    {stem:'How should a part be demolded, and when?',
+     opts:['With hooks, straps, and wedges rather than prying on the laminate, only once the part has cooled to room temperature','By prying directly on the laminate edge as soon as the exotherm peak passes','With hooks and wedges only, while the part is still warm to ease separation','By flexing the mold itself repeatedly until the part pops free unaided'],correct:0,
+     why:'Demold with hooks, straps, and wedges rather than prying on the laminate — and only once the part has cooled to room temperature.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-8'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-8'); CFS.recordScore('module-8', c, t); }});
 })();
 </script>
 </body>

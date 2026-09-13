@@ -137,7 +137,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. Read carefully — the wrong answers are the ones that sound almost right.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions — read carefully, the wrong answers are the ones that sound almost right.</p>
+    <div id="mustWatch5"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -166,7 +167,8 @@
 <script>
 (function(){
   CFS.initNav();
-  CFS.renderVideos('safetyVideos', CFS_VIDEOS.safety);
+  CFS.renderVideos('safetyVideos', CFS_VIDEOS.safety.slice(1));
+  CFS.renderMustWatch('mustWatch5', CFS_VIDEOS.safety[0], {id: 'module-5-required'});
   CFS.initChatbot();
 
   /* ---- shared: NFPA diamond builder ---- */
@@ -304,22 +306,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'You\'re mixing resin and gelcoat, releasing styrene vapor. Which respirator protects you?',
-     opts:['Any dust mask','An organic-vapor (OV) cartridge respirator','No respirator needed if the room is well-lit','A particulate (dust) respirator'],correct:1,
+     opts:['A standard particulate dust mask, since its filter media blocks vapor as effectively as it blocks dust','An organic-vapor (OV) cartridge respirator','No respirator at all — adequate lighting and a tidy workspace are sufficient protection here','A particulate respirator, the same cartridge type used when sanding or grinding cured laminate'],correct:1,
      why:'A dust mask does nothing against styrene vapor. Mixing/spraying resin or gelcoat calls for an OV cartridge respirator.'},
     {stem:'You\'re sanding cured fiberglass laminate. Which respirator protection is required?',
-     opts:['An organic-vapor (OV) cartridge respirator','A particulate respirator','Either works interchangeably','No protection needed — it\'s just dust'],correct:1,
+     opts:['An organic-vapor (OV) cartridge respirator, the same cartridge used for mixing resin or gelcoat','A particulate respirator','Either an OV or a particulate cartridge works interchangeably, since both filter airborne particles','No respirator protection needed, since glass and resin dust settle out before it can be inhaled'],correct:1,
      why:'Sanding/grinding produces glass and resin dust, which needs particulate protection — a different cartridge than the OV one used for vapors. They are not interchangeable.'},
     {stem:'MEKP splashes into a worker\'s eyes. What is the correct first aid?',
-     opts:['Apply an ointment and keep working','Immediately flush with copious water, then get prompt medical attention','Wait to see if irritation goes away on its own','Rub the eyes to clear the chemical'],correct:1,
+     opts:['Apply a soothing eye ointment and continue working if the stinging subsides','Immediately flush with copious water, then get prompt medical attention','Wait several minutes to see whether the irritation clears on its own before acting','Rub the eyes firmly to work the chemical out, then rinse briefly with water'],correct:1,
      why:'MEKP can cause blindness on eye contact. The correct response is immediate, copious water flushing followed by prompt medical attention.'},
     {stem:'Why should MEKP catalyst never be combined directly with cobalt accelerator?',
-     opts:['It just wastes the accelerator','Mixed neat, the peroxide and oxidizer can react violently — each must be added to the resin separately','It slightly slows the cure','It only changes the resin\'s color'],correct:1,
+     opts:['Combining them directly wastes the accelerator, since it reacts before reaching the resin','Mixed neat, the peroxide and oxidizer can react violently — each must be added to the resin separately','Combining them directly only slightly slows the cure, with no other meaningful effect','Combining them directly only changes the resin\'s color, with no reaction hazard involved'],correct:1,
      why:'MEKP (organic peroxide) and accelerator (oxidizer) combined directly, rather than each added to the resin separately, can react violently.'},
     {stem:'What is the PRIMARY control for reducing styrene/resin vapor exposure in a shop?',
-     opts:['Wearing two pairs of gloves','Ventilation','Working faster to finish before vapor builds up','Drinking more water during the shift'],correct:1,
-     why:'Ventilation is the primary control for styrene/resin vapor exposure — respirators are additional protection, not a substitute for it.'}
+     opts:['Wearing two pairs of nitrile gloves to block vapor from reaching the skin','Ventilation that removes vapor from the breathing zone before it builds up','Working as fast as possible to finish the layup before vapor has time to build up','Staying well hydrated during the shift to offset any vapor absorbed by the body'],correct:1,
+     why:'Ventilation is the primary control for styrene/resin vapor exposure — respirators are additional protection, not a substitute for it.'},
+    {stem:'On an NFPA HazCom diamond, what does the red quadrant indicate?',
+     opts:['Flammability','Health hazard','Instability (reactivity)','A specific hazard unique to that chemical'],correct:0,
+     why:'The NFPA diamond uses four fixed colors: red for flammability, blue for health, yellow for instability/reactivity, and white for a specific hazard.'},
+    {stem:'What does the blue quadrant of the NFPA diamond indicate?',
+     opts:['Instability (reactivity)','Flammability','Health hazard','A specific hazard unique to that chemical'],correct:2,
+     why:'Blue is always the health-hazard quadrant on an NFPA diamond, regardless of which chemical\'s container it appears on.'},
+    {stem:'What does the yellow quadrant of the NFPA diamond indicate?',
+     opts:['Health hazard','Flammability','A specific hazard unique to that chemical','Instability (reactivity)'],correct:3,
+     why:'Yellow is always the instability/reactivity quadrant — how likely the material is to react violently on its own or with other materials.'},
+    {stem:'What is an SDS (Safety Data Sheet), and what did it used to be called?',
+     opts:['The reference document for a chemical\'s hazards, handling, and first aid — formerly called an MSDS','A shop\'s internal log of which employees have completed hazard-communication training','A manufacturer\'s warranty document covering resin and gelcoat product defects','A checklist confirming a batch of resin was mixed at the correct catalyst percentage'],correct:0,
+     why:'The SDS (formerly MSDS) is the reference document for a chemical\'s hazards, handling, and first aid — it should be kept accessible in the shop.'},
+    {stem:'What is the correct response to a large chemical spill in the shop?',
+     opts:['Immediate containment, alerting management, and keeping the spill out of floor drains','Absorbing it with a dry rag and finishing the current task before reporting it','Flushing it directly into a floor drain with plenty of water to dilute it quickly','Covering it with a tarp and addressing it at the end of the shift'],correct:0,
+     why:'A large spill calls for immediate containment, alerting management, and keeping it out of floor drains — not delaying the response or sending it down a drain.'},
+    {stem:'How must solvent-soaked rags be disposed of, and why?',
+     opts:['In a sealed, fire-rated container, because they can spontaneously combust','In a standard open trash bin, since the solvent evaporates harmlessly within minutes','Rinsed with water and air-dried before regular disposal, to prevent any fire risk','In a sealed plastic bag, since spontaneous combustion isn\'t a concern for solvent rags'],correct:0,
+     why:'Solvent-soaked rags can spontaneously combust, so they must go in a sealed, fire-rated container rather than regular trash.'},
+    {stem:'How many employees are required to move a heavy object with a hoist?',
+     opts:['Two, no exceptions','One, as long as the hoist is rated for the load','Three, if the object weighs more than a set threshold','It depends on the hoist manufacturer\'s own posted rating'],correct:0,
+     why:'Moving heavy objects with a hoist requires two employees, no exceptions — regardless of the hoist\'s load rating.'},
+    {stem:'Why is nitrile the default glove material for handling MEKP, resin, or acetone?',
+     opts:['It resists solvents and resin far better than cotton or leather, which offer essentially no chemical barrier','It is the least expensive glove material, even though cotton and leather resist chemicals equally well','It is required only for cosmetic reasons, since cotton and leather resist these chemicals just as well','It resists heat better than cotton or leather, though all three resist chemicals about equally'],correct:0,
+     why:'Nitrile resists solvents and resin far better than cotton or leather, which offer essentially no chemical barrier — that\'s why it\'s the default for MEKP, resin, or acetone.'},
+    {stem:'What PPE does this module recommend when working with gelcoat?',
+     opts:['Safety glasses, a properly cartridge-rated respirator, and gloves','A particulate dust mask only, since gelcoat produces no chemical vapor','Nitrile gloves only, since gelcoat vapor is not a respiratory hazard','Safety glasses and gloves, with no respirator needed if the shop door is open'],correct:0,
+     why:'Gelcoat work calls for safety glasses, a properly cartridge-rated respirator, and gloves — gelcoat releases the same kind of vapor hazard as resin.'},
+    {stem:'What three factors determine whether a respirator is actually protecting the wearer?',
+     opts:['How it\'s stored when not in use, whether the cartridge type matches the actual hazard, and whether facial hair breaks the seal','The respirator\'s purchase price, its brand name, and how frequently it\'s washed','The cartridge\'s color coding, the wearer\'s years of experience, and the shop\'s ambient temperature','How new the respirator is, whether it has an exhalation valve, and the wearer\'s shift length'],correct:0,
+     why:'Storage, matching the cartridge type to the actual hazard, and facial hair breaking the seal are the three factors that determine whether a respirator is actually protecting the wearer — any one failing means it isn\'t doing its job.'},
+    {stem:'What hazard classification does styrene carry, and what controls it?',
+     opts:['A VOC/hazardous air pollutant with central-nervous-system effects at elevated exposure, controlled primarily by ventilation','A physical dust hazard with no chemical component, controlled primarily by particulate filtration','A flammability-only hazard with no health effects, controlled primarily by keeping it away from ignition sources','A skin-contact-only hazard with no inhalation risk, controlled primarily by nitrile gloves'],correct:0,
+     why:'Styrene is a VOC and hazardous air pollutant with CNS effects at elevated exposure, and it\'s on California\'s Prop 65 list — ventilation is the primary control.'},
+    {stem:'What is the hazard classification of acetone, and how should it be stored?',
+     opts:['Flammable — stored away from ignition sources with adequate ventilation','An oxidizer — stored away from any organic peroxide, with no ventilation requirement','A health-hazard-only chemical — stored in a sealed cabinet away from sunlight, with no fire risk','A physical dust hazard — stored in a sealed, fire-rated container like solvent rags'],correct:0,
+     why:'Acetone is flammable, so it should be stored away from ignition sources and used with adequate ventilation.'},
+    {stem:'What kind of hazard does sanding or grinding cured fiberglass laminate produce, and how is it classified?',
+     opts:['Fine glass and resin dust — a physical inhalation and skin/eye irritation hazard, not a HazCom-labeled chemical','Styrene vapor — a HazCom-labeled chemical hazard identical to mixing resin','MEKP residue — an organic peroxide hazard requiring the same PPE as catalyzing resin','Acetone vapor — a flammability hazard requiring storage away from ignition sources'],correct:0,
+     why:'Sanding/grinding produces fine glass and resin dust — a physical hazard needing particulate protection, not a HazCom-labeled chemical hazard the way resin vapor is.'},
+    {stem:'In the MEKP-in-the-eyes first aid sequence, what comes immediately after recognizing the emergency and before getting medical attention?',
+     opts:['Immediately flush the eyes with copious water and keep flushing continuously','Apply a cold compress and monitor the eyes for ten minutes before deciding on flushing','Administer eye drops formulated to neutralize organic peroxides, then flush briefly','Cover the eyes with a sterile bandage to block further chemical exposure before flushing'],correct:0,
+     why:'The order is: treat it as an emergency, flush immediately with copious water, keep flushing continuously, then get prompt medical attention.'},
+    {stem:'Per this module\'s field notes, why are the MEKP-in-eyes and MEKP-plus-accelerator scenarios described as classic ABYC exam traps?',
+     opts:['They sound like chemistry trivia, but the wrong answer in real life is a hospital trip — blindness or a violent reaction','They\'re trick questions with no real-world consequence, testing only memorization of chemical names','They only appear on the exam\'s optional bonus section, testing knowledge beyond the core curriculum','They test gelcoat application technique rather than chemical safety, despite the safety-sounding wording'],correct:0,
+     why:'These scenarios sound like chemistry trivia until you realize the wrong answer is a hospital trip — which is exactly why this module gets so much exam weight.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-5'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-5'); CFS.recordScore('module-5', c, t); }});
 })();
 </script>
 </body>

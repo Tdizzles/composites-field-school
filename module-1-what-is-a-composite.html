@@ -162,16 +162,23 @@
         <input type="range" id="coreRange" min="0" max="40" value="0" step="1">
       </div>
       <div class="meter">
-        <div class="mlab"><span>Stiffness (relative)</span><span id="stiffVal">8</span></div>
-        <div class="mtrack"><div class="mfill stiff" id="stiffFill" style="width:8%"></div></div>
+        <div class="mlab"><span>Bending stiffness (× this solid laminate)</span><span id="stiffVal">1.0×</span></div>
+        <div class="mtrack"><div class="mfill stiff" id="stiffFill" style="width:4%"></div></div>
       </div>
       <div class="meter">
-        <div class="mlab"><span>Weight (relative)</span><span id="wtVal">30</span></div>
-        <div class="mtrack"><div class="mfill weight" id="wtFill" style="width:30%"></div></div>
+        <div class="mlab"><span>Panel weight (kg per m² of panel)</span><span id="wtVal">10.8 kg/m²</span></div>
+        <div class="mtrack"><div class="mfill weight" id="wtFill" style="width:4%"></div></div>
       </div>
       <div class="readout" id="sandRead">A solid laminate: to make it stiffer you'd have to make it heavier.</div>
-      <p class="note">Numbers are relative and illustrative, to show the trend — not engineering values.</p>
+      <p class="note">Worked from an actual sandwich-beam formula (below) with illustrative but realistic inputs — 3&nbsp;mm total skin laminate at 1.8&nbsp;g/cm³, an 80&nbsp;kg/m³ PVC foam core (a common grade, e.g. Divinycell H80/Core-Cell A80). Change the skins or the core material and the exact numbers shift — the multiplying <i>effect</i> doesn't.</p>
     </div>
+    <details class="deep">
+      <summary>The math behind the slider above</summary>
+      <div class="deep-body">
+        <p>A sandwich panel's resistance to bending comes almost entirely from the skins, because pushing them apart — even with a soft, near-weightless core — multiplies their <b>lever arm</b>. Foam and balsa cores are roughly 100&times; softer than a glass/resin skin, so their own stiffness contributes almost nothing; their whole job is spacing.</p>
+        <p style="margin-bottom:0">Treating the core as stiffness-zero and using the standard rectangular-section formula on the full section minus the core gives: <b>bending stiffness index = [(2t + c)³ &minus; c³] / (2t)³</b>, where <i>t</i> is one skin's thickness and <i>c</i> is core thickness. At <i>c</i>&nbsp;=&nbsp;0 that's exactly 1.0 (the solid laminate). It's why a 20&nbsp;mm core on 3&nbsp;mm skins doesn't just double stiffness — the exponent means it multiplies it by dozens, for a weight gain measured in single-digit percent.</p>
+      </div>
+    </details>
   </section>
 
   <!-- 5: GLASS:RESIN -->
@@ -204,7 +211,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five questions, exam-style — the distractors are meant to look right. Answer each; you'll get instant feedback and the reason.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 questions, exam-style — distractors are written to sound just as plausible as the right answer, so read carefully. Get one wrong and you can keep trying or reveal the answer; nothing here can strand you.</p>
+    <div id="mustWatch1"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -233,7 +241,8 @@
 <script>
 (function(){
   CFS.initNav();
-  CFS.renderVideos('anisoVideos', CFS_VIDEOS.fiberOrientation);
+  CFS.renderVideos('anisoVideos', CFS_VIDEOS.fiberOrientation.slice(1));
+  CFS.renderMustWatch('mustWatch1', CFS_VIDEOS.fiberOrientation[0], {id: 'module-1-required'});
   CFS.initChatbot();
 
   /* ---- 1. material toggle ---- */
@@ -297,6 +306,9 @@
   var wtVal=document.getElementById('wtVal');
   var wtFill=document.getElementById('wtFill');
   var sandRead=document.getElementById('sandRead');
+  var SKIN_T = 3;        // mm — illustrative total skin laminate thickness (e.g. 2 plies of 1708)
+  var SKIN_RHO = 1800;   // kg/m3 — typical cured E-glass/polyester laminate density (~1.8 g/cm3)
+  var CORE_RHO = 80;     // kg/m3 — a common PVC foam density grade (e.g. Divinycell H80 / Core-Cell A80)
   function setSand(){
     var c=+cRange.value;
     var coreH=c*2.2;
@@ -307,16 +319,29 @@
     skinBot.setAttribute('y', topY+coreH);
     coreLabel.setAttribute('y', topY+coreH/2+4);
     coreLabel.textContent = c>0 ? c+' mm core' : '';
-    var stiff=Math.round(8 + (Math.pow(c,1.55)/Math.pow(40,1.55))*92);
-    var wt=Math.round(30 + c*0.6);
-    stiffVal.textContent=stiff; stiffFill.style.width=stiff+'%';
-    wtVal.textContent=wt; wtFill.style.width=wt+'%';
-    if(c===0){coreVal.textContent='0 mm (solid laminate)';sandRead.className='readout';sandRead.textContent='A solid laminate: to make it stiffer you\'d have to make it heavier.';}
+
+    // Real sandwich-beam formula: core treated as contributing zero bending
+    // stiffness of its own (valid since foam/balsa modulus << skin modulus) —
+    // stiffness index is the full-section inertia minus the hollowed-out core,
+    // normalized to the solid-laminate (c=0) case.
+    var d0 = Math.pow(2*SKIN_T, 3);
+    var d  = Math.pow(2*SKIN_T + c, 3) - Math.pow(c, 3);
+    var stiffIndex = d / d0;
+    var skinWeight = 2 * (SKIN_T/1000) * SKIN_RHO;      // kg/m2, both skins
+    var coreWeight = (c/1000) * CORE_RHO;                // kg/m2
+    var totalWeight = skinWeight + coreWeight;
+    var weightMult = totalWeight / skinWeight;
+
+    stiffVal.textContent = stiffIndex.toFixed(1)+'×';
+    stiffFill.style.width = Math.min(100, (Math.log(stiffIndex+1)/Math.log(151))*100).toFixed(1)+'%';
+    wtVal.textContent = totalWeight.toFixed(1)+' kg/m²';
+    wtFill.style.width = Math.min(100, Math.max(4, (coreWeight/(skinWeight*0.8))*100)).toFixed(1)+'%';
+
+    if(c===0){coreVal.textContent='0 mm (solid laminate)';sandRead.className='readout';sandRead.textContent='A solid laminate: to make it stiffer you\'d have to make it heavier — there is no core weight to trade against yet.';}
     else{
       coreVal.textContent=c+' mm core';
-      var mult=(stiff/8).toFixed(1);
       sandRead.className='readout ok';
-      sandRead.textContent='Stiffness is now ~'+mult+'× the solid skins, for only ~'+(wt/30).toFixed(1)+'× the weight. That\'s the sandwich payoff.';
+      sandRead.textContent=stiffIndex.toFixed(1)+'× the bending stiffness of the solid laminate, for only '+weightMult.toFixed(2)+'× the weight ('+coreWeight.toFixed(2)+' kg/m² of that is the foam itself). That gap between the stiffness multiplier and the weight multiplier is the entire sandwich payoff.';
     }
   }
   cRange.addEventListener('input', setSand); setSand();
@@ -356,19 +381,64 @@
      opts:['The reinforcement fibers','The resin matrix / fiber-resin bond','The gelcoat pigment','The core density'],correct:1,
      why:'The matrix binds the fibers and carries the loads they can\'t. Most composite failures are the resin cracking or the bond letting go — not the glass snapping.'},
     {stem:'Why is a cored (sandwich) panel far stiffer than a solid laminate of the same weight?',
-     opts:['The core material is stronger than fiberglass','The core adds tensile strength to the skins','Separating the skins increases stiffness, like an I-beam','The resin cures harder inside a sandwich'],correct:2,
+     opts:['The core material is inherently stronger than the fiberglass skins','The core adds meaningful tensile strength to each skin','Separating the skins increases stiffness, the same principle as an I-beam','The resin cross-links more completely around a core'],correct:2,
      why:'Stiffness comes from moving material away from the center. The core\'s job is to hold the skins apart and carry shear between them — not to be strong itself.'},
     {stem:'Calling a laminate "anisotropic" means it:',
-     opts:['Is equally strong in every direction','Is strongest in the direction its fibers run','Has no usable strength','Can only be used cosmetically'],correct:1,
+     opts:['Is equally strong in every direction, like steel','Is strongest in the direction its fibers run','Has no usable strength until fully post-cured','Is only ever used for cosmetic, non-structural parts'],correct:1,
      why:'Fiber-reinforced composites carry load along the fibers, so strength is directional. That\'s the whole reason fabric orientation is chosen deliberately.'},
     {stem:'Compared to a properly wet-out laminate of the same fibers, a "resin-rich" laminate is generally:',
-     opts:['Lighter and stronger','Heavier and more brittle','Identical in every way','Impossible to cure'],correct:1,
+     opts:['Lighter and stronger, since resin fills any remaining voids','Heavier and more brittle, since excess resin adds no fiber strength','About the same, since resin content barely affects properties','Impossible to fully cure once resin content is too high'],correct:1,
      why:'Excess resin adds weight and more of the brittle component without adding any fiber, so strength-to-weight goes down.'},
     {stem:'In the fiber/matrix division of labor, which is correct?',
-     opts:['Fibers carry compression; resin carries tension','Fibers carry tension; resin binds them and carries compression & shear','Both carry tension only','The core carries all the tensile load'],correct:1,
-     why:'Tensile strength runs along the fibers; the matrix binds them, transfers load between them, and handles compression and shear.'}
+     opts:['Fibers carry compression; resin binds them and carries the tensile and shear loads','Fibers carry tension; resin binds them and carries compression & shear','Both fibers and resin carry equal tension, while the core carries all compression','The core carries the tensile load; fibers and resin only carry compression'],correct:1,
+     why:'Tensile strength runs along the fibers; the matrix binds them, transfers load between them, and handles compression and shear.'},
+    {stem:'What does a "quasi-isotropic" layup mean?',
+     opts:['A layup using only 0° fiber, for maximum strength along one known load path','A layup with fiber in 0°, 90°, and both ±45° directions, giving roughly equal strength every way','A layup where the resin is isotropic even though the fibers stay directional','A layup with fiber in only two perpendicular directions, 0° and 90°'],correct:1,
+     why:'Covering 0°, 90°, and both ±45° directions means no direction is left for the weak resin to carry alone — the composite equivalent of a plate of steel.'},
+    {stem:'Per classical laminate theory, a ply oriented 45° off the load direction keeps roughly what fraction of its along-fiber strength?',
+     opts:['Almost none of it','About a third of it','About half of it','Nearly all of it'],correct:2,
+     why:'Usable ply strength falls off with cos²θ of the angle to the load. At 45°, cos²(45°) ≈ 0.5 — roughly half the strength remains.'},
+    {stem:'A ply oriented 90° to the load (fibers running straight across it) contributes to strength in that direction:',
+     opts:['Almost none of the fiber\'s strength — the resin is left carrying it','About half the fiber\'s strength, split with the resin','The same strength as a ply aligned with the load','More strength than an aligned ply, since fibers spread load sideways'],correct:0,
+     why:'At 90° off-axis, cos²θ collapses toward zero — this is exactly why unidirectional laminates fail when pulled across the fiber instead of along it.'},
+    {stem:'A part has one clear, known load path — say, a stringer cap that only ever gets pulled straight along its length. The efficient fiber choice is:',
+     opts:['A quasi-isotropic layup covering every direction equally','Chopped strand mat, oriented randomly in every direction','Unidirectional fiber laid straight along that load path','Biaxial fabric angled at ±45° to the load'],correct:2,
+     why:'When you can point to one line on the part and say "this only ever gets pulled that way," unidirectional fiber along that axis is the efficient answer — quasi-isotropic coverage is for when the load path is uncertain.'},
+    {stem:'A hull skin takes hoop, longitudinal, and slamming loads from unpredictable directions. The safer fiber choice here is:',
+     opts:['Unidirectional fiber at 0°, to maximize strength in one direction','A quasi-isotropic layup (0°, 90°, ±45°) so no direction is left uncovered','A single layer of biaxial fabric oriented at 90° only','Chopped strand mat alone, since direction doesn\'t matter for hoop loads'],correct:1,
+     why:'Multiple or uncertain load paths call for coverage in every direction — 0°, 90°, and both ±45° — so the resin is never left to carry a direction alone.'},
+    {stem:'Between a solid laminate and a cored sandwich panel of the same total weight, which is generally stiffer?',
+     opts:['The solid laminate, since there\'s more total fiberglass by volume','The cored sandwich, since separating the skins raises stiffness for little added weight','They\'re equal, since total fiber content is unchanged either way','The solid laminate, since a core always adds unwanted flex'],correct:1,
+     why:'Bending stiffness scales with how far material sits from the panel\'s center. A core moves the skins apart for almost no weight penalty — the sandwich payoff.'},
+    {stem:'What is the core\'s structural job in a sandwich laminate — and what is it explicitly not there to do?',
+     opts:['Carry the primary tensile load — not to add any stiffness','Hold the skins apart and carry shear between them — not to be strong itself','Bond permanently to the gelcoat — not to separate the skins','Resist compression only — not to transfer any shear at all'],correct:1,
+     why:'The core\'s entire job is separating the skins and transferring shear between them. It adds huge stiffness for almost no weight — it doesn\'t need to be a strong material itself.'},
+    {stem:'Why is dry fiberglass reinforcement described as "strong, but shapeless" before it meets resin?',
+     opts:['The fiber bundles are actually brittle and snap under light load','The fiber bundles have high tensile strength but no rigidity — like a rope','The fiber bundles carry compression well but no tension when dry','The fiber bundles are rigid on their own but far too heavy without resin'],correct:1,
+     why:'Fibers have huge pull-strength and zero stiffness on their own. Something has to bind and shape them — that\'s the resin\'s job.'},
+    {stem:'Why is cured resin alone described as "rigid, but brittle"?',
+     opts:['It never fully hardens unless fiber reinforcement is present','It holds a shape once cured, but cracks under load with nothing to arrest the crack','It stays flexible under load but is simply too heavy on its own','It carries tensile load well but fails immediately in compression'],correct:1,
+     why:'Cured resin can hold a shape, but with no fiber to carry tension and stop a crack from propagating, it fails suddenly rather than yielding.'},
+    {stem:'Percent fiber content (glass content by weight) of a cured laminate is calculated as:',
+     opts:['Weight of resin ÷ total laminate weight × 100%','Weight of fiber ÷ weight of resin × 100%','Weight of fiber ÷ total laminate weight × 100%','Volume of fiber ÷ volume of the mold cavity × 100%'],correct:2,
+     why:'Percent fiber content = (weight of fiber ÷ total weight of the cured laminate) × 100% — the actual calculation a shop uses to check a laminate against its target ratio.'},
+    {stem:'A laminate with too little resin to fully wet the fibers tends to show:',
+     opts:['A glossy, resin-rich surface with no visible fiber texture','Voids and dry spots where air got trapped instead of resin','Extra weight from resin pooling at the surface','More flexibility from incompletely cross-linked resin'],correct:1,
+     why:'Starve the fibers of resin and air gets trapped instead — those voids are exactly what the wet-out demo\'s red circles represent, and they drop strength fast.'},
+    {stem:'A laminate with excess resin — well beyond what\'s needed to wet the fibers — is generally:',
+     opts:['Lighter and stronger, since resin fills any remaining voids','Heavier and weaker for its weight, since resin adds little strength versus fiber','Unchanged in strength, since resin content doesn\'t affect fiber properties','Stronger but more brittle, since more resin means more cross-linking'],correct:1,
+     why:'Resin is the heavy, comparatively weak half of the pair. Past the wet-out sweet spot, every extra bit is dead weight that drags down strength-to-weight.'},
+    {stem:'Which best describes an anisotropic material like a fiberglass laminate, in contrast to an isotropic one like steel?',
+     opts:['It has no measurable strength in any direction until fully cured','Its strength depends on direction relative to the fibers, unlike steel which is equally strong every way','It is stronger than steel in every direction, not only along the fibers','It behaves identically to steel once the resin fully cross-links'],correct:1,
+     why:'Steel is isotropic — equally strong everywhere. A laminate\'s strength is tied to fiber direction, which is why orientation is chosen on purpose, not by habit.'},
+    {stem:'What are the three structural roles in a cored composite panel, and what does each one carry?',
+     opts:['Fiber = tension; resin = binds fibers, carries compression & shear; core = separates skins, carries shear between them','Fiber = compression; resin = tension; core = decoration only, carries no load','Fiber = all loads; resin = waterproofing only; core = tension','Resin = tension; fiber = compression & shear; core = carries all bending'],correct:0,
+     why:'Each material covers what the others can\'t: fiber takes tension, resin binds the fibers and takes compression/shear, and the core holds the skins apart while carrying shear between them.'},
+    {stem:'Why did boatbuilders start combining fiberglass and resin instead of using either material by itself?',
+     opts:['Resin alone was too expensive to use at scale','Fiber alone is strong but shapeless, and resin alone is rigid but brittle — together each covers the other\'s weakness','Fiber alone was too heavy for hull construction','Building with resin alone required no molds, but was banned for marine use'],correct:1,
+     why:'A composite beats either material alone precisely because the fiber\'s pull-strength and the resin\'s rigidity/shear-and-compression carrying cover each other\'s gap.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-1'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-1'); CFS.recordScore('module-1', c, t); }});
 })();
 </script>
 </body>

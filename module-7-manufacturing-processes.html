@@ -205,7 +205,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions — the distractors are built to look right, so read carefully.</p>
+    <div id="mustWatch7"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -234,6 +235,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch7', CFS_VIDEOS.processes[0], {id: 'module-7-required'});
   CFS.initChatbot();
 
   /* ---- 1. open vs closed molding hook ---- */
@@ -318,7 +320,7 @@
   }
   procSeg.forEach(function(b){b.addEventListener('click',function(){setProc(b.dataset.p);});});
   setProc('handlayup');
-  CFS.renderVideos('procVideos', CFS_VIDEOS.processes);
+  CFS.renderVideos('procVideos', CFS_VIDEOS.processes.slice(1));
 
   /* ---- 3. emissions: area vs thickness ---- */
   var emSeg=document.querySelectorAll('#emSeg .seg');
@@ -398,22 +400,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'Between hand lay-up and resin infusion, which process gives more consistent control over the glass:resin ratio, and why?',
-     opts:['Hand lay-up — hand rolling always removes more excess resin','Infusion — it\'s a closed process where vacuum draws resin through the fiber stack, rather than an operator working it in by hand','They\'re identical since both typically use E-glass','Neither — ratio control depends only on gelcoat thickness'],correct:1,
+     opts:['Hand lay-up — hand rolling always removes more excess resin','Infusion — it\'s a closed process where vacuum draws resin through the fiber stack, rather than an operator working it in by hand','They\'re identical — both processes leave ratio control entirely to whichever resin type is chosen, not the process itself','Neither — glass:resin ratio is set only by the mold\'s release agent, not by lay-up or infusion technique'],correct:1,
      why:'Closed-molding processes like infusion give better control over the fiber-to-resin ratio than open molding, because the resin path is controlled by the process (vacuum), not by an operator\'s hand-rolling technique.'},
     {stem:'What determines the level of styrene emissions from an open mold?',
-     opts:['The thickness of the laminate','Ambient humidity in the shop','The surface area of resin/gelcoat exposed to the air','How long the resin took to cure'],correct:2,
+     opts:['The overall thickness of the cured laminate build-up','The ambient humidity level inside the shop that day','The surface area of resin and gelcoat left exposed to open air','The total time the resin was left to cure before demolding'],correct:2,
      why:'Open-mold emissions depend on the surface area of resin or gelcoat exposed to air — not on thickness.'},
     {stem:'Which closed-molding procedure is characterized by vacuum pressure only, with no injection pressure?',
-     opts:['RTM','Infusion molding (vacuum-assisted resin infusion)','Spray-up','Prepreg'],correct:1,
+     opts:['RTM (resin transfer molding)','Infusion molding (vacuum-assisted resin infusion)','Spray-up (chopper-gun molding)','Prepreg (pre-impregnated reinforcement)'],correct:1,
      why:'Infusion molding (VARTM — vacuum-assisted resin infusion) is defined by vacuum pressure alone; RTM, by contrast, injects resin and can add pressure on top of vacuum.'},
     {stem:'What is the correct order to calibrate a chopper gun?',
      opts:['Chop-to-resin ratio → chop chute position → catalyzation (MEKP) level','Catalyzation (MEKP) level → chop chute position → chop-to-resin ratio','Chop chute position → catalyzation (MEKP) level → chop-to-resin ratio','Chop-to-resin ratio → catalyzation (MEKP) level → chop chute position'],correct:1,
      why:'Set the catalyzation (MEKP) level first, then position the chop chute, then adjust the chop-to-resin ratio.'},
     {stem:'You notice excessive wet chop while running a chopper gun. What\'s the fix?',
-     opts:['Increase air pressure to the chop motor','Decrease the MEKP percentage','Switch to a smaller chop chute','Add more accelerator to the resin'],correct:0,
-     why:'Excessive wet chop during chopper-gun application is corrected by increasing air pressure to the chop motor.'}
+     opts:['Increase air pressure to the chop motor','Decrease the MEKP percentage in the resin mix','Switch to a chop chute with a smaller opening','Add more accelerator to speed up the resin\'s kick'],correct:0,
+     why:'Excessive wet chop during chopper-gun application is corrected by increasing air pressure to the chop motor.'},
+    {stem:'What are the two processes classified as "open molding"?',
+     opts:['Hand lay-up and spray-up','Vacuum bagging and resin infusion','RTM and prepreg','Hand lay-up and vacuum bagging'],correct:0,
+     why:'The two kinds of open molding are hand lay-up and spray-up; every other process on this page is a closed-molding method.'},
+    {stem:'Despite closed molding\'s advantages in surface finish and emissions, which lamination method remains the most commonly used in the boatbuilding industry?',
+     opts:['Open molding, since it needs the least specialized tooling and capital equipment','Resin infusion, because it produces the most repeatable glass:resin ratio','RTM, because it produces a finished surface on both sides of the part','Prepreg, because it delivers the highest and most consistent laminate performance'],correct:0,
+     why:'Open molding is still the most commonly used lamination process in boatbuilding — it\'s the cheapest, most flexible way to build a part, even though closed methods score better on ratio control, finish, and consistency.'},
+    {stem:'How does "VARTM" as a broader term differ from infusion molding specifically?',
+     opts:['VARTM covers processes using vacuum and/or pressure — RTM, for example, can add injection pressure on top of vacuum — while infusion is vacuum only','VARTM requires injection pressure only, while infusion uses vacuum only','VARTM and infusion are simply two names for the exact same single process','VARTM applies only to prepreg curing, while infusion applies only to hand lay-up'],correct:0,
+     why:'VARTM (Vacuum-Assisted Resin Transfer Molding) is the broader term covering vacuum and/or pressure; infusion is specifically the vacuum-only version, while RTM can add injection pressure on top of vacuum.'},
+    {stem:'Beyond lower emissions, what other benefits does closed molding offer over open molding?',
+     opts:['Improved surface finish, reduced material waste, and better control over the fiber-to-resin ratio','Faster cure times regardless of resin type, and no need for any release agent','Elimination of the need for gelcoat, since the mold surface finish replaces it','Lower equipment cost and less operator skill required than open molding'],correct:0,
+     why:'Closed molding\'s advantages are improved surface finish, reduced waste, and better fiber-to-resin ratio control — on top of far fewer emissions. It actually costs more and demands more skill than open molding, not less.'},
+    {stem:'Which list correctly matches spray-gun types used in composites work, as covered in this module?',
+     opts:['Siphon cup, cup gun, pressure pot, high-pressure airless, air-assist airless, HVLP, impingement applicator, and flow coater','Roller gun, dip gun, vacuum gun, low-pressure airless, air-only HVLP, diffusion applicator, and drip coater','Chop gun, catalyst gun, resin gun, medium-pressure airless, spray-assist LVLP, convergence applicator, and pour coater','Brush gun, wick gun, gravity pot, ultra-pressure airless, air-free HVLP, collision applicator, and mist coater'],correct:0,
+     why:'The spray-gun types covered are siphon cup, cup gun, pressure pot, high-pressure airless, air-assist airless, HVLP, impingement applicator, and flow coater — the other lists substitute plausible-sounding but invented equipment names.'},
+    {stem:'In spray-gun application, what does "impingement" refer to?',
+     opts:['Two or more streams (such as resin and catalyst) shot so they collide and mix in the air before reaching the surface','A single stream broken into fine mist by compressed air passing through the nozzle','The gun automatically adjusting fan width based on distance from the surface','A safety interlock that shuts the gun off if pressure exceeds a set limit'],correct:0,
+     why:'Impingement means two or more streams — typically resin and catalyst — are shot so they collide and mix on the way to the surface, rather than being pre-mixed.'},
+    {stem:'How does a flow coater apply resin?',
+     opts:['Several resin streams merge into a single fan, with nozzle-hole orientation setting the fan\'s shape — like a showerhead','A single high-pressure stream oscillates rapidly across the surface to build an even coat','Resin is drawn through a felt pad that wicks it evenly onto the fabric by capillary action','Two nozzles alternate spraying resin and catalyst in timed pulses rather than mixing them'],correct:0,
+     why:'A flow coater works like a showerhead: multiple resin streams merge into one fan pattern, and the orientation of the nozzle holes determines that fan\'s shape.'},
+    {stem:'Which four tools are used to apply resin by hand or machine, per this module?',
+     opts:['Brush, resin-fed roller, spray gun, and flow coater','Trowel, squeegee, dip tank, and heat gun','Putty knife, pour cup, air knife, and vibration table','Notched spreader, immersion bath, fog nozzle, and drum pump'],correct:0,
+     why:'The tools used to apply resin are a brush, a resin-fed roller, a spray gun, or a flow coater.'},
+    {stem:'Why is reinforcement fabric overlapped at seams during lamination rather than butted edge-to-edge?',
+     opts:['Overlap transfers stress between adjacent pieces of fabric, avoiding a discontinuity in the load path','Overlap reduces total resin consumption by minimizing exposed fiber edges','Overlap is purely cosmetic, hiding the seam line beneath the gelcoat','Overlap speeds curing by trapping additional exothermic heat at the seam'],correct:0,
+     why:'Overlapping fabric at a seam helps transfer stress between adjacent pieces — an unoverlapped seam would leave a discontinuity in the load path.'},
+    {stem:'What does "triggering" during resin application indicate?',
+     opts:['The resin-to-catalyst ratio is improper — the mix is starting to kick early, or not kicking when it should','The chopper gun\'s chop chute is misaligned relative to the fan pattern','The fiberglass fabric was pre-cut to the wrong dimensions before lay-up','The mold\'s release agent was applied in an insufficient number of coats'],correct:0,
+     why:'Triggering means the resin-to-catalyst ratio is off — the batch is gelling early, or failing to kick at all — not a fabric or chopper-gun problem.'},
+    {stem:'During chopper-gun spraying, "spring-back" — where the chopped fiber doesn\'t cut cleanly — is typically caused by:',
+     opts:['Dull chopper blades','Too little air pressure at the chop motor','An improperly calibrated chop-to-resin ratio','A chop chute positioned too far from the mold surface'],correct:0,
+     why:'Spring-back — chop that doesn\'t cut cleanly and springs back instead of lying flat — is caused by dull chopper-gun blades.'},
+    {stem:'An improper chop pattern from a chopper gun — the spray fan landing unevenly — is most directly caused by:',
+     opts:['Incorrect gun orientation relative to the surface being sprayed','Excessive air pressure at the chop motor','Using resin that is past its recommended shelf life','A chopper-gun blade that has been replaced too recently'],correct:0,
+     why:'Improper chop pattern is caused by incorrect gun orientation relative to the surface — not air pressure, resin age, or blade freshness.'},
+    {stem:'Why is the skin coat described as a critical layer in the lamination sequence?',
+     opts:['It acts as a corrosion barrier that increases blister resistance and supports/backs up the gelcoat film','It is the layer that determines the part\'s final color and gloss','It is the only layer in the entire process ever checked for Barcol hardness','It replaces the need for a structural laminate on lightly loaded parts'],correct:0,
+     why:'The skin coat acts as a corrosion barrier (blister resistance) and supports the gelcoat film — a critical layer applied before any bulk structural laminate goes on top.'},
+    {stem:'What are the advantages of pre-cutting reinforcement fabric before lamination?',
+     opts:['It speeds up lamination time, ensures consistency between parts, and allows structural optimization','It eliminates the need to calculate percent fiber content for that part','It allows the fabric to be applied wet, without any resin at all','It removes the need for overlapping fabric at seams'],correct:0,
+     why:'Pre-cutting reinforcement fabric speeds up lamination time, ensures consistency between parts, and allows structural optimization through precise placement and orientation.'},
+    {stem:'Which of the following does this module explicitly flag as NOT locked down by its vetted source material?',
+     opts:['Exact comparative cost, skill, and emissions numbers across hand lay-up, spray-up, vacuum bag, infusion, RTM, and prepreg','That open-mold emissions scale with exposed surface area rather than thickness','That the two kinds of open molding are hand lay-up and spray-up','That the production sequence runs mold prep → release → gelcoat → skin coat → laminate → cure → demold'],correct:0,
+     why:'This module\'s own TODO: VERIFY callout flags that exact comparative cost/skill/emissions numbers across the six processes aren\'t locked in the content pack — the property bars are relative rankings only, not certified figures.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-7'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-7'); CFS.recordScore('module-7', c, t); }});
 })();
 </script>
 </body>

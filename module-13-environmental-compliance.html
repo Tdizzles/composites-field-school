@@ -161,7 +161,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions on the compliance layer. Read carefully — the distractors are built to look right.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest: vacuum bagging is this course's concrete example of how a process choice — closed molding — cuts VOC/HAP emissions, which is the whole compliance argument in this module. Then: 20 exam-style questions on the compliance layer. Read carefully — the distractors are built to look right.</p>
+    <div id="mustWatch13"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -190,6 +191,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch13', CFS_VIDEOS.processes[1], {id: 'module-13-required'});
   CFS.initChatbot();
 
   /* ---- 2. waste sorter ---- */
@@ -293,7 +295,7 @@
      opts:['A HAP only, not a VOC','A VOC only, not a HAP','Both a VOC and a HAP','Neither — it is unregulated'],correct:2,
      why:'Styrene is both a VOC (volatile organic compound) and a HAP (hazardous air pollutant), with CNS effects at elevated exposure and a listing on California\'s Proposition 65.'},
     {stem:'Why must solvent-soaked rags be disposed of in a sealed, fire-rated container rather than a regular trash bin?',
-     opts:['They are a recyclable material','They can spontaneously combust','They smell bad in open trash','They are classified as biohazard waste'],correct:1,
+     opts:['They are considered a recyclable material by most municipal programs','They can spontaneously combust','They produce a persistent odor if left in open trash','They are classified as biohazard waste requiring special disposal'],correct:1,
      why:'Solvent-soaked (oily) rags can spontaneously combust, so they must go into a sealed, fire-rated container — never loose in regular trash.'},
     {stem:'What actually determines the amount of styrene VOC/HAP emissions coming off an open mold?',
      opts:['The thickness of the laminate','The surface area of resin/gelcoat exposed to air','The color of the gelcoat','The brand of resin used'],correct:1,
@@ -302,10 +304,55 @@
      opts:['It uses a resin that contains no styrene','It encloses the resin/catalyst reaction inside a sealed mold or bag, removing the exposed evaporating surface','It requires no gelcoat at all','It is always done outdoors'],correct:1,
      why:'Closed molding encloses the reaction inside a sealed mold/bag, eliminating the exposed resin surface that styrene would otherwise evaporate from — dramatically cutting VOC/HAP emissions versus open molding.'},
     {stem:'Which agency is primarily responsible for regulating a boat builder\'s environmental emissions and waste disposal?',
-     opts:['OSHA','The EPA (Environmental Protection Agency)','The U.S. Coast Guard','ABYC'],correct:1,
-     why:'The EPA controls environmental regulations for boat builders (air emissions, waste disposal). OSHA, by contrast, governs workplace safety broadly.'}
+     opts:['OSHA','The EPA','The U.S. Coast Guard','ABYC'],correct:1,
+     why:'The EPA controls environmental regulations for boat builders (air emissions, waste disposal). OSHA, by contrast, governs workplace safety broadly.'},
+    {stem:'Which agency governs workplace safety broadly — respirator programs, hazard communication, PPE and ventilation rules?',
+     opts:['OSHA','The EPA','The U.S. Coast Guard','ABYC'],correct:0,
+     why:'OSHA governs workplace safety broadly, including respirator programs, hazard communication, and PPE/ventilation rules. The EPA, by contrast, governs what leaves the building.'},
+    {stem:'What does the EPA govern, in contrast to OSHA, for a composites shop?',
+     opts:['What leaves the building — air emissions and waste disposal','Respirator programs and hazard communication inside the shop','PPE and ventilation requirements on the shop floor','Employee training records for hazardous-material handling'],correct:0,
+     why:'The EPA is the environmental agency — it governs air emissions and waste disposal, the "what leaves the building" side of compliance, while OSHA governs workplace safety.'},
+    {stem:'Why is styrene singled out for regulation, according to this module?',
+     opts:['It checks two separate regulatory boxes at once — it\'s both a VOC and a HAP','It is the only chemical used in composites work that has any odor at all','It is regulated only because of its status on California\'s Proposition 65 list','It is the only solvent classified as flammable in a composites shop'],correct:0,
+     why:'Styrene isn\'t regulated for one reason — it checks two boxes at once, VOC and HAP, and that double status is the thread running through this whole module.'},
+    {stem:'Why are marine composites shops specifically named in federal air-quality rules?',
+     opts:['Open-mold boatbuilding uses a lot of styrene-based resin over a lot of exposed surface area','Boatbuilding shops are the only industry that uses gelcoat at all','Marine composites shops are required to hold an EPA operating permit regardless of size','Fiberglass dust is uniquely regulated as a hazardous air pollutant'],correct:0,
+     why:'Because open-mold boatbuilding uses so much styrene-based resin over so much exposed surface area, marine composites shops are a named category in federal air-quality rules.'},
+    {stem:'How is waste acetone handled in a composites shop, per its SDS?',
+     opts:['As flammable waste, kept away from ignition sources','As a hazardous air pollutant requiring the same handling as styrene','As a solid waste, swept or vacuumed like sanding dust','As biohazard waste requiring sealed disposal like solvent rags'],correct:0,
+     why:'Waste acetone is handled as flammable waste, kept away from ignition sources, per the SDS — a different hazard category than styrene\'s VOC/HAP status.'},
+    {stem:'What is the correct sequence for handling a large resin or gelcoat spill?',
+     opts:['Contain it immediately, alert management, and keep it out of floor drains','Alert management first, then contain the spill once help arrives','Flush it toward the nearest floor drain to clear the work area quickly','Let it dry in place, then sweep it up as solid waste'],correct:0,
+     why:'For a large spill, the sequence is contain it immediately, alert management, and keep it out of floor drains — in that rough order, done fast.'},
+    {stem:'What does a red label on a resin or gelcoat drum indicate?',
+     opts:['That the contents are flammable','That the contents are a listed HAP requiring EPA permitting','That the contents must be disposed of as solid waste','That the contents have exceeded their shelf life'],correct:0,
+     why:'A red label tells you before anything spills that the contents are flammable — exactly the information you need to decide how urgently to react.'},
+    {stem:'How should fiberglass/resin sanding dust be handled, compared to a solvent hazard?',
+     opts:['It\'s not a solvent hazard — swept or vacuumed as solid waste, with particulate PPE per the SDS','It\'s handled identically to solvent-soaked rags, in a sealed fire-rated container','It\'s classified as a VOC and must be contained like a resin spill','It requires the same organic-vapor cartridge respirator used for styrene vapor'],correct:0,
+     why:'Sanding dust isn\'t a solvent hazard — it\'s swept or vacuumed as solid waste, with particulate PPE per the SDS, unlike the fire-rated-container handling solvent rags need.'},
+    {stem:'What is the SDS, and when should you consult it?',
+     opts:['The reference document for a chemical\'s hazards, handling, and disposal guidance — consult it whenever you\'re unsure','A government permit required before a shop may use any styrene-based resin','A logbook recording every spill that has occurred in the shop','A checklist used only during OSHA workplace inspections'],correct:0,
+     why:'The SDS (Safety/Material Data Sheet) is the reference document for a chemical\'s hazards, handling, and disposal guidance — when in doubt, that\'s where you look.'},
+    {stem:'What does classifying styrene as a VOC (volatile organic compound) actually describe?',
+     opts:['That it readily evaporates into the air at room temperature, which is why it doesn\'t stay in the laminate — it leaves the shop','That it is toxic if absorbed through skin contact with liquid resin','That it is a listed carcinogen under California\'s Proposition 65','That it must be stored away from open flame due to flammability'],correct:0,
+     why:'A VOC readily evaporates into the air at room temperature — that\'s what you\'re smelling over open resin, and it\'s the reason emissions are an air-quality issue at all.'},
+    {stem:'What does classifying styrene as a HAP (hazardous air pollutant) actually describe?',
+     opts:['That it\'s a specific category of air pollutant known to cause serious health effects, including CNS effects at elevated exposure','That it evaporates readily into shop air at room temperature','That it is flammable and must be kept from ignition sources','That it requires a permit before any amount can be purchased'],correct:0,
+     why:'A HAP is a specific category of air pollutant known to cause serious health effects — styrene carries CNS effects at elevated exposure, the health-and-exposure side distinct from the VOC air-quality side.'},
+    {stem:'How does acetone\'s regulatory concern differ from styrene\'s?',
+     opts:['Acetone is primarily a fire-and-flammability concern, while styrene is an air-emissions and CNS-exposure concern under VOC/HAP status','Acetone and styrene are regulated under the exact same VOC/HAP/Prop-65 framework','Acetone is a HAP but not a VOC, while styrene is a VOC but not a HAP','Acetone requires an organic-vapor respirator, while styrene requires only particulate protection'],correct:0,
+     why:'Both need respect, but for different reasons — acetone is primarily a fire-and-flammability concern, while styrene is an air-emissions and CNS-exposure concern under its VOC/HAP status.'},
+    {stem:'In the open-molding emissions demo, why does changing laminate thickness never move the emissions meter?',
+     opts:['Emissions scale with the exposed resin/gelcoat surface area, not the mass of material underneath it','The demo intentionally simplifies the relationship, though thickness does matter in a real shop','Thicker laminate always cures faster, which lowers emissions independent of surface area','Emissions are fixed per batch of resin mixed, regardless of how it\'s applied'],correct:0,
+     why:'Emissions scale with the surface area of resin/gelcoat exposed to air — not the thickness of the material underneath it, which is exactly why the thickness slider never moves the emissions meter.'},
+    {stem:'Besides cutting styrene emissions, what other benefits does closed molding offer over open molding?',
+     opts:['Better surface finish, less material waste, and tighter control of fiber-to-resin ratio','No need for a mold release agent at all','Elimination of the need for any structural laminate schedule','A shorter cure time for every resin system used'],correct:0,
+     why:'On top of dramatically lower VOC/HAP emissions, closed molding brings the Module 7 process benefits: better surface finish, less material waste, and tighter control of fiber-to-resin ratio.'},
+    {stem:'What does this module say about the Clean Air Act\'s NESHAP rule for Reinforced Plastic Composites Production?',
+     opts:['The regulatory framework is real and cited, but specific current numeric emission limits and permit thresholds are not locked in this content pack','It provides the exact current numeric emission limits a shop must meet','It applies only to shops using exclusively closed-molding processes','It has been fully superseded by California\'s Proposition 65 requirements'],correct:0,
+     why:'The NESHAP framework targeting styrene is real and cited, but this module flags that specific current numeric emission limits and permit thresholds are outside its vetted content pack.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-13'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-13'); CFS.recordScore('module-13', c, t); }});
 })();
 </script>
 </body>

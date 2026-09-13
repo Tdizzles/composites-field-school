@@ -138,7 +138,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. The distractors are built to look right — read carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest — installing a thru-hull fitting in real hands, not just the cross-section diagram. Then: 20 exam-style questions, distractors written to sound just as plausible as the right answer, so read carefully.</p>
+    <div id="mustWatch10"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -167,6 +168,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch10', CFS_VIDEOS.hardware[0], {id: 'module-10-required'});
   CFS.initChatbot();
 
   /* ---- 1. single-skin vs cored thru-hull cross-section ---- */
@@ -287,7 +289,7 @@
     scWrap.appendChild(q);
   });
 
-  CFS.renderVideos('hwVideos', CFS_VIDEOS.hardware);
+  CFS.renderVideos('hwVideos', CFS_VIDEOS.hardware.slice(1));
 
   /* ---- 3. core-sealing order game + isolated cross-section ---- */
   CFS.initOrderGame('coreOrderGame', [
@@ -362,22 +364,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'What is the purpose of a backing plate (bracing plate) under a through-bolted fitting?',
-     opts:['To make the fitting look more finished on the inside','To distribute the stress from the mounting-bolt loads over a wider area of the laminate','To replace the need for any sealant at the hole','To speed up drilling the hole'],correct:1,
+     opts:['To increase the fastener\'s resistance to corrosion in a seawater environment','To distribute the stress from the mounting-bolt loads over a wider area of the laminate','To let the fastener seat without needing any bedding compound at the hole','To reduce the drilling time needed to install the fitting'],correct:1,
      why:'A backing plate (bracing plate) spreads the load from the bolt over a wider area of laminate instead of concentrating it at one small point — that\'s what lets a through-bolted fitting resist pull-out.'},
     {stem:'When is a self-tapping screw an appropriate fastener for hardware on a boat?',
-     opts:['For any fitting, as long as the screw is long enough','Only for light, non-structural, low-load fittings','Only below the waterline','Only on cored laminates'],correct:1,
+     opts:['For any fitting, provided the screw is long enough to reach through the full laminate thickness','Only for light, non-structural, low-load fittings, since it grips just a thin layer of laminate','Only on fittings mounted below the waterline, where a backing plate can\'t be reached','Only on cored laminates, where the core adds enough extra grip for the threads'],correct:1,
      why:'Self-tapping screws grip only a thin layer of laminate, so they\'re appropriate for light, non-structural, low-load fittings. Real structural or shock loads need a through-bolt and backing plate.'},
     {stem:'On a cored (sandwich) hull, why do you over-drill the fastener hole, fill it with thickened epoxy, let it cure, and then re-drill to final size?',
-     opts:['To make the hole look neater','To isolate the exposed core from the fastener so water can\'t wick into it','To save resin compared to filling the whole panel','To avoid needing a backing plate'],correct:1,
+     opts:['To smooth the hole\'s edges so the fitting\'s flange seats flush against the gelcoat','To isolate the exposed core from the fastener so water can\'t wick into it','To reduce the total resin used versus filling the entire panel with epoxy','To eliminate the need for a backing plate on the inner skin'],correct:1,
      why:'The core must never directly contact a fastener or thru-hull fitting. The cured epoxy plug takes the core\'s place right at the hole, so the fastener seats in solid epoxy and the surrounding core stays sealed off from water.'},
     {stem:'What happens if a thru-hull fitting is installed on a cored hull without isolating the core first?',
-     opts:['Nothing, as long as the fitting is through-bolted','Water can intrude into the laminate and wick through the exposed core','The gelcoat will yellow faster','The fitting will corrode the gelcoat'],correct:1,
+     opts:['Nothing significant, provided the fitting itself is through-bolted rather than self-tapped','Water can intrude into the laminate and wick through the exposed core','The surrounding gelcoat discolors faster from UV exposure at the penetration','The metal fitting galvanically corrodes the gelcoat surrounding it'],correct:1,
      why:'Improper thru-hull installation lets water intrude into the laminate — and on a cored hull, that water wicks through the exposed core since it wasn\'t isolated from the hole.'},
     {stem:'A carbon-fiber bracket is through-bolted directly to an aluminum fitting with no isolation between them. What is the main concern?',
-     opts:['The carbon will absorb water and swell','Galvanic corrosion of the aluminum, since carbon is conductive and sits far from it on the galvanic series','The bolt will overheat during tightening','The epoxy will not cure properly near aluminum'],correct:1,
-     why:'As Module 2 covered, carbon fiber is electrically conductive and sits far from common boat metals — especially aluminum — on the galvanic series. Moisture as an electrolyte drives rapid corrosion of the aluminum unless isolated with a glass barrier ply, epoxy isolation, or non-conductive fasteners/bushings.'}
+     opts:['The carbon will absorb seawater and swell, cracking the laminate around the bolt','Galvanic corrosion of the aluminum, since carbon is conductive and sits far from it on the galvanic series','The bolt will overheat during tightening due to carbon\'s electrical conductivity','The epoxy resin will fail to cure properly near bare aluminum'],correct:1,
+     why:'As Module 2 covered, carbon fiber is electrically conductive and sits far from common boat metals — especially aluminum — on the galvanic series. Moisture as an electrolyte drives rapid corrosion of the aluminum unless isolated with a glass barrier ply, epoxy isolation, or non-conductive fasteners/bushings.'},
+    {stem:'On a single-skin hull, what does the doubler laminated around a new hardware hole actually restore?',
+     opts:['The strength of laminate that was removed when the hole was cut','The gelcoat\'s original color match at the penetration','The core\'s resistance to water wicking at the edge of the hole','The bond between the bedding compound and the fitting\'s flange'],correct:0,
+     why:'Cutting a hole removes load-carrying laminate; the doubler is extra laminate that puts that strength back — the single-skin equivalent of the core-isolation plug on a cored hull.'},
+    {stem:'A bow cleat will take the full shock load of the anchor rode snubbing in a blow. What\'s the appropriate fastening method?',
+     opts:['A through-bolt with a backing plate, to spread that shock load over a wide area of laminate','A self-tapping screw, since cleats carry static rather than shock loads','A single oversized self-tapping screw driven deeper than usual to compensate','A through-bolt with no backing plate, since the cleat\'s own base spreads the load'],correct:0,
+     why:'A cleat under heavy shock loading needs a through-bolt and backing plate to spread that load over a wide area of laminate and resist pull-out — self-tapping screws only grip a thin layer.'},
+    {stem:'A stanchion base holds lifelines a crew member could fall against. Why does this call for a through-bolt and backing plate rather than self-tapping screws?',
+     opts:['It\'s a structural, safety-critical fitting, and the backing plate distributes that load and resists pull-out','Self-tapping screws are never permitted on any deck hardware regardless of load','Stanchion bases are always installed on cored hulls, which require through-bolting','The backing plate is mainly there to keep the base from scratching the gelcoat'],correct:0,
+     why:'This is a structural, safety-critical fitting that has to hold a person\'s full weight in a fall. It needs a through-bolt and backing plate to distribute that load and resist pull-out.'},
+    {stem:'A small plastic map-light fixture inside a cabin liner only has to support its own weight. What\'s the appropriate fastener?',
+     opts:['A self-tapping screw, since a light, non-structural fitting like this carries essentially no load','A through-bolt with a backing plate, since any electrical fitting is treated as safety-critical','A self-tapping screw, but only after installing a doubler behind the liner','A through-bolt with no backing plate, since the load is too light to need one'],correct:0,
+     why:'A light, non-structural fitting like this carries essentially no load, so a self-tapping screw is the appropriate, simpler choice — through-bolting with a backing plate would be overkill.'},
+    {stem:'A mid-boat cleat is sized for docklines and towing loads. What\'s the appropriate fastening method?',
+     opts:['A through-bolt with a backing plate, since docklines and towing put real structural load through this fitting','A self-tapping screw, since docklines apply load gradually rather than as shock loading','A through-bolt with no backing plate, since a cleat\'s wide base already spreads the load itself','A self-tapping screw upsized to the next thread diameter to compensate for the load'],correct:0,
+     why:'Docklines and towing put real structural load through this fitting, so it needs a through-bolt and backing plate — self-tapping screws are only appropriate for light, non-structural fittings.'},
+    {stem:'Why should a fastener hole be counterbored or countersunk before the fastener is installed?',
+     opts:['So the sealant fills the gap around the fastener instead of the fastener head crushing or cracking the brittle gelcoat to seat itself','So the fastener can be driven in without any bedding compound at all','So the fastener threads bite directly into the exposed core material','So the backing plate can be omitted on structural fittings'],correct:0,
+     why:'Counterboring or countersinking the hole means the screw head or nut doesn\'t ride directly on the gelcoat — the sealant fills the gap instead of the fastener crushing the brittle surface to seat itself.'},
+    {stem:'On a cored hull, after over-drilling the fastener hole oversize and filling it solid with thickened epoxy, what has to happen before you re-drill to final size?',
+     opts:['The epoxy must cure fully, so the fastener threads into a solid cured plug rather than uncured resin','The core must be removed entirely from around the hole','A backing plate must be bonded over the outer skin first','Bedding compound must be applied over the still-wet epoxy'],correct:0,
+     why:'The sequence only works if the epoxy cures solid before you drill back into it — that cured plug is what the fastener actually threads into, not soft resin or the core.'},
+    {stem:'What does the cured epoxy plug in an isolated cored-hull fastener hole actually do?',
+     opts:['It becomes what the fastener threads into, keeping the surrounding core sealed off from water on both faces of the laminate','It replaces the need for a backing plate on the inner skin','It bonds the outer skin directly to the fitting\'s flange, replacing bedding compound','It restores the gelcoat\'s cosmetic finish around the hole'],correct:0,
+     why:'The cured epoxy plug takes the core\'s place right at the hole. The fastener seats in it instead of the core, and the surrounding core stays isolated from water on both faces of the laminate.'},
+    {stem:'Without bedding compound at a hardware penetration, what specific failure path does water take?',
+     opts:['It tracks under the fitting\'s base and down along the fastener shanks and threads — a slow, hidden leak called crevice intrusion','It evaporates through the gelcoat before ever reaching the laminate','It travels along the top of the fitting and drips off the outside only','It bypasses the fastener entirely and enters through the backing plate'],correct:0,
+     why:'Without a seal at the interface, water tracks under the fitting\'s base and down along the fastener shanks and threads — a slow, hidden leak path called crevice intrusion.'},
+    {stem:'Besides sealing water out, what else does bedding compound do at a hardware penetration?',
+     opts:['It lets the fitting and hull flex slightly against each other without opening a gap','It replaces the need for a doubler on a single-skin hull','It structurally bonds the fitting to the laminate in place of any fasteners','It raises the local Barcol hardness reading around the fitting'],correct:0,
+     why:'Bedding compound isn\'t just a water seal — it also lets the fitting and hull flex slightly against each other without a gap opening at the interface.'},
+    {stem:'How do bedding compound and putty differ in their jobs on a boat?',
+     opts:['Putty fillets bulkheads and stringers for a structural bonding joint, while bedding compound seals a hardware penetration against water','Putty seals hardware penetrations against water, while bedding compound fillets structural bulkhead joints','Both perform the same sealing job, but putty is only used below the waterline','Bedding compound is a structural adhesive, while putty is used purely for cosmetic gelcoat touch-ups'],correct:0,
+     why:'Putties are for filleting bulkheads and stringers — the radius-fillet tabbing joint — a structural bonding job. Bedding compound seals a hardware penetration against water. Different jobs, different products.'},
+    {stem:'Which of the following does this course explicitly flag as NOT having a vetted, specific answer yet?',
+     opts:['Exact fastener torque values and backing-plate material/thickness specs for a given load','The general principle that self-tapping screws suit only light, non-structural fittings','The requirement that a cored hull\'s core must never directly contact a fastener','The rule against bolting carbon fiber directly to bare aluminum hardware'],correct:0,
+     why:'The module flags exact fastener torque values, load sizing, and backing-plate material/thickness as unverified — only the general through-bolt-vs-self-tapping principle is confirmed.'},
+    {stem:'What open question about repair materials does this course explicitly flag as having no vetted answer at all?',
+     opts:['When it\'s necessary to use an adhesive in place of a putty','Whether polyurethane or polysulfide bedding compound cures faster','Whether bedding compound should be applied before or after painting','Whether putty can be used to seal a thru-hull fitting instead of bedding compound'],correct:0,
+     why:'"When is it necessary to use an adhesive in place of a putty?" is flagged as an open question with no vetted answer in the source material — the course deliberately doesn\'t guess at one.'},
+    {stem:'In a carbon-to-aluminum galvanic pairing on a boat, what actually happens to each material?',
+     opts:['The carbon acts as a noble cathode while the aluminum corrodes rapidly','The aluminum acts as a noble cathode while the carbon degrades and delaminates','Both materials corrode at roughly the same rate once moisture is present','The carbon corrodes first, sacrificially protecting the aluminum'],correct:0,
+     why:'Carbon sits far from aluminum on the galvanic series and behaves as a noble cathode — with an electrolyte present, it\'s the aluminum that corrodes rapidly, not the carbon.'},
+    {stem:'Which of these is NOT one of the isolation methods this module gives for keeping carbon fiber safely away from bare aluminum hardware?',
+     opts:['A glass barrier ply between the carbon and the metal','A full epoxy coating over the metal fitting','A non-conductive fastener or bushing at the point of contact','A thicker layer of gelcoat sprayed over the joint'],correct:3,
+     why:'The isolation methods are a glass barrier ply, epoxy isolation over the metal, and non-conductive fasteners/bushings — gelcoat thickness does nothing to break the electrical contact that drives galvanic corrosion.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-10'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-10'); CFS.recordScore('module-10', c, t); }});
 })();
 </script>
 </body>

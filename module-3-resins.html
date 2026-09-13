@@ -123,7 +123,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. Read the distractors carefully.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions — read the distractors carefully.</p>
+    <div id="mustWatch3"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -152,7 +153,8 @@
 <script>
 (function(){
   CFS.initNav();
-  CFS.renderVideos('resinVideos', CFS_VIDEOS.resinComparison);
+  CFS.renderVideos('resinVideos', CFS_VIDEOS.resinComparison.slice(1));
+  CFS.renderMustWatch('mustWatch3', CFS_VIDEOS.resinComparison[0], {id: 'module-3-required'});
   CFS.initChatbot();
 
   /* ---- 1. resin family selector ---- */
@@ -245,25 +247,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'What is the key difference between a thermoset and a thermoplastic resin?',
-     opts:['Thermosets are always more expensive','Thermosets cross-link permanently during cure and cannot be re-melted; thermoplastics do not cross-link and can be reformed','Thermoplastics cannot be used in boatbuilding','There is no real difference'],correct:1,
+     opts:['Thermosets simply cost more per unit weight than thermoplastics','Thermosets cross-link permanently during cure and cannot be re-melted; thermoplastics do not cross-link and can be reformed','Thermoplastics are structurally unsuitable for any boatbuilding application','Thermosets and thermoplastics cure through the identical chemical mechanism'],correct:1,
      why:'Thermoset molecules cross-link during an irreversible, exothermic cure. Thermoplastics have no cross-linking, so they can be melted and reshaped.'},
     {stem:'Compared to standard (orthophthalic) polyester, isophthalic polyester offers:',
-     opts:['Lower cost only','Better mechanical properties, chemical resistance, and water-permeation resistance, at higher cost','Faster cure with no catalyst needed','Compatibility with epoxy binders'],correct:1,
+     opts:['Lower material cost with no change in mechanical properties','Better mechanical properties, chemical resistance, and water-permeation resistance, at higher cost','A faster cure that requires no MEKP catalyst at all','Full chemical compatibility with epoxy hardener systems'],correct:1,
      why:'Isophthalic acid in place of orthophthalic gives better mechanical properties and water/chemical resistance — at a higher price. Gelcoat is typically isophthalic.'},
     {stem:'You need to laminate new material onto a boat hull that is fully-cured EPOXY. Which resin choice is most likely to give a strong bond?',
-     opts:['Standard orthophthalic polyester','Any resin — epoxy bonds equally well to everything applied to it','Epoxy','Vinylester, because it contains styrene'],correct:2,
+     opts:['Standard orthophthalic polyester, applied at a slightly heavier catalyst ratio','Any resin — epoxy bonds equally well to everything applied to it','Epoxy resin, applied and catalyzed the same way as for a fresh laminate','Vinylester, because it contains styrene'],correct:2,
      why:'The one-way bond rule: epoxy bonds well to nearly everything, but polyester and vinylester bond poorly to fully-cured epoxy. To build on cured epoxy, use epoxy.'},
     {stem:'Doubling the percentage of MEKP catalyst in a polyester resin batch will mainly:',
-     opts:['Double the cured strength of the laminate','Speed up and intensify the cure (more exotherm), not increase ultimate strength','Have no effect at all','Turn the resin into an epoxy'],correct:1,
+     opts:['Double the cured strength of the finished laminate','Speed up and intensify the cure (more exotherm), without increasing ultimate strength','Have no measurable effect on the resin at all','Convert the polyester resin chemically into an epoxy'],correct:1,
      why:'MEKP initiates a free-radical cure; more of it cures faster and hotter, risking cracking or pre-release — it does not make the part stronger.'},
     {stem:'A partially-cured epoxy surface feels slightly waxy and slippery before the next layer is applied. What should happen before laminating over it?',
      opts:['Nothing — laminate directly over it','Wash off the amine blush with water and abrade the surface','Apply extra hardener to melt the wax','Heat the surface with a torch'],correct:1,
      why:'That waxy film is amine blush, a byproduct of epoxy curing in humid/cool conditions. It must be washed off and sanded before recoating or the new layer won\'t bond.'},
     {stem:'A resin-rich outer laminating layer of polyester stays tacky to the touch even after curing time has passed, but this is expected at that stage. Why?',
-     opts:['The resin was never catalyzed','Air inhibition — atmospheric oxygen stops surface styrene from fully curing until a wax-additive finish coat seals it','The mold released too early','The glass-to-resin ratio was too high'],correct:1,
-     why:'Air-inhibited (tacky) surfaces are normal between structural layers — that tackiness is what the next layer bonds to. Only the final coat needs a surfacing/wax additive to cure hard.'}
+     opts:['The resin batch was never properly catalyzed with MEKP','Air inhibition — atmospheric oxygen stops surface styrene from fully curing until a wax-additive finish coat seals it','The part released from the mold before reaching room temperature','The glass-to-resin ratio in that layer was too high for proper cure'],correct:1,
+     why:'Air-inhibited (tacky) surfaces are normal between structural layers — that tackiness is what the next layer bonds to. Only the final coat needs a surfacing/wax additive to cure hard.'},
+    {stem:'What four ingredients combine to make polyester resin?',
+     opts:['An unsaturated acid (maleic anhydride), a saturated acid (isophthalic or orthophthalic), a glycol (ethylene glycol), and a monomer (styrene)','A bisphenol diepoxide backbone, an amine hardener, a glycol, and a monomer (styrene)','An unsaturated acid (methacrylic or acrylic), a bisphenol backbone, and an unsaturated monomer (styrene)','A phenol, formaldehyde, water, and a catalyst (MEKP)'],correct:0,
+     why:'Polyester resin is built from an unsaturated acid (maleic anhydride), a saturated acid (isophthalic or orthophthalic), a glycol (ethylene glycol), and styrene monomer.'},
+    {stem:'What ingredient gives vinylester resin its "epoxy-like backbone, but cures like polyester" character?',
+     opts:['A bisphenol diepoxide backbone combined with an unsaturated acid and styrene monomer','A phenolic backbone combined with formaldehyde and water','An amine hardener combined with a stoichiometric epoxide resin','A saturated acid (orthophthalic) combined with ethylene glycol only'],correct:0,
+     why:'Vinylester borrows a bisphenol diepoxide backbone (like epoxy) but still uses an unsaturated acid and styrene monomer, so it cures by the same free-radical mechanism as polyester.'},
+    {stem:'Why is gelcoat typically formulated from isophthalic resin rather than orthophthalic?',
+     opts:['Isophthalic resin gives better mechanical properties, chemical resistance, and water-permeation resistance, worth the added cost for the outer surface','Isophthalic resin cures without any catalyst, simplifying gelcoat application','Isophthalic resin is the only type that accepts pigment for color matching','Isophthalic resin is cheaper than orthophthalic, keeping gelcoat costs down'],correct:0,
+     why:'Isophthalic polyester\'s better mechanical properties and water-permeation resistance make it the standard choice for gelcoat, which faces the harshest environment on the boat.'},
+    {stem:'What is the correct initiation (catalyst) rate range for polyester resin at 75°F, per the course?',
+     opts:['1% to 4% MEKP by weight, with 1%–2.5% being the commonly cited working range','0.1% to 0.5% MEKP by weight, adjusted only for humidity','5% to 10% MEKP by weight, regardless of shop temperature','MEKP is not measured by percentage — it\'s always a fixed 10 ml per quart'],correct:0,
+     why:'The cited initiation rate is 1% to 4% MEKP by weight, with 1%–2.5% as the commonly used working range, adjusted for shop temperature.'},
+    {stem:'What is the function of an inhibitor in polyester or vinylester resin?',
+     opts:['To slow polymerization, extending shelf life and giving working/open time before the catalyst takes over','To speed up polymerization so the resin cures before it can be fully wet out','To improve secondary bonding to already-cured laminate','To reduce the exothermic heat released during cure'],correct:0,
+     why:'An inhibitor slows polymerization, which is what gives resin both shelf life and working (pot) time before the catalyst drives the cure forward.'},
+    {stem:'What are the three phases of the curing process, in order?',
+     opts:['Gel-time/pot-time (minutes) → post-cure (a few weeks) → full-cure (up to about a year)','Mixing (seconds) → gel-time (hours) → post-cure (a full day)','Initiation (minutes) → exotherm peak (minutes) → full-cure (a few hours)','Pot-time (hours) → gel-time (days) → post-cure (indefinite)'],correct:0,
+     why:'Curing runs through gel-time/pot-time (minutes), post-cure (a few weeks), and full-cure, which can take up to about a year to reach final properties.'},
+    {stem:'Ranking the three resin families by secondary-bond strength to already-cured laminate, from best to weakest, gives:',
+     opts:['Epoxy best, vinylester next, standard polyester weakest','Standard polyester best, vinylester next, epoxy weakest','Vinylester best, epoxy next, standard polyester weakest','All three bond equally well to already-cured laminate'],correct:0,
+     why:'Epoxy has the best secondary-bond characteristics, followed by vinylester, with standard polyester weakest at bonding to already-cured (green or fully cured) laminate.'},
+    {stem:'What characterizes "primary bonding" between two laminate layers?',
+     opts:['Plies laminated over adjacent plies that are still uncured ("green"), so full molecular cross-linking occurs between them','Plies laminated over a fully-cured surface that has been sanded and solvent-wiped first','A mechanical bond created only by physical interlocking, with no chemical cross-linking at all','A bond that only epoxy resin is capable of forming, regardless of cure state'],correct:0,
+     why:'Primary bonding happens when new plies are laid over adjacent plies that are still uncured/green, allowing full molecular cross-linking between them — the strongest possible bond.'},
+    {stem:'What is the "green window" for secondary bonding?',
+     opts:['A period after a laminate gels but before it fully cures, when a new layer can still form a strong chemical bond to it','The full year it takes a laminate to reach its final cured properties','The time window during which MEKP catalyst remains chemically active in the can','The period during which amine blush must be washed off an epoxy surface'],correct:0,
+     why:'The green window is the period after gel but before full cure, when a new layer can still chemically bond rather than relying on a weaker mechanical bond after full cure.'},
+    {stem:'Why does a thicker laminate generally cure faster than a thin one?',
+     opts:['The larger resin mass traps more exothermic heat, accelerating the reaction','Thicker laminates always contain a higher percentage of catalyst','Thicker laminates use vinylester by default, which cures faster than polyester','Thick sections block atmospheric oxygen more effectively, eliminating air inhibition'],correct:0,
+     why:'Curing is exothermic; a thicker mass traps more of that heat, which accelerates the cure — the same reason a very thin film may struggle to reach full cure at all.'},
+    {stem:'What can result from applying too many resin plies at once, without managing exotherm?',
+     opts:['Excessive heat buildup, which can cause pre-release from the mold, mold damage, or a warped part','A slower, cooler cure that improves the laminate\'s final strength','No effect, since exotherm only matters for gelcoat, not structural laminate','Immediate conversion of the resin from thermoset to thermoplastic'],correct:0,
+     why:'Applying too many plies at once traps excess exothermic heat, which can pre-release the part from the mold, damage the mold, or warp/distort the finished part.'},
+    {stem:'Why is epoxy resin\'s cure chemistry described as "stoichiometric," unlike MEKP-catalyzed polyester?',
+     opts:['Epoxy cures via a fixed-ratio two-part reaction, so getting the resin-to-hardener ratio wrong under-cures it','Epoxy requires no measuring at all, since any ratio of resin to hardener will cure fully','Epoxy cures only when heated to a specific fixed temperature, regardless of ratio','Epoxy\'s cure ratio only matters for gelcoat, not structural laminating resin'],correct:0,
+     why:'Epoxy cures through a fixed-ratio, two-part reaction between resin and hardener; unlike MEKP (which merely initiates polyester\'s cure), getting epoxy\'s ratio wrong leaves it under-cured.'},
+    {stem:'For a below-waterline hull needing strong blister resistance, which resin does the job-matching guidance point to?',
+     opts:['Vinylester resin, laminated at a standard catalyst ratio','Standard orthophthalic polyester','Isophthalic polyester used as gelcoat only','Any resin, since blister resistance doesn\'t vary by resin family'],correct:0,
+     why:'Vinylester\'s superior corrosion and blister resistance versus polyester make it the standard match for below-waterline hulls, per the job-matching guidance.'},
+    {stem:'Why is phenolic resin worth knowing for the exam even though it\'s rarely used for a whole hull today?',
+     opts:['It is inherently fire-retardant because its chemistry incorporates water, and it launched modern composites in the first place','It is the cheapest resin available, undercutting even orthophthalic polyester','It is the only resin compatible with chopped strand mat\'s styrene-soluble binder','It cures without any exothermic reaction, unlike polyester or epoxy'],correct:0,
+     why:'Phenolic resin is inherently fire-retardant because its chemistry incorporates water, and it is credited with launching modern composites in the first place.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-3'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-3'); CFS.recordScore('module-3', c, t); }});
 })();
 </script>
 </body>

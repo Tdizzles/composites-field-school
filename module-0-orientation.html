@@ -161,7 +161,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions on the numbers and scope you just learned. Read carefully — the wrong answers are built to look plausible.</p>
+    <p>Before the quiz, lock in one video: the safety mindset you'll need from day one, even though full PPE coverage waits until Module 5. Then: 20 exam-style questions on the numbers and scope you just learned — read carefully, the wrong answers are built to look plausible.</p>
+    <div id="mustWatch0"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -190,6 +191,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch0', CFS_VIDEOS.safety[1], {id: 'module-0-required'});
   CFS.initChatbot();
 
   /* ---- 1. exam format / scope toggle ---- */
@@ -364,10 +366,55 @@
      opts:['Structural detail and QA/inspection','Safety and environmental compliance','Color / cosmetic gelcoat matching','Manufacturing processes'],correct:2,
      why:'This is a builder/manufacturer exam. Color matching is explicitly excluded — that lives in the separate MiniCraft/Spectrum cosmetic track (Section 1).'},
     {stem:'At 200 questions in 3.5 hours (210 minutes), roughly how long do you have per question — and what does that mean for exam strategy?',
-     opts:['~63 seconds; know the material cold regardless of any open-book policy','~10 minutes; plenty of time to look everything up','~5 seconds; effectively impossible to finish','~30 minutes; take your time'],correct:0,
-     why:'210 minutes ÷ 200 questions ≈ 63 seconds/question (Section 5). At that pace you must already know the material — you will not have time to search for answers.'}
+     opts:['~63 seconds per question, so you need the material memorized rather than looked up','~10 minutes per question, plenty of time to search for any answer','~5 seconds per question, which is not enough time to answer at all','~30 minutes per question, since the exam is not strictly timed section-by-section'],correct:0,
+     why:'210 minutes ÷ 200 questions ≈ 63 seconds/question (Section 5). At that pace you must already know the material — you will not have time to search for answers.'},
+    {stem:'What does the acronym "FRP" stand for in composites boatbuilding?',
+     opts:['Fiber-Reinforced Polyurethane','Fiberglass Reinforced Plastic','Fabricated Resin Product','Flexible Reinforced Polyester'],correct:1,
+     why:'FRP stands for Fiberglass Reinforced Plastic — the general term for glass-fiber composite boat construction.'},
+    {stem:'What is credited with launching the use of modern composite materials in the first place?',
+     opts:['Vinylester resin, for its superior blister resistance','Phenolic resin, an early thermoset used before polyester became dominant','Epoxy resin, developed for aerospace bonding applications','Polyester resin, developed specifically for boat hulls'],correct:1,
+     why:'Phenolic resin is credited with launching modern composites, before polyester and epoxy resins became the marine-industry standards.'},
+    {stem:'How and when did fiberglass boatbuilding begin?',
+     opts:['During the 1970s energy crisis, as builders sought a cheaper alternative to steel','After WWII, when the US Navy contracted a 28-foot personnel craft built from it to cut maintenance versus wood','In the 1930s, developed by aircraft manufacturers looking for a lighter hull material','During the Korean War, when the Army needed disposable amphibious landing craft'],correct:1,
+     why:'Fiberglass boatbuilding began after WWII with a US Navy-contracted 28-foot personnel craft, chosen to reduce maintenance compared to wood.'},
+    {stem:'When did fiberglass boatbuilding proliferate, and what drove the boom?',
+     opts:['Around 1960, driven by lower hull costs and near-zero maintenance versus wood','Around 1945, driven by wartime surplus resin becoming available to civilian builders','Around 1980, driven by new EPA emissions rules favoring closed molding','Around 1990, driven by the introduction of vacuum infusion processes'],correct:0,
+     why:'The fiberglass boatbuilding boom took off around 1960, driven by reduced hull costs and virtually no maintenance compared to wood.'},
+    {stem:'Early FRP boat builders had no structural calculator to size a hull. What method did they rely on instead, and what did it typically cause?',
+     opts:['The empirical (build-and-test) method, which typically led to over-built, excess-material hulls','The scantling-table method, which typically led to under-built, failure-prone hulls','The finite-element method, which typically led to precisely optimized, minimal-weight hulls','The classical-laminate-theory method, which typically led to highly directional, thin-skinned hulls'],correct:0,
+     why:'Without a calculated design basis, early builders used the empirical (build it, test if it survives) method, which is why so many early fiberglass boats are over-built.'},
+    {stem:'What was the main driving factor behind the development of FRP boats over planked wood construction?',
+     opts:['The ability to produce complex, seamless, moldable hull shapes rather than planked hulls','The ability to weld hull sections together the way steel boats are joined','The ability to eliminate the need for any bottom paint or hull maintenance entirely','The ability to build hulls without any resin curing or exothermic reaction at all'],correct:0,
+     why:'The driving factor was producing complex hull configurations and the advantages of a seamless, moldable hull versus planked wood.'},
+    {stem:'Which three advantages does the course credit composites with holding over traditional (wood/metal) boatbuilding materials?',
+     opts:['Higher specific strength, moldability into complex shapes, and greater durability','Lower material cost, faster cure time, and immunity to UV degradation','Higher stiffness-to-weight only, with no advantage in shape or durability','Fire resistance, electrical conductivity, and lower manufacturing skill requirement'],correct:0,
+     why:'The three cited advantages are higher specific strength (strength per pound), moldability into complex shapes, and greater durability.'},
+    {stem:'Regardless of how this exam\'s open-book policy ultimately applies to its online-proctored format, what does the course recommend you do?',
+     opts:['Study as if it were closed-book, since the pacing leaves no real time to look things up','Bring a printed copy of the ABYC study guide, since open-book is fully confirmed','Skip memorizing exact numbers, since the proctor allows a reference sheet','Assume the exam allows unlimited time, since it is untimed for online delivery'],correct:0,
+     why:'The policy for this specific online-proctored delivery isn\'t confirmed, so the course says to study as if closed-book — reinforced by the pacing math in Section 5.'},
+    {stem:'Which set of topics is explicitly ON the ABYC Marine Composites exam, per the course\'s scope breakdown?',
+     opts:['Construction, structural detail, manufacturing processes, QA & inspection, safety, and environmental compliance','Construction, color/gelcoat matching, cosmetic finishing, and paint-shop management','Structural detail and QA only, with safety and environmental compliance excluded','Manufacturing processes and safety only, with construction and QA excluded'],correct:0,
+     why:'The scope view lists construction, structural detail, manufacturing processes, QA & inspection, safety, and environmental compliance as covered — with color/gelcoat matching explicitly excluded.'},
+    {stem:'The ACMA CCT credential mentioned in the credential-stack section is best described as:',
+     opts:['A Certified Composites Technician credential from the American Composites Manufacturers Association, separate from ABYC','A cosmetic color-matching credential run jointly by ABYC and ACMA','The renewal exam required every 5 years to keep the ABYC Marine Composites cert active','A prerequisite exam that must be passed before sitting the ABYC Marine Composites exam'],correct:0,
+     why:'ACMA CCT is a Certified Composites Technician credential from the American Composites Manufacturers Association — a separate industry body from ABYC, with its exact overlap with this exam not confirmed.'},
+    {stem:'What is CertTEC, as introduced in the credential-stack section?',
+     opts:['A separate composites-industry credentialing body, distinct from both ABYC and ACMA','A subsidiary training division that operates entirely inside ABYC','The cosmetic/color-matching track referenced elsewhere in the section','An OSHA-administered workplace safety credential'],correct:0,
+     why:'CertTEC is described as a separate composites-industry credentialing body, distinct from ABYC and ACMA — its exact cost/format relative to this exam is flagged as unconfirmed.'},
+    {stem:'What is OSHA 10, as it appears in the credential-stack comparison?',
+     opts:['A general workplace-safety credential (the 10-hour outreach card) common across shop environments','A composites-specific hands-on skills certification issued by ABYC','A 10-question diagnostic quiz given before starting this course','A cosmetic finishing credential covering gelcoat color matching'],correct:0,
+     why:'OSHA 10 refers to the general workplace-safety 10-hour outreach card, common across shop environments generally — not a composites-specific credential.'},
+    {stem:'This course describes its study method as a "See → Do → Check" loop, plus two more habits. In what order does the course say those five habits actually belong?',
+     opts:['See, Do, Check, Flag, Cold','See, Flag, Do, Cold, Check','Flag, See, Do, Check, Cold','See, Do, Flag, Check, Cold'],correct:0,
+     why:'The loop runs See the idea, Do something with it, Check that it stuck — then Flag any gaps and later drill Cold (from memory) before exam day.'},
+    {stem:'Per the exam blueprint map, resin material properties are covered in two separate modules. Why does the course say certain topics repeat like this across modules?',
+     opts:['Because the exam reuses the same building blocks in different contexts, once you have more background to apply them','Because ABYC requires every topic to appear in at least two modules by policy','Because early modules are drafts and later modules replace them entirely','Because the repeated modules are optional review, not exam-tested material'],correct:0,
+     why:'Resin properties return once you know cure chemistry, and manufacturing processes return once you know molds and tooling — the exam reuses the same building blocks across contexts.'},
+    {stem:'On the exam blueprint map, which two areas of the course does "manufacturing processes" get covered across?',
+     opts:['The manufacturing-processes module and the molds/tooling/gelcoat module','The reinforcements module and the resins module','The safety module and the environmental-compliance module','The structural-details module and the hardware-installation module'],correct:0,
+     why:'Manufacturing processes is tagged to both the processes module and the molds/gelcoat module, since the topic comes back once you know molds and tooling.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-0'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-0'); CFS.recordScore('module-0', c, t); }});
 })();
 </script>
 </body>

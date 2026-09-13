@@ -98,19 +98,19 @@
     <div class="card">
       <svg class="demo-svg" id="exoSvg" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="height:120px"></svg>
       <div class="control">
-        <label for="exoRange"><span>Resin mass</span><span class="val" id="exoVal">Thin film</span></label>
-        <input type="range" id="exoRange" min="0" max="100" value="15" step="1">
+        <label for="exoRange"><span>Poured thickness in one shot</span><span class="val" id="exoVal">0.5 mm — a thin brushed coat</span></label>
+        <input type="range" id="exoRange" min="0.5" max="25" value="3" step="0.5">
       </div>
       <div class="meter">
-        <div class="mlab"><span>Relative peak exotherm (illustrative)</span><span id="exoTempVal">low</span></div>
+        <div class="mlab"><span>Relative exotherm index (thickness-driven)</span><span id="exoTempVal">low</span></div>
         <div class="mtrack"><div class="mfill stiff" id="exoTempFill" style="width:15%"></div></div>
       </div>
       <div class="meter">
-        <div class="mlab"><span>Relative cure speed (illustrative)</span><span id="exoSpeedVal">slow</span></div>
+        <div class="mlab"><span>Cure-speed multiplier vs. the thin coat</span><span id="exoSpeedVal">1.0×</span></div>
         <div class="mtrack"><div class="mfill sw" id="exoSpeedFill" style="width:15%"></div></div>
       </div>
       <div class="readout" id="exoRead"></div>
-      <p class="note">Curve shape only — relative/illustrative, not measured temperatures. The point is the trend: mass drives heat, heat drives speed, and both extremes fail differently.</p>
+      <p class="note">The exotherm index scales with thickness because generation scales with volume while heat escapes mainly through the top surface — real heat-transfer behavior, illustrative units. The speed multiplier applies the Arrhenius "Q10" rule of thumb (reaction rate roughly doubles for every fixed jump in temperature) to that index — a real, general chemistry relationship, not a resin-specific number.</p>
     </div>
     <div class="callout"><b>Demold rule of thumb:</b> whatever the mass, don't pull a part from the mold until it has cooled back to room temperature — pulling it while still hot from exotherm is a common cause of warping.</div>
 
@@ -157,7 +157,8 @@
   <section class="panel" data-name="Recall check">
     <p class="kicker">Prove it stuck</p>
     <h2>Recall check</h2>
-    <p>Five exam-style questions. Everything here was taught on this page.</p>
+    <p>Before the quiz, lock in the one video this module leans on hardest. Then: 20 exam-style questions. Everything here was taught on this page.</p>
+    <div id="mustWatch6"></div>
     <div class="card">
       <div id="quizContainer"></div>
       <div class="score" id="scoreLine"></div>
@@ -186,6 +187,7 @@
 <script>
 (function(){
   CFS.initNav();
+  CFS.renderMustWatch('mustWatch6', CFS_VIDEOS.mekpCatalyst[0], {id: 'module-6-required'});
   CFS.initChatbot();
 
   /* ---- 1. polymerization SVG ---- */
@@ -247,7 +249,7 @@
     });
   });
   setMekp2();
-  CFS.renderVideos('mekpVideos', CFS_VIDEOS.mekpCatalyst);
+  CFS.renderVideos('mekpVideos', CFS_VIDEOS.mekpCatalyst.slice(1));
 
   /* ---- 3. exotherm demo ---- */
   var exoRange=document.getElementById('exoRange');
@@ -258,27 +260,38 @@
     return 'rgb('+r+','+g+','+bl+')';
   }
   function setExo(){
-    var v=+exoRange.value;
-    var color=lerpColor('#2f6f92','#c33a2c', v/100);
-    var h=(6+v*0.9).toFixed(1);
+    var mm=+exoRange.value;
+    var pct=(mm-0.5)/(25-0.5); // 0..1 across the slider's real range
+    var color=lerpColor('#2f6f92','#c33a2c', pct);
+    var h=(6+pct*90).toFixed(1);
     var svg='<text x="200" y="16" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#42586b">resin cross-section (relative heat by color)</text>'+
       '<rect x="90" y="'+(120-h)+'" width="220" height="'+h+'" fill="'+color+'" rx="4"/>'+
       '<line x1="80" y1="120" x2="320" y2="120" stroke="#42586b" stroke-width="2"/>';
     document.getElementById('exoSvg').innerHTML=svg;
-    document.getElementById('exoVal').textContent = v<20?'Thin film':v>80?'Thick pour':'Moderate laminate';
-    var tempPct=Math.max(6,v);
-    var speedPct=Math.max(6,v);
+    document.getElementById('exoVal').textContent = mm.toFixed(1)+' mm — '+(mm<2?'a thin brushed coat':mm<8?'a normal wet laminate lay-up':mm<15?'a heavy, all-at-once laminate':'a deep pour — never do this in one shot');
+
+    // Exotherm index: generation scales with volume (~thickness for a fixed
+    // footprint), loss scales with the top surface only — with mild positive-
+    // feedback acceleration above ~15mm, since a hotter mass also cures (and
+    // generates heat) faster, a real self-reinforcing effect in thick pours.
+    var tempIndex = mm<=15 ? mm*4 : 60 + Math.pow(mm-15,1.6)*3;
+    var tempPct = Math.min(100, tempIndex);
+    // Cure-speed multiplier: real Arrhenius "Q10" rule of thumb — reaction
+    // rate roughly doubles for every fixed exotherm-index jump of ~25.
+    var speedMult = Math.pow(2, tempIndex/25);
+    var speedPct = Math.min(100, (Math.log(speedMult)/Math.log(32))*100);
+
     document.getElementById('exoTempFill').style.width=tempPct+'%';
     document.getElementById('exoSpeedFill').style.width=speedPct+'%';
-    document.getElementById('exoTempVal').textContent = tempPct<30?'low':tempPct<70?'moderate':'high';
-    document.getElementById('exoSpeedVal').textContent = speedPct<30?'slow':speedPct<70?'moderate':'fast';
+    document.getElementById('exoTempVal').textContent = tempPct<25?'low':tempPct<60?'moderate':tempPct<85?'high':'runaway risk';
+    document.getElementById('exoSpeedVal').textContent = speedMult.toFixed(1)+'×';
     var read=document.getElementById('exoRead');
-    if(v<20){
+    if(mm<2){
       read.className='readout warn';
       read.textContent='Thin film risk: not enough resin mass to trap reaction heat. Cure can stall out short of full hardness — undercure, not overcure.';
-    } else if(v>80){
+    } else if(mm>15){
       read.className='readout warn';
-      read.textContent='Thick mass risk: trapped heat compounds on itself. Watch for overheating, cracking, pre-release from the mold, mold damage, or a warped part — classic symptoms of laying up too many plies at once.';
+      read.textContent='Thick mass risk: trapped heat compounds on itself — the speed multiplier is climbing exponentially, not linearly, which is exactly the self-reinforcing runaway that cracks laminate, pre-releases it from the mold, damages the mold, or warps the part as it cools unevenly.';
     } else {
       read.className='readout ok';
       read.textContent='Workable range: enough mass to retain heat and cure fully, not so much that heat runs away. This is why a thicker laminate generally cures faster than a thin one — right up until it\'s too thick.';
@@ -336,22 +349,67 @@
   /* ---- 6. quiz ---- */
   var questions=[
     {stem:'What is the everyday working range for MEKP catalyst by weight, and how wide is the full allowed band once temperature is factored in?',
-     opts:['1%–2.5% everyday; up to about 1%–4% depending on temperature','5%–10% everyday; up to 20% in cold shops','0.1%–0.5% everyday; never more than 1%','There is no upper limit — more catalyst just cures faster with no downside'],correct:0,
+     opts:['1%–2.5% everyday; up to about 1%–4% depending on temperature','5%–10% everyday; extending up to roughly 20% in cold shops to compensate for slow cure','0.1%–0.5% everyday; the manufacturer\'s data sheet caps it at 1% under any condition','There is no fixed upper limit; more catalyst simply cures the part faster with no strength penalty'],correct:0,
      why:'The everyday working range is 1%–2.5% MEKP by weight; the wider allowed band, adjusted for shop temperature, is about 1%–4%.'},
     {stem:'Why does a THICK laminate mass generally cure faster than a thin film of the same resin?',
-     opts:['Thick laminates automatically get more catalyst mixed in','The cure reaction is exothermic, and a thick mass traps more of that self-generated heat, accelerating the reaction','Thick laminates use a different resin chemistry','Thickness has no effect on cure speed'],correct:1,
+     opts:['A thicker laminate automatically receives a higher catalyst percentage during mixing','The cure reaction is exothermic, and a thick mass traps more of that self-generated heat, accelerating the reaction','A thicker laminate is formulated with a different, faster-reacting resin chemistry','Laminate thickness has no measurable effect on how quickly the resin cures'],correct:1,
      why:'Cure releases heat (exothermic). A thick mass retains that heat, which speeds the reaction further — while a thin film loses heat to the air and may even undercure.'},
     {stem:'A structural (non-final) layer of polyester still feels tacky after its gel time has passed. What\'s happening, and is it a problem?',
-     opts:['Air inhibition — atmospheric oxygen stops surface cure; this is expected and is exactly what the next wet layer bonds to','The batch was never catalyzed and must be scraped off','The mold released too early','Too much MEKP was used'],correct:0,
+     opts:['Air inhibition — atmospheric oxygen stops surface cure; this is expected and is exactly what the next wet layer bonds to','The batch was never properly catalyzed, and the tacky layer must be scraped off before continuing','The part released from the mold too early, leaving an uncured surface film behind','Too much MEKP was used, which leaves the surface tacky instead of speeding the cure'],correct:0,
      why:'Air inhibition leaves a structural layer tacky on purpose — that tackiness is what a following wet layer chemically bonds to. Only the final coat needs a wax/surfacing additive to cure hard.'},
     {stem:'You laminate a new ply onto a layer of the SAME resin that fully cured days ago. Compared to laminating onto that layer while it was still green, this bond will be:',
-     opts:['Identical — cure timing never affects bond strength','Weaker — a secondary/mechanical bond, requiring sanding and a solvent wipe to bond well','Stronger, because the base layer is now fully hardened','Impossible — cured resin cannot be bonded to at all'],correct:1,
+     opts:['Identical in strength to a green bond, since cure timing has no effect on how new resin cross-links to it','Weaker — a secondary/mechanical bond, requiring sanding and a solvent wipe to bond well','Stronger than a green bond, since the fully hardened base layer provides a firmer surface to bond to','Impossible to achieve, since fully cured resin cannot form any bond with a new layer'],correct:1,
      why:'Once a layer fully cures, later layers only achieve a weaker secondary/mechanical bond and need sanding plus a solvent wipe. Laminating onto a still-green layer achieves full molecular cross-linking instead — the strongest bond.'},
     {stem:'While applying a polyester batch, it suddenly starts gelling much faster than expected ("triggering"). What does this indicate?',
-     opts:['Normal exotherm for a thick laminate — no action needed','An improper resin-to-catalyst ratio','The resin has reached its full-cure phase','The shop is too cold'],correct:1,
-     why:'Triggering — an unexpectedly fast gel/kick during application — indicates the resin-to-catalyst ratio is off, not a normal or harmless event.'}
+     opts:['A normal exotherm response for a thick laminate that requires no corrective action','An improper resin-to-catalyst ratio','The resin has reached its full-cure phase well ahead of the usual up-to-a-year timeline','The shop is running too cold, which normally slows gelling rather than speeding it up'],correct:1,
+     why:'Triggering — an unexpectedly fast gel/kick during application — indicates the resin-to-catalyst ratio is off, not a normal or harmless event.'},
+    {stem:'What is polymerization (esterification) in curing chemistry?',
+     opts:['The process by which individual resin molecules cross-link into one continuous network, turning liquid into solid','The process by which MEKP catalyst evaporates out of the resin as it hardens','The process by which fiberglass reinforcement absorbs resin until fully saturated','The process by which cobalt accelerator neutralizes the resin\'s inhibitor before mixing'],correct:0,
+     why:'Polymerization (esterification) is resin molecules cross-linking into one continuous network — the reaction that turns liquid resin solid.'},
+    {stem:'Is polymerization exothermic or endothermic, and what does that mean in practice?',
+     opts:['Exothermic — the reaction releases heat, and that self-generated heat is part of what drives the cure forward','Endothermic — the reaction absorbs ambient heat, which is why cold shops cure faster','Exothermic — but the released heat has no effect on how quickly the reaction proceeds','Endothermic — the resin must be actively heated the entire time or the reaction stops'],correct:0,
+     why:'Polymerization is a one-way, exothermic reaction — the heat it releases is exactly what drives the thick-vs-thin exotherm behavior in this module.'},
+    {stem:'What role does MEKP play in the MEKP/cobalt redox pair?',
+     opts:['It\'s the catalyst that initiates the free-radical chain reaction that cross-links the resin','It\'s the promoter that lets the reaction proceed at normal shop temperatures without heat','It\'s the inhibitor that slows the reaction to extend the resin\'s shelf life','It\'s a filler that thickens the resin and controls its viscosity during application'],correct:0,
+     why:'MEKP is the catalyst — it initiates the free-radical chain reaction that cross-links polyester/vinylester resin.'},
+    {stem:'What role does the cobalt promoter play in the MEKP/cobalt redox pair?',
+     opts:['It works alongside MEKP to get the free-radical reaction going at normal working temperatures','It initiates the free-radical chain reaction on its own, before MEKP is even added','It slows the reaction down to extend the resin\'s usable shelf life before catalyzing','It thickens the resin so it doesn\'t sag on vertical or overhead surfaces'],correct:0,
+     why:'The cobalt promoter, already mixed into most promoted laminating resins, works alongside MEKP to get the free-radical reaction going at working temperatures.'},
+    {stem:'Why must MEKP and cobalt accelerator never be combined directly (neat), outside the resin?',
+     opts:['Concentrated direct contact between the peroxide and the oxidizer is a fire/explosion hazard','Direct contact simply cancels out both chemicals, leaving the resin unable to cure at all','Direct contact only wastes material, with no safety concern as long as it\'s outdoors','Direct contact slightly discolors the resin but presents no fire or reactivity risk'],correct:0,
+     why:'Module 5\'s warning stands here too: concentrated contact between MEKP and cobalt outside the resin is a fire/explosion hazard, which is why each goes into the resin separately.'},
+    {stem:'What distinguishes an inhibitor from a catalyst in resin chemistry?',
+     opts:['An inhibitor is already in the resin from the manufacturer and slows polymerization for shelf life; a catalyst like MEKP is added at the bench to initiate the reaction','An inhibitor is added at the bench to speed curing; a catalyst is pre-mixed by the manufacturer to extend shelf life','An inhibitor and a catalyst perform the same function, just under different trade names','An inhibitor initiates the free-radical reaction; a catalyst slows it down for working time'],correct:0,
+     why:'The inhibitor is baked into the resin by the manufacturer to give it shelf life and working time; the catalyst (MEKP) is what you add at the bench to start the reaction.'},
+    {stem:'Does MEKP catalyst get "used up" to build strength as the resin cures?',
+     opts:['No — it initiates and paces the reaction, but it isn\'t consumed to add strength to the finished laminate','Yes — the catalyst becomes part of the cross-linked network and directly adds strength','Yes — more catalyst is chemically converted into additional cured resin volume','No — but only because the promoter, not the catalyst, does all the strength-building work'],correct:0,
+     why:'The catalyst just starts and paces the reaction; it doesn\'t get "used up" to build strength, which is also why more MEKP doesn\'t mean a stronger part.'},
+    {stem:'Using the calculator\'s rule of thumb (ml = batch oz × 30 ml/oz × percentage ÷ 100), roughly how much MEKP goes into a quart (32 oz) of resin at 2%?',
+     opts:['About 19–20 ml','About 2.4–2.5 ml','About 32 ml','About 96 ml'],correct:0,
+     why:'32 oz × 30 ml/oz × 2% ÷ 100 lands at roughly 19–20 ml — one of the two worked checkpoints this module\'s calculator confirms.'},
+    {stem:'Using the same rule of thumb, roughly how much MEKP goes into a cup (8 oz) of resin at 1%?',
+     opts:['About 2.4–2.5 ml','About 19–20 ml','About 8 ml','About 0.8 ml'],correct:0,
+     why:'8 oz × 30 ml/oz × 1% ÷ 100 lands at roughly 2.4–2.5 ml — the other worked checkpoint the calculator confirms.'},
+    {stem:'In a cold shop, how should the MEKP percentage generally shift within the allowed range, and why?',
+     opts:['Toward the upper part of the range, since cold slows the reaction and needs more catalyst to still get a workable cure','Toward the lower part of the range, since cold speeds the reaction enough on its own','It should stay fixed at 2%, since shop temperature doesn\'t affect catalyst dosing','Toward the upper part of the range, purely to shorten working time regardless of temperature'],correct:0,
+     why:'Cold slows the reaction, so shops typically lean toward the upper part of the range to still get a workable cure — a temperature call, not a strength call.'},
+    {stem:'In a hot shop, how should the MEKP percentage generally shift, and why?',
+     opts:['Toward the lower part of the range, closer to 1%, to avoid a too-fast, too-hot reaction','Toward the upper part of the range, since heat requires more catalyst to fully cure','It should stay fixed at 2.5%, since heat has no effect on how the reaction proceeds','Toward the lower part of the range, purely to extend shelf life rather than to manage heat'],correct:0,
+     why:'Heat speeds the reaction on its own, so shops typically lean toward the lower part of the range to avoid a too-fast, too-hot kick.'},
+    {stem:'Why shouldn\'t a part be pulled from the mold while it\'s still hot from exotherm?',
+     opts:['Pulling it while still hot is a common cause of warping; the rule of thumb is to wait until it cools to room temperature','The mold itself will be damaged unless the part is removed while still warm','A hot part hasn\'t been catalyzed correctly and needs additional MEKP before demolding','Heat has no effect on demolding — the timing rule is based only on gel-time, not temperature'],correct:0,
+     why:'Whatever the mass, don\'t pull a part from the mold until it has cooled back to room temperature — pulling it while still hot from exotherm is a common cause of warping.'},
+    {stem:'What does a resin-rich structural layer staying tacky after its gel time mean, and why is it acceptable for a non-final layer?',
+     opts:['It\'s air inhibition — atmospheric oxygen stops the surface from fully curing, which is exactly what lets the next wet layer bond to it','It\'s a sign of an underlying catalyst failure that must be corrected before adding another layer','It\'s normal only for the final coat, and is a defect on any structural (non-final) layer','It\'s caused by too much cobalt promoter, which can be diluted out with fresh resin'],correct:0,
+     why:'Atmospheric oxygen stops surface styrene from fully curing on a structural layer, and that\'s expected — it\'s exactly what lets the next wet layer bond to it.'},
+    {stem:'What keeps the FINAL coat of a laminate from staying tacky the way a structural layer does?',
+     opts:['A wax or surfacing additive that seals out air so the final coat cures hard instead of staying inhibited','A higher catalyst percentage than any structural layer beneath it','A longer post-cure period than the structural layers get','A layer of chopped strand mat pressed into the still-wet final coat'],correct:0,
+     why:'Only the final coat needs a wax/surfacing additive to seal out air and cure hard — structural layers are left tacky on purpose so the next layer can bond.'},
+    {stem:'Between epoxy, vinylester, and standard polyester, which has the best secondary-bonding characteristics, and why does that matter for this module\'s green-window topic?',
+     opts:['Epoxy — it\'s the standard choice whenever a secondary (not primary/green) bond is unavoidable, such as a repair','Standard polyester — its air-inhibited surface bonds better to fully cured laminate than epoxy does','Vinylester — it bonds better than epoxy to a fully cured surface, though worse than polyester','All three bond equally well to fully cured laminate, so resin choice doesn\'t matter for a secondary bond'],correct:0,
+     why:'Epoxy has the best secondary-bonding characteristics of the three resin families, which is why it\'s the standard choice whenever you\'re forced into a secondary bond rather than a primary/green one.'}
   ];
-  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(){ CFS.markComplete('module-6'); }});
+  CFS.renderQuiz('quizContainer', questions, 'scoreLine', {onComplete:function(c,t){ CFS.markComplete('module-6'); CFS.recordScore('module-6', c, t); }});
 })();
 </script>
 </body>
